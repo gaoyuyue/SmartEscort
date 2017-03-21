@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: arthurme
@@ -6,11 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
-</html>
+<shiro:hasRole name="admin">
+    <%@ include file="admin.jsp"%>
+</shiro:hasRole>
+<shiro:hasRole name="user">
+    <%@include file="user.jsp"%>
+</shiro:hasRole>

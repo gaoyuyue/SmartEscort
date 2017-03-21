@@ -79,12 +79,10 @@ public class AccountController {
             user.login(token);
             //得到所有Role
             Role role = userService.getById(UserName).getRole();
-            if (Role.admin == role) {
-                return "redirect:/Admin/";
-            } else if (Role.user == role){
-                return "redirect:/User/";
-            }
-            {
+            System.out.println(role);
+            if (Role.admin == role || Role.user == role) {
+                return "redirect:/";
+            } else {
                 return "redirect:/Account/Login";
             }
         } catch (Exception e) {
