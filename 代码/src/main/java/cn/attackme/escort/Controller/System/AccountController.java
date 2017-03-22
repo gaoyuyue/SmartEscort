@@ -2,6 +2,8 @@ package cn.attackme.escort.Controller.System;
 
 
 import cn.attackme.escort.Model.Role;
+import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Service.UserService;
 import cn.attackme.escort.Utils.LogUtils;
 import cn.attackme.escort.Utils.SHAUtils;
@@ -11,18 +13,25 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
+import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
+import static org.apache.shiro.SecurityUtils.getSubject;
 
 @SuppressWarnings({"JavaDoc", "unused"})
 @Controller
@@ -30,6 +39,9 @@ public class AccountController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -45,6 +57,47 @@ public class AccountController {
     public String LoginPage() {
         return "/Account/login";
     }
+
+    /**
+     * 转向注册界面
+     * @return
+     */
+    @GetMapping("/Account/Register")
+        public String RegisterPage(){ return "/Account/register";}
+
+//    @ResponseBody
+//    @PostMapping("/name/{name}")
+
+    /**
+     * 检查用户名是否重复
+     * @param UserName
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/Account/UserName/{UserName}")
+    public ResponseEntity<Void> userSearch(@PathVariable String UserName) {
+        if (userInfoService.isExist(UserName)) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    /**
+     * 注册用户
+     * @param user
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("Account/user")
+    public ResponseEntity<Void> createUser(@RequestBody User user) {
+        user.setPassWord(getSHA_256(user.getPassWord()));
+        userInfoService.save(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+
 
     /**
      * 接收用户登录传参，判断是否登陆成功
@@ -73,7 +126,7 @@ public class AccountController {
         UsernamePasswordToken token = null;
         try {
             Subject user = SecurityUtils.getSubject();
-            token = new UsernamePasswordToken(UserName.trim(), SHAUtils.getSHA_256(Password));
+            token = new UsernamePasswordToken(UserName.trim(), getSHA_256(Password));
             if (RememberMe != null && RememberMe.equals("on"))
                 token.setRememberMe(true);
             user.login(token);

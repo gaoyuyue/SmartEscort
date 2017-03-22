@@ -39,6 +39,10 @@ public class User implements Serializable{
 
     @Getter
     @Setter
+    private String phoneNumber;
+
+    @Getter
+    @Setter
     private boolean isDeleted;
 
     @Getter
