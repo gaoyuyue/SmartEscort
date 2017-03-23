@@ -70,13 +70,13 @@ public class AccountController {
 
     /**
      * 检查用户名是否重复
-     * @param UserName
+     * @param userName
      * @return
      */
     @ResponseBody
-    @GetMapping("/Account/UserName/{UserName}")
-    public ResponseEntity<Void> userSearch(@PathVariable String UserName) {
-        if (userInfoService.isExist(UserName)) {
+    @GetMapping("/Account/userName/{UuserName}")
+    public ResponseEntity<Void> userSearch(@PathVariable String userName) {
+        if (userInfoService.isExist(userName)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -89,7 +89,7 @@ public class AccountController {
      * @return
      */
     @ResponseBody
-    @PostMapping("Account/user")
+    @PostMapping("/Account/user")
     public ResponseEntity<Void> createUser(@RequestBody User user) {
         user.setPassWord(getSHA_256(user.getPassWord()));
         userInfoService.save(user);

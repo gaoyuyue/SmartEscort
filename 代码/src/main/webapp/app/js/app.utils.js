@@ -40,3 +40,44 @@ var bindRedirect = function bindRedirect() {
         AsynchronousLoading(attribute);
     });
 };
+
+/**
+ * 是空或null或undefined嘛
+ * @param value
+ * @returns {boolean}
+ */
+var isNullOrEmpty = function (value) {
+    "use strict";
+    value = $.trim(value);
+
+    if (!value && typeof value === "object") {
+        return true;
+    }
+
+
+    if (value == "") {
+        return true;
+    }
+
+    if (value == " ") {
+        return true;
+    }
+
+    if (typeof(value) === "undefined") {
+        return true;
+    }
+};
+
+/**
+ * 如果为Null或空就返回空字符串
+ * @param data
+ * @returns {*}
+ */
+var ifIsNullReturnEmptyString = function ifIsNullReturnEmptyString(data) {
+    "use strict";
+    if (isNullOrEmpty(data)) {
+        return "";
+    } else {
+        return data;
+    }
+};
