@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by arthurme on 2017/3/20.
@@ -30,6 +33,7 @@ public class User implements Serializable{
     @Setter
     private String name;
 
+    //微信号
     @Getter
     @Setter
     private String openid;
@@ -41,6 +45,7 @@ public class User implements Serializable{
     @Setter
     private String phoneNumber;
 
+    //是否禁用
     @Getter
     @Setter
     private boolean isDeleted;
@@ -49,6 +54,17 @@ public class User implements Serializable{
     @Setter
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    //信誉积分
+    @Getter
+    @Setter
+    private Integer integration;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Address> addressList;
 
     public User(String userName, String passWord) {
         this.userName = userName;
