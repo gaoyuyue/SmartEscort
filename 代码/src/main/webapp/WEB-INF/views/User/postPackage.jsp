@@ -6,6 +6,56 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<a class="weui-cell weui-cell_access" href="javascript:;">--%>
+    <%--<div class="weui-cell__bd">--%>
+        <%--<p>cell standard</p>--%>
+    <%--</div>--%>
+
+<%--</a>--%>
+<style>
+    .icon {
+        margin-right: 9px;
+        height: 21px;
+        width: 21px;
+        background: url(/assets/img/address.png) 50% 50% no-repeat;
+        background-size: 15px 20px;
+    }
+</style>
+<a class="weui-cell weui-cell_access" href="javascript:;">
+    <div style="float: left">
+        <div class="icon">
+        </div>
+    </div>
+    <div>
+        <%--<article class="weui-article">--%>
+            <%--<section>--%>
+            <div>
+                <span >收货人：  </span>
+                <span >高语越</span>
+                <span > </span>
+                <span style="float: right">13230524775</span>
+            </div>
+            <%--</section>--%>
+            <%--<section>--%>
+            <div>
+                <span>收货地址：</span>
+                <span>
+                </span>
+                <span>河北省 </span>
+                <span>唐山市 </span>
+                <span>曹妃甸区 </span>
+                <span>唐山湾生态城 </span>
+                <span>渤海大道21号华北理工大学东区梅园 </span>
+            </div>
+            <%--</section>--%>
+        <%--</article>--%>
+    </div>
+    <div class="weui-cell__ft">
+    </div>
+</a>
+
+<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
+
 <div class="weui-cells__title">取件号</div>
 <div class="weui-cells">
     <div class="weui-cell">
