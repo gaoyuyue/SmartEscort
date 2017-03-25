@@ -55,6 +55,22 @@ public class UserInfoService extends BaseService<User>{
     }
 
     /**
+     * 根据OpenId获取用户
+     * @param openId
+     * @return
+     */
+    public User getByOpenId(@NotNull String openId){
+        Query query = new Query(entityManager);
+        return (User) query.from(User.class)
+                .whereEqual("openId",openId)
+                .whereEqual("isDeleted", false)
+                .createTypedQuery()
+                .setFirstResult(0)
+                .setMaxResults(1)
+                .getSingleResult();
+    }
+
+    /**
      * 判断用户是否已存在，不管是否被删除
      *
      * @param userName

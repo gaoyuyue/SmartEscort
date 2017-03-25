@@ -6,7 +6,6 @@ import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Service.UserService;
 import cn.attackme.escort.Utils.LogUtils;
-import cn.attackme.escort.Utils.SHAUtils;
 import cn.attackme.escort.Utils.ValidateCode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -23,15 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
-import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
-import static org.apache.shiro.SecurityUtils.getSubject;
 
 @SuppressWarnings({"JavaDoc", "unused"})
 @Controller
@@ -71,8 +65,8 @@ public class AccountController {
      * @return
      */
     @ResponseBody
-    @GetMapping("/Account/userName/{userName}")
-    public ResponseEntity<Void> userSearch(@PathVariable String userName){
+    @GetMapping("/Account/userName/{UserName}")
+    public ResponseEntity<Void> userSearch(@PathVariable String userName) {
         if (userInfoService.isExist(userName)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
@@ -80,35 +74,50 @@ public class AccountController {
         }
     }
 
-//    String Register
-
     /**
      * 注册用户
-     * @param userName
-     * @param passWord
-     * @param name
-     * @param phoneNumber
-     * @param session
+     * @param user
      * @return
      */
-    @SuppressWarnings("ConstantConditions")
     @PostMapping("/Account/Register")
-    public ResponseEntity<Void> createUser(@RequestParam("userName") String userName,
-                        @RequestParam("passWord") String passWord,
-                        @RequestParam("name") String name,
-                        @RequestParam("phoneNumber") String phoneNumber,
-                        HttpSession session) {
-        User user = new User();
-        user.setPhoneNumber(phoneNumber);
-        user.setName(name);
-        user.setPassWord(getSHA_256(passWord));
-        user.setRole(Role.user);
-        user.setUserName(userName);
-        userInfoService.save(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public String createUser(@RequestBody User user,
+                             HttpSession httpSession) {
+        String openid = (String) httpSession.getAttribute("openid");
+
+        if (null != openid){
+            user.setPassWord(getSHA_256(user.getPassWord()));
+            user.setOpenid(openid);
+            userInfoService.save(user);
+            return "redirect:/Account/OAuth2";
+        }
+        return "redirect:/Account/Register";
     }
 
-
+    /**
+     * 微信用户登录
+     * @param httpSession
+     * @return
+     */
+    @GetMapping("/Account/OAuth2")
+    public String oauth2(HttpSession httpSession){
+        try{
+            String openid = (String) httpSession.getAttribute("openid");
+            User user = userInfoService.getByOpenId(openid);
+            if (null!=user) {
+                UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassWord());
+                Subject subject = SecurityUtils.getSubject();
+                subject.login(token);
+                String state = (String) httpSession.getAttribute("state");
+                httpSession.removeAttribute("openid");
+                httpSession.removeAttribute("state");
+                return "redirect:"+state;
+            }else {
+                return "redirect:/Account/Register";
+            }
+        }catch (Exception e){
+            return "forward:/403.jsp";
+        }
+    }
 
     /**
      * 接收用户登录传参，判断是否登陆成功
@@ -187,5 +196,4 @@ public class AccountController {
         SecurityUtils.getSubject().logout();
         return "redirect:/Account/Login";
     }
-
 }

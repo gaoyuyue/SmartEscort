@@ -38,7 +38,7 @@ public class OAuth2Controller {
             if (!"".equals(openId) && null != openId) {
                 httpSession.setAttribute("openid",openId);
                 httpSession.setAttribute("state",state);
-                return "redirect:/Account/login";
+                return "redirect:/Account/OAuth2";
             }
         }
         return "/403.jsp";
