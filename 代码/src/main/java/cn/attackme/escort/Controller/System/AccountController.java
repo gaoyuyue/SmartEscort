@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -97,6 +98,7 @@ public class AccountController {
             user.setPassWord(getSHA_256(passWord));
             user.setRole(Role.user);
             user.setUserName(userName);
+            user.setOpenid(openid);
             userInfoService.save(user);
             return "redirect:/Account/OAuth2";
         }
@@ -113,18 +115,16 @@ public class AccountController {
         try{
             String openid = (String) httpSession.getAttribute("openid");
             User user = userInfoService.getByOpenId(openid);
-            if (null!=user) {
-                UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassWord());
-                Subject subject = SecurityUtils.getSubject();
-                subject.login(token);
-                String state = (String) httpSession.getAttribute("state");
-                httpSession.removeAttribute("openid");
-                httpSession.removeAttribute("state");
-                return "redirect:"+state;
-            }else {
-                return "redirect:/Account/Register";
-            }
-        }catch (Exception e){
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassWord());
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+            String state = (String) httpSession.getAttribute("state");
+            httpSession.removeAttribute("openid");
+            httpSession.removeAttribute("state");
+            return "redirect:" + state;
+        }catch (NoResultException nre){
+            return "redirect:/Account/Register";
+        } catch (Exception e){
             return "forward:/403.jsp";
         }
     }

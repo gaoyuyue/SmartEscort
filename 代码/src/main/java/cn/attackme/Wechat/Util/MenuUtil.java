@@ -34,17 +34,17 @@ public class MenuUtil {
         cbConn.setType("click");
 
         ViewButton vbPost=new ViewButton();
-        vbPost.setUrl(foreUrl+"/LovePackage/Post"+backUrl);
+        vbPost.setUrl(foreUrl+"/User/PostPackage"+backUrl);
         vbPost.setName("发布任务");
         vbPost.setType("view");
 
         ViewButton vbGet=new ViewButton();
-        vbGet.setUrl(foreUrl+"/LovePackage/Get"+backUrl);
+        vbGet.setUrl(foreUrl+"/User/GetPackage"+backUrl);
         vbGet.setName("领取任务");
         vbGet.setType("view");
 
         ViewButton vbPerson=new ViewButton();
-        vbPerson.setUrl(foreUrl+"/LovePackage/Person"+backUrl);
+        vbPerson.setUrl(foreUrl+"/User/PersonCenter"+backUrl);
         vbPerson.setName("个人中心");
         vbPerson.setType("view");
 

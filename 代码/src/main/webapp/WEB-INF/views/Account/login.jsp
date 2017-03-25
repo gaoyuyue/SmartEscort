@@ -35,13 +35,12 @@
 <body class="gray-bg">
 
 <div class="middle-box text-center loginscreen  animated fadeInDown">
+
     <div>
-        <div>
-
-            <h2 class="logo-name">镖</h2>
-
+        <div class="siteIcon">
+            <img src="/assets/img/logo.png" alt="" data-toggle="tooltip" data-placement="top" title="AttackMe" draggable="false">
         </div>
-        <h3>欢迎使用智慧镖局后台管理系统</h3>
+        <h3>欢迎使用智慧镖局</h3>
 
         <form class="m-t-md" role="form" action="/Account/Login" method="post">
             <div class="form-group">

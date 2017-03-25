@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="cn.attackme.escort.Controller">
+    <context:component-scan base-package="cn.attackme.escort.Controller,cn.attackme.Wechat.Controller">
         <!--springMVC配置 只扫描以下包-->
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>

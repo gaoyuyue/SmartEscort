@@ -35,7 +35,7 @@
 
     <!--开发环境-->
     <beans profile="development">
-        <context:component-scan base-package="cn.attackme.escort">
+        <context:component-scan base-package="cn.attackme">
             <!--spring配置不扫描以下包-->
             <context:exclude-filter type="annotation"
                                     expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
@@ -44,7 +44,7 @@
     </beans>
     <!--测试环境-->
     <beans profile="test">
-        <context:component-scan base-package="cn.attackme.escort">
+        <context:component-scan base-package="cn.attackme">
             <!--spring配置不扫描以下包-->
             <context:exclude-filter type="annotation"
                                     expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
@@ -53,7 +53,7 @@
     </beans>
     <!--生产环境-->
     <beans profile="production">
-        <context:component-scan base-package="cn.attackme.escort">
+        <context:component-scan base-package="cn.attackme">
             <!--spring配置不扫描以下包-->
             <context:exclude-filter type="annotation"
                                     expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
