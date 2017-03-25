@@ -8,18 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="assets/img/logo.png">
     <title>Title</title>
-    <link href="/assets/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
-
-    <!-- Morris -->
-    <link href="/assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
-
-    <!-- Gritter -->
-    <link href="/assets/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
-
-    <link href="/assets/css/animate.css" rel="stylesheet">
-    <link href="/assets/css/style.css?v=2.2.0" rel="stylesheet">
+    <%@include file="admin_css.jsp" %>
 </head>
 <body>
 <div id="wrapper">
@@ -52,38 +44,44 @@
                         </ul>
                     </div>
                     <div class="logo-element">
-                        H+
+                        <%--<img src="assets/img/logo.png" height="18" width="20">--%>
+                        <strong>镖</strong>
                     </div>
 
                 </li>
+
                 <li class="active">
-                    <a href="#" ><i class="fa fa-th-large"></i> <span class="nav-label">主页</span> <span
-                            class="fa arrow"></span></a>
+                    <a href="#" url="/UserManagement/" class="redirect"><i class="fa fa-users"></i><span class="nav-label">用户管理</span> </a>
                     <%--<ul class="nav nav-second-level">--%>
-                        <%--<li><a href="index_1.html">主页示例一</a>--%>
-                        <%--</li>--%>
-                        <%--<li><a href="index_2.html">主页示例二</a>--%>
-                        <%--</li>--%>
-                        <%--<li><a href="index_3.html">主页示例三</a>--%>
-                        <%--</li>--%>
-                        <%--<li><a href="index_4.html">主页示例四</a>--%>
-                        <%--</li>--%>
+                    <%--<li><a href="index_1.html">主页示例一</a>--%>
+                    <%--</li>--%>
+                    <%--<li><a href="index_2.html">主页示例二</a>--%>
+                    <%--</li>--%>
+                    <%--<li><a href="index_3.html">主页示例三</a>--%>
+                    <%--</li>--%>
+                    <%--<li><a href="index_4.html">主页示例四</a>--%>
+                    <%--</li>--%>
                     <%--</ul>--%>
                 </li>
-                <li class="active">
-                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">主页</span> <span
-                            class="fa arrow"></span></a>
+                <li class="">
+                    <a href="#" url="/PackageListManagement/" class="redirect"><i class="fa fa-th-list"></i> <span class="nav-label">任务列表管理</span></a>
+                </li>
+                <li class="">
+                    <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">快递类型管理</span> </a>
+                </li>
+                <li class="">
+                    <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
                 </li>
             </ul>
 
         </div>
     </nav>
 
-    <div id="page-wrapper" class="gray-bg dashbard-1">
+    <div id="page-wrapper" class="gray-bg dashoard-1">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="index_2.html#"><i
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
                             class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
@@ -104,9 +102,9 @@
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
                                 <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
+                                    <%--<a href="#" class="pull-left">
                                         <img alt="image" class="img-circle" src="img/a7.jpg">
-                                    </a>
+                                    </a>--%>
                                     <div class="media-body">
                                         <small class="pull-right">46小时前</small>
                                         <strong>小四</strong> 项目已处理完结
@@ -118,9 +116,9 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
+                                    <%--<a href="#" class="pull-left">
                                         <img alt="image" class="img-circle" src="img/a4.jpg">
-                                    </a>
+                                    </a>--%>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">25小时前</small>
                                         <strong>国民岳父</strong> 这是一条测试信息
@@ -187,14 +185,14 @@
 </div>
 </body>
 <%@include file="admin_script.jsp" %>
-<%@include file="admin_footer.jsp"%>
-
+<%@include file="admin_footer.jsp" %>
 <script type="text/javascript">
     bindRedirect();
     var fillUser = function fillUser(data) {
         $("#userName").text(data.name);
     };
     AjaxGetRequest("/UserManagement/UserInfo", fillUser);
+
 </script>
 
 </html>
