@@ -3,7 +3,7 @@ package cn.attackme.escort.UtilsTest;
 
 import org.junit.Test;
 
-import static cn.edu.ncst.jiaogai.Utils.SHAUtils.*;
+import static cn.attackme.escort.Utils.SHAUtils.*;
 import static org.junit.Assert.assertEquals;
 
 public class SHAUtilsTest {
