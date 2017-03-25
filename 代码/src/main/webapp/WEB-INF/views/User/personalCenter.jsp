@@ -11,7 +11,7 @@
     .weui-gridnew{
         position:relative;
         float:left;
-        padding:20px 10px;
+        padding:20px 0px;
         width:4%;
         box-sizing:border-box
     }
