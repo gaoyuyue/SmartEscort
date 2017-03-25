@@ -1,7 +1,7 @@
 package cn.attackme.escort.TestUtils;
 
 
-import cn.edu.ncst.jiaogai.Model.User;
+import cn.attackme.escort.Model.User;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.junit.Before;
@@ -22,7 +22,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import static cn.edu.ncst.jiaogai.Utils.StringUtils.getRandomUUID;
+import static cn.attackme.escort.Utils.StringUtils.getRandomUUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

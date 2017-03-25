@@ -25,184 +25,123 @@
     <script src="/assets/js/bootstrap.min.js?v=3.4.0"></script>
     <script src="/app/js/app.utils.js"></script>
     <script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
-    <script src="/assets/plugins/sweetalert/sweetalert.css"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                document.getElementById("passWord").value = hex_sha256($("#userName").val() + $("#passWord").val());
+            });
+        });
+    </script>
 </head>
 
-<body>
+<body class="gray-bg">
 <div class="page input js_show">
         <div class="weui-cells__title">
             <h2>镖师/发镖人注册</h2>
         </div>
+        <form action="/Account/user" method="post" name="form1">
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label" for="userName">江湖人称</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="昵称" name="userName" id="userName">
+                    <input class="weui-input" type="text" placeholder="请输入昵称" name="userName" id="userName">
                 </div>
             </div>
 
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label" for="name">尊姓大名</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="真实姓名" name="name" id="name">
+                    <input class="weui-input" type="text" placeholder="请输入真实姓名" name="name" id="name">
                 </div>
             </div>
 
-        <div class="weui-cells">
-            <div class="weui-cell weui-cell_vcode weui-cell_select weui-cell_select-before">
+            <div class="weui-cell">
                 <div class="weui-cell__hd">
                     <label class="weui-label">千里传音</label>
-                </div>
-                <div class="weui-cell__hd">
-                    <select class="weui-select" name="select2">
-                        <option value="1">+86</option>
-                        <option value="2">+80</option>
-                        <option value="3">+84</option>
-                        <option value="4">+87</option>
-                    </select>
                 </div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="tel" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber">
                 </div>
             </div>
-        </div>
 
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="password" class="weui-label">密码</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="password" name="password" id="password" placeholder="请输入密码">
+                    <input class="weui-input" type="password" name="passWord" id="passWord" placeholder="请输入密码">
                 </div>
             </div>
+
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="confirmPassword" class="weui-label">确认密码</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="password" placeholder="请再次确认密码" name="confirmPassword" id="confirmPassword">
+                    <input class="weui-input" type="password" onchange="checkpwd()" placeholder="请确认密码" id="confirmPassword">
                 </div>
             </div>
 
-            <div class="weui-cell weui-cell_vcode">
-                <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入验证码" name="validateCode">
-                </div>
-                <div class="weui-cell__ft">
-                    <img id="validateCodeImg"
-                         src="${pageContext.request.contextPath}/Account/validateCode"/>&nbsp;&nbsp;
-                    <a href="#" onclick="javascript:reloadValidateCode();">看不清？</a>
-                </div>
+            <div class="weui-cell">
+                <div id="msg" style="color:red;"></div>
             </div>
         </div>
-
         <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" href="javascript:" id="submit">进入镖局</a>
+            <button type="submit" class="weui-btn weui-btn_primary" id="submit">进入镖局</button>
         </div>
+        </form>
     </div>
 
 <script src="/assets/js/sha256.min.js"></script>
-<script>
-    function reloadValidateCode() {
-        $("#validateCodeImg").attr("src", "/Account/validateCode?data=" + new Date() + Math.floor(Math.random() * 24));
-    }
-    $("#validateCodeImg").click(function () {
-        reloadValidateCode();
-    });
-</script>
 
 <script type="text/javascript">
     /**
-     *检查是否重名
+     * 判断密码两次是否输入正确
+     * @returns {boolean}
      */
-    $("#UserName").focus(function () {
-
-    });
-    $("#UserName").blur(function () {
-        var searchId = $("#userName").val();
-        if (!isNullOrEmpty(searchId)) {
-            $.ajax({
-                type: "GET",
-                url: "/Account/userName/" + searchId,
-                success: function () {
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.status == 409) {
-                        swal({
-                            title: "出错了！",
-                            text: "此用户名已被注册，请更换用户名",
-                            type: "error",
-                            confirmButtonText: "知道了"
-                        });
-                    }
-                }
-            });
+    function checkpwd() {
+        var p1 = $("#passWord").val();
+        var p2 = $("#confirmPassword").val();
+        if(p1 ==""){
+            alert("请输入密码");
+            document.form1.password.focus();
+            return false;
         }
+        if(p1!=p2){
+            document.getElementById("msg").innerHTML = "两次输入密码不一致，请重新输入";
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    /**
+     * 获取焦点事件
+     * */
+    $("#userName").focus(function () {
+        $(this).val("");
+    });
+    $("#confirmPassword").focus(function () {
+        $(this).val("");
     });
     /**
-     * 注册
+     * 判断用户名是否重复
      */
-    $("#submit").click(function () {
+    $("#userName").blur(function () {
         var userName = $("#userName").val();
-        var password = hex_sha256($("#userName").val() + $("#password").val());
-        var name = $("#name").val();
-        var phoneNumber = $("#phoneNumber").val();
-
-        if (isNullOrEmpty(userName) ||
-                isNullOrEmpty(password) ||
-                isNullOrEmpty(name) ||
-                isNullOrEmpty(phoneNumber)) {
-            swal({
-                title: "错误",
-                text: "不可为空",
-                type: "error",
-                confirmButtonText: "知道了"
-            });
-        } else {
-            var data = {
-                "userName": userName,
-                "passWord": password,
-                "name": name,
-                "phoneNumber":phoneNumber
-            };
+        if (!isNullOrEmpty(userName)) {
             $.ajax({
-                type: "POST",
-                url: "/Account/user",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(data),
+                type: "GET",
+                url: "/Account/userName/" + userName,
                 success: function () {
-                    swal({
-                        title: "注册成功",
-                        text: name + "注册完毕",
-                        type: "success",
-                        confirmButtonText: "知道了"
-                    });
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.status == 201) {
-                        swal({
-                            title: "注册成功",
-                            text: name + "注册完毕",
-                            type: "success",
-                            confirmButtonText: "知道了"
-                        });
-                    } else {
-                        swal({
-                            title: "出错了！",
-                            text: "错误信息" + XMLHttpRequest.status,
-                            type: "error",
-                            confirmButtonText: "知道了"
-                        });
-                    }
+                error: function () {
+                    alert("该用户名已被注册!");
                 }
             });
         }
-        $("#userName").val("");
-        $("#password").val("");
-        $("#name").val("");
-        $("#phoneNumber").val("");
-    })
-</script>
+    });
 
+
+</script>
 
 </body>
 </html>

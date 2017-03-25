@@ -65,17 +65,14 @@ public class AccountController {
     @GetMapping("/Account/Register")
         public String RegisterPage(){ return "/Account/register";}
 
-//    @ResponseBody
-//    @PostMapping("/name/{name}")
-
     /**
      * 检查用户名是否重复
      * @param userName
      * @return
      */
     @ResponseBody
-    @GetMapping("/Account/userName/{UuserName}")
-    public ResponseEntity<Void> userSearch(@PathVariable String userName) {
+    @GetMapping("/Account/userName/{userName}")
+    public ResponseEntity<Void> userSearch(@PathVariable String userName){
         if (userInfoService.isExist(userName)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } else {
@@ -83,19 +80,33 @@ public class AccountController {
         }
     }
 
+//    String Register
+
     /**
      * 注册用户
-     * @param user
+     * @param userName
+     * @param passWord
+     * @param name
+     * @param phoneNumber
+     * @param session
      * @return
      */
-    @ResponseBody
+    @SuppressWarnings("ConstantConditions")
     @PostMapping("/Account/user")
-    public ResponseEntity<Void> createUser(@RequestBody User user) {
-        user.setPassWord(getSHA_256(user.getPassWord()));
+    public ResponseEntity<Void> createUser(@RequestParam("userName") String userName,
+                        @RequestParam("passWord") String passWord,
+                        @RequestParam("name") String name,
+                        @RequestParam("phoneNumber") String phoneNumber,
+                        HttpSession session) {
+        User user = new User();
+        user.setPhoneNumber(phoneNumber);
+        user.setName(name);
+        user.setPassWord(getSHA_256(passWord));
+        user.setRole(Role.user);
+        user.setUserName(userName);
         userInfoService.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
 
 
 
