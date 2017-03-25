@@ -76,17 +76,27 @@ public class AccountController {
 
     /**
      * 注册用户
-     * @param user
+     * @param userName
+     * @param passWord
+     * @param name
+     * @param phoneNumber
+     * @param httpSession
      * @return
      */
     @PostMapping("/Account/Register")
-    public String createUser(@RequestBody User user,
-                             HttpSession httpSession) {
+    public String createUser(@RequestParam("userName") String userName,
+                                           @RequestParam("passWord") String passWord,
+                                           @RequestParam("name") String name,
+                                           @RequestParam("phoneNumber") String phoneNumber,
+                                           HttpSession httpSession) {
         String openid = (String) httpSession.getAttribute("openid");
-
-        if (null != openid){
-            user.setPassWord(getSHA_256(user.getPassWord()));
-            user.setOpenid(openid);
+        if (null != openid) {
+            User user = new User();
+            user.setPhoneNumber(phoneNumber);
+            user.setName(name);
+            user.setPassWord(getSHA_256(passWord));
+            user.setRole(Role.user);
+            user.setUserName(userName);
             userInfoService.save(user);
             return "redirect:/Account/OAuth2";
         }
