@@ -193,7 +193,7 @@
     };
     AjaxGetRequest("/UserManagement/UserInfo", fillUser);
 
-    $("#side-menu li").click(function () {
+    $("#side-menu").find("li").click(function () {
         $(".active").removeClass("active");
         $(this).addClass("active");
     });

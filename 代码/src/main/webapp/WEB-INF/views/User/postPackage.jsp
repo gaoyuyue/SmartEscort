@@ -89,6 +89,9 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        $("#postPackage").addClass("weui-bar__item_on");
+    });
     function postPackage() {
         var data = {
         }

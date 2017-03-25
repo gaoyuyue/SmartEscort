@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 包裹
@@ -15,7 +16,6 @@ import java.util.Date;
  */
 @Entity
 @Table
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,6 +59,22 @@ public class Package implements Serializable {
     //满意程度
     private Integer score;
 
+    //任务发布时间
+    private Date publishTime;
+
+    //任务领悟时间
+    private Date receiveTime;
+
+    //代理人对委托人的评价
+    @OneToOne
+    @JoinColumn(name = "agencyEvaluation")
+    private Evaluation agencyEvaluation;
+
+    //委托人对代理人的评价
+    @OneToOne
+    @JoinColumn(name = "delegationEvaluation")
+    private Evaluation delegationEvaluation;
+
     //包裹开始派送时间
     private Date beginTime;
 
@@ -66,5 +82,6 @@ public class Package implements Serializable {
     private Date endTime;
 
     //包裹状态
+    @Enumerated(EnumType.STRING)
     private PackageStatus packageStatus;
 }

@@ -86,6 +86,21 @@ public class UserInfoService extends BaseService<User>{
         return count.intValue() > 0;
     }
 
+    /**
+     * 根据openid判断用户是否已存在，不管是否被删除
+     * @param openId
+     * @return
+     */
+    public Boolean isExistByOpenId(String openId) {
+        Query query = new Query(entityManager);
+        final Long count = (Long) query.from(User.class)
+                .whereEqual("openid", openId)
+                .selectCount()
+                .createTypedQuery()
+                .getSingleResult();
+        return count.intValue() > 0;
+    }
+
     public User search(String pattern) {
         Query query = new Query(entityManager);
         return (User) query.from(User.class)
