@@ -65,7 +65,7 @@ public class AccountController {
      * @return
      */
     @ResponseBody
-    @GetMapping("/Account/userName/{UserName}")
+    @GetMapping("/Account/userName/{userName}")
     public ResponseEntity<Void> userSearch(@PathVariable String userName) {
         if (userInfoService.isExist(userName)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);

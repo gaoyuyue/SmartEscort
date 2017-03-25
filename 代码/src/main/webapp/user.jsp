@@ -20,7 +20,7 @@
         <div class="page__bd" style="height: 100%;">
             <div class="weui-tab">
                 <div class="weui-tab__panel" id="main">
-                    <%@include file="WEB-INF/views/User/postPackage.jsp"%>
+                    <%@include file="WEB-INF/views/User/personalCenter.jsp"%>
                 </div>
                 <div class="weui-tabbar">
                     <a href="javascript:;" class="weui-tabbar__item">
