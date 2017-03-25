@@ -8,12 +8,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 <style>
-    .weui-grid-new{
+    .weui-gridnew{
         position:relative;
         float:left;
         padding:20px 10px;
         width:4%;
         box-sizing:border-box
+    }
+    .weui-gridnew:after,{
+        content: " ";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #d9d9d9;
+    }
+    .weui-gridnew:before{
+        content: " ";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #d9d9d9;
     }
 </style>
 
@@ -31,11 +45,9 @@
 
     <div class="weui-cells">
         <div class="page__hd">
-
-
-
             <div class="weui-grids">
-                <a class="weui-grid-new">
+
+                <a class="weui-gridnew">
                     <div class="weui-grid__icon">
                     <p>发镖人</p>
                     </div>
@@ -57,7 +69,7 @@
         <div class="page__hd">
 
             <div class="weui-grids">
-                <a class="weui-grid-new">
+                <a class="weui-gridnew">
                     <div class="weui-grid__icon">
                         <p>镖师</p>
                     </div>
@@ -78,9 +90,11 @@
         </div>
         <div class="weui-cell weui-cell_access">
             <div class="weui-cell__bd">
-                <img src="/assets/img/dingdan.png">
-                <span style="vertical-align: middle">全部订单</span>
-                <span class="weui-badge" style="margin-left: 5px;">8</span>
+                <img src="/assets/img/dingdan.png" style="margin-top: 3px; float: left">
+                <div style="float: left;margin-top: 3px;">
+                    <span style="vertical-align: middle; margin-top: 3px;">全部订单</span>
+                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                </div>
             </div>
             <div class="weui-cell__ft">查看全部订单</div>
         </div>
