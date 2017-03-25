@@ -40,7 +40,7 @@
         <div class="weui-cells__title">
             <h2>镖师/发镖人注册</h2>
         </div>
-        <form action="/Account/user" method="post" name="form1">
+        <form action="/Account/Register" method="post" name="form1">
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label" for="userName">江湖人称</label></div>

@@ -92,7 +92,7 @@ public class AccountController {
      * @return
      */
     @SuppressWarnings("ConstantConditions")
-    @PostMapping("/Account/user")
+    @PostMapping("/Account/Register")
     public ResponseEntity<Void> createUser(@RequestParam("userName") String userName,
                         @RequestParam("passWord") String passWord,
                         @RequestParam("name") String name,
