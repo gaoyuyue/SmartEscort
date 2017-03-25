@@ -61,13 +61,15 @@
                         <table class="table table-striped" id="package">
                             <thead>
                             <tr>
-
                                 <th></th>
                                 <th>项目</th>
-                                <th>进度</th>
-                                <th>任务</th>
-                                <th>日期</th>
-                                <th>操作</th>
+                                <th>发布人</th>
+                                <th>接受人</th>
+                                <th>快递类型</th>
+                                <th>快递大小</th>
+                                <th>发布时间</th>
+                                <th>执行时间</th>
+                                <th>完成时间</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -79,42 +81,6 @@
                                 <td><span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
                                 </td>
                                 <td>20%</td>
-                                <td>2014.11.11</td>
-                                <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                </td>
-                                <td>商家与购物用户的交互试衣应用</td>
-                                <td><span class="pie" style="display: none;">6,9</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 12.702282018339785 14.47213595499958 Z" fill="#1ab394"></path><path d="M 8 8 L 12.702282018339785 14.47213595499958 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
-                                </td>
-                                <td>40%</td>
-                                <td>2014.11.11</td>
-                                <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                </td>
-                                <td>天狼---智能硬件项目</td>
-                                <td><span class="pie" style="display: none;">3,1</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 1 1 0 8.000000000000002 Z" fill="#1ab394"></path><path d="M 8 8 L 0 8.000000000000002 A 8 8 0 0 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
-                                </td>
-                                <td>75%</td>
-                                <td>2014.11.11</td>
-                                <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                </td>
-                                <td>线下超市+线上商城+物流配送互联系统</td>
-                                <td><span class="pie" style="display: none;">4,9</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 15.48012994148332 10.836839096340286 Z" fill="#1ab394"></path><path d="M 8 8 L 15.48012994148332 10.836839096340286 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
-                                </td>
-                                <td>18%</td>
                                 <td>2014.11.11</td>
                                 <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
                                 </td>
@@ -141,4 +107,6 @@
         function () {
             loadPage(1)
         });
+
+
 </script>

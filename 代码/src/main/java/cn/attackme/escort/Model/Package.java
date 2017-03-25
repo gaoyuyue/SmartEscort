@@ -62,6 +62,9 @@ public class Package implements Serializable {
     //任务发布时间
     private Date publishTime;
 
+    //任务领悟时间
+    private Date receiveTime;
+
     //代理人对委托人的评价
     @OneToOne
     @JoinColumn(name = "agencyEvaluation")
