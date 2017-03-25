@@ -13,7 +13,7 @@
         float:left;
         padding:20px 10px;
         width:4%;
-        box-sizing:border-box；
+        box-sizing:border-box
     }
 </style>
 

@@ -13,7 +13,6 @@
     <title></title>
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
-    <link href="/assets/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
     <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" class="tabbar js_show">
