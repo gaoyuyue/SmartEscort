@@ -62,7 +62,7 @@ public class UserInfoService extends BaseService<User>{
     public User getByOpenId(@NotNull String openId){
         Query query = new Query(entityManager);
         return (User) query.from(User.class)
-                .whereEqual("openId",openId)
+                .whereEqual("openid",openId)
                 .whereEqual("isDeleted", false)
                 .createTypedQuery()
                 .setFirstResult(0)

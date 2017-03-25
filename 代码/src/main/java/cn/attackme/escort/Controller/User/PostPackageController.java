@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/User")
 @Controller
 public class PostPackageController {
-    @GetMapping("/")
+    @GetMapping("/PostPackage")
     public String index(){
         return "/User/postPackage";
     }
