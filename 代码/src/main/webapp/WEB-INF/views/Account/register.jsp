@@ -82,6 +82,9 @@
             <div class="weui-cell">
                 <div id="msg" style="color:red;"></div>
             </div>
+            <div class="weui-cell">
+                <div id="lala" style="color:darkgrey;"></div>
+            </div>
         </div>
         <div class="weui-btn-area">
             <button type="submit" class="weui-btn weui-btn_primary" id="submit">进入镖局</button>
@@ -105,6 +108,10 @@
         }
         if(p1!=p2){
             document.getElementById("msg").innerHTML = "两次输入密码不一致，请重新输入";
+            document.getElementById("submit").disabled =true;
+        } else{
+            document.getElementById("lala").innerHTML = "密码一致，进入镖局吧";
+            document.getElementById("submit").disabled =false;
         }
     }
 

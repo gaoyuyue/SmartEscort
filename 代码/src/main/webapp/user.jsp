@@ -8,5 +8,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="user_header.jsp"%>
-<%@include file="WEB-INF/views/User/postPackage.jsp"%>
+<%@include file="WEB-INF/views/User/personalCenter.jsp"%>
 <%@include file="user_footer.jsp"%>
