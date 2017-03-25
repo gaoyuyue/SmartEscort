@@ -6,12 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<a class="weui-cell weui-cell_access" href="javascript:;">--%>
-    <%--<div class="weui-cell__bd">--%>
-        <%--<p>cell standard</p>--%>
-    <%--</div>--%>
-
-<%--</a>--%>
 <style>
     .icon {
         margin-right: 9px;
@@ -21,6 +15,7 @@
         background-size: 15px 20px;
     }
 </style>
+
 <a class="weui-cell weui-cell_access" href="javascript:;">
     <div style="float: left">
         <div class="icon">
@@ -56,6 +51,14 @@
 
 <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
 
+<div class="weui-cells__title">取件人姓名</div>
+<div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <input id="ower" class="weui-input" type="text" placeholder="请输入取件人姓名">
+        </div>
+    </div>
+</div>
 <div class="weui-cells__title">取件号</div>
 <div class="weui-cells">
     <div class="weui-cell">
