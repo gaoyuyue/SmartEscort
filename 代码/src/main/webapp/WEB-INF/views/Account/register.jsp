@@ -102,14 +102,9 @@
         if(p1 ==""){
             alert("请输入密码");
             document.form1.password.focus();
-            return false;
         }
         if(p1!=p2){
             document.getElementById("msg").innerHTML = "两次输入密码不一致，请重新输入";
-            return false;
-        }
-        else {
-            return true;
         }
     }
 
@@ -139,8 +134,6 @@
             });
         }
     });
-
-
 </script>
 
 </body>
