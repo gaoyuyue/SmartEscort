@@ -17,7 +17,7 @@
     }
 </style>
 
-<a class="weui-cell weui-cell_access" href="javascript:;">
+<a class="weui-cell weui-cell_access" href="/User/ManageAddress">
     <div style="float: left">
         <div class="icon">
         </div>

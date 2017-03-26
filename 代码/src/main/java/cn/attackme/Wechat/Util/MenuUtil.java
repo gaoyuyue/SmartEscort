@@ -44,7 +44,7 @@ public class MenuUtil {
         vbGet.setType("view");
 
         ViewButton vbPerson=new ViewButton();
-        vbPerson.setUrl(foreUrl+"/User/PersonCenter"+backUrl);
+        vbPerson.setUrl(foreUrl+"/User/PersonalCenter"+backUrl);
         vbPerson.setName("个人中心");
         vbPerson.setType("view");
 
