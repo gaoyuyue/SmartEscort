@@ -38,7 +38,7 @@
 <body class="gray-bg">
 <div class="page input js_show">
         <div class="weui-cells__title">
-            <h2>镖师/发镖人注册</h2>
+            <h2>镖师/发布人注册</h2>
         </div>
         <form action="/Account/Register" method="post" name="form1">
         <div class="weui-cells weui-cells_form">
@@ -91,6 +91,7 @@
         </div>
         </form>
     </div>
+
 
 <script src="/assets/js/sha256.min.js"></script>
 
