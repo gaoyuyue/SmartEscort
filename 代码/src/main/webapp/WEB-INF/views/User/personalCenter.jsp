@@ -91,7 +91,7 @@
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
-            <div class="weui-cell__ft"></div>
+            <div class="weui-cell__ft">详细地址管理</div>
         </div>
     </div>
 
