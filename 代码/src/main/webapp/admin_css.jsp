@@ -15,5 +15,8 @@
 <!-- Gritter -->
 <link href="/assets/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
+<!-- sweetalert-->
+<link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
+
 <link href="/assets/css/animate.css" rel="stylesheet">
 <link href="/assets/css/style.css?v=2.2.0" rel="stylesheet">

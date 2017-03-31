@@ -13,7 +13,11 @@
     <title>Title</title>
     <%@include file="admin_css.jsp" %>
 </head>
-<body>
+<body class="pace-done">
+<div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+    <div class="pace-progress-inner"></div>
+</div>
+    <div class="pace-activity"></div></div>
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -44,33 +48,20 @@
                         </ul>
                     </div>
                     <div class="logo-element">
-                        <%--<img src="assets/img/logo.png" height="18" width="20">--%>
                         <strong>镖</strong>
                     </div>
-
                 </li>
-
                 <li class="active">
                     <a href="#" url="/UserManagement/" class="redirect"><i class="fa fa-users"></i><span class="nav-label">用户管理</span> </a>
-                    <%--<ul class="nav nav-second-level">--%>
-                    <%--<li><a href="index_1.html">主页示例一</a>--%>
-                    <%--</li>--%>
-                    <%--<li><a href="index_2.html">主页示例二</a>--%>
-                    <%--</li>--%>
-                    <%--<li><a href="index_3.html">主页示例三</a>--%>
-                    <%--</li>--%>
-                    <%--<li><a href="index_4.html">主页示例四</a>--%>
-                    <%--</li>--%>
-                    <%--</ul>--%>
                 </li>
                 <li class="">
                     <a href="#" url="/PackageListManagement/" class="redirect"><i class="fa fa-th-list"></i> <span class="nav-label">任务列表管理</span></a>
                 </li>
                 <li class="">
-                    <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">快递类型管理</span> </a>
+                    <a href="#" url="/CourierCompanyManagement/" class="redirect"><i class="fa fa-truck"></i> <span class="nav-label">快递类型管理</span> </a>
                 </li>
                 <li class="">
-                    <a href="#"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
+                    <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
                 </li>
             </ul>
 
