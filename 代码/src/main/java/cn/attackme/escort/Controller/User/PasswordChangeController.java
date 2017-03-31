@@ -22,10 +22,12 @@ import java.io.IOException;
 @RequestMapping("/User/PasswordChange")
 @Controller
 public class PasswordChangeController {
+
     @GetMapping("/")
     public String index(){
         return "User/PasswordChange/index";
     }
+
 
 
 

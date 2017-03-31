@@ -18,7 +18,6 @@
     .pwd_Weak_c_r{border-right:1px solid #BB2B2B;}
     .pwd_Medium_c_r{border-right:1px solid #E9AE10;}
     .pwd_Strong_c_r{border-right:1px solid #267A12;}
-
 </style>
 
 <div id="frame">
@@ -44,8 +43,8 @@
                 <input class="weui-input" type="password" name="newPassword" id="newPassword" placeholder="请输入新密码" onKeyUp="CheckIntensity(this.value)"><tr></tr>
             </div>
         </div>
-        <div class="weui-cell__bd">
-            <div style="padding-left: 120px;">
+        <div class="weui-cell">
+            <div style="padding-left: 100px;">
                 <table border="0" cellpadding="0" cellspacing="0">
                     <tr align="center">
                         <td id="pwd_Weak" class="pwd pwd_c"> </td>
