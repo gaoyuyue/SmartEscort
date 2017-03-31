@@ -19,12 +19,12 @@ import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
  * Time: 17:09
  * To change this template use File | Settings | File Templates.
  */
-@RequestMapping("/User")
+@RequestMapping("/User/PersonalCenter")
 @Controller
 public class PersonalCenterController {
-    @GetMapping("/PersonalCenter")
+    @GetMapping("/")
     public String index(){
-        return "/User/personalCenter";
+        return "User/PersonalCenter/index";
     }
 
     @Autowired

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Time: 19:07
  * To change this template use File | Settings | File Templates.
  */
-@RequestMapping("/User")
+@RequestMapping("/User/FeedBack")
 @Controller
 public class FeedBackController {
-    @GetMapping("/FeedBack")
+    @GetMapping("/")
     public String index(){
-        return "/User/feedBack";
+        return "User/FeedBack/index";
     }
 }

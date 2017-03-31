@@ -16,7 +16,7 @@
                     </span>
                     <p class="weui-tabbar__label">首页</p>
                 </a>
-                <a href="/User/PostPackage" id="postPackage" class="weui-tabbar__item">
+                <a href="/User/PostPackage/" id="postPackage" class="weui-tabbar__item">
                     <span style="display: inline-block;position: relative;">
                         <div alt="" class="weui-tabbar__icon">
                             <i class="fa fa-cloud-upload"></i>
@@ -24,7 +24,7 @@
                     </span>
                     <p class="weui-tabbar__label">发布任务</p>
                 </a>
-                <a href="/User/GetPackage" id="getPackage" class="weui-tabbar__item">
+                <a href="/User/GetPackage/" id="getPackage" class="weui-tabbar__item">
                     <span style="display: inline-block;position: relative;">
                         <div alt="" class="weui-tabbar__icon">
                             <i class="fa fa-cloud-download"></i>
@@ -32,7 +32,7 @@
                     </span>
                     <p class="weui-tabbar__label">领取任务</p>
                 </a>
-                <a href="/User/PersonalCenter" id="personalCenter" class="weui-tabbar__item">
+                <a href="/User/PersonalCenter/" id="personalCenter" class="weui-tabbar__item">
                      <span style="display: inline-block;position: relative;">
                          <div alt="" class="weui-tabbar__icon">
                             <i class="fa fa-user"></i>

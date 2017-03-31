@@ -30,18 +30,18 @@
     <div class="weui-cells">
         <div class="page__hd">
             <div class="weui-grids">
-                <a href="/User/WaitingGoods" class="weui-grid">
+                <a href="/User/WaitingGoods/" class="weui-grid">
                     <div class="weui-grid__icon">
                         <img src="/assets/img/daishouhuo.png" alt="">
                     </div>
                     <p class="weui-grid__label">待收货</p>
                 </a>
-                <a href="/User/ReceivedDarts" class="weui-grid">
+                <a href="/User/ReceivedDarts/" class="weui-grid">
                     <div class="weui-grid__icon">
                         <img src="/assets/img/daijiebiao.png" alt="">
                     </div>
                     <p class="weui-grid__label">已接镖</p>
-                    <a href="/User/WaitingEvaluation" class="weui-grid">
+                    <a href="/User/WaitingEvaluation/" class="weui-grid">
                         <div class="weui-grid__icon">
                             <img src="/assets/img/daipingjia.png" alt="">
                         </div>
@@ -54,7 +54,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/dingdan.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/SingleDart"><span style="vertical-align: middle; margin-top: 3px;">全部镖单</span></a>
+                    <a href="/User/SingleDart/"><span style="vertical-align: middle; margin-top: 3px;">全部镖单</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
@@ -67,7 +67,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/gerenxinxi.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/UserInfomation"><span style="vertical-align: middle; margin-top: 3px;">个人信息</span></a>
+                    <a href="/User/UserInfomation/"><span style="vertical-align: middle; margin-top: 3px;">个人信息</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/mima.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/PasswordChange"><span style="vertical-align: middle; margin-top: 3px;">修改密码</span></a>
+                    <a href="/User/PasswordChange/"><span style="vertical-align: middle; margin-top: 3px;">修改密码</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
@@ -87,7 +87,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/shouhuodizhi.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/ManageAddress"><span style="vertical-align: middle; margin-top: 3px;">抵达地点</span></a>
+                    <a href="/User/ManageAddress/"><span style="vertical-align: middle; margin-top: 3px;">抵达地点</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
@@ -100,7 +100,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/xingqu.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/MyConcern"><span style="vertical-align: middle; margin-top: 3px;">我的关注</span></a>
+                    <a href="/User/MyConcern/"><span style="vertical-align: middle; margin-top: 3px;">我的关注</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
@@ -110,7 +110,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/yijianfankui.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/Feedback"><span style="vertical-align: middle; margin-top: 3px;">意见反馈</span></a>
+                    <a href="/User/Feedback/"><span style="vertical-align: middle; margin-top: 3px;">意见反馈</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>

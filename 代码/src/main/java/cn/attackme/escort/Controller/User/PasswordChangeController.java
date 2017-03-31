@@ -19,12 +19,12 @@ import java.io.IOException;
  * Time: 19:02
  * To change this template use File | Settings | File Templates.
  */
-@RequestMapping("/User")
+@RequestMapping("/User/PasswordChange")
 @Controller
 public class PasswordChangeController {
-    @GetMapping("/PasswordChange")
+    @GetMapping("/")
     public String index(){
-        return "/User/passwordChange";
+        return "User/PasswordChange/index";
     }
 
 

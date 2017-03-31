@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * Created by arthurme on 2017/3/25.
  */
-@RequestMapping("/User")
+@RequestMapping("/User/ManageAddress")
 @Controller
 public class ManageAddressController {
-    @GetMapping("/ManageAddress")
+    @GetMapping("/")
     public String index(){
-        return "/User/manageAddress";
+        return "User/ManageAddress/index";
     }
 }

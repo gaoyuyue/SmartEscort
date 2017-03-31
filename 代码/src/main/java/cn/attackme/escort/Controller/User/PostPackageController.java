@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * Created by arthurme on 2017/3/21.
  */
-@RequestMapping("/User")
+@RequestMapping("/User/PostPackage")
 @Controller
 public class PostPackageController {
-    @GetMapping("/PostPackage")
+    @GetMapping("/")
     public String index(){
-        return "/User/postPackage";
+        return "User/PostPackage/index";
     }
 }

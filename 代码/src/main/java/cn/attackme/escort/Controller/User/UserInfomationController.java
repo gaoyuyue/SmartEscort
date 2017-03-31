@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Time: 19:09
  * To change this template use File | Settings | File Templates.
  */
-@RequestMapping("/User")
+@RequestMapping("/User/UserInfomation")
 @Controller
 public class UserInfomationController {
-    @GetMapping("/UserInfomation")
+    @GetMapping("/")
     public String index(){
-        return "/User/userInfomation";
+        return "User/UserInfomation/index";
     }
 }
