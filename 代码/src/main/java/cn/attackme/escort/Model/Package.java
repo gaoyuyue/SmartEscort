@@ -43,20 +43,10 @@ public class Package implements Serializable {
     @JoinColumn(name = "standard")
     private Standard standard;
 
-// TODO: 2017/3/31
-//    //取件凭证
-//    @OneToOne
-//    @JoinColumn(name = "certificate")
-//    private Certificate certificate;
-
-    //取件号
-    private String  pickupNumber;
-
-    //手机尾号
-    private String  tailNumber;
-
-    //包裹所属人姓名
-    private String owner;
+    //取件凭证
+    @OneToOne
+    @JoinColumn(name = "certificate")
+    private Certificate certificate;
 
     //快递公司
     @OneToOne

@@ -95,9 +95,11 @@
     });
     function postPackage() {
         var data = {
-            "owner":$("#owner").val(),
-            "pickupNumber":$("#pickupNumber").val(),
-            "tailNumber":$("#tailNumber").val(),
+            "certificate":{
+                "owner":$("#owner").val(),
+                "pickupNumber":$("#pickupNumber").val(),
+                "tailNumber":$("#tailNumber").val()
+            },
             "note":$("#note").val()
         };
         Post("/User/PostPackage/",data);
