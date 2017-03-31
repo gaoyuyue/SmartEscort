@@ -27,7 +27,7 @@
             <a href="javascript:window.history.back();"><img src="/assets/img/goback.png" align="top"></a>
         </span>
         <a id="title">修改密码</a>
-        <a id="logo" href="index.html"><img src="/assets/img/home.png" align="top"></a>
+        <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
     </div>
 
     <form action="/Account/Register" method="post" name="form1">

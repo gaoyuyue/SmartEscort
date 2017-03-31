@@ -17,7 +17,7 @@
     }
 </style>
 
-<a class="weui-cell weui-cell_access" href="/User/ManageAddress">
+<a class="weui-cell weui-cell_access" href="/User/ManageAddress/">
     <div style="float: left">
         <div class="icon">
         </div>
@@ -56,7 +56,7 @@
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <input id="ower" class="weui-input" type="text" placeholder="请输入取件人姓名">
+            <input id="owner" class="weui-input" type="text" placeholder="请输入取件人姓名">
         </div>
     </div>
 </div>
@@ -64,7 +64,7 @@
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <input id="number" class="weui-input" type="text" placeholder="请输入取件号">
+            <input id="pickupNumber" class="weui-input" type="text" placeholder="请输入取件号">
         </div>
     </div>
 </div>
@@ -72,7 +72,7 @@
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <input id="phoneNumber" class="weui-input" type="text" placeholder="请输入手机尾号">
+            <input id="tailNumber" class="weui-input" type="text" placeholder="请输入手机尾号">
         </div>
     </div>
 </div>
@@ -88,13 +88,20 @@
     <a class="weui-btn weui-btn_primary" href="javascript:postPackage()" id="showTooltips">发布</a>
 </div>
 
+<script src="/app/js/mobile.utils.js"></script>
 <script>
     $(document).ready(function () {
         $("#postPackage").addClass("weui-bar__item_on");
     });
     function postPackage() {
         var data = {
-        }
+            "owner":$("#owner").val(),
+            "pickupNumber":$("#pickupNumber").val(),
+            "tailNumber":$("#tailNumber").val(),
+            "note":$("#note").val()
+        };
+        Post("/User/PostPackage/",data);
     }
 </script>
+
 <%@include file="/user_footer.jsp"%>
