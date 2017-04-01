@@ -110,7 +110,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/yijianfankui.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/Feedback/"><span style="vertical-align: middle; margin-top: 3px;">意见反馈</span></a>
+                    <a href="/User/FeedBack/"><span style="vertical-align: middle; margin-top: 3px;">意见反馈</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
