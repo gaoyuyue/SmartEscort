@@ -2,12 +2,12 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2017/3/26/026
-  Time: 19:28
+  Time: 19:06
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
-<style type="text/css">
+<style>
     a{
         text-decoration:none;
         color: black;
@@ -27,8 +27,8 @@
         <div class="page__bd" style="height: 100%;">
             <div class="weui-tab">
                 <div class="weui-navbar">
-                    <div class="weui-navbar__item">
-                        <a href="/User/AllDart/">全部镖单</a>
+                    <div class="weui-navbar__item weui-bar__item_on">
+                        <a href="/User/AllDart/" style="color:orange;">全部镖单</a>
                     </div>
                     <div class="weui-navbar__item">
                         <a href="/User/WaitingGoods/">待收镖</a>
@@ -36,8 +36,8 @@
                     <div class="weui-navbar__item">
                         <a href="/User/ReceivedDarts/">已接镖</a>
                     </div>
-                    <div class="weui-navbar__item weui-bar__item_on">
-                        <a href="/User/WaitingEvaluation/" style="color:orange;">待评价</a>
+                    <div class="weui-navbar__item">
+                        <a href="/User/WaitingEvaluation/">待评价</a>
                     </div>
                 </div>
 
@@ -114,8 +114,5 @@
         });
     });
 </script>
-
-
-
 
 <%@include file="/user_footer.jsp"%>

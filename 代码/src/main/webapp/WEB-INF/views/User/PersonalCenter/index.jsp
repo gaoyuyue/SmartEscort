@@ -34,7 +34,7 @@
                     <div class="weui-grid__icon">
                         <img src="/assets/img/daishouhuo.png" alt="">
                     </div>
-                    <p class="weui-grid__label">待收货</p>
+                    <p class="weui-grid__label">待收镖</p>
                 </a>
                 <a href="/User/ReceivedDarts/" class="weui-grid">
                     <div class="weui-grid__icon">
@@ -54,7 +54,7 @@
             <div class="weui-cell__bd">
                 <img src="/assets/img/dingdan.png" style="margin-top: 3px; float: left">
                 <div style="float: left;margin-top: 3px;">
-                    <a href="/User/SingleDart/"><span style="vertical-align: middle; margin-top: 3px;">全部镖单</span></a>
+                    <a href="/User/AllDart/"><span style="vertical-align: middle; margin-top: 3px;">全部镖单</span></a>
                     <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
                 </div>
             </div>
