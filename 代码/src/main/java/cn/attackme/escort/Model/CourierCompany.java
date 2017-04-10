@@ -33,4 +33,7 @@ public class CourierCompany implements Serializable{
     //快递名称
     private String companyName;
 
+    public CourierCompany(String companyName) {
+        this.companyName = companyName;
+    }
 }
