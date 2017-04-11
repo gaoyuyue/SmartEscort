@@ -28,10 +28,12 @@
                                 <img alt="image" class="img-circle" src="/assets/img/profile_small.jpg"/>
                                  </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                    <span class="clear"> <span class="block m-t-xs">
+                                    <span class="clear">
+                                        <span class="block m-t-xs">
                                         <strong class="font-bold" id="userName"></strong>
-                                 </span> <span class="text-muted text-xs block">管理员<b
-                                            class="caret"></b></span> </span>
+                                        </span>
+                                        <span class="text-muted text-xs block">管理员<b class="caret"></b></span>
+                                    </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="">修改头像</a>

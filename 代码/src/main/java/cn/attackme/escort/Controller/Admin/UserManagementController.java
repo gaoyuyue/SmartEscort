@@ -25,6 +25,9 @@ public class UserManagementController {
         return "Admin/UserManagement/index";
     }
 
+    /*
+    返回
+     */
     @ResponseBody
     @GetMapping("/UserInfo")
     public User getUserInfo(){

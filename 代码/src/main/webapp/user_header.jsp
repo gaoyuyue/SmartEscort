@@ -16,6 +16,7 @@
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/assets/js/manhuatoTop.1.0.js" type="text/javascript"></script>
     <script src="/assets/js/common.js" type="text/javascript"></script>
+    <script src="/app/js/app.utils.js" type="text/javascript"></script>
 
 
 

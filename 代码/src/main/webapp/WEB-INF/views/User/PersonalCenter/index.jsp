@@ -22,7 +22,7 @@
             <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</span>
         </div>
         <div class="weui-cell__bd">
-            <p>联系人名称</p>
+            <strong id="userName"></strong>
             <p style="font-size: 13px;color: #888888;">摘要信息</p>
         </div>
     </div>
@@ -116,6 +116,25 @@
             </div>
             <div class="weui-cell__ft"></div>
         </div>
+        <div class="weui-cell weui-cell_access">
+            <div class="weui-cell__bd">
+                <img src="/assets/img/tongzhi.png" style="margin-top: 3px; float: left">
+                <div style="float: left;margin-top: 3px;">
+                    <a href="/User/Notice/"><span style="vertical-align: middle; margin-top: 3px;">通知</span></a>
+                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                </div>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </div>
     </div>
 </div>
+<script type="text/javascript">
+    var fillUser = function fillUser(result) {
+        console.error(result);
+        $("#userName").text(result.name);
+    };
+    $(document).ready(function () {
+        AjaxGetRequest("/UserManagement/UserInfo", fillUser);
+    })
+</script>
 <%@include file="/user_footer.jsp"%>
