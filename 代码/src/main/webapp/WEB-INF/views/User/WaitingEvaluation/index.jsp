@@ -31,10 +31,10 @@
                         <a href="/User/AllDart/">全部镖单</a>
                     </div>
                     <div class="weui-navbar__item">
-                        <a href="/User/WaitingGoods/">待收镖</a>
+                        <a href="/User/WaitingGoods/">我的发布</a>
                     </div>
                     <div class="weui-navbar__item">
-                        <a href="/User/ReceivedDarts/">已接镖</a>
+                        <a href="/User/ReceivedDarts/">我的接单</a>
                     </div>
                     <div class="weui-navbar__item weui-bar__item_on">
                         <a href="/User/WaitingEvaluation/" style="color:orange;">待评价</a>

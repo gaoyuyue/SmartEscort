@@ -34,98 +34,114 @@
                     <div class="weui-grid__icon">
                         <img src="/assets/img/daishouhuo.png" alt="">
                     </div>
-                    <p class="weui-grid__label">待收镖</p>
+                    <p class="weui-grid__label">我的发布</p>
                 </a>
                 <a href="/User/ReceivedDarts/" class="weui-grid">
                     <div class="weui-grid__icon">
                         <img src="/assets/img/daijiebiao.png" alt="">
                     </div>
-                    <p class="weui-grid__label">已接镖</p>
-                    <a href="/User/WaitingEvaluation/" class="weui-grid">
-                        <div class="weui-grid__icon">
-                            <img src="/assets/img/daipingjia.png" alt="">
-                        </div>
-                        <p class="weui-grid__label">待评价</p>
-                    </a>
+                    <p class="weui-grid__label">我的接单</p>
                 </a>
+                <a href="/User/WaitingEvaluation/" class="weui-grid">
+                    <div class="weui-grid__icon">
+                        <img src="/assets/img/daipingjia.png" alt="">
+                    </div>
+                    <p class="weui-grid__label">待评价</p>
+                </a>
+
             </div>
         </div>
-        <div class="weui-cell weui-cell_access">
-            <div class="weui-cell__bd">
-                <img src="/assets/img/dingdan.png" style="margin-top: 3px; float: left">
-                <div style="float: left;margin-top: 3px;">
-                    <a href="/User/AllDart/"><span style="vertical-align: middle; margin-top: 3px;">全部镖单</span></a>
-                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+        <a href="/User/AllDart/">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <img src="/assets/img/dingdan.png" style="margin-top: 3px; float: left">
+                    <div style="float: left;margin-top: 3px;">
+                        <span style="vertical-align: middle; margin-top: 3px;">全部镖单</span>
+                        <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                    </div>
                 </div>
+                <div class="weui-cell__ft">查看全部订单</div>
             </div>
-            <div class="weui-cell__ft">查看全部订单</div>
-        </div>
+        </a>
     </div>
 
     <div class="weui-cells">
-        <div class="weui-cell weui-cell_access">
-            <div class="weui-cell__bd">
-                <img src="/assets/img/gerenxinxi.png" style="margin-top: 3px; float: left">
-                <div style="float: left;margin-top: 3px;">
-                    <a href="/User/UserInfomation/"><span style="vertical-align: middle; margin-top: 3px;">个人信息</span></a>
-                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+        <a href="/User/UserInfomation/">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <img src="/assets/img/gerenxinxi.png" style="margin-top: 3px; float: left">
+                    <div style="float: left;margin-top: 3px;">
+                        <span style="vertical-align: middle; margin-top: 3px;">个人信息</span>
+                        <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                    </div>
                 </div>
+                <div class="weui-cell__ft"></div>
             </div>
-            <div class="weui-cell__ft"></div>
-        </div>
-        <div class="weui-cell weui-cell_access">
-            <div class="weui-cell__bd">
-                <img src="/assets/img/mima.png" style="margin-top: 3px; float: left">
-                <div style="float: left;margin-top: 3px;">
-                    <a href="/User/PasswordChange/"><span style="vertical-align: middle; margin-top: 3px;">修改密码</span></a>
-                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+        </a>
+        <a href="/User/PasswordChange/">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <img src="/assets/img/mima.png" style="margin-top: 3px; float: left">
+                    <div style="float: left;margin-top: 3px;">
+                        <span style="vertical-align: middle; margin-top: 3px;">修改密码</span>
+                        <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                    </div>
                 </div>
+                <div class="weui-cell__ft"></div>
             </div>
-            <div class="weui-cell__ft"></div>
-        </div>
-        <div class="weui-cell weui-cell_access">
-            <div class="weui-cell__bd">
-                <img src="/assets/img/shouhuodizhi.png" style="margin-top: 3px; float: left">
-                <div style="float: left;margin-top: 3px;">
-                    <a href="/User/ManageAddress/"><span style="vertical-align: middle; margin-top: 3px;">抵达地点</span></a>
-                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+        </a>
+        <a href="/User/ManageAddress/">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <img src="/assets/img/shouhuodizhi.png" style="margin-top: 3px; float: left">
+                    <div style="float: left;margin-top: 3px;">
+                        <span style="vertical-align: middle; margin-top: 3px;">抵达地点</span>
+                        <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                    </div>
                 </div>
+                <div class="weui-cell__ft">详细地址管理</div>
             </div>
-            <div class="weui-cell__ft">详细地址管理</div>
-        </div>
+        </a>
     </div>
 
-    <div class="weui-cells">
-        <div class="weui-cell weui-cell_access">
-            <div class="weui-cell__bd">
-                <img src="/assets/img/xingqu.png" style="margin-top: 3px; float: left">
-                <div style="float: left;margin-top: 3px;">
-                    <a href="/User/MyConcern/"><span style="vertical-align: middle; margin-top: 3px;">我的关注</span></a>
-                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+        <a href="/User/MyConcern/">
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <img src="/assets/img/xingqu.png" style="margin-top: 3px; float: left">
+                        <div style="float: left;margin-top: 3px;">
+                            <span style="vertical-align: middle; margin-top: 3px;">我的关注</span>
+                            <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft"></div>
                 </div>
             </div>
-            <div class="weui-cell__ft"></div>
-        </div>
-        <div class="weui-cell weui-cell_access">
-            <div class="weui-cell__bd">
-                <img src="/assets/img/yijianfankui.png" style="margin-top: 3px; float: left">
-                <div style="float: left;margin-top: 3px;">
-                    <a href="/User/FeedBack/"><span style="vertical-align: middle; margin-top: 3px;">意见反馈</span></a>
-                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+        </a>
+        <a href="/User/FeedBack/">
+                <div class="weui-cell weui-cell_access">
+                    <div class="weui-cell__bd">
+                        <img src="/assets/img/yijianfankui.png" style="margin-top: 3px; float: left">
+                        <div style="float: left;margin-top: 3px;">
+                            <span style="vertical-align: middle; margin-top: 3px; font-size: 17px">意见反馈</span>
+                            <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft"></div>
                 </div>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </div>
-        <div class="weui-cell weui-cell_access">
-            <div class="weui-cell__bd">
-                <img src="/assets/img/tongzhi.png" style="margin-top: 3px; float: left">
-                <div style="float: left;margin-top: 3px;">
-                    <a href="/User/Notice/"><span style="vertical-align: middle; margin-top: 3px;">通知</span></a>
-                    <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+        </a>
+        <a href="/User/Notice/">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd">
+                    <img src="/assets/img/tongzhi.png" style="margin-top: 3px; float: left">
+                    <div style="float: left;margin-top: 3px;">
+                        <span style="vertical-align: middle; margin-top: 3px;font-size: 17px">通知</span>
+                        <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
+                    </div>
                 </div>
+                <div class="weui-cell__ft"></div>
             </div>
-            <div class="weui-cell__ft"></div>
-        </div>
+        </a>
     </div>
 </div>
 <script type="text/javascript">

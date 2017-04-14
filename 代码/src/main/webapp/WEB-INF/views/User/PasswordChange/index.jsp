@@ -31,13 +31,6 @@
 
     <form action="/Account/Register" method="post" name="form1">
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label class="weui-label" for="passWord">当前密码:</label></div>
-            <div class="weui-cell__bd">
-                <input class="weui-input" type="password" name="passWord" id="passWord" placeholder="请输入当前密码">
-            </div>
-        </div>
-
-        <div class="weui-cell">
             <div class="weui-cell__hd" style="float: left"><label class="weui-label" for="newPassword">新密码:</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" type="password" name="newPassword" id="newPassword" placeholder="请输入新密码" onKeyUp="CheckIntensity(this.value)"><tr></tr>
