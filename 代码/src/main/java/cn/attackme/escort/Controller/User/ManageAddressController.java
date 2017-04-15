@@ -19,4 +19,9 @@ public class ManageAddressController {
     public String add(){
         return "User/ManageAddress/add";
     }
+
+    @GetMapping("/edit")
+    public String edit(){
+        return "User/ManageAddress/edit";
+    }
 }
