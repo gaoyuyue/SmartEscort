@@ -17,11 +17,17 @@
     <script src="/app/js/app.utils.js" type="text/javascript"></script>
     <script src="/app/js/posfixed.js" type="text/javascript"></script>
 
-
+    <script type="text/javascript">
+        function disp_alert()
+        {
+            alert("是否确认删除")
+        }
+    </script>
 
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
     <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
 </head>
 <body>
     <div id="top">
@@ -30,6 +36,57 @@
         </span>
         <a id="title">管理收货地址</a>
         <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
+    </div>
+    <!--我-->
+    <div class="adress">
+            <div>
+                <span style="margin: 5px" >张三</span>
+                <span > </span>
+                <span style="float: right">13230524775</span>
+            </div>
+            <div>
+                <span>
+            </span>
+                <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
+            </div>
+            <hr color=" #DCDCDC" size="1px">
+            <div>
+
+                <input type="checkbox">设为默认
+
+                <span onclick="disp_alert()" style="float: right">删除</span>
+                <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
+
+                <a href="#" style="float: right;color: black;">编辑</a>
+                <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
+
+
+            </div>
+
+    </div>
+
+    <div style="background-color: #DCDCDC;height: 8px;">
+    </div>
+    <div class="adress">
+        <div>
+            <span >李四</span>
+            <span > </span>
+            <span style="float: right">13230524775</span>
+        </div>
+        <div>
+                <span>
+            </span>
+            <span style="font-size: 14px;">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学西区</span>
+        </div>
+        <hr color=" #DCDCDC" size="1px">
+        <div>
+
+            <input type="checkbox">设为默认
+            <span onclick="disp_alert()" style="float: right">删除</span>
+            <a href="#" style="float: right;color: black;">编辑</a>
+
+        </div>
+
     </div>
 
     <div class="weui-tabbar">
