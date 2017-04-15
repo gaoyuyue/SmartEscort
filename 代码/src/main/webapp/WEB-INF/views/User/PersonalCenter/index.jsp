@@ -7,19 +7,22 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+
 <!--页面-->
 <div class="page badge js_show">
-    <div class="weui-cell">
-        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-            <img src="/assets/img/a9.jpg" style="width: 50px;display: block">
+    <%--<div class="weui-cells">--%>
+    <div class="weui-cell nav" >
+        <div   class="weui-cell__hd navicon" >
+            <img class="img-circle" src="/assets/img/a5.jpg" style="width: 50px;display: block">
+
         </div>
-        <div class="weui-cell__bd">
-            <strong id="userName"></strong>
-            <p style="font-size: 13px;color: #888888;">摘要信息</p>
+
+        <div style="margin: 0 auto">
+            <strong id="userName" class="navusername"></strong>
+            <p style="font-size: 13px;color: #888888;" class="navuser">摘要信息</p>
         </div>
     </div>
 
-    <div class="weui-cells">
         <div class="page__hd">
             <div class="weui-grids">
                 <a href="/User/MyPublish/" class="weui-grid">
@@ -54,7 +57,7 @@
                 <div class="weui-cell__ft">查看全部订单</div>
             </div>
         </a>
-    </div>
+    <%--</div>--%>
 
     <div class="weui-cells">
         <a href="/User/ManageAddress/">
