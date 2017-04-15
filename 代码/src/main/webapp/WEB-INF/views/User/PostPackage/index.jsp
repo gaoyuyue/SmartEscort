@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+<link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
 
 <a class="weui-cell weui-cell_access" href="/User/ManageAddress/">
     <div style="float: left">
@@ -37,31 +38,32 @@
 
 <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
 
-<div class="weui-cells__title">取件人姓名</div>
-<div class="weui-cells">
+<div class="weui-cells weui-cells_form">
     <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">包裹类型</label></div>
         <div class="weui-cell__bd">
-            <input id="owner" class="weui-input" type="text" placeholder="请输入取件人姓名">
+            <input class="weui-input" id="packageType" type="text" value="">
         </div>
     </div>
 </div>
-<div class="weui-cells__title">取件号</div>
-<div class="weui-cells">
+
+<div class="weui-cells weui-cells_form">
     <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>
         <div class="weui-cell__bd">
-            <input id="pickupNumber" class="weui-input" type="text" placeholder="请输入取件号">
+            <input class="weui-input" id="expressType" type="text" value="">
         </div>
     </div>
 </div>
-<div class="weui-cells__title">手机尾号</div>
+
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <input id="tailNumber" class="weui-input" type="text" placeholder="请输入手机尾号">
+            <input id="price" class="weui-input" type="text" placeholder="请输入价格（元）">
         </div>
     </div>
 </div>
-<div class="weui-cells__title">备注</div>
+
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
@@ -69,10 +71,21 @@
         </div>
     </div>
 </div>
+
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <textarea class="weui-textarea" id="address" placeholder="短信内容" rows="4"></textarea>
+        </div>
+    </div>
+</div>
+
 <div class="weui-btn-area">
     <a class="weui-btn weui-btn_primary" href="javascript:postPackage()" id="showTooltips">发布</a>
 </div>
 
+<script src="/assets/js/jquery-weui.min.js"></script>
+<script src="/assets/js/fastclick.js"></script>
 <script src="/app/js/mobile.utils.js"></script>
 <script>
     $(document).ready(function () {
@@ -94,6 +107,29 @@
         };
         Post("/User/PostPackage/",data,success);
     }
+
+    $(function() {
+        FastClick.attach(document.body);
+    });
+
+    $("#packageType").picker({
+        title: "请选择包裹类型",
+        cols: [
+            {
+                textAlign: 'center',
+                values: ['大', '中', '小']
+            }
+        ]
+    });
+    $("#expressType").picker({
+        title: "请选择您的快递类型",
+        cols: [
+            {
+                textAlign: 'center',
+                values: ['申通', '中通', '圆通', '京东']
+            }
+        ]
+    });
 </script>
 
 <%@include file="/user_footer.jsp"%>
