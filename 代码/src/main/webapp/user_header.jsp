@@ -12,7 +12,7 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
 
-    <link href="/assets/css/m.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/assets/js/manhuatoTop.1.0.js" type="text/javascript"></script>
     <script src="/assets/js/common.js" type="text/javascript"></script>
