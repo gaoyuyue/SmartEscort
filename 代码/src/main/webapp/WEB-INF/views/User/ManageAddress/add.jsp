@@ -15,12 +15,9 @@
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
-    <script src="/assets/js/manhuatoTop.1.0.js" type="text/javascript"></script>
-    <script src="/assets/js/common.js" type="text/javascript"></script>
 
 </head>
 <body>
-    <%--<div id="frame">--%>
     <div id="top">
         <span id="list">
             <a href="javascript:window.history.back();"><img src="/assets/img/goback.png" align="top"></a>

@@ -7,44 +7,29 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
-<style>
-    .icon {
-        margin-right: 9px;
-        height: 21px;
-        width: 21px;
-        background: url(/assets/img/address.png) 50% 50% no-repeat;
-        background-size: 15px 20px;
-    }
-</style>
 
 <a class="weui-cell weui-cell_access" href="/User/ManageAddress/">
     <div style="float: left">
-        <div class="icon">
+        <div class="address_icon">
         </div>
     </div>
     <div>
-        <%--<article class="weui-article">--%>
-            <%--<section>--%>
-            <div>
-                <span >收货人：  </span>
-                <span >高语越</span>
-                <span > </span>
-                <span style="float: right">13230524775</span>
-            </div>
-            <%--</section>--%>
-            <%--<section>--%>
-            <div>
-                <span>收货地址：</span>
-                <span>
-                </span>
-                <span>河北省 </span>
-                <span>唐山市 </span>
-                <span>曹妃甸区 </span>
-                <span>唐山湾生态城 </span>
-                <span>渤海大道21号华北理工大学东区梅园 </span>
-            </div>
-            <%--</section>--%>
-        <%--</article>--%>
+        <div>
+            <span >收货人：  </span>
+            <span >高语越</span>
+            <span > </span>
+            <span style="float: right">13230524775</span>
+        </div>
+        <div>
+            <span>收货地址：</span>
+            <span>
+            </span>
+            <span>河北省 </span>
+            <span>唐山市 </span>
+            <span>曹妃甸区 </span>
+            <span>唐山湾生态城 </span>
+            <span>渤海大道21号华北理工大学东区梅园 </span>
+        </div>
     </div>
     <div class="weui-cell__ft">
     </div>
