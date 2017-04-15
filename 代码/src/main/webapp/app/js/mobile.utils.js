@@ -16,7 +16,7 @@ var Get = function (url,success) {
     });
 };
 
-var Post = function (url,data) {
+var Post = function (url,data,success) {
     "use strict";
 
     $.ajax({
@@ -25,6 +25,7 @@ var Post = function (url,data) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success:function () {
+            success();
         },
         error:function (XMLHttpRequest) {
         }

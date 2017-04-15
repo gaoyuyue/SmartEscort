@@ -37,6 +37,11 @@ public class PostPackageController {
         return "User/PostPackage/index";
     }
 
+    @GetMapping("/success")
+    public String success(){
+        return "User/PostPackage/success";
+    }
+
     @PostMapping("/")
     public ResponseEntity<Void> create(@RequestBody Package p){
         Certificate certificate = p.getCertificate();

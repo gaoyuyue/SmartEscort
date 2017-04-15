@@ -14,4 +14,9 @@ public class ManageAddressController {
     public String index(){
         return "User/ManageAddress/index";
     }
+
+    @GetMapping("/add")
+    public String add(){
+        return "User/ManageAddress/add";
+    }
 }

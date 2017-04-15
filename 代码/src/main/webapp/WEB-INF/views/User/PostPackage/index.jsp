@@ -93,6 +93,11 @@
     $(document).ready(function () {
         $("#postPackage").addClass("weui-bar__item_on");
     });
+
+    var success = function () {
+        window.location.href = "/User/PostPackage/success";
+    };
+
     function postPackage() {
         var data = {
             "certificate":{
@@ -102,7 +107,7 @@
             },
             "note":$("#note").val()
         };
-        Post("/User/PostPackage/",data);
+        Post("/User/PostPackage/",data,success);
     }
 </script>
 
