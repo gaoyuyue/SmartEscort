@@ -2,13 +2,12 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2017/3/26/026
-  Time: 19:06
+  Time: 19:27
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 <div id="frame">
-
     <div id="navbarSuspension">
         <div id="top">
             <span id="list">
@@ -21,14 +20,14 @@
             <div class="page__bd">
                 <div class="weui-tab">
                     <div class="weui-navbar">
-                        <div class="weui-navbar__item weui-bar__item_on font_color">
-                            <a href="/User/AllDart/" style="color:orange;" class="font_color">全部镖单</a>
+                        <div class="weui-navbar__item">
+                            <a href="/User/AllDart/" class="font_color">全部镖单</a>
                         </div>
                         <div class="weui-navbar__item font_color">
                             <a href="/User/MyPublish/" class="font_color">我的发布</a>
                         </div>
-                        <div class="weui-navbar__item font_color">
-                            <a href="/User/MyDart/" class="font_color">我的接单</a>
+                        <div class="weui-navbar__item weui-bar__item_on font_color">
+                            <a href="/User/MyDart/" style="color:orange;" class="font_color">我的接单</a>
                         </div>
                         <div class="weui-navbar__item font_color">
                             <a href="/User/WaitingEvaluation/" class="font_color">待评价</a>
@@ -39,75 +38,8 @@
         </div>
     </div>
 
-
     <div class="weui-tab__panel">
         <div class="page__bd" style="height: 50%;margin-top: 100px">
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ffb71a;font-size: 17px">待领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">取消订单</a>
-            </div>
-
-            <br>
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ff746d;font-size: 17px">已领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">联系送货人</a>
-            </div>
             <div class="weui-form-preview">
                 <div class="weui-form-preview__bd">
                     <div class="weui-form-preview__item">
@@ -173,9 +105,11 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
+
+
 
 
 
@@ -191,51 +125,8 @@
             $(this).css("color",$(this).css("color"));
         });
     });
-
-
-    /**
-     * 悬浮框实现
-     */
-    $(function(){
-        $('#navbarSuspension').posfixed({
-            distance : 0,
-            pos : 'top',
-            type : 'while',
-            hide : false
-        });
-
-        $('.gotop').posfixed({
-            distance : 10,
-            direction : 'bottom',
-            type : 'always',
-            tag : {
-                obj : $('.wrap'),
-                direction : 'right',
-                distance : 10
-            },
-            hide : true
-        });
-    });
-
-//    var speed = 100;
-//    var scrollTop = null;
-//    var hold = 0;
-//    var float_banner;
-//    var pos = null;
-//    var timer = null;
-//    var moveHeight = null;
-//    float_banner = document.getElementById("float_banner");
-//    window.onscroll=scroll_ad;
-//    function scroll_ad(){
-//        scrollTop = document.documentElement.scrollTop+document.body.scrollTop;
-//        pos = scrollTop - float_banner.offsetTop;
-//        pos = pos/10
-//        moveHeight = pos>0?Math.ceil(pos):Math.floor(pos);
-//        if(moveHeight!=0){
-//            float_banner.style.top = float_banner.offsetTop+moveHeight+"px";
-//            setTimeout(scroll_ad,speed);
-//        }
-//    }
 </script>
+
+
 
 <%@include file="/user_footer.jsp"%>

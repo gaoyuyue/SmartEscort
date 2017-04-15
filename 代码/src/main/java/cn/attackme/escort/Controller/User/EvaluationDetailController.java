@@ -8,15 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by IntelliJ IDEA.
  * User: StevenJack
  * Date: ${DATA}
- * Time: 19:27
+ * Time: 15:58
  * To change this template use File | Settings | File Templates.
  */
-@RequestMapping("/User/ReceivedDarts")
+@RequestMapping("/User/EvaluationDetail")
 @Controller
-public class ReceivedDartsController {
+public class EvaluationDetailController {
     @GetMapping("/")
     public String index(){
-        return "/User/ReceivedDarts/index";
+        return "User/EvaluationDetail/index";
     }
-
 }

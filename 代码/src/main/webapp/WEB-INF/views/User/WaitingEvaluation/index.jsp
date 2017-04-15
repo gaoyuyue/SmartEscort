@@ -7,95 +7,72 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
-<style type="text/css">
-    a{
-        text-decoration:none;
-        color: black;
-    }
-</style>
-
 <div id="frame">
-    <div id="top">
-        <span id="list">
-            <a href="/User/PersonalCenter/"><img src="/assets/img/goback.png" align="top"></a>
-        </span>
-        <a id="title">订单管理</a>
-        <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
+    <div id="navbarSuspension">
+        <div id="top">
+            <span id="list">
+                <a href="/User/PersonalCenter/"><img src="/assets/img/goback.png" align="top"></a>
+            </span>
+            <a id="title">订单管理</a>
+            <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
+        </div>
+        <div class="page navbar js_show">
+            <div class="page__bd">
+                <div class="weui-tab">
+                    <div class="weui-navbar">
+                        <div class="weui-navbar__item">
+                            <a href="/User/AllDart/" class="font_color">全部镖单</a>
+                        </div>
+                        <div class="weui-navbar__item">
+                            <a href="/User/MyPublish/" class="font_color">我的发布</a>
+                        </div>
+                        <div class="weui-navbar__item">
+                            <a href="/User/MyDart/" class="font_color">我的接单</a>
+                        </div>
+                        <div class="weui-navbar__item weui-bar__item_on">
+                            <a href="/User/WaitingEvaluation/" style="color:orange;" class="font_color">待评价</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="page navbar js_show">
-        <div class="page__bd" style="height: 100%;">
-            <div class="weui-tab">
-                <div class="weui-navbar">
-                    <div class="weui-navbar__item">
-                        <a href="/User/AllDart/">全部镖单</a>
-                    </div>
-                    <div class="weui-navbar__item">
-                        <a href="/User/WaitingGoods/">我的发布</a>
-                    </div>
-                    <div class="weui-navbar__item">
-                        <a href="/User/ReceivedDarts/">我的接单</a>
-                    </div>
-                    <div class="weui-navbar__item weui-bar__item_on">
-                        <a href="/User/WaitingEvaluation/" style="color:orange;">待评价</a>
+    <div class="weui-tab__panel">
+        <div class="page__bd" style="height: 50%;margin-top: 100px">
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__bd">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label"></label>
+                        <strong class="weui-form-preview__value" style="color: #1affac;font-size: 17px">已签收</strong>
                     </div>
                 </div>
 
-                <div class="weui-tab__panel">
-                    <div class="page__bd">
-                        <div class="weui-form-preview">
-                            <div class="weui-form-preview__hd">
-                                <div class="weui-form-preview__item">
-                                    <label class="weui-form-preview__label">付款金额</label>
-                                    <em class="weui-form-preview__value">¥2400.00</em>
-                                </div>
-                            </div>
-                            <div class="weui-form-preview__bd">
-                                <div class="weui-form-preview__item">
-                                    <label class="weui-form-preview__label">商品</label>
-                                    <span class="weui-form-preview__value">电动打蛋机</span>
-                                </div>
-                                <div class="weui-form-preview__item">
-                                    <label class="weui-form-preview__label">标题标题</label>
-                                    <span class="weui-form-preview__value">名字名字名字</span>
-                                </div>
-                                <div class="weui-form-preview__item">
-                                    <label class="weui-form-preview__label">标题标题</label>
-                                    <span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
-                                </div>
-                            </div>
-                            <div class="weui-form-preview__ft">
-                                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</a>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="weui-form-preview">
-                            <div class="weui-form-preview__hd">
-                                <label class="weui-form-preview__label">付款金额</label>
-                                <em class="weui-form-preview__value">¥2400.00</em>
-                            </div>
-                            <div class="weui-form-preview__bd">
-                                <div class="weui-form-preview__item">
-                                    <label class="weui-form-preview__label">商品</label>
-                                    <span class="weui-form-preview__value">电动打蛋机</span>
-                                </div>
-                                <div class="weui-form-preview__item">
-                                    <label class="weui-form-preview__label">标题标题</label>
-                                    <span class="weui-form-preview__value">名字名字名字</span>
-                                </div>
-                                <div class="weui-form-preview__item">
-                                    <label class="weui-form-preview__label">标题标题</label>
-                                    <span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
-                                </div>
-                            </div>
-                            <div class="weui-form-preview__ft">
-                                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">辅助操作</a>
-                                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</button>
-                            </div>
-                        </div>
+                <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">包裹大小</label>
+                        <span class="weui-form-preview__value">大</span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">快递类型</label>
+                        <span class="weui-form-preview__value">圆通</span>
                     </div>
                 </div>
 
+                <div class="weui-form-preview__hd">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label"></label>
+                        <span class="weui-form-preview__value" style="font-size: 15px">
+                            付款金额 :
+                            <b>24</b>
+                        </span>
+                    </div>
+                </div>
+                <div class="weui-form-preview__ft">
+                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="" style="border:3px solid #f5f5f5;color: #0d0d0d">删除订单</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="/User/EvaluationDetail/" style="border:3px solid #f5f5f5;color: #0d0d0d">评价</a>
+                </div>
             </div>
         </div>
     </div>

@@ -7,19 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
-<style>
-    .pwd{width:40px;height:20px;line-height:14px;padding-top:2px;}
-    .pwd_f{color:#BBBBBB;}
-    .pwd_c{background-color:#F3F3F3;border-top:1px solid #D0D0D0;border-bottom:1px solid #D0D0D0;border-left:1px solid #D0D0D0;}
-    .pwd_Weak_c{background-color:#FF4545;border-top:1px solid #BB2B2B;border-bottom:1px solid #BB2B2B;border-left:1px solid #BB2B2B;}
-    .pwd_Medium_c{background-color:#FFD35E;border-top:1px solid #E9AE10;border-bottom:1px solid #E9AE10;border-left:1px solid #E9AE10;}
-    .pwd_Strong_c{background-color:#3ABB1C;border-top:1px solid #267A12;border-bottom:1px solid #267A12;border-left:1px solid #267A12;}
-    .pwd_c_r{border-right:1px solid #D0D0D0;}
-    .pwd_Weak_c_r{border-right:1px solid #BB2B2B;}
-    .pwd_Medium_c_r{border-right:1px solid #E9AE10;}
-    .pwd_Strong_c_r{border-right:1px solid #267A12;}
-</style>
-
 <div id="frame">
     <div id="top">
         <span id="list">
