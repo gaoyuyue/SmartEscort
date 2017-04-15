@@ -40,6 +40,23 @@
             </div>
         </div>
     </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">学校</label>
+        </div>
+        <div class="weui-cell__bd">
+        </div>
+    </div>
+
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">区域</label>
+        </div>
+        <div class="weui-cell__bd">
+        </div>
+    </div>
+
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
