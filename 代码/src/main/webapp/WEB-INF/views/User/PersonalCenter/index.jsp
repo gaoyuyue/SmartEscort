@@ -14,7 +14,6 @@
     <div class="weui-cell nav" >
         <div   class="weui-cell__hd navicon" >
             <img class="img-circle" src="/assets/img/a5.jpg" style="width: 50px;display: block">
-
         </div>
 
         <div style="margin: 0 auto">
