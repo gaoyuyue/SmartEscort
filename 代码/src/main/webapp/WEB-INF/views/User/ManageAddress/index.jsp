@@ -30,66 +30,234 @@
 
 </head>
 <body>
-    <div id="top">
-        <span id="list">
-            <a href="javascript:window.history.back();"><img src="/assets/img/goback.png" align="top"></a>
-        </span>
-        <a id="title">管理收货地址</a>
-        <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
-    </div>
-    <!--我-->
-    <div class="adress">
-            <div>
-                <span style="margin: 5px" >张三</span>
-                <span > </span>
-                <span style="float: right">13230524775</span>
-            </div>
-            <div>
-                <span>
+<div id="frame">
+    <div id="navbarSuspension">
+        <div id="top">
+            <span id="list">
+                <a href="javascript:window.history.back();"><img src="/assets/img/goback.png" align="top"></a>
             </span>
-                <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
-            </div>
-            <hr color=" #DCDCDC" size="1px">
-            <div>
-
-                <input type="checkbox">设为默认
-
-                <span onclick="disp_alert()" style="float: right">删除</span>
-                <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
-
-                <a href="#" style="float: right;color: black;">编辑</a>
-                <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
-
-
-            </div>
-
+            <a id="title">管理收货地址</a>
+            <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
+        </div>
     </div>
 
-    <div style="background-color: #DCDCDC;height: 8px;">
-    </div>
-    <div class="adress">
-        <div>
-            <span >李四</span>
-            <span > </span>
-            <span style="float: right">13230524775</span>
-        </div>
-        <div>
-                <span>
-            </span>
-            <span style="font-size: 14px;">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学西区</span>
-        </div>
-        <hr color=" #DCDCDC" size="1px">
-        <div>
+    <div class="weui-tab__panel">
+        <div class="address_manage">
+            <div class="address_one">
+                    <div class="address_name-phone">
+                        <span style="margin: 5px" >张三</span>
+                        <span > </span>
+                        <span style="float: right">13230524775</span>
+                    </div>
+                    <div class="address_detail">
+                        <span>
+                        </span>
+                        <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
+                    </div>
 
-            <input type="checkbox">设为默认
-            <span onclick="disp_alert()" style="float: right">删除</span>
-            <a href="#" style="float: right;color: black;">编辑</a>
+                    <div class="address_hr">
+                        <hr color=" #DCDCDC" size="1px">
+                    </div>
+
+                    <div class="address_setting">
+                        <input type="checkbox"><span>设为默认</span>
+
+                        <span onclick="disp_alert()" style="float: right">删除</span>
+                        <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
+                        &nbsp;
+                        <a href="#" style="float: right;color: black;">编辑</a>
+                        <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
+
+                    </div>
+            </div>
+
+            <div style="background-color: #DCDCDC;height: 8px;">
+            </div>
+
+            <div class="address_one">
+                <div class="address_name-phone">
+                    <span style="margin: 5px" >张三</span>
+                    <span > </span>
+                    <span style="float: right">13230524775</span>
+                </div>
+                <div class="address_detail">
+                        <span>
+                        </span>
+                    <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
+                </div>
+
+                <div class="address_hr">
+                    <hr color=" #DCDCDC" size="1px">
+                </div>
+
+                <div class="address_setting">
+                    <input type="checkbox"><span>设为默认</span>
+
+                    <span onclick="disp_alert()" style="float: right">删除</span>
+                    <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
+                    &nbsp;
+                    <a href="#" style="float: right;color: black;">编辑</a>
+                    <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
+
+                </div>
+            </div>
+
+            <div style="background-color: #DCDCDC;height: 8px;">
+            </div>
+
+            <div class="address_one">
+                <div class="address_name-phone">
+                    <span style="margin: 5px" >张三</span>
+                    <span > </span>
+                    <span style="float: right">13230524775</span>
+                </div>
+                <div class="address_detail">
+                        <span>
+                        </span>
+                    <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
+                </div>
+
+                <div class="address_hr">
+                    <hr color=" #DCDCDC" size="1px">
+                </div>
+
+                <div class="address_setting">
+                    <input type="checkbox"><span>设为默认</span>
+
+                    <span onclick="disp_alert()" style="float: right">删除</span>
+                    <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
+                    &nbsp;
+                    <a href="#" style="float: right;color: black;">编辑</a>
+                    <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
+
+                </div>
+            </div>
+
+            <div style="background-color: #DCDCDC;height: 8px;">
+            </div>
+
+            <div class="address_one">
+                <div class="address_name-phone">
+                    <span style="margin: 5px" >张三</span>
+                    <span > </span>
+                    <span style="float: right">13230524775</span>
+                </div>
+                <div class="address_detail">
+                        <span>
+                        </span>
+                    <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
+                </div>
+
+                <div class="address_hr">
+                    <hr color=" #DCDCDC" size="1px">
+                </div>
+
+                <div class="address_setting">
+                    <input type="checkbox"><span>设为默认</span>
+
+                    <span onclick="disp_alert()" style="float: right">删除</span>
+                    <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
+                    &nbsp;
+                    <a href="#" style="float: right;color: black;">编辑</a>
+                    <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
+
+                </div>
+            </div>
+
+            <div style="background-color: #DCDCDC;height: 8px;">
+            </div>
+
+            <div class="address_one">
+                <div class="address_name-phone">
+                    <span style="margin: 5px" >张三</span>
+                    <span > </span>
+                    <span style="float: right">13230524775</span>
+                </div>
+                <div class="address_detail">
+                        <span>
+                        </span>
+                    <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
+                </div>
+
+                <div class="address_hr">
+                    <hr color=" #DCDCDC" size="1px">
+                </div>
+
+                <div class="address_setting">
+                    <input type="checkbox"><span>设为默认</span>
+
+                    <span onclick="disp_alert()" style="float: right">删除</span>
+                    <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
+                    &nbsp;
+                    <a href="#" style="float: right;color: black;">编辑</a>
+                    <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
+
+                </div>
+            </div>
+
+            <div style="background-color: #DCDCDC;height: 8px;">
+            </div>
+
+            <div class="address_one">
+                <div class="address_name-phone">
+                    <span style="margin: 5px" >张三</span>
+                    <span > </span>
+                    <span style="float: right">13230524775</span>
+                </div>
+                <div class="address_detail">
+                        <span>
+                        </span>
+                    <span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>
+                </div>
+
+                <div class="address_hr">
+                    <hr color=" #DCDCDC" size="1px">
+                </div>
+
+                <div class="address_setting">
+                    <input type="checkbox"><span>设为默认</span>
+
+                    <span onclick="disp_alert()" style="float: right">删除</span>
+                    <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
+                    &nbsp;
+                    <a href="#" style="float: right;color: black;">编辑</a>
+                    <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
+
+                </div>
+            </div>
+
+            <div style="background-color: #DCDCDC;height: 8px;">
+            </div>
 
         </div>
-
     </div>
 
     <div class="weui-tabbar">
         <a href="/User/ManageAddress/add" class="weui-btn weui-btn_primary footer_weui-btn">新增收获地址</a>
     </div>
+</div>
+
+<script>
+    $(function(){
+        $('#navbarSuspension').posfixed({
+            distance : 0,
+            pos : 'top',
+            type : 'while',
+            hide : false
+        });
+
+        $('.gotop').posfixed({
+            distance : 10,
+            direction : 'bottom',
+            type : 'always',
+            tag : {
+                obj : $('.wrap'),
+                direction : 'right',
+                distance : 10
+            },
+            hide : true
+        });
+    });
+</script>
+
 </body>
