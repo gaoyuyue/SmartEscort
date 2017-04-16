@@ -54,6 +54,14 @@
             <%--</div>--%>
         <%--</div>--%>
     </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell" >
+            <div class="weui-cell__bd" >
+                <textarea class="weui-textarea textarea" id="counts" placeholder="请输入您的意见" rows="8"></textarea>
+                <div class="weui-textarea-counter"><span id="remainingwords">0</span>/200</div>
+            </div>
+        </div>
+    </div>
 
 </div>
 <script>
@@ -63,6 +71,14 @@
             $(this).addClass('border_Evaluation_color').siblings('.border_Evaluation_color').removeClass('border_Evaluation_color');
             $(this).css("color",$(this).css("color"));
         });
+    });
+</script>
+<script language="javascript" type="text/javascript">
+    $("#counts").keyup(function(){
+        if($("#counts").val().length > 200){
+            $("#counts").val( $("#counts").val().substring(0,200) );
+        }
+        $("#remainingwords").text( 200 - $("#counts").val().length ) ;
     });
 </script>
 <%@include file="/user_footer.jsp"%>
