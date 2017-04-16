@@ -11,17 +11,15 @@
 <!--页面-->
 <div class="page badge js_show">
     <%--<div class="weui-cells">--%>
-    <div class="weui-cell nav" >
-        <div   class="weui-cell__hd navicon" >
-            <img class="img-circle" src="/assets/img/a5.jpg" style="width: 50px;display: block">
-
+         <div class=" navn1" >
+            <img class="img-circle navicon" src="/assets/img/a5.jpg" style="width: 50px;display: block">
         </div>
-
-        <div style="margin: 0 auto">
-            <strong id="userName" class="navusername"></strong>
+        <div class=" navn2" >
+            <strong><p id="userName" class="navuser"></p></strong>
+        </div>
+        <div class=" navn3" >
             <p style="font-size: 13px;color: #888888;" class="navuser">摘要信息</p>
         </div>
-    </div>
 
         <div class="page__hd">
             <div class="weui-grids">
