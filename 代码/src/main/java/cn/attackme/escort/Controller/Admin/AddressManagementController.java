@@ -43,8 +43,8 @@ public class AddressManagementController {
 
     //删除Area
     @RequiresRoles("admin")
-    @DeleteMapping("/DeleteAreaBySchool/schoolId/{schoolId}/areaId/{areaId}")
-    public ResponseEntity<Void> DeleteAreaBySchool(@PathVariable int schoolId,
+    @DeleteMapping("/deleteAreaBySchool/schoolId/{schoolId}/areaId/{areaId}")
+    public ResponseEntity<Void> deleteAreaBySchool(@PathVariable int schoolId,
                                                    @PathVariable int areaId) {
         Area area = areaService.getById(areaId);
         School school = schoolService.getById(schoolId);
@@ -60,6 +60,15 @@ public class AddressManagementController {
             }
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    //新增学校
+    @RequiresRoles("admin")
+    @PostMapping("/createSchool/schoolName/{schoolName}")
+    public ResponseEntity<Void> createSchool(@PathVariable String schoolName){
+        School school=new School(schoolName,null);
+        schoolService.save(school);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

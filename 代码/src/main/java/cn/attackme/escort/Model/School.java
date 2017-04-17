@@ -34,4 +34,9 @@ public class School implements Serializable {
     @OneToMany(mappedBy = "school",cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.EXTRA)
     private List<Area> areaList;
+
+    public School(String schoolName, List<Area> areaList) {
+        this.schoolName = schoolName;
+        this.areaList = areaList;
+    }
 }
