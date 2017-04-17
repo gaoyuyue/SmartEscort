@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.enterprise.inject.Default;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -24,11 +25,13 @@ public class User implements Serializable{
 
     private static final long serialVersionUID = 895922977663522702L;
 
+    //用户名
     @Id
     @Getter
     @Setter
     private String userName;
 
+    //昵称
     @Getter
     @Setter
     private String name;
@@ -41,6 +44,8 @@ public class User implements Serializable{
     @Setter
     private String passWord;
 
+
+    //个人信息中的手机号
     @Getter
     @Setter
     private String phoneNumber;

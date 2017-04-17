@@ -32,14 +32,8 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-2 m-b-xs">
-                            <select class="input-sm form-control input-s-sm inline">
-                                <option value="0">请选择</option>
-                                <option value="1">选项1</option>
-                                <option value="2">选项2</option>
-                                <option value="3">选项3</option>
-                            </select>
-                        </div>
+                        <button type="button" class="btn btn-w-m btn-primary">添加学校</button>
+                        <button type="button" class="btn btn-w-m btn-info">添加地址</button>
                         <div class="col-sm-3" style="float: right">
                             <div class="input-group">
                                 <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
@@ -51,8 +45,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-
-                                <th></th>
+                                <th>选择</th>
                                 <th>项目</th>
                                 <th>进度</th>
                                 <th>任务</th>
@@ -63,7 +56,7 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" checked="" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                    <div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" checked="" class="i-checks" name="input[]" ></div>
                                 </td>
                                 <td>米莫说｜MiMO Show</td>
                                 <td><span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
@@ -75,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                    <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" name="input[]" ></div>
                                 </td>
                                 <td>商家与购物用户的交互试衣应用</td>
                                 <td><span class="pie" style="display: none;">6,9</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 12.702282018339785 14.47213595499958 Z" fill="#1ab394"></path><path d="M 8 8 L 12.702282018339785 14.47213595499958 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
@@ -85,7 +78,6 @@
                                 <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
                                 </td>
                             </tr>
-
                             </tbody>
                         </table>
                     </div>

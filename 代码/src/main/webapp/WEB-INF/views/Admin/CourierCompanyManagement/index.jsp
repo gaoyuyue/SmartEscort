@@ -57,7 +57,6 @@
                             </tr>
                             </thead>
                             <tbody id="CourierTable">
-                            </tr>
                             </tbody>
                         </table>
                     </div>

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
+ * 问题反馈
  * Created by hujian on 2017/3/24.
  */
 @Entity

@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
+ * 收货地址
  * Created by hujian on 2017/3/24.
  */
 @Entity
@@ -36,6 +37,8 @@ public class Address implements Serializable{
     private Area area;
 
     private String detail;
+
+    private String phoneNumber;
 
     @ManyToOne
     @JoinColumn(name = "user")

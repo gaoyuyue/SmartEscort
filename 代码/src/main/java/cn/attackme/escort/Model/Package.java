@@ -43,15 +43,13 @@ public class Package implements Serializable {
     @JoinColumn(name = "standard")
     private Standard standard;
 
-    //取件凭证
-    @OneToOne
-    @JoinColumn(name = "certificate")
-    private Certificate certificate;
-
     //快递公司
     @OneToOne
     @JoinColumn(name = "courierCompany")
     private CourierCompany courierCompany;
+
+    //取件短信
+    private String message;
 
     //留言
     private String note;
@@ -62,7 +60,7 @@ public class Package implements Serializable {
     //任务发布时间
     private Date publishTime;
 
-    //任务领悟时间
+    //任务领取时间
     private Date receiveTime;
 
     //代理人对委托人的评价
