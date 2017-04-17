@@ -1,5 +1,6 @@
 /**
  * Created by arthurme on 2017/3/31.
+ * 手机端交互js
  */
 
 /**
@@ -34,6 +35,12 @@ var Loading = function (url, updateTable, pageSize) {
     });
 };
 
+/**
+ * Get方法
+ * @param url
+ * @param success
+ * @constructor
+ */
 var Get = function (url,success) {
     "use strict";
 
@@ -49,6 +56,13 @@ var Get = function (url,success) {
     });
 };
 
+/**
+ * Post方法
+ * @param url
+ * @param data
+ * @param success
+ * @constructor
+ */
 var Post = function (url,data,success) {
     "use strict";
 
@@ -65,7 +79,14 @@ var Post = function (url,data,success) {
     });
 };
 
-var Put = function (url,data) {
+/**
+ * Put方法
+ * @param url
+ * @param data
+ * @param success
+ * @constructor
+ */
+var Put = function (url,data,success) {
     "use strict";
 
     $.ajax({
@@ -74,19 +95,27 @@ var Put = function (url,data) {
         contentType: "application/json",
         data: JSON.stringify(data),
         success:function () {
+            success();
         },
         error:function (XMLHttpRequest) {
         }
     });
 };
 
-var Delete = function (url) {
+/**
+ * Delete方法
+ * @param url
+ * @param success
+ * @constructor
+ */
+var Delete = function (url,success) {
     "use strict";
 
     $.ajax({
         url:url,
         type:"DELETE",
         success:function () {
+            success();
         },
         error:function (XMLHttpRequest) {
         }

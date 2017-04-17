@@ -8,4 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 
+<script>
+    $(document).ready(function () {
+        $("#getPackage").addClass("weui-bar__item_on");
+    });
+</script>
 <%@include file="/user_footer.jsp"%>

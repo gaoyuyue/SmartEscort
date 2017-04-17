@@ -19,8 +19,6 @@ public class PostPackageController {
     private UserInfoService userInfoService;
     @Autowired
     private PackageService packageService;
-    /*@Autowired
-    private CertificateService certificateService;*/
 
     @GetMapping("/")
     public String index(){

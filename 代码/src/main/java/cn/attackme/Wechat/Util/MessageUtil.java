@@ -18,6 +18,7 @@ import java.io.Writer;
 import java.util.*;
 
 import static cn.attackme.Wechat.Util.HttpUtil.sendPostBuffer;
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
@@ -257,26 +258,24 @@ public class MessageUtil {
         return msg;
     }
 
-    public static String postTemplate(){
-        TemplateMessage templete = new TemplateMessage();
-        templete.setTouser((String) getSubject().getPrincipal());
-        templete.setTemplate_id("0SqbEDkCEnshrxnMRlbb275rT8FfjN1pwFEm4e6320Q");
-        templete.setUrl("www.baidu.com");
-        RowMessage a = new RowMessage("","");
-        RowMessage b = new RowMessage("","");
-        List<RowMessage> list = new ArrayList<>();
-        list.add(a);
-        list.add(b);
-        templete.setData(list);
+    public static void postTemplate(TemplateMessage templateMessage){
+//        TemplateMessage templete = new TemplateMessage();
+//        templete.setTouser((String) getSubject().getPrincipal());
+//        templete.setTemplate_id("0SqbEDkCEnshrxnMRlbb275rT8FfjN1pwFEm4e6320Q");
+//        templete.setUrl("www.baidu.com");
+//        RowMessage a = new RowMessage("","");
+//        RowMessage b = new RowMessage("","");
+//        List<RowMessage> list = new ArrayList<>();
+//        list.add(a);
+//        list.add(b);
+//        templete.setData(list);
         try {
 //            sendPostBuffer(WechatProperties.setIndustry+WechatProperties.access_token,industry);
 //            sendPostBuffer(WechatProperties.getTemplate+WechatProperties.access_token,getTemplete);
-            String result = sendPostBuffer(WechatProperties.sendTemplate+WechatProperties.access_token,new JSONObject(templete).toString());
-            System.out.println(result+"<><><><><><><><><><><><><><<><><><<>><><><><<><><><><<><><><><<><><><><><><><><><><><><><><><><><>");
-        } catch (IOException e) {
-            e.printStackTrace();
+            String result = sendPostBuffer(WechatProperties.sendTemplate+WechatProperties.access_token,new JSONObject(templateMessage).toString());
+        } catch (IOException ex) {
+            LogToDB(ex);
         }
-        return "";
     }
 
 }

@@ -123,6 +123,9 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#personalCenter").addClass("weui-bar__item_on");
+    });
     var fillUser = function fillUser(result) {
         console.error(result);
         $("#userName").text(result.name);
