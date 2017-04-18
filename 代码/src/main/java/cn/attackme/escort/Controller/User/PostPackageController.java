@@ -3,6 +3,7 @@ package cn.attackme.escort.Controller.User;
 
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +21,13 @@ public class PostPackageController {
     @Autowired
     private PackageService packageService;
 
+    @RequiresRoles("user")
     @GetMapping("/")
     public String index(){
         return "User/PostPackage/index";
     }
 
+    @RequiresRoles("user")
     @GetMapping("/success")
     public String success(){
         return "User/PostPackage/success";

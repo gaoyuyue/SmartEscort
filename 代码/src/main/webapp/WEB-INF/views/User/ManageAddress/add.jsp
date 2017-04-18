@@ -54,32 +54,46 @@
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" id="address" placeholder="详细地址" rows="4"></textarea>
+                <textarea class="weui-textarea" id="detailAddress" placeholder="详细地址" rows="4"></textarea>
             </div>
         </div>
     </div>
 
-    <a href="javascript:;" class="weui-btn weui-btn_warn">保存</a>
+    <a id="saveButton" href="javascript:;" class="weui-btn weui-btn_warn">保存</a>
 
     <script src="/assets/js/jquery-weui.min.js"></script>
     <script src="/assets/js/fastclick.js"></script>
+    <script src="/app/js/mobile.utils.js"></script>
     <script>
         $(function() {
             FastClick.attach(document.body);
         });
-        $("#area").select({
-            title: "选择区域",
-            items: ["梅园", "兰园", "竹园", "菊园"],
-            onChange: function(d) {
-                console.log(this, d);
-            },
-            onClose: function() {
-                console.log("close");
-            },
-            onOpen: function() {
-                console.log("open");
-            }
+        var getSuccess = function (data) {
+            $("#area").select({
+                title: "选择区域",
+                items: data
+            });
+        };
+        $(document).ready(function () {
+            Get("/User/ManageAddress/getAreaNameList",getSuccess)
         });
+
+        var postSuccess = function () {
+
+        };
+
+        $("#saveButton").click(function () {
+            var data = {
+                phoneNumber:$("#phone").val(),
+                detail:$("#detailAddress").val(),
+                receiverName:$("#name").val(),
+                area:{
+                    areaName:$("#area").val()
+                }
+            };
+            Post("/User/ManageAddress/add",data,postSuccess);
+        });
+
     </script>
 
 </body>

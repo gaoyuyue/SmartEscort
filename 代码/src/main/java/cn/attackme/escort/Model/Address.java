@@ -40,6 +40,8 @@ public class Address implements Serializable{
 
     private String phoneNumber;
 
+    private String receiverName;
+
     @ManyToOne
     @JoinColumn(name = "user")
     private User user;
