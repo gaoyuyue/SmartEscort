@@ -40,9 +40,9 @@
 
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">包裹类型</label></div>
+        <div class="weui-cell__hd"><label class="weui-label">包裹大小</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="packageType" type="text" value="">
+            <input class="weui-input" id="packageSize" type="text" value="">
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="expressType" type="text" value="">
+            <input class="weui-input" id="packageType" type="text" value="">
         </div>
     </div>
 </div>
@@ -112,23 +112,14 @@
         FastClick.attach(document.body);
     });
 
-    $("#packageType").picker({
-        title: "请选择包裹类型",
-        cols: [
-            {
-                textAlign: 'center',
-                values: ['大', '中', '小']
-            }
-        ]
+    $("#packageSize").select({
+        title: "选择包裹大小",
+        items: ["鞋盒", "方便面箱","自行车"]
     });
-    $("#expressType").picker({
-        title: "请选择您的快递类型",
-        cols: [
-            {
-                textAlign: 'center',
-                values: ['申通', '中通', '圆通', '京东']
-            }
-        ]
+
+    $("#packageType").select({
+        title: "选择快递类型",
+        items: ["申通", "中通", "圆通", "京东"]
     });
 </script>
 

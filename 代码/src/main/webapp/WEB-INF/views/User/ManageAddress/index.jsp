@@ -15,14 +15,8 @@
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/app/js/app.utils.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery-migrate-3.0.0.min.js"></script>
     <script src="/app/js/posfixed.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-        function disp_alert()
-        {
-            alert("是否确认删除")
-        }
-    </script>
 
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>

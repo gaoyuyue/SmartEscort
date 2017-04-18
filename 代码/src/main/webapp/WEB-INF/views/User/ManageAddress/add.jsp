@@ -44,9 +44,9 @@
 
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
-            <div class="weui-cell__hd"><label for="home-city" class="weui-label">学校/区域</label></div>
+            <div class="weui-cell__hd"><label for="name" class="weui-label">区域</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" id="home-city" type="text">
+                <input class="weui-input" id="area" type="text" value="">
             </div>
         </div>
     </div>
@@ -63,96 +63,21 @@
 
     <script src="/assets/js/jquery-weui.min.js"></script>
     <script src="/assets/js/fastclick.js"></script>
-    <script src="/assets/js/city-picker.js"></script>
     <script>
         $(function() {
             FastClick.attach(document.body);
         });
-    </script>
-    <script>
-        $.rawCitiesData.push(
-                {
-                    "name":"北京",
-                    "code":"110000",
-                    "sub": [
-                        {
-                            "name": "北京市",
-                            "code": "110000",
-                            "sub":[
-                                {
-                                    "name":"东城区",
-                                    "code":"110101"
-                                },
-                                {
-                                    "name":"西城区",
-                                    "code":"110102"
-                                },
-                                {
-                                    "name":"朝阳区",
-                                    "code":"110105"
-                                },
-                                {
-                                    "name":"丰台区",
-                                    "code":"110106"
-                                },
-                                {
-                                    "name":"石景山区",
-                                    "code":"110107"
-                                },
-                                {
-                                    "name":"海淀区",
-                                    "code":"110108"
-                                },
-                                {
-                                    "name":"门头沟区",
-                                    "code":"110109"
-                                },
-                                {
-                                    "name":"房山区",
-                                    "code":"110111"
-                                },
-                                {
-                                    "name":"通州区",
-                                    "code":"110112"
-                                },
-                                {
-                                    "name":"顺义区",
-                                    "code":"110113"
-                                },
-                                {
-                                    "name":"昌平区",
-                                    "code":"110114"
-                                },
-                                {
-                                    "name":"大兴区",
-                                    "code":"110115"
-                                },
-                                {
-                                    "name":"怀柔区",
-                                    "code":"110116"
-                                },
-                                {
-                                    "name":"平谷区",
-                                    "code":"110117"
-                                },
-                                {
-                                    "name":"密云县",
-                                    "code":"110228"
-                                },
-                                {
-                                    "name":"延庆县",
-                                    "code":"110229"
-                                }
-                            ]
-                        }
-                    ]
-                }
-        );
-        $("#home-city").cityPicker({
-            title: "选择学校和区域",
-            showDistrict: false,
-            onChange: function (picker, values, displayValues) {
-                console.log(values, displayValues);
+        $("#area").select({
+            title: "选择区域",
+            items: ["梅园", "兰园", "竹园", "菊园"],
+            onChange: function(d) {
+                console.log(this, d);
+            },
+            onClose: function() {
+                console.log("close");
+            },
+            onOpen: function() {
+                console.log("open");
             }
         });
     </script>
