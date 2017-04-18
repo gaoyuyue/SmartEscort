@@ -4,6 +4,62 @@
  */
 
 /**
+ * 是空或null或undefined嘛
+ * @param value
+ * @returns {boolean}
+ */
+var isNullOrEmpty = function (value) {
+    "use strict";
+    value = $.trim(value);
+
+    if (!value && typeof value === "object") {
+        return true;
+    }
+
+    if (value == "") {
+        return true;
+    }
+
+    if (value == " ") {
+        return true;
+    }
+
+    if (typeof(value) === "undefined") {
+        return true;
+    }
+};
+
+/**
+ * 如果为Null或空就返回空字符串
+ * @param data
+ * @returns {*}
+ */
+var ifIsNullReturnEmptyString = function ifIsNullReturnEmptyString(data) {
+    "use strict";
+    if (isNullOrEmpty(data)) {
+        return "";
+    } else {
+        return data;
+    }
+};
+
+/**
+ * 是不是数字？
+ * @param value
+ * @returns {*}
+ */
+var checkNaN = function (value) {
+    "use strict";
+    value = $.trim(value);
+
+    if (isNaN(value) || isNullOrEmpty(value)) {
+        return 0;
+    } else {
+        return value;
+    }
+};
+
+/**
  * 分页
  * @param url url，不带 pageNumber和pageSize
  * @param updateTable

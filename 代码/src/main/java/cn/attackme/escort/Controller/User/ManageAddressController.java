@@ -1,15 +1,23 @@
 package cn.attackme.escort.Controller.User;
 
 import cn.attackme.escort.Model.Address;
+import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.AddressService;
+import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
+import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
@@ -22,6 +30,8 @@ public class ManageAddressController {
     private UserInfoService userInfoService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private SchoolService schoolService;
 
     @GetMapping("/")
     public String index(){
@@ -46,5 +56,13 @@ public class ManageAddressController {
         address.setUser(user);
         addressService.save(address);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @ResponseBody
+    @GetMapping("/getAllSchoolName")
+    public ResponseEntity<List<String>> getAllSchoolName(){
+        List<School> schoolList = schoolService.getAll();
+        List<String> stringList = schoolList.stream().map(School::getSchoolName).collect(toList());
+        return new ResponseEntity<List<String>>(stringList,HttpStatus.OK);
     }
 }

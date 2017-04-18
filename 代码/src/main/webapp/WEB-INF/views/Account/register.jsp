@@ -13,18 +13,12 @@
 
     <title>注册</title>
 
-    <link href="/assets/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <%--<link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">--%>
-
-    <link href="/assets/css/animate.css" rel="stylesheet">
-    <link href="/assets/css/style.css?v=2.2.0" rel="stylesheet">
     <%--引进WeUI插件--%>
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/jquery-weui.min.css"/>
 
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js?v=3.4.0"></script>
-    <script src="/app/js/app.utils.js"></script>
-    <script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="/app/js/mobile.utils.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -66,6 +60,22 @@
             </div>
 
             <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">学/工号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="tel" placeholder="学/工号" name="studentId" id="studentId">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="name" class="weui-label">学校</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" name="schoolName" id="schoolName" placeholder="请选择学校" type="text" value="">
+                </div>
+            </div>
+
+            <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="password" class="weui-label">密码</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="password" name="passWord" id="passWord" placeholder="请输入密码">
@@ -82,9 +92,7 @@
             <div class="weui-cell">
                 <div id="msg" style="color:red;"></div>
             </div>
-            <%--<div class="weui-cell">--%>
-                <%--<div id="lala" style="color:darkgrey;"></div>--%>
-            <%--</div>--%>
+
         </div>
         <div class="weui-btn-area">
             <button type="submit" class="weui-btn weui-btn_primary" id="submit">进入</button>
@@ -92,7 +100,8 @@
         </form>
     </div>
 
-
+<script src="/assets/js/jquery-weui.min.js"></script>
+<script src="/assets/js/fastclick.js"></script>
 <script src="/assets/js/sha256.min.js"></script>
 
 <script type="text/javascript">
@@ -141,6 +150,16 @@
                 }
             });
         }
+    });
+
+    var success = function (data) {
+        $("#schoolName").select({
+            title: "选择区域",
+            items: data
+        });
+    };
+    $(document).ready(function () {
+        Get("/User/ManageAddress/getAllSchoolName",success);
     });
 </script>
 

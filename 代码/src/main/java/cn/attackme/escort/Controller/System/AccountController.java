@@ -2,7 +2,9 @@ package cn.attackme.escort.Controller.System;
 
 
 import cn.attackme.escort.Model.Role;
+import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Service.UserService;
 import cn.attackme.escort.Utils.LogUtils;
@@ -39,6 +41,9 @@ public class AccountController {
     private UserInfoService userInfoService;
 
     @Autowired
+    private SchoolService schoolService;
+
+    @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
@@ -55,13 +60,17 @@ public class AccountController {
 
     /**
      * 转向注册界面
+     *
      * @return
      */
     @GetMapping("/Account/Register")
-        public String RegisterPage(){ return "/Account/register";}
+    public String RegisterPage() {
+        return "/Account/register";
+    }
 
     /**
      * 检查用户名是否重复
+     *
      * @param userName
      * @return
      */
@@ -77,6 +86,7 @@ public class AccountController {
 
     /**
      * 注册用户
+     *
      * @param userName
      * @param passWord
      * @param name
@@ -86,18 +96,23 @@ public class AccountController {
      */
     @PostMapping("/Account/Register")
     public String createUser(@RequestParam("userName") String userName,
-                                           @RequestParam("passWord") String passWord,
-                                           @RequestParam("name") String name,
-                                           @RequestParam("phoneNumber") String phoneNumber,
-                                           HttpSession httpSession) {
+                             @RequestParam("passWord") String passWord,
+                             @RequestParam("name") String name,
+                             @RequestParam("phoneNumber") String phoneNumber,
+                             @RequestParam("studentId") String studentId,
+                             @RequestParam("schoolName") String schoolName,
+                             HttpSession httpSession) {
         String openid = (String) httpSession.getAttribute("openid");
         if (null != openid) {
             User user = new User();
+            School school = schoolService.getByName(schoolName);
+            user.setSchool(school);
             user.setPhoneNumber(phoneNumber);
             user.setName(name);
             user.setPassWord(getSHA_256(passWord));
             user.setRole(Role.user);
             user.setUserName(userName);
+            user.setStudentId(studentId);
             user.setOpenid(openid);
             userInfoService.save(user);
             return "redirect:/Account/OAuth2";
@@ -107,14 +122,18 @@ public class AccountController {
 
     /**
      * 微信用户登录
+     *
      * @param httpSession
      * @return
      */
     @GetMapping("/Account/OAuth2")
-    public String oauth2(HttpSession httpSession){
-        try{
+    public String oauth2(HttpSession httpSession) {
+        try {
             String openid = (String) httpSession.getAttribute("openid");
             User user = userInfoService.getByOpenId(openid);
+            if (user.isDeleted()){
+                return "forward:/403.jsp";
+            }
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassWord());
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
@@ -122,9 +141,9 @@ public class AccountController {
             httpSession.removeAttribute("openid");
             httpSession.removeAttribute("state");
             return "redirect:" + state;
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
             return "redirect:/Account/Register";
-        } catch (Exception e){
+        } catch (Exception e) {
             return "forward:/403.jsp";
         }
     }
