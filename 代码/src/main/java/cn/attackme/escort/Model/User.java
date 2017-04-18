@@ -65,6 +65,16 @@ public class User implements Serializable{
     @Setter
     private Integer integration;
 
+    //所属学校
+    @Getter
+    @Setter
+    private School school;
+
+    //学工号
+    @Getter
+    @Setter
+    private String studentId;
+
     @Getter
     @Setter
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
