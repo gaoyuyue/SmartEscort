@@ -6,33 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script>
-    /**
-     * 悬浮框实现
-     */
-    <%--$(function(){--%>
-        <%--$('#navbarSuspension')({--%>
-            <%--distance : 0,--%>
-            <%--pos : 'top',--%>
-            <%--type : 'while',--%>
-            <%--hide : false--%>
-        <%--});--%>
-
-        <%--$('.gotop')({--%>
-            <%--distance : 10,--%>
-            <%--direction : 'bottom',--%>
-            <%--type : 'always',--%>
-            <%--tag : {--%>
-                <%--obj : $('.wrap'),--%>
-                <%--direction : 'right',--%>
-                <%--distance : 10--%>
-            <%--},--%>
-            <%--hide : true--%>
-        <%--});--%>
-    <%--});--%>
-
-</script>
-
             </div>
             <div class="weui-tabbar">
                 <a href="/" id="home" class="weui-tabbar__item">

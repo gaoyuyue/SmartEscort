@@ -7,27 +7,26 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
-<style>
-    ul {
-        padding-left: 0;
-        overflow: hidden;
+<style type="text/css">
+    *{margin:0;padding:0;list-style-type:none;}
+    a,img{border:0;}
+    .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .clearfix{display:inline-table}
+    *html .clearfix{height:1%}
+    .clearfix{display:block}
+    *+html .clearfix{min-height:1%}
+    .fl{float:left;}
+    .gradecon{
+        width: 250px;
+        height: 25px;
     }
-    ul li {
-        float: left;
-        list-style: none;
-        width: 27px;
-        height: 27px;
-        background: url(img/star.gif)
-    }
-    ul li a {
-        display: block;
-        width: 100%;
-        padding-top: 27px;
-        overflow: hidden;
-    }
-    ul li.light {
-        background-position: 0 -29px;
-    }
+    .rev_pro li{line-height:20px;height:20px;}
+    .rev_pro li .revtit{text-align:right;display:block;float:left;margin-right:10px;width:70px;}
+    .revinp{float:left;display:inline;}
+    .level .level_solid,.level .level_hollow{float:left;background-image:url("/assets/img/star.png");background-repeat:no-repeat;display:inline-block;width:40px;height:30px;}
+    .level .level_solid{background-position:6px 0px;}
+    .level .level_hollow{background-position:-40px 0px;}
+    .revgrade{margin-left:20px;}
 </style>
 <div id="frame">
     <div id="top">
@@ -76,6 +75,7 @@
             <%--</div>--%>
         <%--</div>--%>
     </div>
+
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell" >
             <div class="weui-cell__bd" >
@@ -85,34 +85,66 @@
         </div>
     </div>
 
-
     <div class="weui-cell">
         <div class="weui-cell__bd">
             <p>服务态度</p>
         </div>
-        <div class="weui-cell__ft"></div>
+        <div class="weui-cell__ft">
+            <div class="gradecon">
+                <ul class="rev_pro clearfix">
+                    <li>
+                        <div class="revinp">
+				<span class="level">
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+				</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-
     <div class="weui-cell">
         <div class="weui-cell__bd">
             <p>送货速度</p>
         </div>
         <div class="weui-cell__ft">
-            <ul>
-                <li class="light"><a href="javascript:;">1</a></li>
-                <li><a href="javascript:;">2</a></li>
-                <li><a href="javascript:;">3</a></li>
-                <li><a href="javascript:;">4</a></li>
-                <li><a href="javascript:;">5</a></li>
-            </ul>
-
+            <div class="gradecon">
+                <ul class="rev_pro clearfix">
+                    <li>
+                        <div class="revinp">
+				<span class="level">
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+					<i class="level_hollow" cjmark=""></i>
+				</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell weui-cell_switch">
+            <div class="weui-cell__bd">是否匿名</div>
+            <div class="weui-cell__ft">
+                <label for="switchCP" class="weui-switch-cp">
+                    <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked">
+                    <div class="weui-switch-cp__box"></div>
+                </label>
+            </div>
+        </div>
+    </div>
 
-
-
-
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" style="background-color: #ff850e">提交评论</a>
+    </div>
 </div>
 <script>
     $(function(){
@@ -132,29 +164,22 @@
     });
 </script>
 
-<script>
-    var num=finalnum = tempnum= 0;
-    var lis = document.getElementsByTagName("li");
-    //num:传入点亮星星的个数
-    //finalnum:最终点亮星星的个数
-    //tempnum:一个中间值
-    function fnShow(num) {
-        finalnum= num || tempnum;//如果传入的num为0，则finalnum取tempnum的值
-        for (var i = 0; i < lis.length; i++) {
-            lis[i].className = i < finalnum? "light" : "";//点亮星星就是加class为light的样式
-        }
-    }
-    for (var i = 1; i <= lis.length; i++) {
-        lis[i - 1].index = i;
-        lis[i - 1].onmouseover = function() { //鼠标经过点亮星星。
-            fnShow(this.index);//传入的值为正，就是finalnum
-        }
-        lis[i - 1].onmouseout = function() { //鼠标离开时星星变暗
-            fnShow(0);//传入值为0，finalnum为tempnum,初始为0
-        }
-        lis[i - 1].onclick = function() { //鼠标点击,同时会调用onmouseout,改变tempnum值点亮星星
-            tempnum= this.index;
-        }
-    }
+<script type="text/javascript">
+    $(function(){
+        //点星星
+        $(document).on('mouseover','i[cjmark]',function(){
+            var num = $(this).index();
+            var pmark = $(this).parents('.revinp');
+
+            var list = $(this).parent().find('i');
+            for(var i=0;i<=num;i++){
+                list.eq(i).attr('class','level_solid');
+            }
+            for(var i=num+1,len=list.length-1;i<=len;i++){
+                list.eq(i).attr('class','level_hollow');
+            }
+            $(this).parent().next().html(degree[num+1]);
+        })
+    })
 </script>
 <%@include file="/user_footer.jsp"%>
