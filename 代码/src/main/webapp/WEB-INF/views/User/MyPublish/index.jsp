@@ -126,5 +126,4 @@
 
 
 
-
 <%@include file="/user_footer.jsp"%>

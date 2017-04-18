@@ -14,9 +14,14 @@
 
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/jquery-migrate-3.0.0.min.js"></script>
+
     <script src="/app/js/app.utils.js" type="text/javascript"></script>
     <!--悬浮框插件 -->
     <script src="/app/js/posfixed.js" type="text/javascript"></script>
+    <!--引进下拉刷新插件-->
+    <script src="/app/js/fastclick.js"></script>
+    <script src="/assets/js/jquery-weui.min.js"></script>
 
 
 

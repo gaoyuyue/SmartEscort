@@ -7,6 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+<style>
+    ul {
+        padding-left: 0;
+        overflow: hidden;
+    }
+    ul li {
+        float: left;
+        list-style: none;
+        width: 27px;
+        height: 27px;
+        background: url(img/star.gif)
+    }
+    ul li a {
+        display: block;
+        width: 100%;
+        padding-top: 27px;
+        overflow: hidden;
+    }
+    ul li.light {
+        background-position: 0 -29px;
+    }
+</style>
 <div id="frame">
     <div id="top">
         <span id="list">
@@ -57,11 +79,39 @@
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell" >
             <div class="weui-cell__bd" >
-                <textarea class="weui-textarea textarea" id="counts" placeholder="请输入您的意见" rows="8"></textarea>
-                <div class="weui-textarea-counter"><span id="remainingwords">0</span>/200</div>
+                <textarea class="weui-textarea textarea" id="counts" placeholder="请输入您的意见" rows="3"></textarea>
+                <div class="weui-textarea-counter"><span id="remainingwords">0</span>/100</div>
             </div>
         </div>
     </div>
+
+
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>服务态度</p>
+        </div>
+        <div class="weui-cell__ft"></div>
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>送货速度</p>
+        </div>
+        <div class="weui-cell__ft">
+            <ul>
+                <li class="light"><a href="javascript:;">1</a></li>
+                <li><a href="javascript:;">2</a></li>
+                <li><a href="javascript:;">3</a></li>
+                <li><a href="javascript:;">4</a></li>
+                <li><a href="javascript:;">5</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+
+
+
 
 </div>
 <script>
@@ -75,10 +125,36 @@
 </script>
 <script language="javascript" type="text/javascript">
     $("#counts").keyup(function(){
-        if($("#counts").val().length > 200){
-            $("#counts").val( $("#counts").val().substring(0,200) );
+        if($("#counts").val().length > 100){
+            $("#counts").val( $("#counts").val().substring(0,100) );
         }
-        $("#remainingwords").text( 200 - $("#counts").val().length ) ;
+        $("#remainingwords").text( 100 - $("#counts").val().length ) ;
     });
+</script>
+
+<script>
+    var num=finalnum = tempnum= 0;
+    var lis = document.getElementsByTagName("li");
+    //num:传入点亮星星的个数
+    //finalnum:最终点亮星星的个数
+    //tempnum:一个中间值
+    function fnShow(num) {
+        finalnum= num || tempnum;//如果传入的num为0，则finalnum取tempnum的值
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].className = i < finalnum? "light" : "";//点亮星星就是加class为light的样式
+        }
+    }
+    for (var i = 1; i <= lis.length; i++) {
+        lis[i - 1].index = i;
+        lis[i - 1].onmouseover = function() { //鼠标经过点亮星星。
+            fnShow(this.index);//传入的值为正，就是finalnum
+        }
+        lis[i - 1].onmouseout = function() { //鼠标离开时星星变暗
+            fnShow(0);//传入值为0，finalnum为tempnum,初始为0
+        }
+        lis[i - 1].onclick = function() { //鼠标点击,同时会调用onmouseout,改变tempnum值点亮星星
+            tempnum= this.index;
+        }
+    }
 </script>
 <%@include file="/user_footer.jsp"%>

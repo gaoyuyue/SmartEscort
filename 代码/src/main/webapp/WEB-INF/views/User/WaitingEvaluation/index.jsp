@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="weui-form-preview__ft">
-                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="" style="border:3px solid #f5f5f5;color: #0d0d0d">删除订单</a>
-                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="/User/EvaluationDetail/" style="border:3px solid #f5f5f5;color: #0d0d0d">评价</a>
+                    <a class="weui-form-preview__btn weui-form-preview__btn_primary weui-form-preview_border" href="" style="color: #0d0d0d;">删除订单</a>
+                    <a class="weui-form-preview__btn weui-form-preview__btn_primary weui-form-preview_border" href="/User/EvaluationDetail/" style="color: #0d0d0d;">评价</a>
                 </div>
             </div>
         </div>
