@@ -178,7 +178,6 @@
             for(var i=num+1,len=list.length-1;i<=len;i++){
                 list.eq(i).attr('class','level_hollow');
             }
-            $(this).parent().next().html(degree[num+1]);
         })
     })
 </script>
