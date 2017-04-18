@@ -21,7 +21,7 @@
                 <div class="weui-tab">
                     <div class="weui-navbar">
                         <div class="weui-navbar__item">
-                            <a href="/User/AllDart/" class="font_color">全部镖单</a>
+                            <a href="/User/AllDart/" class="font_color">全部订单</a>
                         </div>
                         <div class="weui-navbar__item">
                             <a href="/User/MyPublish/" class="font_color">我的发布</a>

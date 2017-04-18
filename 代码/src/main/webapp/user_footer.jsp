@@ -10,26 +10,26 @@
     /**
      * 悬浮框实现
      */
-    $(function(){
-        $('#navbarSuspension').posfixed({
-            distance : 0,
-            pos : 'top',
-            type : 'while',
-            hide : false
-        });
+    <%--$(function(){--%>
+        <%--$('#navbarSuspension')({--%>
+            <%--distance : 0,--%>
+            <%--pos : 'top',--%>
+            <%--type : 'while',--%>
+            <%--hide : false--%>
+        <%--});--%>
 
-        $('.gotop').posfixed({
-            distance : 10,
-            direction : 'bottom',
-            type : 'always',
-            tag : {
-                obj : $('.wrap'),
-                direction : 'right',
-                distance : 10
-            },
-            hide : true
-        });
-    });
+        <%--$('.gotop')({--%>
+            <%--distance : 10,--%>
+            <%--direction : 'bottom',--%>
+            <%--type : 'always',--%>
+            <%--tag : {--%>
+                <%--obj : $('.wrap'),--%>
+                <%--direction : 'right',--%>
+                <%--distance : 10--%>
+            <%--},--%>
+            <%--hide : true--%>
+        <%--});--%>
+    <%--});--%>
 
 </script>
 

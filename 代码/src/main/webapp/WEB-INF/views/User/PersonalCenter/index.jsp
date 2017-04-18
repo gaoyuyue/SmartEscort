@@ -49,7 +49,7 @@
                 <div class="weui-cell__bd">
                     <img src="/assets/img/dingdan.png" style="margin-top: 3px; float: left">
                     <div style="float: left;margin-top: 3px;" class="font_color">
-                        <span style="vertical-align: middle; margin-top: 3px;">&nbsp;全部镖单</span>
+                        <span style="vertical-align: middle; margin-top: 3px;">&nbsp;全部订单</span>
                     </div>
                 </div>
                 <div class="weui-cell__ft">查看全部订单</div>
