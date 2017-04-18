@@ -1,11 +1,13 @@
 package cn.attackme.escort.Service;
 
+import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Repository.Query;
 import cn.attackme.escort.Utils.PageResults;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -132,7 +134,7 @@ public class UserInfoService extends BaseService<User>{
         delete(User);
     }
 
-    @Override
+    /*@Override
     public User getById(@NotNull Serializable id) {
         User User = super.getById(id);
         if (User != null && User.isDeleted()) {
@@ -140,7 +142,7 @@ public class UserInfoService extends BaseService<User>{
         } else {
             return User;
         }
-    }
+    }*/
 
     @Override
     public List<User> getAll() {
@@ -180,5 +182,14 @@ public class UserInfoService extends BaseService<User>{
     public int getCountByQuery(@NotNull Query query) {
         query.whereEqual("isDeleted", false);
         return super.getCountByQuery(query);
+    }
+
+    public PageResults<User> getListByPageAndSchool(@NotNull School school,
+                                                    @NotNull Integer currentPageNumber,
+                                                    @NotNull Integer pageSize){
+        Query query=new Query(entityManager);
+        query.from(User.class)
+                .whereEqual("school",school);
+        return super.getListByPageAndQuery(currentPageNumber,pageSize,query);
     }
 }

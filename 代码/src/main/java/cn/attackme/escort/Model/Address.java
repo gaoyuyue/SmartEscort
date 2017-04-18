@@ -28,9 +28,9 @@ public class Address implements Serializable{
     @GenericGenerator(name = "generator",strategy = "increment")
     private Integer id;
 
-    @OneToOne
+    /*@OneToOne
     @JoinColumn(name = "school")
-    private School school;
+    private School school;*/
 
     @OneToOne
     @JoinColumn(name = "area")

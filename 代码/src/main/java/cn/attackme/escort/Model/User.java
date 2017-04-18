@@ -68,6 +68,8 @@ public class User implements Serializable{
     //所属学校
     @Getter
     @Setter
+    @OneToOne
+    @JoinColumn(name = "school")
     private School school;
 
     //学工号
