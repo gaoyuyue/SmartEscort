@@ -38,19 +38,19 @@
 <body class="gray-bg">
 <div class="page input js_show">
         <div class="weui-cells__title">
-            <h2>镖师/发布人注册</h2>
+            <h2>用户注册</h2>
         </div>
         <form action="/Account/Register" method="post" name="form1">
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label" for="userName">江湖人称</label></div>
+                <div class="weui-cell__hd"><label class="weui-label" for="userName">用户名</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="text" placeholder="请输入昵称" name="userName" id="userName">
                 </div>
             </div>
 
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label" for="name">尊姓大名</label></div>
+                <div class="weui-cell__hd"><label class="weui-label" for="name">真实姓名</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="text" placeholder="请输入真实姓名" name="name" id="name">
                 </div>
@@ -58,7 +58,7 @@
 
             <div class="weui-cell">
                 <div class="weui-cell__hd">
-                    <label class="weui-label">千里传音</label>
+                    <label class="weui-label">手机号</label>
                 </div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="tel" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber">
@@ -87,7 +87,7 @@
             <%--</div>--%>
         </div>
         <div class="weui-btn-area">
-            <button type="submit" class="weui-btn weui-btn_primary" id="submit">进入镖局</button>
+            <button type="submit" class="weui-btn weui-btn_primary" id="submit">进入</button>
         </div>
         </form>
     </div>
