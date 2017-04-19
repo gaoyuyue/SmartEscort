@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Date: ${DATA}
  * Time: 19:09
  * To change this template use File | Settings | File Templates.
+ *个人信息
  */
 @RequestMapping("/User/UserInfomation")
 @Controller

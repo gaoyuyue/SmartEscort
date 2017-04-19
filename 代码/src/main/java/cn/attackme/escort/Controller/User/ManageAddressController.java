@@ -25,6 +25,7 @@ import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
  * Created by arthurme on 2017/3/25.
+ * 地址管理
  */
 @RequestMapping("/User/ManageAddress")
 @Controller

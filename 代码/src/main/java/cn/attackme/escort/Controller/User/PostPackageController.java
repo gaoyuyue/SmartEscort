@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by arthurme on 2017/3/21.
+ * 发布包裹
  */
 @RequestMapping("/User/PostPackage")
 @Controller

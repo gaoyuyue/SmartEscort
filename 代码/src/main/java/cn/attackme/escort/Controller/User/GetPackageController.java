@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by arthurme on 2017/3/31.
+ * 接取包裹
  */
 @RequestMapping("/User/GetPackage")
 @Controller

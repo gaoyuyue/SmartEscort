@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Date: ${DATA}
  * Time: 19:25
  * To change this template use File | Settings | File Templates.
+ * 我的发布
  */
 @RequestMapping("/User/MyPublish")
 @Controller

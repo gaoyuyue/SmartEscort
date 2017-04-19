@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Date: ${DATA}
  * Time: 21:00
  * To change this template use File | Settings | File Templates.
+ * 通知
  */
 @RequestMapping("/User/Notice")
 @Controller
