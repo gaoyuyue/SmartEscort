@@ -6,20 +6,22 @@
   To change this template use File | Settings | File Templates.
   领取任务页
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 
 <div class="weui-panel weui-panel_access">
     <div class="weui-tab">
         <div class="weui-navbar">
-            <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+            <a class="weui-navbar__item weui-bar__item--on" id="priceSlect" href="#tab1">
                 价格
             </a>
-            <a class="weui-navbar__item" href="#tab2">
+            <a class="weui-navbar__item" href="#tab2" id="creditSlect">
                 信用
             </a>
-            <a class="weui-navbar__item" href="#tab3">
+            <a class="weui-navbar__item" id="select" type="text" href="#tab3">
                 筛选
+                <input type="text" id="textpicker"/>
             </a>
         </div>
     </div>
@@ -63,13 +65,12 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $("#getPackage").addClass("weui-bar__item_on");
-    });
-    $(function () {
-        $(".weui-form-preview__item").on('click',function () {
+    <script>
+        $(document).ready(function () {
+            $("#getPackage").addClass("weui-bar__item_on");
+        });
 
+        $(".weui-form-preview__item").on('click',function () {
             var packageSize = $("#packageSize").val();
             var packageType = "";
             var price = $("#price").val();
@@ -77,9 +78,11 @@
 
             $.confirm({
                 title: '确定要接单吗？',
-                text:   "<textarea></textarea>",
-
-
+                text:   '大小'+packageSize+'<br/>'+
+                        '类型'+packageType+'<br/>'+
+                        '价格'+price+'<br/>' +
+                        '备注:'+'<br/>'+
+                        '<textarea rows="5" cols="10"></textarea>',
                 onOK: function () {
                     //点击确认
                 },
@@ -87,7 +90,58 @@
                 }
             });
         });
+        
+        $('#priceSlect').on('click',function () {
+            $.actions({
+                actions: [{
+                    text: "从高到低排序",
+                    onClick: function() {
+                        //do something
+                    }
+                },{
+                    text: "从低到高排序",
+                    onClick: function() {
+                        //do something
+                    }
+                }]
+            });
+        });
 
-    });
-</script>
+        $('#creditSlect').on('click',function () {
+            $.actions({
+                actions: [{
+                    text: "从高到低排序",
+                    onClick: function() {
+                        //do something
+                    }
+                },{
+                    text: "从低到高排序",
+                    onClick: function() {
+                        //do something
+                    }
+                }]
+            });
+        });
+
+        $('#textpicker').picker({
+
+            title:'',
+            cols:[
+                {
+                    textAlign:'center',
+                    values:['顺风','京东','圆通']
+                },
+                {
+                    textAlign:'center',
+                    values:['大','中','小']
+                }
+            ]
+        });
+
+
+    
+    </script>
+<script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+
 <%@include file="/user_footer.jsp"%>
