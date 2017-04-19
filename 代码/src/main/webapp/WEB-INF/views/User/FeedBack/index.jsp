@@ -35,7 +35,6 @@
         <div class="weui-btn-area">
             <a class="weui-btn weui-btn_primary" style="background-color: orange" href="javascript:postPackage()" id="showTooltips">提交</a>
         </div>
-
     </div>
 </div>
 
@@ -48,5 +47,7 @@
         $("#remainingwords").text( 200 - $("#counts").val().length ) ;
     });
 </script>
+<script src="/assets/js/jquery-weui.min.js"></script>
+<script src="/assets/js/fastclick.js"></script>
 <%@include file="/user_footer.jsp"%>
 

@@ -15,13 +15,12 @@
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/app/js/app.utils.js" type="text/javascript"></script>
-    <!--引进下拉刷新插件-->
-    <script src="/app/js/fastclick.js"></script>
     <script src="/assets/js/jquery-weui.min.js"></script>
 
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
     <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/jquery-weui.min.css">
 
     <script type="text/javascript" class="tabbar js_show">
         $(function(){
