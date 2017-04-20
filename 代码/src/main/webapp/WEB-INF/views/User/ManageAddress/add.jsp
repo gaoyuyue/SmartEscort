@@ -46,7 +46,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label for="name" class="weui-label">区域</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" id="area" type="text" value="">
+                <input class="weui-input" id="area" placeholder="请选择区域" type="text" value="">
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
         });
 
         var postSuccess = function () {
-
+            window.location.href = "/User/ManageAddress/";
         };
 
         $("#saveButton").click(function () {

@@ -107,7 +107,6 @@ var Get = function (url,success) {
             success(data);
         },
         error:function (XMLHttpRequest) {
-
         }
     });
 };

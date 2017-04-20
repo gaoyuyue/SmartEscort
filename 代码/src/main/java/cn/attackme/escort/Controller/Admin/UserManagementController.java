@@ -1,6 +1,5 @@
 package cn.attackme.escort.Controller.Admin;
 
-import cn.attackme.Wechat.Util.SecurityUtil;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.SchoolService;

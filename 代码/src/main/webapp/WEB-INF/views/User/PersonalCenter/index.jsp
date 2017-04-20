@@ -10,7 +10,6 @@
 
 <!--页面-->
 <div class="page badge js_show">
-    <%--<div class="weui-cells">--%>
          <div class=" navn1" >
             <img class="img-circle navicon" src="/assets/img/a5.jpg" style="width: 50px;display: block">
         </div>
@@ -55,7 +54,6 @@
                 <div class="weui-cell__ft">查看全部订单</div>
             </div>
         </a>
-    <%--</div>--%>
 
     <div class="weui-cells">
         <a href="/User/ManageAddress/">
@@ -126,12 +124,11 @@
     $(document).ready(function () {
         $("#personalCenter").addClass("weui-bar__item_on");
     });
-    var fillUser = function fillUser(result) {
-        console.error(result);
+    var fillUser = function(result) {
         $("#userName").text(result.name);
     };
     $(document).ready(function () {
-        AjaxGetRequest("/UserManagement/UserInfo", fillUser);
-    })
+        Get("/UserManagement/UserInfo", fillUser);
+    });
 </script>
 <%@include file="/user_footer.jsp"%>

@@ -42,7 +42,7 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">包裹大小</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="packageSize" type="text" value="">
+            <input class="weui-input" id="packageSize" placeholder="请选择包裹大小" type="text" value="">
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="packageType" type="text" value="">
+            <input class="weui-input" id="packageType" placeholder="请选择快递类型" type="text" value="">
         </div>
     </div>
 </div>
