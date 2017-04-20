@@ -4,6 +4,7 @@
   Date: 2017/4/15/015
   Time: 15:57
   To change this template use File | Settings | File Templates.
+  评价详情页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
@@ -23,7 +24,7 @@
     .rev_pro li{line-height:20px;height:20px;}
     .rev_pro li .revtit{text-align:right;display:block;float:left;margin-right:10px;width:70px;}
     .revinp{float:left;display:inline;}
-    .level .level_solid,.level .level_hollow{float:left;background-image:url("/assets/img/star.png");background-repeat:no-repeat;display:inline-block;width:40px;height:30px;}
+    .level .level_solid,.level .level_hollow{float:left;background-image:url("/assets/img/star.png");background-repeat:no-repeat;display:inline-block;width:40px;height:33px;}
     .level .level_solid{background-position:6px 0px;}
     .level .level_hollow{background-position:-40px 0px;}
     .revgrade{margin-left:20px;}

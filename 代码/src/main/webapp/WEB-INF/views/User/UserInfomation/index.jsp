@@ -4,6 +4,7 @@
   Date: 2017/3/25/025
   Time: 21:05
   To change this template use File | Settings | File Templates.
+  设置页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
@@ -145,16 +146,20 @@
             </div>
         </div>
     </div>
-
-
 </div>
-
-
+    <%--获取用户信息--%>
 <script type="text/javascript">
     var success = function success(data) {
         $("#userName").text(data.userName);
         $("#name").text(data.name);
         $("#phoneNumber").text(data.phoneNumber);
+
+        var upadateUserName = data.userName;
+        var updateName = data.name;
+        var updatePhoneNumber = data.phoneNumber;
+        $("#upadateUserName_other").val(upadateUserName);
+        $("#updateName_other").val(updateName);
+        $("#updatePhoneNumber_other").val(updatePhoneNumber);
     }
     AjaxGetRequest("/User/UserInfomation/current",success);
 </script>
@@ -165,24 +170,13 @@
         FastClick.attach(document.body);
     });
 </script>
+    <%--嵌套页面--%>
 <script>
     $(document).on("open", ".weui-popup-modal", function() {
         console.log("open popup");
     }).on("close", ".weui-popup-modal", function() {
         console.log("close popup");
     });
-</script>
-
-<script>
-    var success = function success(data) {
-        var upadateUserName = data.userName;
-        var updateName = data.name;
-        var updatePhoneNumber = data.phoneNumber;
-        $("#upadateUserName_other").val(upadateUserName);
-        $("#updateName_other").val(updateName);
-        $("#updatePhoneNumber_other").val(updatePhoneNumber);
-    }
-    AjaxGetRequest("/User/UserInfomation/current",success);
 </script>
 
 <script type="text/javascript">
@@ -267,14 +261,12 @@
             document.getElementById("submit").disabled =false;
         }
     }
-
     /**
      * 给确认密码一个焦点事件
      */
     $("#reNewPassword").focus(function () {
         $(this).val("");
     });
-
 </script>
 
 <%@include file="/user_footer.jsp"%>

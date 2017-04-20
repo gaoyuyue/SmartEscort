@@ -4,6 +4,7 @@
   Date: 2017/4/11/011
   Time: 21:02
   To change this template use File | Settings | File Templates.
+  通知页面
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
