@@ -5,11 +5,10 @@ import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,6 +41,24 @@ public class UserInfomationController {
         return userInfoService.getById(userName);
     }
 
-//    @ResponseBody
-//    @PutMapping("")
+    /**
+     * 修改用户信息
+     * @param user
+     * @return
+     */
+    @ResponseBody
+    @PutMapping("/updateUser")
+    public ResponseEntity<Void> updateUser(@RequestBody User user){
+        final String userName = SecurityUtils.getSubject().getPrincipal().toString();
+        User currentUser = userInfoService.getById(userName);
+
+        if(currentUser==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            currentUser.setName(user.getName());
+            currentUser.setPhoneNumber(user.getPhoneNumber());
+            userInfoService.save(currentUser);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 }

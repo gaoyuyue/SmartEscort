@@ -68,11 +68,11 @@
         <div class="weui-popup__modal">
             <div class="top_other">
                 <span class="list_other"><a class="close-popup">取消</a></span>
-                <span><a class="logo_other">保存</a></span>
+                <span><a class="logo_other show-warning update">保存</a></span>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="upadateUserName_other" type="text" style="border: 1px solid grey;border-radius:6px;">
+                    <input class="weui-input show-notification" id="upadateUserName_other" type="text" style="border: 1px solid grey;border-radius:6px;">
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="weui-popup__modal">
             <div class="top_other">
                 <span class="list_other"><a class="close-popup">取消</a></span>
-                <span><a class="logo_other">保存</a></span>
+                <span><a class="logo_other show-warning update">保存</a></span>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
@@ -98,7 +98,7 @@
         <div class="weui-popup__modal">
             <div class="top_other">
                 <span class="list_other"><a class="close-popup">取消</a></span>
-                <span><a class="logo_other">保存</a></span>
+                <span><a class="logo_other show-warning update">保存</a></span>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
@@ -147,24 +147,8 @@
         </div>
     </div>
 </div>
-    <%--获取用户信息--%>
-<script type="text/javascript">
-    var success = function success(data) {
-        $("#userName").text(data.userName);
-        $("#name").text(data.name);
-        $("#phoneNumber").text(data.phoneNumber);
-
-        var upadateUserName = data.userName;
-        var updateName = data.name;
-        var updatePhoneNumber = data.phoneNumber;
-        $("#upadateUserName_other").val(upadateUserName);
-        $("#updateName_other").val(updateName);
-        $("#updatePhoneNumber_other").val(updatePhoneNumber);
-    }
-    AjaxGetRequest("/User/UserInfomation/current",success);
-</script>
-
 <script src="/assets/js/fastclick.js"></script>
+
 <script>
     $(function() {
         FastClick.attach(document.body);
@@ -176,6 +160,80 @@
         console.log("open popup");
     }).on("close", ".weui-popup-modal", function() {
         console.log("close popup");
+    });
+</script>
+
+<script>
+    var loadPage=function loadPage() {
+        var success = function success(data) {
+
+            $("#userName").empty();
+            $("#name").empty();
+            $("#phoneNumber").empty();
+
+            $("#userName").text(data.userName);
+            $("#name").text(data.name);
+            $("#phoneNumber").text(data.phoneNumber);
+
+            var upadateUserName = data.userName;
+            var updateName = data.name;
+            var updatePhoneNumber = data.phoneNumber;
+            $("#upadateUserName_other").val(upadateUserName);
+            $("#updateName_other").val(updateName);
+            $("#updatePhoneNumber_other").val(updatePhoneNumber);
+        }
+        Get("/User/UserInfomation/current",success);
+    };
+    /**
+     * 修改
+     */
+    $(".update").click(function () {
+        var upadateUserName_other = $("#upadateUserName_other").val();
+        var updateName_other = $("#updateName_other").val();
+        var updatePhoneNumber_other = $("#updatePhoneNumber_other").val();
+        if(
+                isNullOrEmpty(upadateUserName_other) ||
+                isNullOrEmpty(updateName_other) ||
+                isNullOrEmpty(updatePhoneNumber_other)
+        ){
+            $(document)
+                    .on('click', '.show-warning', function() {
+                        $.toptip('内容不能为空', 'warning');
+                    })
+        } else {
+            var updateData = {
+                "userName":upadateUserName_other,
+                "name":updateName_other,
+                "phoneNumber":updatePhoneNumber_other
+            };
+            $.ajax({
+                type: "Put",
+                url: "/User/UserInfomation/updateUser",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(updateData),
+                success: function (updateData) {
+                   success(updateData);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+            cancelClick();
+        }
+    });
+
+    //点击取消，并重新加载个人信息
+    var cancelClick=function () {
+        $(".close-popup").click(
+                function () {
+                    loadPage()
+                }
+        );
+        $(".close-popup").trigger("click");
+    };
+
+    $(document).ready(function () {
+        loadPage()
     });
 </script>
 
