@@ -141,7 +141,7 @@
     }
 
     //分页加载页面
-    var loadPage = function (pageNumber) {
+    var loadPage = function loadPage(pageNumber) {
         var uploadTable = function (data) {
             var resultList = data["results"];
             console.log(resultList);

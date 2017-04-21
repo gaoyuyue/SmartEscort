@@ -25,6 +25,7 @@ public class PackageListManagementController {
     @Autowired
     private PackageService packageService;
 
+    @RequiresRoles("admin")
     @GetMapping("/")
     public String index(){
         return "Admin/PackageListManagement/index";

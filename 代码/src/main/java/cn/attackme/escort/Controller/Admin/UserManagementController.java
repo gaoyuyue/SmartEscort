@@ -30,6 +30,7 @@ public class UserManagementController {
     @Autowired
     private SchoolService schoolService;
 
+    @RequiresRoles("admin")
     @GetMapping("/")
     public String index(){
         return "Admin/UserManagement/index";

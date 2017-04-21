@@ -21,6 +21,7 @@ public class CourierCompanyManagementController {
     @Autowired
     private CourierCompanyService courierCompanyService;
 
+    @RequiresRoles("admin")
     @GetMapping("/")
     public String index(){
         return "Admin/CourierCompanyManagement/index";
