@@ -18,7 +18,7 @@ public class SHAUtilsTest {
         String sha256 = getSHA_256("123456123456");
         System.out.println(
                 getSHA_256(
-                        getSHA_256("admin" + "admin")
+                        getSHA_256("user" + "user")
                 )
         );
         System.out.println(
