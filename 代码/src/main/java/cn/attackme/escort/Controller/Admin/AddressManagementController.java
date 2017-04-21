@@ -2,12 +2,9 @@ package cn.attackme.escort.Controller.Admin;
 
 import cn.attackme.escort.Model.Area;
 import cn.attackme.escort.Model.School;
-import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.AreaService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Utils.PageResults;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Id;
 import java.util.List;
 
 /**
@@ -44,7 +40,6 @@ public class AddressManagementController {
                                               @PathVariable int pageSize) {
         return schoolService.getListByPage(pageNumber, pageSize);
     }
-
 
     //删除Area
     @RequiresRoles("admin")
@@ -76,18 +71,4 @@ public class AddressManagementController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-
-
-    //增加地址
-    @RequiresRoles("admin")
-    @PostMapping("/createArea/areaName/{areaName}/schoolId/{schoolId}")
-    public ResponseEntity<Void> createArea(@PathVariable String areaName,
-                                           @PathVariable int schoolId) {
-        School school = schoolService.getById(schoolId);
-        Area area = new Area(areaName,school);
-        school.getAreaList().add(area);
-        areaService.save(area);
-        schoolService.save(school);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
 }
