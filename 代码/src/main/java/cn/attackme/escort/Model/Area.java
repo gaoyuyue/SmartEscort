@@ -37,6 +37,11 @@ public class Area implements Serializable{
     @Setter
     private School school;
 
+    public Area(String areaName, School school) {
+        this.areaName = areaName;
+        this.school = school;
+    }
+
     @JsonIgnore
     public School getSchool() {return school;}
 }

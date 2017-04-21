@@ -71,4 +71,21 @@ public class AddressManagementController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @RequiresRoles("admin")
+    @PostMapping("/createArea/areaName/{areaName}/schoolId/{schoolId}")
+    public ResponseEntity<Void> createArea(@PathVariable String areaName,
+                                           @PathVariable int schoolId){
+        School school = schoolService.getById(schoolId);
+        if(school!=null){
+            Area area=new Area(areaName,school);
+            school.getAreaList().add(area);
+            areaService.save(area);
+            schoolService.save(school);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
 }

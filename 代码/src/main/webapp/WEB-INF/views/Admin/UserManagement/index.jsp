@@ -17,10 +17,6 @@
                     <div class="row">
                         <div class="col-sm-2 m-b-xs">
                             <select id="school" class="input-sm form-control input-s-sm inline">
-                                <option value="0">请选择</option>
-                                <option value="1">选项1</option>
-                                <option value="2">选项2</option>
-                                <option value="3">选项3</option>
                             </select>
                         </div>
                     </div>
@@ -60,7 +56,7 @@
             swal(
                 {
                     title: "确定？",
-                    text: "你确定禁用吗？禁用之后用户将无法登录系统！",
+                    text: "请再次确认你的操作",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -74,7 +70,7 @@
                         AjaxPutRequest("/UserManagement/disabledUser/userName/" + userName + "/stage/" + stage);
                         swal({
                             title: "成功",
-                            text: "禁用成功，此用户将无法登录此系统。",
+                            text: "操作成功",
                             type: "success",
                             confirmButtonText: "知道了"
                         });
@@ -143,26 +139,9 @@
         modifyUser();
     };
 
-    var loadSchool = function () {
-        var success = function (data) {
-            //console.log(data);
-            $("#school").empty();
-            for (var i = 0; i < data.length; i++) {
-                var item = data[i];
-                $("#school").append(
-                        /*<option value="0">请选择</option>*/
-                    '<option value="' + item.id +
-                    '"> ' + item.schoolName +
-                    '</option>'
-                )
-            }
-        };
-        AjaxGetRequest("/UserManagement/getSchoolList", success);
-    };
-
     $(document).ready(
         function () {
-            loadSchool();
+            loadSchool("school");
             loadPage(1);
             $("#school").change(function () {
                 loadPage(1)

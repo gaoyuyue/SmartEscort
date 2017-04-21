@@ -12,30 +12,14 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>自定义响应式表格</h5>
-                    <%--<div class="ibox-tools">
-                        &lt;%&ndash;<a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>&ndash;%&gt;
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="table_basic.html#">选项1</a>
-                            </li>
-                            <li><a href="table_basic.html#">选项2</a>
-                            </li>
-                        </ul>
-                        &lt;%&ndash;<a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>&ndash;%&gt;
-                    </div>--%>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
                         <button type="button" class="btn btn-w-m btn-primary" data-toggle="modal"
                                 data-target="#myModal1">添加学校
                         </button>
-                        <button type="button" class="btn btn-w-m btn-info" data-toggle="modal" data-target="#myModal2">
+                        <button type="button" class="btn btn-w-m btn-info" data-toggle="modal" data-target="#myModal2"
+                                id="createArea">
                             添加地址
                         </button>
                         <%--<div class="col-sm-3" style="float: right">
@@ -79,11 +63,9 @@
             </div>
             <small class="font-bold">
                 <div class="modal-body" align="center">
-                    <input type="text" placeholder="请输入快递类型名称" class="form-control" name="min" id="updateDescription"
-                           style="
-                width: 8cm;">
+                    <input type="text" placeholder="请输入学校名称" class="form-control" name="min" id="schoolContent"
+                           style="width: 8cm;">
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal" id="schoolCancelButton">取消</button>
                     <button type="button" class="btn btn-primary" id="schoolCreateButton">确认</button>
@@ -109,14 +91,26 @@
                 </small>
             </div>
             <small class="font-bold">
+
                 <div class="modal-body" align="center">
-                    <input type="text" placeholder="请输入快递类型名称" class="form-control" name="min" id="content" style="
-                width: 8cm;">
+                    <div class="col-sm-4 m-b-xs">
+                        <div class="form-group">
+                            <label>学校名称: </label>
+                            <select id="school" class="input-sm  input-s-sm inline">
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-8 m-b-xs">
+                        <label>请输入学校区域名称: </label>
+                        <input type="text"  class="input-sm form-control input-s-sm inline" id="areaContent"
+                               style="width: 8cm;">
+                    </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal" id="createCancelButton">关闭</button>
-                    <button type="button" class="btn btn-primary" id="createButton">保存</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="areaCancelButton">关闭</button>
+                    <button type="button" class="btn btn-primary" id="areaCreateButton">保存</button>
                 </div>
             </small>
         </div>
@@ -135,11 +129,11 @@
         $(".md-delete").click(function () {
             var id = this["id"];
             var idArr = id.split("/");
-            var areaId=idArr[0];
-            var schoolId=idArr[1];
+            var areaId = idArr[0];
+            var schoolId = idArr[1];
             console.log(idArr);
             $.ajax({
-                url: "/AddressManagement/DeleteAreaBySchool/schoolId/"+schoolId+"/areaId/"+areaId,
+                url: "/AddressManagement/DeleteAreaBySchool/schoolId/" + schoolId + "/areaId/" + areaId,
                 type: "DELETE",
                 success: function () {
                     swal({
@@ -181,17 +175,17 @@
             for (var i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
                 //console.log(result);
-                var areaList=result.areaList;
+                var areaList = result.areaList;
                 //console.log(areaList);
-                for(var j=0;j<areaList.length;j++){
-                    var area=areaList[j];
+                for (var j = 0; j < areaList.length; j++) {
+                    var area = areaList[j];
                     $("#AddressTable").append(
                         '<tr>' +
-                        '<td >' +result.schoolName+
+                        '<td >' + result.schoolName +
                         '</td>' +
-                        '<td>' +area.areaName+
+                        '<td>' + area.areaName +
                         '</td>' +
-                        '<td><a class="md-delete" id="'+area.id+"/"+result.id+
+                        '<td><a class="md-delete" id="' + area.id + "/" + result.id +
                         '">删除</a></td>' +
                         '</tr>'
                     );
@@ -207,25 +201,47 @@
         }
     );
 
-
-
     //新增学校
-    /*$("#schoolCreateButton").click(function () {
-     var description = $("#categoryDescription").val();
-     if (isNullOrEmpty(description)) {
-     swal({
-     title: "错误",
-     text: "不可为空",
-     type: "error",
-     confirmButtonText: "知道了"
-     });
-     } else {
+    $("#schoolCreateButton").click(function () {
+        var schoolName = $("#schoolContent").val();
+        console.log(schoolName);
+        if (isNullOrEmpty(schoolName)) {
+            swal({
+                title: "错误",
+                text: "不可为空",
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        } else {
+            AjaxPostRequest("/AddressManagement/createSchool/schoolName/" + schoolName);
+            $("#schoolCancelButton").click();
+            //loadSchool("");
+        }
+        $("#categoryDescription").val("");
+    });
 
-     AjaxPostRequest("/ProjectCollectManagement/CategoriesAndTheme/projectCategories/description/" + description);
+    //创建区域时加载学校
+    $("#createArea").click(function () {
+        loadSchool("school");
+    });
 
-     $("#categoryCancelButton").click();
-     loadProjectCategoryTable();
-     }
-     $("#categoryDescription").val("");
-     });*/
+    //创建区域
+    $("#areaCreateButton").click(function () {
+        var areaName = $("#areaContent").val();
+        var schoolId = $("#school").val();
+        if(isNullOrEmpty(areaName)){
+            swal({
+                title: "错误",
+                text: "不可为空",
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        }else{
+            AjaxPostRequest("/AddressManagement/createArea/areaName/"+areaName+"/schoolId/"+schoolId)
+            $("#areaCancelButton").click();
+            var pageNumber = $(".pagination .active")[0].innerText;
+            loadPage(pageNumber);
+        }
+        $("#areaContent").val("")
+    })
 </script>
