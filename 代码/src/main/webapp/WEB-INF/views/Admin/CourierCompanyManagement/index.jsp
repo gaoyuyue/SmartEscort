@@ -162,11 +162,7 @@
 
         };
         Paging("/CourierCompanyManagement/getCourierCompanyList", "CourierTable", uploadTable, pageNumber, 10);
-    };
-    $(document).ready(
-        function () {
-            loadPage(1);
-        });
+    }
 
     //新增
     $("#createButton").click(function () {
@@ -252,4 +248,8 @@
             });
     });
 
+    $(document).ready(
+        function () {
+            loadPage(1);
+        });
 </script>

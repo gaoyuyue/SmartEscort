@@ -194,12 +194,6 @@
         Paging("/AddressManagement/getAddressList", "AddressTable", uploadTable, pageNumber, 10);
         deleteMe();
     };
-    $(document).ready(
-        function () {
-            loadPage(1);
-        }
-    );
-
 
     //新增学校
     $("#schoolCreateButton").click(function () {
@@ -237,11 +231,20 @@
                 confirmButtonText: "知道了"
             });
         } else {
-           AjaxPostRequest("/AddressManagement/createArea/areaName/"+ areaName +"/schoolId/" + schoolId);
+            AjaxPostRequest("/AddressManagement/createArea/areaName/"+ areaName +"/schoolId/" + schoolId);
             $("#areaCancelButton").click();
             var pageNumber = $(".pagination .active")[0].innerText;
             loadPage(pageNumber);
         }
         $("#areaName").val("");
     });
+
+    $(document).ready(
+        function () {
+            loadPage(1);
+        }
+    );
+
+
+
 </script>

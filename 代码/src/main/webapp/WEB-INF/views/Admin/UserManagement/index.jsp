@@ -46,44 +46,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    var modifyUser = function modifyUser() {
-        $(".modifyUser").click(function () {
-            var id = this["id"];
-            var arr = id.split("_");
-            var userName = arr[0];
-            var stage = arr[1];
-            console.log(userName);
-            console.log(stage);
-            swal(
-                {
-                    title: "确定？",
-                    text: "你确定禁用吗？禁用之后用户将无法登录系统！",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if(isConfirm){
-                        AjaxPutRequest("/UserManagement/disabledUser/userName/" + userName + "/stage/" + stage);
-                        swal({
-                            title: "成功",
-                            text: "禁用成功，此用户将无法登录此系统。",
-                            type: "success",
-                            confirmButtonText: "知道了"
-                        });
-                        var pageNumber = $(".pagination .active")[0].innerText;
-                        loadPage(pageNumber);
-                    }else {
-                        swal("已取消", "未作任何操作", "info");
-                    }
-                }
-            )
-        })
-    };
 
     var loadPage = function loadPage(pageNumber) {
         var uploadTable = function (data) {
@@ -140,6 +102,45 @@
         modifyUser();
     };
 
+    //是否禁用
+    var modifyUser = function modifyUser() {
+        $(".modifyUser").click(function () {
+            var id = this["id"];
+            var arr = id.split("_");
+            var userName = arr[0];
+            var stage = arr[1];
+            console.log(userName);
+            console.log(stage);
+            swal(
+                {
+                    title: "确定？",
+                    text: "请再次确认你的操作",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if(isConfirm){
+                        AjaxPutRequest("/UserManagement/disabledUser/userName/" + userName + "/stage/" + stage);
+                        swal({
+                            title: "成功",
+                            text: "操作成功",
+                            type: "success",
+                            confirmButtonText: "知道了"
+                        });
+                        var pageNumber = $(".pagination .active")[0].innerText;
+                        loadPage(pageNumber);
+                    }else {
+                        swal("已取消", "未作任何操作", "info");
+                    }
+                }
+            )
+        })
+    };
 
     $(document).ready(
         function () {
@@ -149,7 +150,6 @@
                 loadPage(1)
             })
         }
-    )
-
+    );
 
 </script>
