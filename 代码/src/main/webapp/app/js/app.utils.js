@@ -390,3 +390,23 @@ var appendNotify = function appendNotify(toAppend, title, content, buttonText, U
         '</div>'
     );
 };
+
+/**
+ * 加载学校
+ */
+var loadSchool = function (id) {
+    var success = function (data) {
+        //console.log(data);
+        $("#"+id).empty();
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            $("#"+id).append(
+                /*<option value="0">请选择</option>*/
+                '<option value="' + item.id +
+                '"> ' + item.schoolName +
+                '</option>'
+            )
+        }
+    };
+    AjaxGetRequest("/UserManagement/getSchoolList", success);
+};

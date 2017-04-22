@@ -27,6 +27,7 @@ public class AddressManagementController {
     @Autowired
     private AreaService areaService;
 
+    @RequiresRoles("admin")
     @GetMapping("/")
     public String index() {
         return "Admin/AddressManagement/index";
@@ -52,8 +53,8 @@ public class AddressManagementController {
             List<Area> areaList = school.getAreaList();
             if (areaList.contains(area)) {
                 areaList.remove(area);
-                schoolService.save(school);
                 areaService.delete(area);
+                schoolService.save(school);
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
@@ -71,4 +72,20 @@ public class AddressManagementController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    //新增区域
+    @RequiresRoles("admin")
+    @PostMapping("/createArea/areaName/{areaName}/schoolId/{schoolId}")
+    public ResponseEntity<Void> createArea(@PathVariable String areaName,
+                                           @PathVariable int schoolId){
+        School school = schoolService.getById(schoolId);
+        Area area=new Area(areaName,school);
+        areaService.save(area);
+        if(school==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else {
+            school.getAreaList().add(area);
+            schoolService.save(school);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+    }
 }

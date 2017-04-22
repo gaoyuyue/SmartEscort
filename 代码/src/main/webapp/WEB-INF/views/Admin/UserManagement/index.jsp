@@ -16,11 +16,8 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-2 m-b-xs">
-                            <select id="school" class="input-sm form-control input-s-sm inline">
-                                <option value="0">请选择</option>
-                                <option value="1">选项1</option>
-                                <option value="2">选项2</option>
-                                <option value="3">选项3</option>
+                            <select id="school" class="input-sm input-s-sm inline">
+
                             </select>
                         </div>
                     </div>
@@ -143,26 +140,10 @@
         modifyUser();
     };
 
-    var loadSchool = function () {
-        var success = function (data) {
-            //console.log(data);
-            $("#school").empty();
-            for (var i = 0; i < data.length; i++) {
-                var item = data[i];
-                $("#school").append(
-                        /*<option value="0">请选择</option>*/
-                    '<option value="' + item.id +
-                    '"> ' + item.schoolName +
-                    '</option>'
-                )
-            }
-        };
-        AjaxGetRequest("/UserManagement/getSchoolList", success);
-    };
 
     $(document).ready(
         function () {
-            loadSchool();
+            loadSchool("school");
             loadPage(1);
             $("#school").change(function () {
                 loadPage(1)
