@@ -56,7 +56,6 @@ public class UserManagementController {
     }
 
     //获取全部学校
-    @RequiresRoles("admin")
     @ResponseBody
     @GetMapping("/getSchoolList")
     public ResponseEntity<List<School>> getSchoolList(){

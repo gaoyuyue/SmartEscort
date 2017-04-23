@@ -222,7 +222,6 @@
 
         var areaName = $("#areaName").val();
         var schoolId = $("#school").val();
-        console.log(schoolId);
         if (isNullOrEmpty(areaName) || isNullOrEmpty(schoolId)) {
             swal({
                 title: "错误",

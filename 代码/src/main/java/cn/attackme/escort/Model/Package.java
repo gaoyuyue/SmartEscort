@@ -82,4 +82,9 @@ public class Package implements Serializable {
     //包裹状态
     @Enumerated(EnumType.STRING)
     private PackageStatus packageStatus;
+
+    //所属学校
+    @ManyToOne (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+    @JoinColumn(name = "school")
+    private School school;
 }
