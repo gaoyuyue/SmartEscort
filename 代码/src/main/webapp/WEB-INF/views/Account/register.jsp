@@ -159,7 +159,7 @@
         });
     };
     $(document).ready(function () {
-        Get("/User/ManageAddress/getAllSchoolName",success);
+        Get("/User/ManageAddress/schoolNameList",success);
     });
 </script>
 

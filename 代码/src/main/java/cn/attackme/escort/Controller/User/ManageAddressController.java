@@ -9,7 +9,6 @@ import cn.attackme.escort.Service.AreaService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
@@ -72,8 +69,8 @@ public class ManageAddressController {
     }
 
     @ResponseBody
-    @GetMapping("/getAllSchoolName")
-    public ResponseEntity<List<String>> getAllSchoolName(){
+    @GetMapping("/schoolNameList")
+    public ResponseEntity<List<String>> schoolNameList(){
         List<School> schoolList = schoolService.getAll();
         List<String> stringList = schoolList.stream().map(School::getSchoolName).collect(toList());
         return new ResponseEntity<List<String>>(stringList,HttpStatus.OK);
@@ -81,12 +78,32 @@ public class ManageAddressController {
 
     @RequiresRoles("user")
     @ResponseBody
-    @GetMapping("/getAreaNameList")
-    public ResponseEntity<List<String>> getAreaNameList(){
+    @GetMapping("/areaNameList")
+    public ResponseEntity<List<String>> areaNameList(){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
         List<Area> areaList = user.getSchool().getAreaList();
         List<String> stringList = areaList.stream().map(Area::getAreaName).collect(toList());
         return new ResponseEntity<List<String>>(stringList,HttpStatus.OK);
+    }
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @GetMapping("/addressList")
+    public ResponseEntity<List<Address>> addressList(){
+        String userName = getSubject().getPrincipal().toString();
+        User user = userInfoService.getById(userName);
+        return new ResponseEntity<>(user.getAddressList(),HttpStatus.OK);
+    }
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @PutMapping("/default")
+    public ResponseEntity<Void> setDefault(@RequestBody int addressId){
+        String userName = getSubject().getPrincipal().toString();
+        User user = userInfoService.getById(userName);
+        List<Address> addressList = addressService.getListByUser(user);
+        addressList.stream().filter(Address::isDefault);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.enterprise.inject.Default;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -77,7 +76,6 @@ public class User implements Serializable{
     @Setter
     private String studentId;
 
-    @Getter
     @Setter
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.EXTRA)
@@ -91,5 +89,10 @@ public class User implements Serializable{
     @JsonIgnore    //生成json不包含此字段,必须打在Getter上面
     public String getPassWord() {
         return passWord;
+    }
+
+    @JsonIgnore
+    public List<Address> getAddressList(){
+        return addressList;
     }
 }

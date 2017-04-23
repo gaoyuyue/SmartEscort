@@ -28,10 +28,6 @@ public class Address implements Serializable{
     @GenericGenerator(name = "generator",strategy = "increment")
     private Integer id;
 
-    /*@OneToOne
-    @JoinColumn(name = "school")
-    private School school;*/
-
     @OneToOne
     @JoinColumn(name = "area")
     private Area area;
@@ -41,6 +37,8 @@ public class Address implements Serializable{
     private String phoneNumber;
 
     private String receiverName;
+
+    private boolean isDefault;
 
     @ManyToOne
     @JoinColumn(name = "user")

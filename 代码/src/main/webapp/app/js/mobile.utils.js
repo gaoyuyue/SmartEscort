@@ -103,6 +103,8 @@ var Get = function (url,success) {
     $.ajax({
         url:url,
         type:"GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         success:function (data) {
             success(data);
         },
