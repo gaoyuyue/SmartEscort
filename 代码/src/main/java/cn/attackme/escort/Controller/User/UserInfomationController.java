@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
+
 /**
  * Created by IntelliJ IDEA.
  * User: StevenJack
@@ -43,22 +45,40 @@ public class UserInfomationController {
 
     /**
      * 修改用户信息
-     * @param user
+     * @param name
+     * @param phoneNumber
      * @return
      */
     @ResponseBody
-    @PutMapping("/updateUser")
-    public ResponseEntity<Void> updateUser(@RequestBody User user){
+    @PutMapping("/name/{name}/phoneNumber/{phoneNumber}")
+    public ResponseEntity<Void> updateUser(@PathVariable String name,
+                                           @PathVariable String phoneNumber){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
 
         if(currentUser==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else{
-            currentUser.setName(user.getName());
-            currentUser.setPhoneNumber(user.getPhoneNumber());
+            currentUser.setName(name);
+            currentUser.setPhoneNumber(phoneNumber);
             userInfoService.save(currentUser);
             return new ResponseEntity<>(HttpStatus.OK);
         }
+    }
+
+    /**
+     * 修改密码
+     * @param userName
+     * @param password
+     * @return
+     */
+    @ResponseBody
+    @PutMapping("/userName/{userName}/password/{password}")
+    public ResponseEntity<User> userResponseEntity(@PathVariable String userName,
+                                                   @PathVariable String password){
+        User user = userInfoService.getById(userName);
+        user.setPassWord(getSHA_256(password));
+        userInfoService.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

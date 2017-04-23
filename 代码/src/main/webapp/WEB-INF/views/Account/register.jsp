@@ -117,11 +117,10 @@
             document.form1.password.focus();
         }
         if(p1!=p2){
-            document.getElementById("msg").innerHTML = "两次输入密码不一致，请重新输入";
-            document.getElementById("submit").disabled =true;
+            $("#msg").html("两次输入密码不一致，请重新输入");
+            $("#editPassWord").disabled = true;
         } else{
-            document.getElementById("msg").innerHTML = "";
-            document.getElementById("submit").disabled =false;
+            $("#editPassWord").disabled = false;
         }
     }
 
@@ -133,6 +132,7 @@
     });
     $("#confirmPassword").focus(function () {
         $(this).val("");
+        $("#msg").html("");
     });
     /**
      * 判断用户名是否重复

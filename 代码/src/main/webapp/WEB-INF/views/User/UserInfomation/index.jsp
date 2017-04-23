@@ -19,42 +19,42 @@
     <div class="page list js_show">
         <div class="page__bd">
             <div class="weui-cells">
-                <a class="open-popup" data-target="#updateUserName">
-                    <div class="weui-cell">
+                <a class="open-popup" >
+                    <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
                         <div class="weui-cell__bd">
-                            <strong>用户名</strong>
+                            <p style="font-family: SimSun">用户名</p>
                         </div>
-                        <div class="weui-cell__ft" id="userName"></div>
+                        <div class="weui-cell__ft" id="userName" title="修改用户名，请联系客服"></div>
                     </div>
                 </a>
                 <a class="open-popup" data-target="#updateName">
-                    <div class="weui-cell">
+                    <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
                         <div class="weui-cell__bd">
-                            <strong>姓名</strong>
+                            <p style="font-family: SimSun">姓名</p>
                         </div>
                         <div class="weui-cell__ft" id="name"></div>
                     </div>
                 </a>
                 <a class="open-popup" data-target="#updatePhoneNumber">
-                    <div class="weui-cell">
+                    <div class="weui-cell" style="border-bottom: 1px solid #f0f0f0">
                         <div class="weui-cell__bd">
-                            <strong>手机号</strong>
+                            <p style="font-family: SimSun">手机号</p>
                         </div>
                         <div class="weui-cell__ft" id="phoneNumber"></div>
                     </div>
                 </a>
-                    <div class="weui-cell">
+                    <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
                         <div class="weui-cell__bd">
-                            <strong>性别</strong>
+                            <p style="font-family: SimSun">性别</p>
                         </div>
-                        <div class="weui-cell__ft sex"></div>
+                        <div class="weui-cell__ft sex">男</div>
                     </div>
             </div>
 
             <div class="weui-cells">
                 <a class="weui-cell weui-cell_access open-popup" data-target="#updatePassword">
                     <div class="weui-cell__bd">
-                        <strong>修改密码</strong>
+                        <p style="font-family: SimSun">修改密码</p>
                     </div>
                     <div class="weui-cell__ft">
                     </div>
@@ -62,21 +62,7 @@
             </div>
         </div>
     </div>
-    <%--修改用户名--%>
-    <div id="updateUserName" class='weui-popup__container'>
-        <div class="weui-popup__overlay"></div>
-        <div class="weui-popup__modal">
-            <div class="top_other">
-                <span class="list_other"><a class="close-popup">取消</a></span>
-                <span><a class="logo_other show-warning update">保存</a></span>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input show-notification" id="upadateUserName_other" type="text" style="border: 1px solid grey;border-radius:6px;">
-                </div>
-            </div>
-        </div>
-    </div>
+
     <%--修改姓名--%>
     <div id="updateName" class='weui-popup__container'>
         <div class="weui-popup__overlay"></div>
@@ -102,7 +88,7 @@
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="updatePhoneNumber_other" type="text" style="border: 1px solid grey;border-radius:6px;">
+                    <input class="weui-input" id="updatePhoneNumber_other" type="number" style="border: 1px solid grey;border-radius:6px;">
                 </div>
             </div>
         </div>
@@ -113,12 +99,11 @@
         <div class="weui-popup__modal">
             <div class="top_other">
                 <span class="list_other"><a class="close-popup">取消</a></span>
-                <span><a class="logo_other">保存</a></span>
+                <span><a class="logo_other" id="editPassWord">保存</a></span>
             </div>
             <div class="weui-cell">
-                <div class="weui-cell__hd" style="float: left"><label class="weui-label" for="newPassword">新密码:</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="password" name="newPassword" id="newPassword" placeholder="请输入新密码" onKeyUp="CheckIntensity(this.value)"><tr></tr>
+                    <input class="weui-input" type="password" id="newPassword" placeholder="请输入新密码" onKeyUp="CheckIntensity(this.value)"><tr></tr>
                 </div>
             </div>
             <div class="weui-cell">
@@ -133,40 +118,33 @@
                 </div>
             </div>
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="reNewPassword" class="weui-label">确认新密码:</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="password" name="passWord" id="reNewPassword" placeholder="请再次输入密码">
+                    <input class="weui-input" type="password" id="reNewPassword" placeholder="请再次输入密码">
                 </div>
             </div>
             <div class="weui-cell">
                 <div id="msg" style="color:red;"></div>
             </div>
-            <div class="weui-btn-area">
-                <button type="submit" class="weui-btn weui-btn_primary" id="passwordSubmitButton" style="background-color: orange">确定</button>
-            </div>
         </div>
     </div>
 </div>
-<script src="/assets/js/fastclick.js"></script>
 
+<script src="/assets/js/fastclick.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
-</script>
     <%--嵌套页面--%>
-<script>
     $(document).on("open", ".weui-popup-modal", function() {
         console.log("open popup");
     }).on("close", ".weui-popup-modal", function() {
         console.log("close popup");
     });
 </script>
-
+<%--修改用户信息--%>
 <script>
     var loadPage=function loadPage() {
         var success = function success(data) {
-
             $("#userName").empty();
             $("#name").empty();
             $("#phoneNumber").empty();
@@ -175,10 +153,8 @@
             $("#name").text(data.name);
             $("#phoneNumber").text(data.phoneNumber);
 
-            var upadateUserName = data.userName;
             var updateName = data.name;
             var updatePhoneNumber = data.phoneNumber;
-            $("#upadateUserName_other").val(upadateUserName);
             $("#updateName_other").val(updateName);
             $("#updatePhoneNumber_other").val(updatePhoneNumber);
         }
@@ -188,11 +164,9 @@
      * 修改
      */
     $(".update").click(function () {
-        var upadateUserName_other = $("#upadateUserName_other").val();
         var updateName_other = $("#updateName_other").val();
         var updatePhoneNumber_other = $("#updatePhoneNumber_other").val();
         if(
-                isNullOrEmpty(upadateUserName_other) ||
                 isNullOrEmpty(updateName_other) ||
                 isNullOrEmpty(updatePhoneNumber_other)
         ){
@@ -201,19 +175,10 @@
                         $.toptip('内容不能为空', 'warning');
                     })
         } else {
-            var updateData = {
-                "userName":upadateUserName_other,
-                "name":updateName_other,
-                "phoneNumber":updatePhoneNumber_other
-            };
             $.ajax({
                 type: "Put",
-                url: "/User/UserInfomation/updateUser",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify(updateData),
-                success: function (updateData) {
-                   success(updateData);
+                url: "/User/UserInfomation/name/" + updateName_other + "/phoneNumber/" +updatePhoneNumber_other,
+                success: function () {
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                 }
@@ -221,7 +186,6 @@
             cancelClick();
         }
     });
-
     //点击取消，并重新加载个人信息
     var cancelClick=function () {
         $(".close-popup").click(
@@ -299,31 +263,46 @@
         document.getElementById('pwd_Strong').className=Scolor;
         document.getElementById('pwd_Medium').innerHTML=Color_Html;
     }
-
-    /**
-     * 判断密码两次是否输入正确
-     * @returns {boolean}
-     */
-    function checkpwd() {
-        var p1 = $("#newPassword").val();
-        var p2 = $("#reNewPassword").val();
-        if(p1 ==""){
-            alert("请输入密码");
-            document.form1.password.focus();
-        }
-        if(p1!=p2){
-            document.getElementById("msg").innerHTML = "两次输入密码不一致，请重新输入";
-            document.getElementById("submit").disabled =true;
-        } else{
-            document.getElementById("msg").innerHTML = "";
-            document.getElementById("submit").disabled =false;
-        }
-    }
     /**
      * 给确认密码一个焦点事件
      */
     $("#reNewPassword").focus(function () {
         $(this).val("");
+        $("#msg").html("");
+    });
+</script>
+
+<%--修改密码--%>
+<script src="/assets/js/sha256.min.js"></script>
+<script>
+    $("#editPassWord").click(function () {
+        var edit = function success(data) {
+            var userNameId = data.userName;
+            var newPassword = $("#newPassword").val();
+            var reNewPassword = $("#reNewPassword").val();
+            var passWord = null;
+            if(newPassword != reNewPassword){
+                $("#msg").html("两次输入密码不一致，请重新输入");
+                $("#editPassWord").disabled = true;
+            } else {
+                $("#editPassWord").disabled = false;
+                passWord = hex_sha256(userNameId + newPassword);
+                $.ajax({
+                    type:"Put",
+                    url:"/User/UserInfomation/userName/" + userNameId +"/password/" +passWord,
+                    success:function () {
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    }
+                });
+
+
+                $("#newPassword").val("");
+                $("#reNewPassword").val("");
+                cancelClick();
+            }
+        }
+        Get("/User/UserInfomation/current",edit);
     });
 </script>
 
