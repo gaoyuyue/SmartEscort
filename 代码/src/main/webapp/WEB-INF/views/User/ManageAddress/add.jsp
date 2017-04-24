@@ -75,7 +75,7 @@
             });
         };
         $(document).ready(function () {
-            Get("/User/ManageAddress/areaNameList",getSuccess)
+            Get("/User/ManageAddress/areaNameList",getSuccess);
         });
 
         var postSuccess = function () {

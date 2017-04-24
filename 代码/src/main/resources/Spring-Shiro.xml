@@ -100,7 +100,7 @@
         <property name="unauthorizedUrl" value="/Account/Login"/>
         <property name="filterChainDefinitions">
             <value>
-                /User/ManageAddress/getAllSchoolName = anon
+                /User/ManageAddress/schoolNameList = anon
                 /Wechat/** = anon
                 /OAuth2/** = anon
                 /Account/** = anon

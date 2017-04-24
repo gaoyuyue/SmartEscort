@@ -14,8 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.FlashMap;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
@@ -49,8 +52,10 @@ public class ManageAddressController {
     }
 
     @RequiresRoles("user")
-    @GetMapping("/edit")
-    public String editPage(){
+    @GetMapping("/edit/addressId/{addressId}")
+    public String editPage(@PathVariable int addressId,
+                           HttpSession httpSession){
+        httpSession.setAttribute("addressId",addressId);
         return "User/ManageAddress/edit";
     }
 
@@ -66,6 +71,29 @@ public class ManageAddressController {
         address.setArea(area);
         addressService.save(address);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @GetMapping("/edit")
+    public ResponseEntity<Address> editData(HttpSession httpSession){
+        int addressId = (int) httpSession.getAttribute("addressId");
+        httpSession.removeAttribute("addressId");
+        Address address = addressService.getById(addressId);
+        return new ResponseEntity<Address>(address,HttpStatus.OK);
+    }
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @PutMapping("/edit")
+    public ResponseEntity<Void> editUpdate(@RequestBody Address address){
+        Address oldAddress = addressService.getById(address.getId());
+        Area area = areaService.getByName(address.getArea().getAreaName());
+        address.setArea(area);
+        address.setDefault(oldAddress.isDefault());
+        address.setUser(oldAddress.getUser());
+        addressService.saveOrUpdate(address);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @ResponseBody
@@ -102,8 +130,14 @@ public class ManageAddressController {
     public ResponseEntity<Void> setDefault(@RequestBody int addressId){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
-        List<Address> addressList = addressService.getListByUser(user);
-        addressList.stream().filter(Address::isDefault);
+        List<Address> addressList = user.getAddressList();
+        Address address = addressList.stream().filter(Address::isDefault).findFirst().orElse(null);
+        if (address!=null){
+            address.setDefault(false);
+        }
+        Address defaultAddress = addressService.getById(addressId);
+        defaultAddress.setDefault(true);
+        addressService.saveOrUpdate(defaultAddress);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

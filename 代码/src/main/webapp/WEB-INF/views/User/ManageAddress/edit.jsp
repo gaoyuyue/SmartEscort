@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/assets/css/jquery-weui.min.css"/>
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="/app/js/mobile.utils.js"></script>
 
 </head>
 <body>
@@ -44,9 +45,9 @@
 
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><label for="home-city" class="weui-label">学校/区域</label></div>
+        <div class="weui-cell__hd"><label for="area" class="weui-label">学校/区域</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="home-city" type="text">
+            <input class="weui-input" id="area" type="text">
         </div>
     </div>
 </div>
@@ -54,106 +55,56 @@
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <textarea class="weui-textarea" id="address" placeholder="详细地址" rows="4"></textarea>
+            <textarea class="weui-textarea" id="detail" placeholder="详细地址" rows="4"></textarea>
         </div>
     </div>
 </div>
 
-<a href="javascript:;" class="weui-btn weui-btn_warn">保存</a>
+<a href="javascript:;" class="weui-btn weui-btn_warn" id="saveButton">保存</a>
 
 <script src="/assets/js/jquery-weui.min.js"></script>
 <script src="/assets/js/fastclick.js"></script>
-<script src="/assets/js/city-picker.js"></script>
 <script>
     $(function() {
         FastClick.attach(document.body);
     });
 </script>
+
 <script>
-    $.rawCitiesData.push(
-            {
-                "name":"北京",
-                "code":"110000",
-                "sub": [
-                    {
-                        "name": "北京市",
-                        "code": "110000",
-                        "sub":[
-                            {
-                                "name":"东城区",
-                                "code":"110101"
-                            },
-                            {
-                                "name":"西城区",
-                                "code":"110102"
-                            },
-                            {
-                                "name":"朝阳区",
-                                "code":"110105"
-                            },
-                            {
-                                "name":"丰台区",
-                                "code":"110106"
-                            },
-                            {
-                                "name":"石景山区",
-                                "code":"110107"
-                            },
-                            {
-                                "name":"海淀区",
-                                "code":"110108"
-                            },
-                            {
-                                "name":"门头沟区",
-                                "code":"110109"
-                            },
-                            {
-                                "name":"房山区",
-                                "code":"110111"
-                            },
-                            {
-                                "name":"通州区",
-                                "code":"110112"
-                            },
-                            {
-                                "name":"顺义区",
-                                "code":"110113"
-                            },
-                            {
-                                "name":"昌平区",
-                                "code":"110114"
-                            },
-                            {
-                                "name":"大兴区",
-                                "code":"110115"
-                            },
-                            {
-                                "name":"怀柔区",
-                                "code":"110116"
-                            },
-                            {
-                                "name":"平谷区",
-                                "code":"110117"
-                            },
-                            {
-                                "name":"密云县",
-                                "code":"110228"
-                            },
-                            {
-                                "name":"延庆县",
-                                "code":"110229"
-                            }
-                        ]
-                    }
-                ]
+    let addressId;
+    var getArea = function (data) {
+        $("#area").select({
+            title: "选择区域",
+            items: data
+        });
+    };
+    var getAddress = function (data) {
+        addressId = data.id;
+        $("#name").val(data.receiverName);
+        $("#phone").val(data.phoneNumber);
+        $("#detail").val(data.detail);
+        Get("/User/ManageAddress/areaNameList",getArea);
+        $("#area").val(data.area.areaName);
+    };
+    $(document).ready(function () {
+        Get("/User/ManageAddress/edit",getAddress);
+    });
+
+    var success = function () {
+        window.location.href = "/User/ManageAddress/";
+    };
+
+    $("#saveButton").click(function () {
+        const data = {
+            id:addressId,
+            receiverName:$("#name").val(),
+            phoneNumber:$("#phone").val(),
+            detail:$("#detail").val(),
+            area:{
+                areaName:$("#area").val()
             }
-    );
-    $("#home-city").cityPicker({
-        title: "选择学校和区域",
-        showDistrict: false,
-        onChange: function (picker, values, displayValues) {
-            console.log(values, displayValues);
-        }
+        };
+        Put("/User/ManageAddress/edit",data,success);
     });
 </script>
 

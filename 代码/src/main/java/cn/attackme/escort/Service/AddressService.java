@@ -13,10 +13,4 @@ import java.util.List;
  */
 @Service
 public class AddressService extends BaseService<Address> {
-    public List<Address> getListByUser(@NotNull User user){
-        Query query = new Query(entityManager);
-        return (List<Address>) query.from(Address.class)
-                .whereEqual("user",user)
-                .createTypedQuery();
-    }
 }

@@ -232,7 +232,8 @@
 
 <script>
     var success = function (data) {
-        data.forEach(function (e) {
+        $("#addressList").empty();
+        data.forEach(function (e,i) {
              $("#addressList").append(`
                 <div class="address_one">
                     <div class="address_name-phone">
@@ -251,26 +252,34 @@
                     </div>
 
                     <div class="address_setting">
-                        <input type="checkbox" class="setDefault" `+(e.isDefault ? "checked" : "")+" addressId='"+e.id+"'"+`><span>设为默认</span>
+                        <input type="checkbox" class="setDefault" `+(e.default ? "checked='true'" : "")+" addressId='"+e.id+"'"+`><span>设为默认</span>
 
-                        <span onclick="disp_alert()" style="float: right">删除</span>
+                        <span style="float: right" >删除</span>
                         <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
                         &nbsp;
-                        <a href="#" style="float: right;color: black;">编辑</a>
+                        <a href="#" class="editAddress" style="float: right;color: black;" `+" addressId='"+e.id+"'"+`>编辑</a>
                         <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
 
                     </div>
                 </div>
-
-                <div style="background-color: #DCDCDC;height: 8px;">
-                </div>
-             `);
+                `+((i<data.length-1)?
+                    `<div style="background-color: #DCDCDC;height: 8px;">
+                     </div>` : "")
+             );
         });
         $(".setDefault").click(function () {
-            const addressId = $(this).attr("addressId");
-            Put("/User/ManageAddress/default",addressId,function () {
-                window.location.href = "/User/ManageAddress/";
-            });
+            const isChecked = $(this).prop("checked");
+            if(!isChecked){
+                $(this).prop("checked",true);
+            }else {
+                const addressId = $(this).attr("addressId");
+                Put("/User/ManageAddress/default",addressId,function () {
+                    window.location.href = "/User/ManageAddress/";
+                });
+            }
+        });
+        $(".editAddress").click(function () {
+            window.location.href = "/User/ManageAddress/edit/addressId/"+$(this).attr("addressId");
         });
     };
     $(document).ready(function () {

@@ -19,6 +19,7 @@
 
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/app/js/mobile.utils.js"></script>
+    <script src="/assets/js/sha256.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
