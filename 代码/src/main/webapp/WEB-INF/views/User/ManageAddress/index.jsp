@@ -36,192 +36,6 @@
 
     <div class="weui-tab__panel">
         <div class="address_manage" id="addressList">
-            <%--<div class="address_one">--%>
-                    <%--<div class="address_name-phone">--%>
-                        <%--<span style="margin: 5px" >张三</span>--%>
-                        <%--<span > </span>--%>
-                        <%--<span style="float: right">13230524775</span>--%>
-                    <%--</div>--%>
-                    <%--<div class="address_detail">--%>
-                        <%--<span>--%>
-                        <%--</span>--%>
-                        <%--<span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>--%>
-                    <%--</div>--%>
-
-                    <%--<div class="address_hr">--%>
-                        <%--<hr color=" #DCDCDC" size="1px">--%>
-                    <%--</div>--%>
-
-                    <%--<div class="address_setting">--%>
-                        <%--<input type="checkbox" class="setDefault"><span>设为默认</span>--%>
-
-                        <%--<span onclick="disp_alert()" style="float: right">删除</span>--%>
-                        <%--<img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">--%>
-                        <%--&nbsp;--%>
-                        <%--<a href="#" style="float: right;color: black;">编辑</a>--%>
-                        <%--<img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">--%>
-
-                    <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div style="background-color: #DCDCDC;height: 8px;">--%>
-            <%--</div>--%>
-
-            <%--<div class="address_one">--%>
-                <%--<div class="address_name-phone">--%>
-                    <%--<span style="margin: 5px" >张三</span>--%>
-                    <%--<span > </span>--%>
-                    <%--<span style="float: right">13230524775</span>--%>
-                <%--</div>--%>
-                <%--<div class="address_detail">--%>
-                        <%--<span>--%>
-                        <%--</span>--%>
-                    <%--<span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>--%>
-                <%--</div>--%>
-
-                <%--<div class="address_hr">--%>
-                    <%--<hr color=" #DCDCDC" size="1px">--%>
-                <%--</div>--%>
-
-                <%--<div class="address_setting">--%>
-                    <%--<input type="checkbox"><span>设为默认</span>--%>
-
-                    <%--<span onclick="disp_alert()" style="float: right">删除</span>--%>
-                    <%--<img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">--%>
-                    <%--&nbsp;--%>
-                    <%--<a href="#" style="float: right;color: black;">编辑</a>--%>
-                    <%--<img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">--%>
-
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div style="background-color: #DCDCDC;height: 8px;">--%>
-            <%--</div>--%>
-
-            <%--<div class="address_one">--%>
-                <%--<div class="address_name-phone">--%>
-                    <%--<span style="margin: 5px" >张三</span>--%>
-                    <%--<span > </span>--%>
-                    <%--<span style="float: right">13230524775</span>--%>
-                <%--</div>--%>
-                <%--<div class="address_detail">--%>
-                        <%--<span>--%>
-                        <%--</span>--%>
-                    <%--<span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>--%>
-                <%--</div>--%>
-
-                <%--<div class="address_hr">--%>
-                    <%--<hr color=" #DCDCDC" size="1px">--%>
-                <%--</div>--%>
-
-                <%--<div class="address_setting">--%>
-                    <%--<input type="checkbox"><span>设为默认</span>--%>
-
-                    <%--<span onclick="disp_alert()" style="float: right">删除</span>--%>
-                    <%--<img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">--%>
-                    <%--&nbsp;--%>
-                    <%--<a href="#" style="float: right;color: black;">编辑</a>--%>
-                    <%--<img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">--%>
-
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div style="background-color: #DCDCDC;height: 8px;">--%>
-            <%--</div>--%>
-
-            <%--<div class="address_one">--%>
-                <%--<div class="address_name-phone">--%>
-                    <%--<span style="margin: 5px" >张三</span>--%>
-                    <%--<span > </span>--%>
-                    <%--<span style="float: right">13230524775</span>--%>
-                <%--</div>--%>
-                <%--<div class="address_detail">--%>
-                        <%--<span>--%>
-                        <%--</span>--%>
-                    <%--<span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>--%>
-                <%--</div>--%>
-
-                <%--<div class="address_hr">--%>
-                    <%--<hr color=" #DCDCDC" size="1px">--%>
-                <%--</div>--%>
-
-                <%--<div class="address_setting">--%>
-                    <%--<input type="checkbox"><span>设为默认</span>--%>
-
-                    <%--<span onclick="disp_alert()" style="float: right">删除</span>--%>
-                    <%--<img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">--%>
-                    <%--&nbsp;--%>
-                    <%--<a href="#" style="float: right;color: black;">编辑</a>--%>
-                    <%--<img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">--%>
-
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div style="background-color: #DCDCDC;height: 8px;">--%>
-            <%--</div>--%>
-
-            <%--<div class="address_one">--%>
-                <%--<div class="address_name-phone">--%>
-                    <%--<span style="margin: 5px" >张三</span>--%>
-                    <%--<span > </span>--%>
-                    <%--<span style="float: right">13230524775</span>--%>
-                <%--</div>--%>
-                <%--<div class="address_detail">--%>
-                        <%--<span>--%>
-                        <%--</span>--%>
-                    <%--<span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>--%>
-                <%--</div>--%>
-
-                <%--<div class="address_hr">--%>
-                    <%--<hr color=" #DCDCDC" size="1px">--%>
-                <%--</div>--%>
-
-                <%--<div class="address_setting">--%>
-                    <%--<input type="checkbox"><span>设为默认</span>--%>
-
-                    <%--<span onclick="disp_alert()" style="float: right">删除</span>--%>
-                    <%--<img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">--%>
-                    <%--&nbsp;--%>
-                    <%--<a href="#" style="float: right;color: black;">编辑</a>--%>
-                    <%--<img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">--%>
-
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div style="background-color: #DCDCDC;height: 8px;">--%>
-            <%--</div>--%>
-
-            <%--<div class="address_one">--%>
-                <%--<div class="address_name-phone">--%>
-                    <%--<span style="margin: 5px" >张三</span>--%>
-                    <%--<span > </span>--%>
-                    <%--<span style="float: right">13230524775</span>--%>
-                <%--</div>--%>
-                <%--<div class="address_detail">--%>
-                        <%--<span>--%>
-                        <%--</span>--%>
-                    <%--<span style="font-size: 14px;margin: 5px">河北省唐山市曹妃甸区唐山湾生态城渤海大道21号华北理工大学东区梅园</span>--%>
-                <%--</div>--%>
-
-                <%--<div class="address_hr">--%>
-                    <%--<hr color=" #DCDCDC" size="1px">--%>
-                <%--</div>--%>
-
-                <%--<div class="address_setting">--%>
-                    <%--<input type="checkbox"><span>设为默认</span>--%>
-
-                    <%--<span onclick="disp_alert()" style="float: right">删除</span>--%>
-                    <%--<img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">--%>
-                    <%--&nbsp;--%>
-                    <%--<a href="#" style="float: right;color: black;">编辑</a>--%>
-                    <%--<img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">--%>
-
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div style="background-color: #DCDCDC;height: 8px;">--%>
-            <%--</div>--%>
-
         </div>
     </div>
 
@@ -230,6 +44,7 @@
     </div>
 </div>
 
+<script src="/assets/js/jquery-weui.min.js"></script>
 <script>
     var success = function (data) {
         $("#addressList").empty();
@@ -254,10 +69,10 @@
                     <div class="address_setting">
                         <input type="checkbox" class="setDefault" `+(e.default ? "checked='true'" : "")+" addressId='"+e.id+"'"+`><span>设为默认</span>
 
-                        <span style="float: right" >删除</span>
+                        <span style="float: right" class="deleteOne" addressId='`+e.id+`'>删除</span>
                         <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
                         &nbsp;
-                        <a href="#" class="editAddress" style="float: right;color: black;" `+" addressId='"+e.id+"'"+`>编辑</a>
+                        <a href="#" class="editAddress" style="float: right;color: black;" addressId='`+e.id+`'>编辑</a>
                         <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
 
                     </div>
@@ -266,6 +81,16 @@
                     `<div style="background-color: #DCDCDC;height: 8px;">
                      </div>` : "")
              );
+        });
+        $(".deleteOne").click(function () {
+            const addressId = $(this).attr("addressId");
+            $.confirm("确认删除此收货地址吗？", "提示", function() {
+                Delete("/User/ManageAddress/delete/addressId/"+addressId,function () {
+                    window.location.href = "/User/ManageAddress/";
+                });
+            }, function() {
+                //取消操作
+            });
         });
         $(".setDefault").click(function () {
             const isChecked = $(this).prop("checked");

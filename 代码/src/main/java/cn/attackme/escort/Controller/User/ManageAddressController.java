@@ -59,6 +59,7 @@ public class ManageAddressController {
         return "User/ManageAddress/edit";
     }
 
+    //增加收货地址
     @RequiresRoles("user")
     @ResponseBody
     @PostMapping("/add")
@@ -73,6 +74,7 @@ public class ManageAddressController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
+    //获取被点击的收货地址信息
     @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/edit")
@@ -83,6 +85,7 @@ public class ManageAddressController {
         return new ResponseEntity<Address>(address,HttpStatus.OK);
     }
 
+    //更新收货地址
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/edit")
@@ -96,6 +99,16 @@ public class ManageAddressController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    //删除收获地址
+    @RequiresRoles("user")
+    @ResponseBody
+    @DeleteMapping("delete/addressId/{addressId}")
+    public ResponseEntity<Void> delete(@PathVariable int addressId){
+        addressService.deleteById(addressId);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    //获取学校列表，不需权限访问
     @ResponseBody
     @GetMapping("/schoolNameList")
     public ResponseEntity<List<String>> schoolNameList(){
@@ -104,6 +117,7 @@ public class ManageAddressController {
         return new ResponseEntity<List<String>>(stringList,HttpStatus.OK);
     }
 
+    //获取当前用户所属学校的区域
     @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/areaNameList")
@@ -115,6 +129,7 @@ public class ManageAddressController {
         return new ResponseEntity<List<String>>(stringList,HttpStatus.OK);
     }
 
+    //获取当前用户的收货地址列表
     @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/addressList")
@@ -124,6 +139,7 @@ public class ManageAddressController {
         return new ResponseEntity<>(user.getAddressList(),HttpStatus.OK);
     }
 
+    //获取当前用户的默认收获地址
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/default")
