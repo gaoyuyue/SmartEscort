@@ -162,7 +162,7 @@
 
         };
         Paging("/CourierCompanyManagement/getCourierCompanyList", "CourierTable", uploadTable, pageNumber, 10);
-    }
+    };
 
     //新增
     $("#createButton").click(function () {

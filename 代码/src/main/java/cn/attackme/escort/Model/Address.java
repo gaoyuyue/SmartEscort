@@ -32,12 +32,14 @@ public class Address implements Serializable{
     @JoinColumn(name = "area")
     private Area area;
 
+    //详细地址
     private String detail;
 
     private String phoneNumber;
 
     private String receiverName;
 
+    //是否是默认地址
     private boolean isDefault;
 
     @ManyToOne

@@ -57,13 +57,16 @@
                     <a href="#" url="/UserManagement/" class="redirect"><i class="fa fa-users"></i><span class="nav-label">用户管理</span> </a>
                 </li>
                 <li class="">
+                    <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
+                </li>
+                <li class="">
                     <a href="#" url="/PackageListManagement/" class="redirect"><i class="fa fa-th-list"></i> <span class="nav-label">任务列表管理</span></a>
                 </li>
                 <li class="">
                     <a href="#" url="/CourierCompanyManagement/" class="redirect"><i class="fa fa-truck"></i> <span class="nav-label">快递类型管理</span> </a>
                 </li>
                 <li class="">
-                    <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
+                    <a href="#" url="/StandardManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">取件收费标准管理</span> </a>
                 </li>
             </ul>
 
@@ -76,12 +79,12 @@
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
                             class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                    <%--<form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
                             <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
                                    id="top-search">
                         </div>
-                    </form>
+                    </form>--%>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
