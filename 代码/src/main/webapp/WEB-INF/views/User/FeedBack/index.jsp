@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" style="background-color: orange" href="javascript:postPackage()" id="showTooltips">提交</a>
+            <a class="weui-btn weui-btn_primary" style="background-color: orange" href="#" id="showTooltips">提交</a>
         </div>
     </div>
 </div>
@@ -47,6 +47,28 @@
         }
         $("#remainingwords").text( 200 - $("#counts").val().length ) ;
     });
+
+</script>
+<script language="javascript" type="text/javascript">
+    $("#showTooltips").click(function () {
+            var content = $("#counts").val();
+        if(
+            isNullOrEmpty(content)
+        ){$.toptip('内容不能为空', 'warning');}
+            else {
+                $.ajax({
+                    type: "Post",
+                    url: "/User/FeedBack/content/" + content,
+                    success: function () {
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    }
+                });
+                $("#counts").val("");
+                $.toptip('提交成功！感谢您的意见', 'warning');
+
+            }
+    })
 </script>
 <script src="/assets/js/jquery-weui.min.js"></script>
 <script src="/assets/js/fastclick.js"></script>
