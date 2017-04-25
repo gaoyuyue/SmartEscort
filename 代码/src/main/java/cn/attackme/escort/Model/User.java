@@ -82,7 +82,7 @@ public class User implements Serializable{
     private List<Address> addressList;
 
     @Setter
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @LazyCollection(LazyCollectionOption.EXTRA)
     private List<Package> packageList;
 
