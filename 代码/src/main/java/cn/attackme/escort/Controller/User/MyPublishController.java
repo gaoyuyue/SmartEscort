@@ -1,8 +1,20 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.UserInfoService;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
+import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,5 +30,18 @@ public class MyPublishController {
     @GetMapping("/")
     public String index(){
         return "User/MyPublish/index";
+    }
+
+    @Autowired
+    private UserInfoService userInfoService;
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @GetMapping("/packageList")
+    public List<Package> packageList(){
+        String userName = getSubject().getPrincipal().toString();
+        User user = userInfoService.getById(userName);
+        List list = user.getPackageList();
+        return list;
     }
 }

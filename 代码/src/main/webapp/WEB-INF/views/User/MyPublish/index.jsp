@@ -8,6 +8,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+<style>
+    .dart_border_padding{
+        padding: 0px 21px;
+    }
+    .status_style{
+        color: orange;
+        font-family: SimSun-ExtB;
+        font-size: 15px
+    }
+</style>
 <div id="frame">
     <div id="navbarSuspension">
         <div id="top">
@@ -40,281 +50,48 @@
     </div>
 
     <div class="weui-tab__panel">
-        <div class="page__bd" style="height: 50%;margin-top: 100px">
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ffb71a;font-size: 17px">待领取</strong>
-                    </div>
-                </div>
+        <div class="page__bd" style="height: 50%;margin-top: 100px" id="packageList">
 
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">取消订单</a>
-            </div>
-
-            <br>
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ff746d;font-size: 17px">已领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">联系送货人</a>
-
-            </div>
+            <%--<div class="weui-cells">--%>
+                <%--<div class="weui-form-preview">--%>
+                    <%--<a href="/User/DartDetail/">--%>
+                        <%--<div class="weui-form-preview__bd" style="background-color: #f5f5f5;border-bottom: 1px solid #e3e3e3;" >--%>
+                            <%--<div class="weui-form-preview__item">--%>
+                                <%--<label class="weui-form-preview__label">包裹大小</label>--%>
+                                <%--<span class="weui-form-preview__value">大</span>--%>
+                            <%--</div>--%>
+                            <%--<div class="weui-form-preview__item">--%>
+                                <%--<label class="weui-form-preview__label">快递类型</label>--%>
+                                <%--<span class="weui-form-preview__value">圆通</span>--%>
+                            <%--</div>--%>
+                            <%--<div class="weui-form-preview__item">--%>
+                                <%--<label class="weui-form-preview__label">地址区域</label>--%>
+                                <%--<span class="weui-form-preview__value">梅园</span>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</a>--%>
+                    <%--<div class="weui-form-preview__hd dart_border_padding">--%>
+                        <%--<div class="weui-form-preview__item">--%>
+                            <%--<label class="weui-form-preview__label status_style">待领取</label>--%>
+                            <%--<span class="weui-form-preview__value" style="font-size: 15px">--%>
+                                <%--付款金额 :--%>
+                                <%--<b>24</b>--%>
+                            <%--</span>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="button_position_style">--%>
+                        <%--<button type="button">取消订单</button>--%>
+                        <%--<button type="button" disabled="true">联系送货人</button>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
 
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ffb71a;font-size: 17px">待领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">取消订单</a>
-            </div>
-
-            <br>
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ff746d;font-size: 17px">已领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">联系送货人</a>
-
-            </div>
 
 
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ffb71a;font-size: 17px">待领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">取消订单</a>
-            </div>
-
-            <br>
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ff746d;font-size: 17px">已领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">联系送货人</a>
-
-            </div>
 
 
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ffb71a;font-size: 17px">待领取</strong>
-                    </div>
-                </div>
 
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">取消订单</a>
-            </div>
-
-            <br>
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #ff746d;font-size: 17px">已领取</strong>
-                    </div>
-                </div>
-
-                <a href="/User/DartDetail/">
-                    <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">包裹大小</label>
-                            <span class="weui-form-preview__value">大</span>
-                        </div>
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label">快递类型</label>
-                            <span class="weui-form-preview__value">圆通</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <a href="javascript:;" class="weui-btn weui-btn_primary">联系送货人</a>
-
-            </div>
         </div>
     </div>
 
@@ -332,6 +109,51 @@
     });
 </script>
 
+<script>
+    var success = function (data) {
+        $("#packageList").empty();
+        data.forEach(function (e) {
+           $("#packageList").append(`
+                <div class="weui-cells">
+                <div class="weui-form-preview">
+                    <a href="/User/DartDetail/">
+                        <div class="weui-form-preview__bd" style="background-color: #f5f5f5;border-bottom: 1px solid #e3e3e3;" >
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label">包裹大小</label>
+                                <span class="weui-form-preview__value">`+e.standard.description+`</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label">快递类型</label>
+                                <span class="weui-form-preview__value">`+e.courierCompany.companyName+`</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label">地址区域</label>
+                                <span class="weui-form-preview__value">`+e.area.areaName+`</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="weui-form-preview__hd dart_border_padding">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label status_style">`+e.packageStatus+`</label>
+                            <span class="weui-form-preview__value" style="font-size: 15px">
+                                付款金额 :
+                                <b>`+e.standard.price+`</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="button_position_style">
+                        <button type="button">取消订单</button>
+                        <button type="button" disabled="true">联系送货人</button>
+                    </div>
+                </div>
+            </div>
+           `);
+        });
+    };
+    $(document).ready(function () {
+        Get("/User/MyPublish/packageList",success);
+    });
+</script>
 
 
 <%@include file="/user_footer.jsp"%>

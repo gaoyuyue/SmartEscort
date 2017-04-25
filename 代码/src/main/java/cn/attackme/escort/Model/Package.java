@@ -87,4 +87,13 @@ public class Package implements Serializable {
     @ManyToOne (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinColumn(name = "school")
     private School school;
+
+    //所属区域
+    @ManyToOne
+    @JoinColumn(name = "area")
+    private Area area;
+
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
 }

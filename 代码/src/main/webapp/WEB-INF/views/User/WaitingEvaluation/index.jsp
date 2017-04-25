@@ -8,6 +8,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+<style>
+    .dart_border_padding{
+        padding: 0px 21px;
+    }
+    .status_style{
+        color: orange;
+        font-family: SimSun-ExtB;
+        font-size: 15px
+    }
+</style>
 <div id="frame">
     <div id="navbarSuspension">
         <div id="top">
@@ -41,39 +51,41 @@
 
     <div class="weui-tab__panel">
         <div class="page__bd" style="height: 50%;margin-top: 100px">
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <strong class="weui-form-preview__value" style="color: #1affac;font-size: 17px">已签收</strong>
-                    </div>
-                </div>
 
-                <div class="weui-form-preview__bd" style="background-color: #f5f5f5">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">包裹大小</label>
-                        <span class="weui-form-preview__value">大</span>
+            <div class="weui-cells">
+                <div class="weui-form-preview">
+                    <a href="/User/DartDetail/">
+                        <div class="weui-form-preview__bd" style="background-color: #f5f5f5;border-bottom: 1px solid #e3e3e3;" >
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label">包裹大小</label>
+                                <span class="weui-form-preview__value">大</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label">快递类型</label>
+                                <span class="weui-form-preview__value">圆通</span>
+                            </div>
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label">地址区域</label>
+                                <span class="weui-form-preview__value">梅园</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="weui-form-preview__hd dart_border_padding">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label status_style" style="">已签收</label>
+                            <span class="weui-form-preview__value" style="font-size: 15px">
+                                付款金额 :
+                                <b>24</b>
+                            </span>
+                        </div>
                     </div>
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">快递类型</label>
-                        <span class="weui-form-preview__value">圆通</span>
+                    <div class="button_position_style">
+                        <button type="button">删除订单</button>
+                        <button type="button"><a href="/User/EvaluationDetail/" style="color: black">评价</a></button>
                     </div>
-                </div>
-
-                <div class="weui-form-preview__hd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label"></label>
-                        <span class="weui-form-preview__value" style="font-size: 15px">
-                            付款金额 :
-                            <b>24</b>
-                        </span>
-                    </div>
-                </div>
-                <div class="weui-form-preview__ft">
-                    <a class="weui-form-preview__btn weui-form-preview__btn_primary weui-form-preview_border" href="" style="color: #0d0d0d;">删除订单</a>
-                    <a class="weui-form-preview__btn weui-form-preview__btn_primary weui-form-preview_border" href="/User/EvaluationDetail/" style="color: #0d0d0d;">评价</a>
                 </div>
             </div>
+
         </div>
     </div>
 

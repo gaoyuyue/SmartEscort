@@ -81,6 +81,11 @@ public class User implements Serializable{
     @LazyCollection(LazyCollectionOption.EXTRA)
     private List<Address> addressList;
 
+    @Setter
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Package> packageList;
+
     public User(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
@@ -94,5 +99,10 @@ public class User implements Serializable{
     @JsonIgnore
     public List<Address> getAddressList(){
         return addressList;
+    }
+
+    @JsonIgnore
+    public List<Package> getPackageList(){
+        return packageList;
     }
 }
