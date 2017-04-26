@@ -45,6 +45,7 @@
 </div>
 
 <script src="/assets/js/jquery-weui.min.js"></script>
+
 <script>
     var success = function (data) {
         $("#addressList").empty();
@@ -69,7 +70,7 @@
                     <div class="address_setting">
                         <input type="checkbox" class="setDefault" `+(e.default ? "checked='true'" : "")+" addressId='"+e.id+"'"+`><span>设为默认</span>
 
-                        <span style="float: right" class="deleteOne" addressId='`+e.id+`'>删除</span>
+                        <a href="#" style="float: right;color: black;" class="deleteOne" addressId='`+e.id+`'>删除</a>
                         <img src="/assets/img/delete_icon.jpg" width="20" height="20" style="float: right">
                         &nbsp;
                         <a href="#" class="editAddress" style="float: right;color: black;" addressId='`+e.id+`'>编辑</a>
@@ -89,7 +90,8 @@
                     window.location.href = "/User/ManageAddress/";
                 });
             }, function() {
-                //取消操作
+                $(this).remove();
+                $(".weui-mask").remove();
             });
         });
         $(".setDefault").click(function () {

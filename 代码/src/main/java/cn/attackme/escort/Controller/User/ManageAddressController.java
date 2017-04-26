@@ -66,6 +66,10 @@ public class ManageAddressController {
     public ResponseEntity<Void> add(@RequestBody Address address){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
+        List<Address> addressList = user.getAddressList();
+        if (addressList==null || addressList.size()==0){
+            address.setDefault(true);
+        }
         address.setUser(user);
         String areaName = address.getArea().getAreaName();
         Area area = areaService.getByName(areaName);
@@ -104,7 +108,17 @@ public class ManageAddressController {
     @ResponseBody
     @DeleteMapping("delete/addressId/{addressId}")
     public ResponseEntity<Void> delete(@PathVariable int addressId){
+        Address address = addressService.getById(addressId);
         addressService.deleteById(addressId);
+        if (address.isDefault()){
+            String userName = getSubject().getPrincipal().toString();
+            List<Address> addressList = userInfoService.getById(userName).getAddressList();
+            if (addressList.size()>0){
+                Address defaultAddress = addressList.stream().findFirst().get();
+                defaultAddress.setDefault(true);
+                addressService.saveOrUpdate(defaultAddress);
+            }
+        }
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
