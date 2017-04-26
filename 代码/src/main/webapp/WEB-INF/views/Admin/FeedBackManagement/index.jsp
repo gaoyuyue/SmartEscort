@@ -63,7 +63,7 @@
                 var result = resultList[i];
                 $("#FeedBack").append(
                     "<tr>"+
-                    "<td>" + result.user +
+                    "<td>" + result.user.userName +
                     "</td>" +
                     "<td>" + result.content +
                     "</td>"+
