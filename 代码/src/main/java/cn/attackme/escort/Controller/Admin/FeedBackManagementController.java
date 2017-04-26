@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/FeedBackManagement")
-public class FeedBackManagement {
+public class FeedBackManagementController {
 @GetMapping("/")
     public String index(){return "Admin/FeedBackManagement/index";}
 }
