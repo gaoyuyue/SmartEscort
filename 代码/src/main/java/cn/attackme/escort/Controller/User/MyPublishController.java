@@ -3,7 +3,6 @@ package cn.attackme.escort.Controller.User;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.UserInfoService;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,8 +44,8 @@ public class MyPublishController {
     @GetMapping("/packageList")
     public ResponseEntity<List<Package>> packageList(){
         String userName = getSubject().getPrincipal().toString();
-        User agency = userInfoService.getById(userName);
-        List<Package> list = agency.getPackageList();
+        User delegation = userInfoService.getById(userName);
+        List<Package> list = delegation.getPublishList();
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 }

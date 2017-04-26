@@ -82,9 +82,14 @@ public class User implements Serializable{
     private List<Address> addressList;
 
     @Setter
-    @OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "delegation",cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.EXTRA)
-    private List<Package> packageList;
+    private List<Package> publishList;
+
+    @Setter
+    @OneToMany(mappedBy = "agency",cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Package> receiveList;
 
     public User(String userName, String passWord) {
         this.userName = userName;
@@ -102,7 +107,12 @@ public class User implements Serializable{
     }
 
     @JsonIgnore
-    public List<Package> getPackageList(){
-        return packageList;
+    public List<Package> getPublishList(){
+        return publishList;
+    }
+
+    @JsonIgnore
+    public List<Package> getReceiveList(){
+        return receiveList;
     }
 }
