@@ -93,7 +93,9 @@ public class Package implements Serializable {
     @JoinColumn(name = "area")
     private Area area;
 
-    @ManyToOne
-    @JoinColumn(name = "user")
-    private User user;
+    //收货地址
+    @OneToOne
+    @JoinColumn(name = "address")
+    private Address address;
+
 }

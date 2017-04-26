@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.UserInfoService;
 import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
@@ -35,13 +36,17 @@ public class MyPublishController {
     @Autowired
     private UserInfoService userInfoService;
 
+    /**
+     * 获取包裹信息
+     * @return
+     */
     @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/packageList")
-    public List<Package> packageList(){
+    public ResponseEntity<List<Package>> packageList(){
         String userName = getSubject().getPrincipal().toString();
-        User user = userInfoService.getById(userName);
-        List list = user.getPackageList();
-        return list;
+        User agency = userInfoService.getById(userName);
+        List<Package> list = agency.getPackageList();
+        return new ResponseEntity<>(list,HttpStatus.OK);
     }
 }
