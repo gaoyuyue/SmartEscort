@@ -37,7 +37,7 @@
                                     <th class="">用户名</th>
                                     <th class="">反馈内容</th>
                                     <th class="">反馈时间</th>
-                                    <th><button class="btn btn-danger ">删除</button></th>
+                                    <th><button class="btn btn-danger " id="deleteFeedBack">删除</button></th>
                                  </div>
                             </tr>
                             </thead>
@@ -53,4 +53,70 @@
 </div>
 
 </body>
+<script>
+    //分页加载页面
+    var loadPage = function (pageNumber) {
+        var uploadTable = function (data) {
+            var resultList = data["results"];
+            console.log(resultList);
+            for (var i = 0; i < data["totalCount"]; i++) {
+                var result = resultList[i];
+                $("#FeedBack").append(
+                    "<tr>"+
+                    "<td>" + result.user +
+                    "</td>" +
+                    "<td>" + result.content +
+                    "</td>"+
+                    "<td>" + result.submitTime +
+                    "</td>"+
+                    "</tr>"
+                );
+
+            }
+
+        };
+        Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
+    };
+
+
+    //点击删除
+    $("#deleteFeedBack").click(function() {
+        swal({
+                title: "确定？",
+                text: "你确定删除吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var checkBoxes = $("input[class='checkMe']:checked");
+                    for (var i = 0; i < checkBoxes.length; i++) {
+                        AjaxDeleteRequest("/FeedBackManagement/delete/FeedBack/id/" + checkBoxes[i].id);
+                    }
+                    swal({
+                        title: "成功",
+                        text: "删除完毕",
+                        type: "success",
+                        confirmButtonText: "知道了"
+                    });
+                    //重新设置为不可点击
+                    setUnAvaliable();
+                    var pageNumber = $(".pagination .active")[0].innerText;
+                    loadPage(pageNumber);
+                } else {
+                    swal("已取消", "未作任何操作", "info");
+                }
+            });
+    });
+
+    $(document).ready(
+        function () {
+            loadPage(1);
+        });
+</script>
 </html>
