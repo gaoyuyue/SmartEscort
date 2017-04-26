@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 问题反馈
@@ -29,8 +30,10 @@ public class Feedback implements Serializable{
 
     private String content;
 
+    //提交时间
+    private Date submitTime;
+
     @OneToOne
     @JoinColumn(name = "user")
     private User user;
-
 }

@@ -10,7 +10,7 @@
 <%@include file="/user_header.jsp"%>
 <link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
 
-<a class="weui-cell weui-cell_access" href="/User/ManageAddress/">
+<a class="weui-cell weui-cell_access" href="/User/ManageAddress/select">
     <div style="float: left">
         <div class="address_icon">
         </div>
