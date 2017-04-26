@@ -22,7 +22,7 @@
                         </button>
                         <button type="button" class="btn btn-danger" id="deleteButton" disabled="disabled">删除</button>
 
-                        <div class="col-sm-3" style="float: right">
+                        <div class="col-sm-3" style="float: right" >
                             <div class="input-group">
                                 <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
                                     class="input-group-btn">
