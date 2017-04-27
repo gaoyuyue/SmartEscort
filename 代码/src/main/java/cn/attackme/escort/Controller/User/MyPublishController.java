@@ -1,19 +1,21 @@
 package cn.attackme.escort.Controller.User;
 
 import cn.attackme.escort.Model.Package;
+import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
@@ -35,6 +37,9 @@ public class MyPublishController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private PackageService packageService;
+
     /**
      * 获取包裹信息
      * @return
@@ -46,6 +51,21 @@ public class MyPublishController {
         String userName = getSubject().getPrincipal().toString();
         User delegation = userInfoService.getById(userName);
         List<Package> list = delegation.getPublishList();
-        return new ResponseEntity<>(list,HttpStatus.OK);
+        List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.已领取)).collect(toList());
+        return new ResponseEntity<>(publishList,HttpStatus.OK);
     }
+
+    /**
+     * 取消订单
+     * @param publishDartId
+     * @return
+     */
+    @ResponseBody
+    @DeleteMapping("/delete/publishDartId/{publishDartId}")
+    public ResponseEntity<Package> deleteDart(@PathVariable int publishDartId){
+        packageService.deleteById(publishDartId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }

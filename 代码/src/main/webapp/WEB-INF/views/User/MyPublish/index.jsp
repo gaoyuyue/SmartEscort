@@ -141,18 +141,46 @@
                             </span>
                         </div>
                     </div>
-                    <div class="button_position_style">
-                        <button type="button">取消订单</button>
-                        <button type="button" disabled="true">联系送货人</button>
-                    </div>
+                    <div class="button_position_style">`+
+                        ((e.packageStatus == '待领取') ? `<button type="button" id="deleteDart" publishDartId='`+e.id+`'>取消订单</button>` : `
+                        <button type="button" id="callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</button>`)
+                    +`</div>
                 </div>
             </div>
            `);
+        });
+        $("#deleteDart").click(function () {
+            const publishDartId = $(this).attr("publishDartId");
+            $.confirm("确认取消订单吗？", "提示", function() {
+                Delete("/User/MyPublish/delete/publishDartId/"+publishDartId,function () {
+                    window.location.href = "/User/MyPublish/";
+                });
+            }, function() {
+                $(this).remove();
+                $(".weui-mask").remove();
+            });
+        });
+        $("#callSender").click(function () {
+            const agencyPhoneNumber = $(this).attr("agencyPhoneNumber");
+            $.actions({
+                title: "送货人联系方式",
+                actions: [
+                    {
+                        text: agencyPhoneNumber,
+                        className: "color-primary",
+                        onClick: function() {
+                            window.location.href = "tel:18231550929";
+                        }
+                    }
+                ]
+            });
         });
     };
     $(document).ready(function () {
         Get("/User/MyPublish/packageList",success);
     });
+
+
 </script>
 
 
