@@ -51,6 +51,9 @@ public class Package implements Serializable {
     //取件短信
     private String message;
 
+    //价格
+    private String price;
+
     //留言
     private String note;
 

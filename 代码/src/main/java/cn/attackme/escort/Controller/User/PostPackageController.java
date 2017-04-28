@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.FlashMap;
 
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.util.*;
+import java.util.Date;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
@@ -166,6 +165,10 @@ public class PostPackageController {
         String companyName = p.getCourierCompany().getCompanyName();
         CourierCompany courierCompany = courierCompanyService.getByName(companyName);
         p.setCourierCompany(courierCompany);
+        String description = p.getStandard().getDescription();
+        Standard standard = standardService.getByDescription(description);
+        p.setStandard(standard);
+        p.setPublishTime(new Date());
         p.setPackageStatus(PackageStatus.待领取);
         packageService.save(p);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
