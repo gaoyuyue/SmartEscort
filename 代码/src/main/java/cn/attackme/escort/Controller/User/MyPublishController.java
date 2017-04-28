@@ -60,11 +60,12 @@ public class MyPublishController {
      * @param publishDartId
      * @return
      */
+    @RequiresRoles("user")
     @ResponseBody
     @DeleteMapping("/delete/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> deleteDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> deleteDart(@PathVariable int publishDartId){
         packageService.deleteById(publishDartId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 
