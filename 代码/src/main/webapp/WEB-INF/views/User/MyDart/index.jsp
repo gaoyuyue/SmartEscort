@@ -50,56 +50,9 @@
     </div>
 
     <div class="weui-tab__panel">
-        <div class="page__bd" style="height: 50%;margin-top: 100px">
+        <div class="page__bd" style="height: 50%;margin-top: 100px" id="packageList">
 
-            <div class="weui-cells">
-                <div class="weui-form-preview">
-                    <a class="open-popup" data-target="#dartDetail" onclick="hideNavbarSuspension()">
-                        <div class="weui-form-preview__bd" style="background-color: #f5f5f5;border-bottom: 1px solid #e3e3e3;" >
-                            <div class="weui-form-preview__item">
-                                <label class="weui-form-preview__label">包裹大小</label>
-                                <span class="weui-form-preview__value">大</span>
-                            </div>
-                            <div class="weui-form-preview__item">
-                                <label class="weui-form-preview__label">快递类型</label>
-                                <span class="weui-form-preview__value">圆通</span>
-                            </div>
-                            <div class="weui-form-preview__item">
-                                <label class="weui-form-preview__label">地址区域</label>
-                                <span class="weui-form-preview__value">梅园</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="weui-form-preview__hd dart_border_padding">
-                        <div class="weui-form-preview__item">
-                            <label class="weui-form-preview__label status_style">已领取</label>
-                            <span class="weui-form-preview__value" style="font-size: 15px">
-                                付款金额 :
-                                <b>24</b>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="button_position_style">
-                        <button type="button">联系收货人</button>
-                    </div>
-                </div>
-            </div>
 
-            <div id="dartDetail" class='weui-popup__container'>
-                <div class="weui-popup__overlay"></div>
-                <div class="weui-popup__modal">
-                    <div class="top_other">
-                        <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
-                        <span ><a class="title_other">订单详情</a></span>
-                        <span><a class="logo_other show-warning update" href="/"><img src="/assets/img/home.png" align="top"></a></span>
-                    </div>
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <input class="weui-input" id="updateName_other" type="text" style="border: 1px solid grey;border-radius:6px;">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
         </div>
@@ -124,6 +77,171 @@
         });
     });
 </script>
+
+<script>
+    var success = function (data) {
+        $("#packageList").empty();
+        data.forEach(function (e) {
+            $("#packageList").append(`
+                <div class="weui-cells">
+                    <div class="weui-form-preview">
+                        <a class="open-popup childPage" data-target="#showDartDetail"  onclick="hideNavbarSuspension()" publishDartId = '`+e.id+`'>
+                            <div class="weui-form-preview__bd" style="background-color: #f5f5f5;border-bottom: 1px solid #e3e3e3;" >
+                                <div class="weui-form-preview__item">
+                                    <label class="weui-form-preview__label">包裹大小</label>
+                                    <span class="weui-form-preview__value">`+e.standard.description+`</span>
+                                </div>
+                                <div class="weui-form-preview__item">
+                                    <label class="weui-form-preview__label">快递类型</label>
+                                    <span class="weui-form-preview__value">`+e.courierCompany.companyName+`</span>
+                                </div>
+                                <div class="weui-form-preview__item">
+                                    <label class="weui-form-preview__label">地址区域</label>
+                                    <span class="weui-form-preview__value">`+e.area.areaName+`</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="weui-form-preview__hd dart_border_padding">
+                            <div class="weui-form-preview__item">
+                                <label class="weui-form-preview__label status_style">`+e.packageStatus+`</label>
+                                <span class="weui-form-preview__value" style="font-size: 15px">
+                                    付款金额 :
+                                    <b>`+e.price+`</b>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="button_position_style">
+                            <button type="button" id="callSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="showDartDetail" class='weui-popup__container'>
+                    <div class="weui-popup__overlay"></div>
+                    <div class="weui-popup__modal">
+                        <div class="top_other">
+                            <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
+                            <span ><a class="title_other">订单详情</a></span>
+                            <span><a class="logo_other show-warning update" href="/"><img src="/assets/img/home.png" align="top"></a></span>
+                        </div>
+
+                        <div class="weui-cell weui-cell_access">
+                            <div style="float: left">
+                                <div class="address_icon">
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <span >收货人：  </span>
+                                    <span id="delegationName"></span>
+                                    <span > </span>
+                                    <span style="float: right" id="delegationPhoneNumber">/span>
+                                </div>
+                                <div>
+                                    <span>收货地址：</span>
+                                    <span>
+                                    </span>
+                                    <span>河北省 </span>
+                                    <span>唐山市 </span>
+                                    <span>曹妃甸区 </span>
+                                    <span>唐山湾生态城 </span>
+                                    <span>渤海大道21号华北理工大学东区梅园 </span>
+                                </div>
+                            </div>
+                            <div class="weui-cell__ft">
+                            </div>
+                        </div>
+                        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
+                        <div class="weui-cell">
+                            <img src="/assets/img/DartImg.jpg" style="width: 100%;height: 20%">
+                            <div class="weui-cell__bd">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>快递类型</p>
+                            </div>
+                            <div class="weui-cell__ft" id="courierCompany"></div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>包裹大小</p>
+                            </div>
+                            <div class="weui-cell__ft" id="standardDescription"></div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>短信</p>
+                            </div>
+                            <div class="weui-cell__ft" id="message"></div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>价格</p>
+                            </div>
+                            <div class="weui-cell__ft" id="price"></div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>备注</p>
+                            </div>
+                            <div class="weui-cell__ft" id="note"></div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+           `);
+
+        });
+        $("#callSender").click(function () {
+            const delegationPhoneNumber = $(this).attr("delegationPhoneNumber");
+            $.actions({
+                title: "收货联系方式",
+                actions: [
+                    {
+                        text: delegationPhoneNumber,
+                        className: "color-black",
+                        onClick: function() {
+                            window.location.href = "tel:delegationPhoneNumber";
+                        }
+                    }
+                ]
+            });
+        });
+        $(".childPage").click(function () {
+            const publishDartId = $(this).attr("publishDartId");
+            var packageData = function packageData(data) {
+                $("#delegationName").text("");
+                $("#delegationPhoneNumber").text("");
+                $("#courierCompany").text("");
+                $("#standardDescription").text("");
+                $("#message").text("");
+                $("#price").text("");
+                $("#note").text("");
+                $("#agencyName").text("");
+                $("#agencyPhoneNumber").text("");
+
+                $("#delegationName").text(data.delegation.name);
+                $("#delegationPhoneNumber").text(data.delegation.phoneNumber);
+                $("#courierCompany").text(data.courierCompany.companyName);
+                $("#standardDescription").text(data.standard.description);
+                $("#message").text(data.message);
+                $("#price").text(data.price);
+                $("#note").text(data.note);
+            };
+            Get("/User/MyDart/dartDetail/publishDartId/"+publishDartId,packageData);
+        });
+    };
+    $(document).ready(function () {
+        Get("/User/MyDart/packageList",success);
+    });
+</script>
+
+
+
 <script src="/assets/js/fastclick.js"></script>
 <script>
     $(function() {
