@@ -149,13 +149,11 @@
                         </div>
                       <div style="width: 80%" class="weui-cell__bd">
                          <div>
-                            <span >收货人：  </span>
                             <span >`+data.address.receiverName+`</span>
                             <span > </span>
                             <span style="float: right">`+data.address.phoneNumber+`</span>
                         </div>
                         <div>
-                            <span>收货地址：</span>
                             <span>`+data.address.area.areaName+`</span>
                             <span>`+data.address.detail+`</span>
                         </div>

@@ -56,13 +56,12 @@
                     <label class="weui-cell weui-check__label" for="`+e.id+`">
                       <div style="width: 90%" class="weui-cell__bd">
                          <div>
-                            <span >收货人：  </span>
                             <span >`+e.receiverName+`</span>
                             <span > </span>
                             <span style="float: right">`+e.phoneNumber+`</span>
                         </div>
                         <div>
-                            <span>收货地址：</span>
+                            <span style="color: #953b39;font-size: small">`+(e.default ? `[默认地址]` : ``)+`</span>
                             <span>`+e.area.areaName+`</span>
                             <span>`+e.detail+`</span>
                         </div>
@@ -80,8 +79,18 @@
             );
         });
 
+        Get("/User/PostPackage/selected",function (data) {
+            $("#"+data).prop("checked",true);
+        });
+
         $(".checkOne").click(function () {
-            window.location.href = "/User/PostPackage/selected/addressId/"+$(this).prop("id");
+            var me = this;
+            $(".checkOne:checked").each(function (index,el) {
+                if (me != el){
+                    $(el).prop("checked",false);
+                }
+            });
+            window.location.href = "/User/PostPackage/select/addressId/"+$(this).prop("id");
         });
     };
     $(document).ready(function () {

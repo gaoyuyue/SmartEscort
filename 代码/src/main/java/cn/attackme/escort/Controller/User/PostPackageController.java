@@ -118,13 +118,29 @@ public class PostPackageController {
 
     //选择快递地址
     @RequiresRoles("user")
-    @GetMapping("/selected/addressId/{addressId}")
-    public String selected(@PathVariable int addressId,
+    @GetMapping("/select/addressId/{addressId}")
+    public String select(@PathVariable int addressId,
                            HttpSession httpSession){
         Address address = addressService.getById(addressId);
         httpSession.setAttribute("address",address);
         httpSession.setAttribute("hasCache",true);
         return "redirect:/User/PostPackage/";
+    }
+
+    @RequiresRoles("user")
+    @GetMapping("/selected")
+    @ResponseBody
+    public ResponseEntity<Integer> selected(HttpSession httpSession){
+        Object object = httpSession.getAttribute("address");
+        Address address;
+        if (object == null){
+            String userName = getSubject().getPrincipal().toString();
+            User user = userInfoService.getById(userName);
+            address = user.getAddressList().stream().filter(Address::isDefault).findFirst().get();
+        }else {
+            address = (Address) object;
+        }
+        return new ResponseEntity<Integer>(address.getId(),HttpStatus.OK);
     }
 
     //添加快递地址
