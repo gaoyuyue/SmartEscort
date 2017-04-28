@@ -54,7 +54,7 @@
 
             <div class="weui-cells">
                 <div class="weui-form-preview">
-                    <a href="/User/DartDetail/">
+                    <a class="open-popup" data-target="#dartDetail" onclick="hideNavbarSuspension()">
                         <div class="weui-form-preview__bd" style="background-color: #f5f5f5;border-bottom: 1px solid #e3e3e3;" >
                             <div class="weui-form-preview__item">
                                 <label class="weui-form-preview__label">包裹大小</label>
@@ -85,9 +85,26 @@
                 </div>
             </div>
 
+            <div id="dartDetail" class='weui-popup__container'>
+                <div class="weui-popup__overlay"></div>
+                <div class="weui-popup__modal">
+                    <div class="top_other">
+                        <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
+                        <span ><a class="title_other">订单详情</a></span>
+                        <span><a class="logo_other show-warning update" href="/"><img src="/assets/img/home.png" align="top"></a></span>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" id="updateName_other" type="text" style="border: 1px solid grey;border-radius:6px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </div>
+
 
 
 
@@ -106,6 +123,24 @@
             $(this).css("color",$(this).css("color"));
         });
     });
+</script>
+<script src="/assets/js/fastclick.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+    <%--嵌套页面--%>
+    $(document).on("open", ".weui-popup-modal", function() {
+        console.log("open popup");
+    }).on("close", ".weui-popup-modal", function() {
+        console.log("close popup");
+    });
+    function hideNavbarSuspension() {
+        $("#navbarSuspension").css('display','none');
+    }
+    function showNavbarSuspension() {
+        $("#navbarSuspension").css('display','block');
+    }
 </script>
 
 

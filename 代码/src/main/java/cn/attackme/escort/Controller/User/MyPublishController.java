@@ -68,4 +68,12 @@ public class MyPublishController {
     }
 
 
+    @ResponseBody
+    @GetMapping("/dartDetail/publishDartId/{publishDartId}")
+    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+        Package aPackage = packageService.getById(publishDartId);
+        return new ResponseEntity<>(aPackage,HttpStatus.OK);
+    }
+
+
 }
