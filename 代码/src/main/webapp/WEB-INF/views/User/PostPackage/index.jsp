@@ -10,7 +10,7 @@
 <%@include file="/user_header.jsp"%>
 <link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
 
-<div id="addressTable">
+<div id="addressTable" style="width: 100%">
 
 </div>
 
@@ -138,26 +138,28 @@
             );
         }else {
             $("#addressTable").append(
-                `<a class="weui-cell weui-cell_access" href="/User/PostPackage/selectAddress" id="cacheLink" addressId="`+data.address.id+`">
-                    <div style="float: left">
-                        <div class="address_icon">
+                `<a class="weui-cell_access" href="/User/PostPackage/selectAddress" id="cacheLink" addressId="`+data.address.id+`">
+                    <label class="weui-cell weui-check__label">
+                        <div style="float: left;width: 10%">
+                            <div class="address_icon">
+                            </div>
                         </div>
-                    </div>
-                    <div>
+                      <div style="width: 80%" class="weui-cell__bd">
+                         <div>
+                            <span >收货人：  </span>
+                            <span >`+data.address.receiverName+`</span>
+                            <span > </span>
+                            <span style="float: right">`+data.address.phoneNumber+`</span>
+                        </div>
                         <div>
-                                    <span >收货人：  </span>
-                                    <span >`+data.address.receiverName+`</span>
-                                    <span > </span>
-                                    <span style="float: right">`+data.address.phoneNumber+`</span>
-                                </div>
-                                <div>
-                                    <span>收货地址：</span>
-                                    <span>`+data.address.area.areaName+`</span>
-                                    <span>`+data.address.detail+`</span>
-                                </div>
-                    </div>
-                    <div class="weui-cell__ft">
-                    </div>
+                            <span>收货地址：</span>
+                            <span>`+data.address.area.areaName+`</span>
+                            <span>`+data.address.detail+`</span>
+                        </div>
+                      </div>
+                      <div class="weui-cell__ft" style="width: 5%">
+                      </div>
+                    </label>
                 </a>`
             );
         }
@@ -175,5 +177,21 @@
     };
 
 </script>
+
+<%--<div>--%>
+    <%--<div>--%>
+        <%--<span >收货人：  </span>--%>
+        <%--<span >`+data.address.receiverName+`</span>--%>
+        <%--<span > </span>--%>
+        <%--<span style="float: right">`+data.address.phoneNumber+`</span>--%>
+    <%--</div>--%>
+    <%--<div>--%>
+        <%--<span>收货地址：</span>--%>
+        <%--<span>`+data.address.area.areaName+`</span>--%>
+        <%--<span>`+data.address.detail+`</span>--%>
+    <%--</div>--%>
+<%--</div>--%>
+<%--<div class="weui-cell__ft" style="margin-right: 5px">--%>
+<%--</div>--%>
 
 <%@include file="/user_footer.jsp"%>

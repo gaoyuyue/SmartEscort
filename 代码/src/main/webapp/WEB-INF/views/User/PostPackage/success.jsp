@@ -25,7 +25,7 @@
         </div>
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
-                <a href="javascript:history.back();" class="weui-btn weui-btn_primary">查看详情</a>
+                <a href="/User/MyPublish/" class="weui-btn weui-btn_primary">查看详情</a>
                 <a href="/User/PostPackage/" class="weui-btn weui-btn_default">继续发布</a>
             </p>
         </div>
