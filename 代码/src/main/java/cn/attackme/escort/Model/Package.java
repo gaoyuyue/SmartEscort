@@ -89,7 +89,7 @@ public class Package implements Serializable {
     private School school;
 
     //所属区域
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "area")
     private Area area;
 

@@ -52,12 +52,6 @@ public class ManageAddressController {
     }
 
     @RequiresRoles("user")
-    @GetMapping("/select")
-    public String selectPage(){
-        return "/User/ManageAddress/select";
-    }
-
-    @RequiresRoles("user")
     @GetMapping("/edit/addressId/{addressId}")
     public String editPage(@PathVariable int addressId,
                            HttpSession httpSession){

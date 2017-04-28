@@ -10,32 +10,9 @@
 <%@include file="/user_header.jsp"%>
 <link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
 
-<a class="weui-cell weui-cell_access" href="/User/ManageAddress/select">
-    <div style="float: left">
-        <div class="address_icon">
-        </div>
-    </div>
-    <div>
-        <div>
-            <span >收货人：  </span>
-            <span >高语越</span>
-            <span > </span>
-            <span style="float: right">13230524775</span>
-        </div>
-        <div>
-            <span>收货地址：</span>
-            <span>
-            </span>
-            <span>河北省 </span>
-            <span>唐山市 </span>
-            <span>曹妃甸区 </span>
-            <span>唐山湾生态城 </span>
-            <span>渤海大道21号华北理工大学东区梅园 </span>
-        </div>
-    </div>
-    <div class="weui-cell__ft">
-    </div>
-</a>
+<div id="addressTable">
+
+</div>
 
 <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
 
@@ -76,7 +53,7 @@
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <textarea class="weui-textarea" id="address" placeholder="短信内容" rows="4"></textarea>
+            <textarea class="weui-textarea" id="message" placeholder="短信内容" rows="4"></textarea>
         </div>
     </div>
 </div>
@@ -91,6 +68,9 @@
 <script>
     $(document).ready(function () {
         $("#postPackage").addClass("weui-bar__item_on");
+        Get("/User/PostPackage/addressAndCache",getData);
+        Get("/User/PostPackage/standardList",getStandard);
+        Get("/User/PostPackage/courierList",getCourier);
     });
 
     var success = function () {
@@ -99,12 +79,17 @@
 
     function postPackage() {
         var data = {
-            "certificate":{
-                "owner":$("#owner").val(),
-                "pickupNumber":$("#pickupNumber").val(),
-                "tailNumber":$("#tailNumber").val()
+            address:{
+                id:$("#cacheLink").attr("addressId")
             },
-            "note":$("#note").val()
+//            standard:{
+//                description:$("#packageSize").val()
+//            },
+            courierCompany:{
+                companyName:$("#packageType").val()
+            },
+            note:$("#note").val(),
+            message:$("#message").val()
         };
         Post("/User/PostPackage/",data,success);
     }
@@ -113,15 +98,82 @@
         FastClick.attach(document.body);
     });
 
-    $("#packageSize").select({
-        title: "选择包裹大小",
-        items: ["鞋盒", "方便面箱","自行车"]
-    });
+    const getStandard = function (data) {
+        $("#packageSize").select({
+            title: "选择包裹大小",
+            items: data
+        });
+    };
 
-    $("#packageType").select({
-        title: "选择快递类型",
-        items: ["申通", "中通", "圆通", "京东"]
-    });
+    const getCourier = function (data) {
+        $("#packageType").select({
+            title: "选择快递类型",
+            items: data
+        });
+    };
+
+    const getData = function (data) {
+        if (data.hasCache){
+            $("#packageSize").val(data.packageSize);
+            $("#packageType").val(data.packageType);
+            $("#price").val(data.price);
+            $("#note").val(data.note);
+            $("#message").val(data.message);
+        }
+        if (data.address == null){
+            $("#addressTable").append(
+                `<a class="weui-cell weui-cell_access" href="/User/PostPackage/addAddress" id="cacheLink">
+                    <div style="float: left">
+                        <div class="address_icon">
+                        </div>
+                    </div>
+                    <div>
+                        <span >+  </span>
+                        <span >添加收货地址</span>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+                `
+            );
+        }else {
+            $("#addressTable").append(
+                `<a class="weui-cell weui-cell_access" href="/User/PostPackage/selectAddress" id="cacheLink" addressId="`+data.address.id+`">
+                    <div style="float: left">
+                        <div class="address_icon">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                                    <span >收货人：  </span>
+                                    <span >`+data.address.receiverName+`</span>
+                                    <span > </span>
+                                    <span style="float: right">`+data.address.phoneNumber+`</span>
+                                </div>
+                                <div>
+                                    <span>收货地址：</span>
+                                    <span>`+data.address.area.areaName+`</span>
+                                    <span>`+data.address.detail+`</span>
+                                </div>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>`
+            );
+        }
+        $("#cacheLink").click(function () {
+            var data = {
+                packageSize:$("#packageSize").val(),
+                packageType:$("#packageType").val(),
+                price:$("#price").val(),
+                note:$("#note").val(),
+                message:$("#message").val()
+            };
+            Post("/User/PostPackage/cache",data,function () {
+            });
+        });
+    };
+
 </script>
 
 <%@include file="/user_footer.jsp"%>

@@ -112,6 +112,8 @@
     $(document).ready(function () {
         Get("/User/ManageAddress/addressList",success);
     });
+
+
 </script>
 
 </body>

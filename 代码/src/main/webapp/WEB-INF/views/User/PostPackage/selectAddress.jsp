@@ -19,6 +19,7 @@
 
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/jquery-weui.min.css"/>
     <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
 
 </head>
@@ -35,12 +36,12 @@
     </div>
 
     <div class="weui-tab__panel">
-        <div class="address_manage" id="addressList">
+        <div style="margin-top: 40px" id="addressList">
         </div>
     </div>
 
     <div class="weui-tabbar">
-        <a href="/User/ManageAddress/add" class="weui-btn weui-btn_primary footer_weui-btn">新增收获地址</a>
+        <a href="/User/PostPackage/addAddress" class="weui-btn weui-btn_primary footer_weui-btn">新增收获地址</a>
     </div>
 </div>
 
@@ -51,23 +52,36 @@
         $("#addressList").empty();
         data.forEach(function (e,i) {
             $("#addressList").append(`
-                <div class="address_one"
-                >
-                    <div class="address_name-phone">
-                        <span style="margin: 5px" >`+e.receiverName+`</span>
-                        <span > </span>
-                        <span style="float: right">`+e.phoneNumber+`</span>
-                    </div>
-                    <div class="address_detail">
-                        <span>
-                        </span>
-                        <span style="font-size: 14px;margin: 5px">`+e.area.areaName+" "+e.detail+`</span>
-                    </div>
+                <div class="weui-cells_radio">
+                    <label class="weui-cell weui-check__label" for="`+e.id+`">
+                      <div style="width: 90%" class="weui-cell__bd">
+                         <div>
+                            <span >收货人：  </span>
+                            <span >`+e.receiverName+`</span>
+                            <span > </span>
+                            <span style="float: right">`+e.phoneNumber+`</span>
+                        </div>
+                        <div>
+                            <span>收货地址：</span>
+                            <span>`+e.area.areaName+`</span>
+                            <span>`+e.detail+`</span>
+                        </div>
+                      </div>
+                      <div class="weui-cell__ft" style="width: 10%">
+                        <input type="checkbox" class="weui-check checkOne"id="`+e.id+`">
+                        <span class="weui-icon-checked"></span>
+                      </div>
+                    </label>
                 </div>
+
                 `+((i<data.length-1)?
                     `<div style="background-color: #DCDCDC;height: 5px;">
                      </div>` : "")
             );
+        });
+
+        $(".checkOne").click(function () {
+            window.location.href = "/User/PostPackage/selected/addressId/"+$(this).prop("id");
         });
     };
     $(document).ready(function () {
