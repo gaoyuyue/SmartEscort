@@ -127,6 +127,7 @@ public class PostPackageController {
         return "redirect:/User/PostPackage/";
     }
 
+    //获取已选择的收货地址
     @RequiresRoles("user")
     @GetMapping("/selected")
     @ResponseBody

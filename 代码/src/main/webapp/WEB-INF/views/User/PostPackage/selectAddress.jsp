@@ -85,11 +85,17 @@
 
         $(".checkOne").click(function () {
             var me = this;
-            $(".checkOne:checked").each(function (index,el) {
-                if (me != el){
-                    $(el).prop("checked",false);
-                }
-            });
+            var checks = $(".checkOne:checked");
+            if (checks.size() == 0){
+                $(me).prop("checked",true);
+            }else {
+                checks.each(function (index,el) {
+                    if (me != el){
+                        $(el).prop("checked",false);
+                    }
+                });
+            }
+
             window.location.href = "/User/PostPackage/select/addressId/"+$(this).prop("id");
         });
     };

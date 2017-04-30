@@ -60,6 +60,9 @@ public class Package implements Serializable {
     //满意程度
     private Integer score;
 
+    //是否被取消
+    private boolean isCancel;
+
     //任务发布时间
     private Date publishTime;
 
