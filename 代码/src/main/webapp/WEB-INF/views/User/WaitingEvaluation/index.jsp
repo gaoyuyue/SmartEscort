@@ -259,6 +259,7 @@
                 $("#agencyName").text(data.agency.name);
                 $("#agencyPhoneNumber").text(data.agency.phoneNumber);
 
+                $("#agencyDetail").empty();
                 $("#agencyDetail").append(
                         `
                                    <div class="weui-cells">

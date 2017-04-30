@@ -69,6 +69,11 @@ public class MyPublishController {
     }
 
 
+    /**
+     * 通过id获取包裹详情
+     * @param publishDartId
+     * @return
+     */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
     public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){

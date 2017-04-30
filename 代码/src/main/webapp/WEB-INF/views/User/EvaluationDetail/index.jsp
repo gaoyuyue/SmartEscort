@@ -8,27 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
-<style type="text/css">
-    *{margin:0;padding:0;list-style-type:none;}
-    a,img{border:0;}
-    .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
-    .clearfix{display:inline-table}
-    *html .clearfix{height:1%}
-    .clearfix{display:block}
-    *+html .clearfix{min-height:1%}
-    .fl{float:left;}
-    .gradecon{
-        width: 250px;
-        height: 25px;
-    }
-    .rev_pro li{line-height:20px;height:20px;}
-    .rev_pro li .revtit{text-align:right;display:block;float:left;margin-right:10px;width:70px;}
-    .revinp{float:left;display:inline;}
-    .level .level_solid,.level .level_hollow{float:left;background-image:url("/assets/img/star.png");background-repeat:no-repeat;display:inline-block;width:40px;height:33px;}
-    .level .level_solid{background-position:6px 0px;}
-    .level .level_hollow{background-position:-40px 0px;}
-    .revgrade{margin-left:20px;}
-</style>
 <div id="frame">
     <div id="top">
         <span id="list">
@@ -43,39 +22,13 @@
             <img src="/assets/img/a7.jpg" style="width: 50px;display: block">
         </div>
         <div class="weui-cell__bd">
-            <p>联系人名称:<b>高语越</b></p>
-            <p style="font-size: 13px;color: #888888;">hahahahahah</p>
+            <p>送货人姓名:<p id="agencyName"></p></p>
+            <p style="font-size: 13px;color: #888888;"></p>
         </div>
     </div>
     <br>
 
-    <div class="weui-tab">
-        <div class="weui-navbar">
-            <a class="weui-navbar__item weui-bar__item--on border_Evaluation_color font_color" href="#good">
-                <img src="/assets/img/good.png" alt="" style="width:15px;margin-right:10px;">
-                好评
-            </a>
-            <a class="weui-navbar__item font_color" href="#order">
-                <img src="/assets/img/order.png" alt="" style="width:15px;margin-right:10px;">
-                中评
-            </a>
-            <a class="weui-navbar__item font_color" href="#poor">
-                <img src="/assets/img/poor.png" alt="" style="width:15px;margin-right:10px;">
-                差评
-            </a>
-        </div>
-        <%--<div class="weui-tab__bd">--%>
-            <%--<div id="good" class="weui-tab__bd-item">--%>
-                <%--<h1>dsfsdfsdfds</h1>--%>
-            <%--</div>--%>
-            <%--<div id="order" class="weui-tab__bd-item">--%>
-                <%--<h1>页面二</h1>--%>
-            <%--</div>--%>
-            <%--<div id="poor" class="weui-tab__bd-item weui-tab__bd-item--active">--%>
-                <%--<h1>页面三</h1>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    </div>
+
 
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell" >
@@ -131,31 +84,12 @@
         </div>
     </div>
 
-    <div class="weui-cells weui-cells_form">
-        <div class="weui-cell weui-cell_switch">
-            <div class="weui-cell__bd">是否匿名</div>
-            <div class="weui-cell__ft">
-                <label for="switchCP" class="weui-switch-cp">
-                    <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked">
-                    <div class="weui-switch-cp__box"></div>
-                </label>
-            </div>
-        </div>
-    </div>
-
     <div class="weui-btn-area">
         <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" style="background-color: #ff850e">提交评论</a>
     </div>
 </div>
-<script>
-    $(function(){
-        $('.weui-navbar__item').on('click', function () {
-            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
-            $(this).addClass('border_Evaluation_color').siblings('.border_Evaluation_color').removeClass('border_Evaluation_color');
-            $(this).css("color",$(this).css("color"));
-        });
-    });
-</script>
+
+//控制评论字数
 <script language="javascript" type="text/javascript">
     $("#counts").keyup(function(){
         if($("#counts").val().length > 100){
@@ -165,9 +99,9 @@
     });
 </script>
 
+//点星星
 <script type="text/javascript">
     $(function(){
-        //点星星
         $(document).on('mouseover','i[cjmark]',function(){
             var num = $(this).index();
             var pmark = $(this).parents('.revinp');
@@ -181,5 +115,21 @@
             }
         })
     })
+</script>
+
+//获取送货人信息
+<script>
+    var success = function (cao) {
+//        $("#agencyName").text("");
+//        $("#agencyName").text(data.agency.name);
+       var agency = cao.message;
+       alert(agency);
+       $("#agencyName").text("ssss");
+
+
+    };
+    $(document).ready(function () {
+       Get("/User/EvaluationDetail/agency",success);
+    });
 </script>
 <%@include file="/user_footer.jsp"%>

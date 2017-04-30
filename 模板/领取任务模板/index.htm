@@ -1,0 +1,547 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>淘鞋网手机商城触屏版自适应手机wap购物网站模板下载 【http://www.lanrenmb.com/shenghuofuwu/gouwu/】</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/gmu.css" />
+<link rel="stylesheet" type="text/css" href="css/ecmmobile.css" />
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/gmu.js"></script>
+<script type="text/javascript" src="js/ecmmobile.js"></script>
+
+
+    
+
+</head>
+<body>
+	
+<div id="page">
+    <div class="toolbar intoolbar">
+        <h2><img src="http://m.taoxie.com/static/mobile/images/logo.png" alt="淘鞋网"></h2>
+        <a href="javascript:void(0)category.html" class="btn-browse"></a>
+        <!-- <a href="javascript:void(0)myindex.html" class="btn-mycenter"></a> -->
+        <a href="javascript:void(0)showcart.html" class="btn-shopcart"></a>
+    </div>
+    
+<!--div class="container"-->
+
+<div>
+    	<style>
+		body{margin-right:0px; margin-left:0px;}
+		.intoolbar{background: #fff;}
+		.intoolbar .ui-toolbar-wrap{ height: 44px; border-bottom: 1px solid #d1271a; background: #fff; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
+		.intoolbar .ui-toolbar-title{text-align: left; margin-left: 12px;}
+		.intoolbar .ui-toolbar-title img{height: 20px; margin-top: 12px;}
+		.intoolbar .ui-toolbar-right a{width: 24px; height: 24px; position: relative; float: left; margin: 11px 2px 0;}
+		.intoolbar .ui-toolbar-right a:last-child{margin-right: 5px;}
+		.intoolbar .ui-toolbar-right a:before{position: absolute; left: 0; top: 0; font-family: "FontAwesome"; font-size: 18px; width: 100%; height: 100%; line-height: 24px; text-align: center; color: #666666;}
+		.intoolbar .ui-toolbar-right a i{ position: absolute; right: -2px; top: -2px; width: 12px; height: 12px; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; background: #d1271a; color: #fff; text-align: center; line-height: 12px; font-size: 10px;}
+		.btn-browse:before{content: "\f0c9";}
+		.btn-mycenter:before{content: "\f007";}
+		.btn-shopcart:before{content: "\f07a";}
+		
+		.searchbox{position: relative; z-index: 9; width:96%;margin-left:auto;margin-right:auto;text-align:center; margin-top:125px;}
+		.searchbox input{ -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 100%; padding: 0px 33px 0 10px; height: 46px; background-color: rgba(251,251,251,.44); -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.26); -moz-box-shadow: 0 2px 4px rgba(0,0,0,.26); box-shadow: 0 1px 2px rgba(0,0,0,.26); border: solid 1px rgba(255,255,255,.61); -webkit-appearance:none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; font-size: 18px; color: #000; text-shadow: 0 1px 2px rgba(0,0,0,.47);}
+		::-webkit-input-placeholder { color:#fff; }
+		.searchbox button{position:absolute; right: 0;top: 0;width:30px; height:34px; padding:0; margin:0; text-indent:-9999px; border:0; background:none;}
+		.searchbox button:before{position: absolute; left: 0; top: 0; content: "\f002"; font-family:"FontAwesome"; text-indent: 0; width: 100%; height: 100%;text-align: center; font-size: 16px; line-height: 42px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.47);}
+		
+		.incontainera{ width: 100%;margin-left:auto;margin-right:auto;text-align:center;}
+		
+		.inslider{margin: -172px 0px 0px 0px; height: 180px; padding-bottom: 20px; position: relative; margin-left:auto;margin-right:auto;text-align:center;background:#fff;}
+		.inslider .ui-slider-item img{width: 370px; height: 180px; }
+		.inslider .ui-slider-dots{position: absolute; bottom: 0; line-height: 20px; width: 100%; padding: 0; text-align: center;}
+		.inslider .ui-slider-dots b{ width: 6px; height: 6px; margin: 0 5px; background: #000;}
+		.inslider .ui-slider-dots .ui-state-active{background: #ff4343;}
+		
+		.in-topbox{height: 125px; background: #fff url(http://m.taoxie.com/static/mobile/images/userfile/taoxie/inblock-divide1.png) no-repeat center; -webkit-background-size: 7px 123px; background-size: 7px 123px; margin: 5px -7px;}
+		.in-topbox ul{}
+		.in-topbox li{float: left; width: 50%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; padding:10px 7px; position: relative;}
+		.in-topbox li i{position: absolute; left: 2px; top: 4px;}
+		.in-topbox li i img{width: 41px; height: 41px;}
+		.in-topbox li strong{display: block; margin-left: 35px; line-height: 14px; color: #434343;}
+		.in-topbox li .pic{display: block; text-align: center;}
+		.in-topbox li .pic img{max-width: 100%; max-height: 80px;}
+		
+
+		
+		.in-title{margin: 15px 0 5px;}
+		.in-title h3{font-size: 16px;}
+		.in-title a{float: right; margin-top: -16px;}
+		.in-title a:after{content: "\f105"; font-family: "FontAwesome"; color: #da3326; font-size: 16px; margin-left: 5px; }
+		.in-box{ -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1); -moz-box-shadow: 0 1px 2px rgba(0,0,0,.1); box-shadow: 0 1px 2px rgba(0,0,0,.1); border: solid 1px #e4e3e3; height: 115px;  background: #fafafa; margin-bottom: 10px;}
+		.in-box,.in-box > a{display: -webkit-box;}
+		.in-box .pic{width: 209px; height: 100%; overflow: hidden;}
+		.in-box .pic img{height: 100%;margin-left:auto;margin-right:auto;text-align:center;}
+		.in-box .info{-webkit-box-flex:1; position: relative;}
+		.in-box .info p{ padding: 10px 8px; line-height: 15px;}
+		.in-box .info i{position: absolute; width: 100%; text-align: center;}
+		.in-box .info i img{width: 60px; height: 60px;margin-left: -134px;}
+		.imgcon{margin: 0 -7px;}
+		.prd-list-grid{margin: 0 -7px 10px;}
+		.prd-list-grid .pic{height: 80px; overflow: hidden; position: relative;}
+		.prd-list-grid .pic img{position: absolute; top: 50%; margin-top: -64px;margin-left: -64px;}
+		
+		.in-imgcons{overflow: hidden; margin: 20px 0;}
+		.in-imgcons li{float: left; width: 50%; padding: 5px 0; line-height: 20px; text-align: center; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+		.in-imgcons li:first-child{border-right: 1px solid #eaeaea;}
+		.in-imgcons img{height: 80px;}
+		
+		
+		
+		.in-navlinks{ height: 140px; padding-bottom: 0px; margin: 0px 0;}
+		.in-navlinks a{ float: left; width: 25%; height: 60px; padding-top: 2px; text-align: center; text-decoration: none; }
+		.in-navlinks a img{ width: 45px; height: 45px; display: block; margin: auto; background: none; }
+		.in-navlinks a p{ font-size: 12px; }
+		.in-navlinks .ui-slider-dots{ position: absolute; width: 100%; text-align: center; padding: 0;}
+		.in-navlinks .ui-slider-dots b{ width: 4px; height: 4px; margin: 0 3px; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; background: #636363;}
+		.in-navlinks .ui-slider-dots .ui-slider-dot-select{background: #d1271a;}
+		.brandgrid{margin-bottom: 20px; background-color:#FFFFFF; width:96%;margin-left:auto;margin-right:auto;text-align:center;}
+		.brandgrid a img{ width: 39px; height: 39px; display: block; margin: auto; background: none;margin-bottom: 5px;}
+		
+		
+		
+		
+/**/		
+		
+.floor-main{
+	float: left;
+	width: 100%;
+	border-top: 1px solid #e8e8e8;
+}
+.product-larger{
+	float: left;
+	width: 50%;
+	text-align:center;
+}
+.product-larger li{
+	border-bottom: 1px solid #e8e8e8; border-left:1px solid #e8e8e8;
+	text-align:center;
+}
+.products img,
+.product-larger img{
+	vertical-align: middle;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}
+
+.products{
+	/*float: left;*/
+	width: 100%;
+	position: relative;
+	margin-left: -1px;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}
+
+.products li{
+	float: left;
+	border-left: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+	width: 100%;
+	height: 100px;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}
+
+.products1{
+	float: left;
+	width: 100%;
+	position: relative;
+	margin-left: -1px;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}
+.products1 li{
+	float: left;
+	border-left: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+	width: 100%;
+	height: 100px;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}
+
+.products2{
+	float: left;
+	width: 50%;
+	position: relative;
+	margin-left: -1px;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+	/*margin-bottom: 20px;*/
+}
+.products2 li{
+	float: left;
+	border-left: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+	width: 100%;
+	height: 100px;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}
+
+.products3{
+	float: left;
+	width: 50%;
+	position: relative;
+	background-color:#622bbd;
+	margin-left: -1px;
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+	margin-bottom: 20px;
+}
+.products3 li{
+	float: left;
+	border-left: 0px solid #e8e8e8;
+	border-bottom: 0px solid #e8e8e8;
+	width: 100%;
+	/*height: 100px;*/
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}
+
+
+
+.rank-box{
+	float: left;
+	border-left: 1px solid #e8e8e8;
+	width: 183px;
+	}
+	
+
+.product-lei{
+	float: left;
+	width: 24.7%;
+	height: 50px;
+	background:#f3f3f3;
+	font-size:16px;
+	color:#666666;
+	text-align:center;
+
+	line-height:50px;   
+    border-bottom: 1px solid #e8e8e8; border-left:1px solid #e8e8e8;
+	margin-bottom: 20px;}
+
+.product-lei A { COLOR: #666666;534422 TEXT-DECORATION: none;font-weight: normal;font-size: 18px; font-family:Verdana, Arial, Helvetica, sans-serif}
+.product-lei A:hover	{COLOR: #F53938; TEXT-DECORATION: none}
+	
+.product-lei1{
+	float: left;
+	width: 24.7%;
+	height: 50px;
+	background:#f3f3f3;
+	font-size:16px;
+	color:#666666;
+	text-align:center;
+
+	line-height:50px;   
+    border-bottom: 1px solid #e8e8e8; border-left:1px solid #e8e8e8;}	
+	
+.product-lei1 A { COLOR: #666666;534422 TEXT-DECORATION: none;font-weight: normal;font-size: 18px; font-family:Verdana, Arial, Helvetica, sans-serif}
+.product-lei1 A:hover	{COLOR: #F53938; TEXT-DECORATION: none}
+
+A.red{ COLOR: #f53938; TEXT-DECORATION: none;font-weight: normal;font-size: 18px; font-family:Verdana, Arial, Helvetica, sans-serif}
+	
+.gonggao{
+	/*float: left;*/
+	width: 95%;
+	height: 39px;
+	background:#f3f3f3;
+	font-size:16px;
+	color:#666666;
+	line-height:39px;   
+    border: 3px solid #F53938;
+	margin-bottom: 8px;
+	
+	text-align:center;
+	margin-left:auto;margin-right:auto;
+}		
+		</style>
+    
+        <!--div class="incontainer"-->
+        <div class="incontainera">
+            <div class="searchbox">
+        <form action="products" method="get">
+                <input type="text" name="key" placeholder="运动鞋">
+                <button>搜索</button>
+        </form>
+            </div>
+          <div class="inslider">
+
+               <!-- 头部三张图片第2张  --> 
+               <a href="javascript:void(0)/products/activityList/1662baf7-1b7e-49f8-8416-37da90f9dfb9"><div style="background:url(images/weihuo.jpg) center top no-repeat;height:180px;"></div></a>  
+
+          </div>
+            
+            
+<div class="in-navlinks">
+                <div>
+                    <a href="javascript:void(0)category.html">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-1.png" alt="">
+                        <p>商品分类</p>
+                    </a>
+                    <a href="javascript:void(0)products.html?isNew=2">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-2.png" alt="">
+                        <p>新品上架</p>
+                    </a>
+                    <a href="javascript:void(0)products.html?isHot=1">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-3.png" alt="">
+                        <p>热卖爆款</p>
+                    </a>
+                    <a href="javascript:void(0)/products/flashSaleList.html">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-4.png" alt="">
+                        <p>限时抢购</p>
+                    </a>
+                    <a href="javascript:void(0)user/index.html">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-5.png" alt="">
+                        <p>个人中心</p>
+                    </a><a href="javascript:void(0)user/order.html">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-6.png" alt="">
+                        <p>我的订单</p>
+                    </a>
+                    <a href="javascript:void(0)user/favoriteList.html">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-7.png" alt="">
+                        <p>收藏夹</p>
+                    </a>
+                    <a href="javascript:void(0)history.html">
+                        <img src="http://m.taoxie.com/static/mobile/images/inico-8.png" alt="">
+                        <p>浏览历史</p>
+                    </a>
+                </div>
+          </div>
+          
+       
+<!--<div class="gonggao">手机下单 满99减10 满199减20 满299减30</div>-->
+       
+     
+          
+            
+<!--女鞋-->    
+<div class="d-title">时尚女鞋</div>         
+<div class="floor-main">                
+            <!--ul class="products1 clr">
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+            </ul-->
+            
+            
+            <ul class="product-larger">
+
+                    <li><a href="list.htm"><img src="http://img.taoxie.com/phone/pop/nvxie/nvpop1.jpg" width="180" height="201" alt=""></a></li>
+                <ul class="products clr">
+ <li><a href="javascript:void(0)http://m.taoxie.com/products?key=女+平底"><img src="http://img.taoxie.com/phone/pop/nvxie/nvpop2.jpg" alt="" width="180" height="100"></a></li>
+                </ul>
+                
+</ul>
+
+            <ul class="products2 clr">
+                <li><a href="javascript:void(0)http://m.taoxie.com/products?key=单鞋+女+高跟"><img src="http://img.taoxie.com/phone/pop/nvxie/nvpop3.jpg" alt="" width="180" height="100"></a></li>
+                <li><a href="javascript:void(0)http://m.taoxie.com/product?id=31617"><img src="http://img.taoxie.com/phone/pop/nvxie/nvpop4.jpg" alt="" width="180" height="100"></a></li>
+                <li><a href="javascript:void(0)http://m.taoxie.com/product?id=31572"><img src="http://img.taoxie.com/phone/pop/nvxie/nvpop5.jpg" alt="" width="180" height="100"></a></li>
+            </ul>
+</div>
+
+
+<div class="floor-main">
+<ul>
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=新品+女鞋">新品</a></li>
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=凉鞋+女" class="red">凉鞋</a></li>
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=单鞋+女">单鞋</a></li>
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=高跟+女">高跟鞋</a></li>
+
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=低跟+女">低跟鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=鱼嘴+女">鱼嘴鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=平底+女">平底鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=OL+女">OL鞋</a></li>
+</ul>
+</div>
+
+<!--男鞋--> 
+<div class="d-title">精品男鞋</div>           
+<div class="floor-main">                
+            <!--ul class="products1 clr">
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+            </ul-->
+            
+            
+            <ul class="product-larger">
+
+                    <li><a href="javascript:void(0)http://m.taoxie.com/products?key=豆豆+男"><img src="http://img.taoxie.com/phone/pop/nanxie/nanpop1.jpg" width="180" height="201" alt=""></a></li>
+                <ul class="products clr">
+ <li><a href="javascript:void(0)http://m.taoxie.com/products?key=凉鞋+男"><img src="http://img.taoxie.com/phone/pop/nanxie/nanpop2.jpg" alt="" width="180" height="100"></a></li>
+                </ul>
+                
+</ul>
+
+            <ul class="products2 clr">
+                <li><a href="javascript:void(0)http://m.taoxie.com/products?key=洞洞鞋+男"><img src="http://img.taoxie.com/phone/pop/nanxie/nanpop3.jpg" alt="" width="180" height="100"></a></li>
+                <li><a href="javascript:void(0)http://m.taoxie.com/products?categoryId=39"><img src="http://img.taoxie.com/phone/pop/nanxie/nanpop4.jpg" alt="" width="180" height="100"></a></li>
+                <li><a href="javascript:void(0)http://m.taoxie.com/product?id=31890"><img src="http://img.taoxie.com/phone/pop/nanxie/nanpop5.jpg" alt="" width="180" height="100"></a></li>
+            </ul>
+</div>
+
+<div class="floor-main">   
+<ul>             
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=凉鞋+男" class="red">凉鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=皮鞋+男">休闲鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=驾车+男">驾车鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=正装+男">正装鞋</a></li>
+</ul>
+</div>
+
+
+<!--运动鞋--> 
+<div class="d-title">休闲运动鞋</div>           
+<div class="floor-main">                
+            <!--ul class="products1 clr">
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+                <li><a href="javascript:void(0)"><img src="images/ico2.jpg" alt="" width="100" height="100"></a></li>
+            </ul-->
+            
+            
+            <ul class="product-larger">
+
+                    <li><a href="javascript:void(0)http://m.taoxie.com/products?key=乔丹+跑步鞋"><img src="http://img.taoxie.com/phone/pop/ydxie/ydpop1.jpg" width="180" height="201" alt=""></a></li>
+                <ul class="products clr">
+ <li><a href="javascript:void(0)http://m.taoxie.com/products?key=阿甘"><img src="http://img.taoxie.com/phone/pop/ydxie/ydpop2.jpg" alt="" width="180" height="100"></a></li>
+                </ul>
+                
+</ul>
+
+            <ul class="products2 clr">
+                <li><a href="javascript:void(0)http://m.taoxie.com/products?key=阿迪+跑步"><img src="http://img.taoxie.com/phone/pop/ydxie/ydpop3.jpg" alt="" width="180" height="100"></a></li>
+                <li><a href="javascript:void(0)http://m.taoxie.com/products?key=安踏+跑步"><img src="http://img.taoxie.com/phone/pop/ydxie/ydpop4.jpg" alt="" width="180" height="100"></a></li>
+                <li><a href="javascript:void(0)http://m.taoxie.com/products?key=特步+跑步+女"><img src="http://img.taoxie.com/phone/pop/ydxie/ydpop5.jpg" alt="" width="180" height="100"></a></li>
+            </ul>
+</div>
+
+<div class="floor-main">  
+<ul>              
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=篮球">篮球鞋</a></li>
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=跑步" class="red">跑步鞋</a></li>
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=板鞋">板鞋</a></li>
+<li class="product-lei1"><a href="javascript:void(0)http://m.taoxie.com/products?key=网球">网球鞋</a></li>
+
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=训练">训练鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=足球">足球鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=帆布">帆布鞋</a></li>
+<li class="product-lei"><a href="javascript:void(0)http://m.taoxie.com/products?key=拖鞋+运动">拖鞋</a></li>
+</ul> 
+</div>         
+            
+<div class="brandgrid">
+                <a href="javascript:void(0)products?brandId=20">
+                <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/1.png">
+                    <p>耐克</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=19">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/2.png">
+                    <p>阿迪达斯</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=71">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/3.png">
+                    <p>沃特</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=66">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/4.png">
+                    <p>安踏</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=88">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/5.png">
+                    <p>特步</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=100">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/6.png">
+                    <p>三叶草</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=23">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/7.png">
+                    <p>李宁</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=31">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/8.png">
+                    <p>361度</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=99">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/9.png">
+                    <p>德意志山峰</p>
+                </a>
+                <a href="javascript:void(0)products?brandId=102">
+                    <img src="http://m.taoxie.com/static/mobile/images/userfile/brands/10.png">
+                    <p>乔丹</p>
+                </a>
+          </div>            
+
+            <div class="in-title">
+                <h3>www.taoxie.com</h3>
+            </div>
+
+
+ 
+
+         
+		<script>
+			$(".inslider").slider({
+			    autoPlay:true,
+			    arrow:false,
+			    loop:true,
+			    viewNum:1
+			});
+			$(".brandgrid a").highlight("ui-state-hover");
+		</script>
+    </div>
+    
+ <script type="text/javascript">    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F2df224f0dcd149a6fb5966ea0741e1a6' type='text/javascript'%3E%3C/script%3E")); </script>
+
+    
+<div id="globalmenu">
+    <a class="gbm-btn" href="javascript:void(0)javascript:void(0)"></a>
+    <div class="gbm-sub">
+        <a href="javascript:void(0)/index.html">主页</a>
+        <a href="javascript:void(0)/products?key=">搜索</a>
+        <a href="javascript:void(0)/user/index.html">个人中心</a>
+        <a href="javascript:void(0)/showcart.html">购物车</a>
+    </div>
+</div>
+<div class="footer">
+    <div class="loginfo">
+        <a href="javascript:void(0)/login">登录</a>
+        <a href="javascript:void(0)/s/help" target="_blank">客服</a>
+    </div>
+    <div class="gotop"><a href="javascript:void(0)#"></a></div>
+</div>
+<div class="footcon">
+    <div class="ftrow ft-promise">
+        <span class="promise-1">正品保障</span>
+        <span class="promise-2">自由退换</span>
+        <span class="promise-3">全场包邮</span>
+        <span class="promise-4">货到付款</span>
+    </div>
+    <div class="ftrow ft-links">
+        <a href="javascript:void(0)/s/aboutUs">关于淘鞋网</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0)/s/job">人才招聘</a>
+    </div>
+    <div class="ftrow">
+        <div class="ft-tel"><a href="javascript:void(0)tel:400-680-5888">400-680-5888</a></div>
+        <div class="ft-sitetype"><a href="javascript:void(0)http://wap.taoxie.com">普通版</a>&nbsp;&nbsp;｜&nbsp;&nbsp;<a href="javascript:void(0)#">触屏版</a>&nbsp;&nbsp;｜&nbsp;&nbsp;<a href="javascript:void(0)http://www.taoxie.com">电脑版</a></div>
+        <div class="ft-copyright">Copyright&reg; 2013 Taoxie &nbsp;&nbsp;<a target="_blank" href="javascript:void(0)http://m.ecmaster.cn">技术支持(云智盛世)</a></div>
+    </div>
+</div>
+  
+</div>
+
+<script type="text/javascript"> 
+     /*创建于2016-06-14*/ 
+     var cpro_id = "u2671677";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>
+
+</body>
+</html>
