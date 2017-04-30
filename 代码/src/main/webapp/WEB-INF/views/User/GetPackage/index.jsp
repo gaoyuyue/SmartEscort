@@ -1,147 +1,89 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: arthurme
-  Date: 2017/3/31
-  Time: 16:47
-  To change this template use File | Settings | File Templates.
-  领取任务页
---%>
+<%--#e15400  color--%>
+<!doctype html>
+<html>
+<head>
+    <%--<%@include file="/user_header.jsp"%>--%>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/assets/css/demo/gmu.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/demo/ecmmobile.css" />
+    <script type="text/javascript" src="/assets/js/demo/zepto.js"></script>
+    <script type="text/javascript" src="/assets/js/demo/gmu.js"></script>
+    <script type="text/javascript" src="/assets/js/demo/ecmmobile.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/mobile.css">
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/user_header.jsp"%>
 
-<div class="weui-panel weui-panel_access">
-    <div class="weui-tab">
-        <div class="weui-navbar">
-            <a class="weui-navbar__item weui-bar__item--on" id="priceSlect" href="#tab1">
-                价格
-            </a>
-            <a class="weui-navbar__item" href="#tab2" id="creditSlect">
-                信用
-            </a>
-            <a class="weui-navbar__item" id="select" type="text" href="#tab3">
-                筛选
-                <input type="text" id="textpicker"/>
-            </a>
-        </div>
-    </div>
-    <div class="weui-form-preview">
-        <div class="weui-panel__bd">
-            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg confirmation">
-                <div style="clear: both">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" src="/assets/img/SF.jpg">
-                    </div>
-                    <div class="weui-form-preview__item">
-                        <span class="weui-form-preview__value" >高语越</span>
-                        <%--<span class="weui-form-preview__value">男</span>--%>
-                        <img src="/assets/img/boy.png" width="51" height="51">
+</head>
+<body>
 
-                    </div>
+
+<div id="page">
+
+    <div class="toolbar">
+        <a href="javascript:window.history.back();"><img src="/assets/img/goback.png" ></a>
+        <h2>
+            <form method="get">
+                <div class="searchinput">
+                    <input type="text" name="key" value="search">
                 </div>
-                <div style="clear: both">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">发布日期</label>
-                        <span class="weui-form-preview__value">2016-4-18</span>
-                    </div>
-
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">区域</label>
-                        <span class="weui-form-preview__value">梅一南楼102</span>
-                    </div>
-                    <div class="weui-form-preview__item" id="packageSize">
-                        <label class="weui-form-preview__label">大小</label>
-                        <span class="weui-form-preview__value" >大（有自行车辣么大）</span>
-                    </div>
-
-                    <div class="weui-form-preview__item" id="price">
-                        <label class="weui-form-preview__label">价格</label>
-                        <span class="weui-form-preview__value" >24元</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-
+            </form>
+        </h2>
+        <a href="javascript:void(0);" id="btn_filter" class="button fa fa-list" ></a>
     </div>
-</div>
+
+    <div id="filterpanel" class="panel" style="height: 100%">
+
+            <h3>筛选</h3>
+            <h4>区域</h4>
+            <ul id="area">
+            </ul>
+            <h4>快递类型</h4>
+            <ul id="CourierCompany" >
+            </ul>
+            <div class="mainbtnbar">
+                <a href="javascript:void(0);" id="filterSubmit" class="button">Ok</a>
+            </div>
+    </div>
 
     <script>
-        $(document).ready(function () {
-            $("#getPackage").addClass("weui-bar__item_on");
+
+        var filterpanel = $("#filterpanel");
+        filterpanel.css({
+            'height': window.innerHeight
+        }).iScroll()
+            .panel({
+                contentWrap: $("#page"),
+                scrollMode: 'fix',
+                display: 'overlay',
+                swipeClose: true
+            }).on('open', function () {
+            filterpanel.iScroll('refresh');
         });
 
-        $(".weui-form-preview__item").on('click',function () {
-            var packageSize = $("#packageSize").val();
-            var packageType = "";
-            var price = $("#price").val();
-            var remakers = "";
-
-            $.confirm({
-                title: '确定要接单吗？',
-                text:   '大小'+packageSize+'<br/>'+
-                        '类型'+packageType+'<br/>'+
-                        '价格'+price+'<br/>' +
-                        '备注:'+'<br/>'+
-                        '<textarea rows="5" cols="10"></textarea>',
-                onOK: function () {
-                    //点击确认
-                },
-                onCancel: function () {
-                }
-            });
-        });
-        
-        $('#priceSlect').on('click',function () {
-            $.actions({
-                actions: [{
-                    text: "从高到低排序",
-                    onClick: function() {
-                        //do something
+        var isBrandLoad = false;
+        $("#btn_filter").on("click", function (e) {
+            e.preventDefault();
+            if(isBrandLoad){
+                filterpanel.panel("toggle");
+            }else{
+                isBrandLoad = true;
+                $.get('products/brands_json', function (response) {
+                    if(response.data){
+                        showLi([{"id":"","name":"全部"}],"brand-ul",10);
+                        showLi(response.data,"brand-ul",10);
+                        filterpanel.panel("toggle");
+                        bindPanelLiClick();
+                        filterpanel.iScroll('refresh');
                     }
-                },{
-                    text: "从低到高排序",
-                    onClick: function() {
-                        //do something
-                    }
-                }]
-            });
+                })
+            }
         });
 
-        $('#creditSlect').on('click',function () {
-            $.actions({
-                actions: [{
-                    text: "从高到低排序",
-                    onClick: function() {
-                        //do something
-                    }
-                },{
-                    text: "从低到高排序",
-                    onClick: function() {
-                        //do something
-                    }
-                }]
-            });
-        });
-
-        $('#textpicker').picker({
-
-            title:'',
-            cols:[
-                {
-                    textAlign:'center',
-                    values:['顺风','京东','圆通']
-                },
-                {
-                    textAlign:'center',
-                    values:['大','中','小']
-                }
-            ]
-        });
-
-
-    
     </script>
-<script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
-
+</body>
+</html>
 <%@include file="/user_footer.jsp"%>
