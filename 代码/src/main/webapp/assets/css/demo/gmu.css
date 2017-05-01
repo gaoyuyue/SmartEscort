@@ -16,3 +16,19 @@
 .ui-btn{cursor:pointer;-webkit-user-select:none;-webkit-box-sizing:border-box;-webkit-appearance:none;}.ui-btn.ui-state-disable,.ui-btn.ui-state-disabled{cursor:default;pointer-events:none;}.ui-btn-icon-only .ui-btn-text,.ui-btn-icon-notext .ui-btn-text,.ui-hidden{display:none;}
 /*!Css widget/panel/panel.css*/
 .ui-panel{position:absolute;display:block;}.ui-panel-contentWrap{position:relative;z-index:1;}.ui-panel.ui-panel-right{right:0;}.ui-panel.ui-panel-left{left:0;}.ui-panel.ui-panel-push{z-index:999;}.ui-panel.ui-panel-overlay{z-index:1001;}.ui-panel.ui-panel-reveal{z-index:0;}.ui-panel-animate{-webkit-transition:-webkit-transform 350ms ease;}.ui-panel-dismiss{position:absolute;z-index:1000;height:100%;top:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+
+/*panel*/
+.ui-panel{position: absolute; z-index: 999; width: 280px; top: 0; height: 100%; -webkit-transform: translate3d(280px, 0px, 0px); padding: 5px 9px; background: #272727; color: #ffffff; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+.ui-panel h3{padding: 0 4px; line-height: 34px; border-bottom: 1px solid #525252; font-size: 17px; text-align: center;}
+.ui-panel h4{margin: 8px 0; border-left: 2px solid #fff; padding-left: 5px; line-height: 1; font-size: 17px;}
+.ui-panel ul{margin-left: 10px; margin-bottom: 15px;}
+.ui-panel li{ float: left; margin: 6px 0; width: 33.3%; overflow: hidden; -ms-text-overflow: ellipsis; text-overflow: ellipsis; }
+.ui-panel .list-col2 li{width: 50%;}
+.ui-panel .list-col4 li{width: 25%;}
+.ui-panel li.cl{width: 100%;}
+.ui-panel li a{ display: inline-block; padding: 0 7px; line-height: 22px; color: #fff; font-size: 15px; white-space: nowrap; }
+.ui-panel li a.selected{background: darkorange;}
+.ui-panel input[type=text],.ui-panel input[type=password]{ width: 60px; height: 27px; line-height: 27px; border: 0; background: #525252; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
+.ui-panel .mainbtnbar{padding-bottom: 20px; border-top: 1px solid #525252;}
+.ui-panel-dismiss{background: rgba(0,0,0,.4); position: fixed; height: 100%!important;}
+.ui-panel-dismiss:before{position: absolute; content: "\f101"; font-family: "FontAwesome"; right: 5px; top: 200px; height: 40px; line-height: 40px; color: #fff; font-size: 36px;}
