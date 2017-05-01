@@ -37,6 +37,7 @@
                                     <th class="">用户名</th>
                                     <th class="">反馈内容</th>
                                     <th class="">反馈时间</th>
+                                    <th class="">选择</th>
                                     <th><button class="btn btn-danger " id="deleteFeedBack">删除</button></th>
                                  </div>
                             </tr>
@@ -68,16 +69,42 @@
                     "<td>" + result.content +
                     "</td>"+
                     "<td>" + result.submitTime +
+                    "</td><td>"+
+                    "<div class='icheckbox_square-green checked'>" +
+                    "<input type='checkbox' class='checkMe' id='" + result.id + "' value='option1'/>" +
+                    "</div>" +
                     "</td>"+
                     "</tr>"
                 );
 
             }
-
+            CheckMe();setUnAvaliable()
         };
         Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
     };
 
+
+
+
+    function deleteButton() {
+        if ($("input[class='checkMe']:checked").length) {
+            $('#deleteFeedBack').removeAttr("disabled");
+        } else {
+            $('#deleteFeedBack').attr('disabled', "true");
+        }
+    }
+
+    //让button不可用
+    function setUnAvaliable() {
+        $('#deleteFeedBack').attr('disabled', "true");
+    }
+
+    //为checkMe绑定点击事件 重新加载列表后需要重新绑定点击事件
+    function CheckMe() {
+        $(".checkMe").click(function () {
+            deleteButton();
+        });
+    }
 
     //点击删除
     $("#deleteFeedBack").click(function() {
@@ -96,7 +123,7 @@
                 if (isConfirm) {
                     var checkBoxes = $("input[class='checkMe']:checked");
                     for (var i = 0; i < checkBoxes.length; i++) {
-                        AjaxDeleteRequest("/FeedBackManagement/delete/FeedBack/id/" + checkBoxes[i].id);
+                        AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + checkBoxes[i].id);
                     }
                     swal({
                         title: "成功",
@@ -104,7 +131,7 @@
                         type: "success",
                         confirmButtonText: "知道了"
                     });
-                    //重新设置为不可点击
+
                     setUnAvaliable();
                     var pageNumber = $(".pagination .active")[0].innerText;
                     loadPage(pageNumber);
