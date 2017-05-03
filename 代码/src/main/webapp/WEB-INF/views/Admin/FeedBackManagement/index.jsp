@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>Title</title>
+    <%--<script src="/assets/js/jquery-2.1.1.min.js"></script>--%>
+    <link rel="stylesheet" href="/assets/css/mobile.css">
 </head>
 <body>
 
@@ -30,14 +32,14 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" style="table-layout: fixed">
                             <thead>
                             <tr>
                                 <div class="row">
-                                    <th class="">用户名</th>
-                                    <th class="">反馈内容</th>
-                                    <th class="">反馈时间</th>
-                                    <th class="">选择</th>
+                                    <th width="15%">用户名</th>
+                                    <th width="30%">反馈内容</th>
+                                    <th width="20%">反馈时间</th>
+                                    <th >选择</th>
                                     <th><button class="btn btn-danger " id="deleteFeedBack">删除</button></th>
                                  </div>
                             </tr>
@@ -53,20 +55,46 @@
     </div>
 </div>
 
+<div class="modal  fade" tabindex="-1" role="dialog" id="modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h2 class="modal-title" id="myModalLabel">
+                   <b> 反馈内容</b>
+                </h2>
+            </div>
+            <div class="modal-body">
+                <p id="feedDetail" style="font-size: large">
+
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script>
     //分页加载页面
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
-            var resultList = data["results"];
+            resultList = data["results"];
             console.log(resultList);
-            for (var i = 0; i < data["totalCount"]; i++) {
+            for (i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
                 $("#FeedBack").append(
                     "<tr>"+
                     "<td>" + result.user.userName +
                     "</td>" +
-                    "<td>" + result.content +
+                    "<td class='feedContent active avoidOverflow' data-toggle='modal' data-target='#modal' onclick='feedBackDetail(this.innerText)' " +
+                    "title='点击查看内容'>" +result.content +
                     "</td>"+
                     "<td>" + result.submitTime +
                     "</td><td>"+
@@ -76,6 +104,7 @@
                     "</td>"+
                     "</tr>"
                 );
+
 
             }
             CheckMe();setUnAvaliable()
@@ -144,6 +173,15 @@
     $(document).ready(
         function () {
             loadPage(1);
-        });
+
+    });
+
+    function feedBackDetail(a){
+        $("#feedDetail").text(a);
+    }
+
+
+
+
 </script>
 </html>
