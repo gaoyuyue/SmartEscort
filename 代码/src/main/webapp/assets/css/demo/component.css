@@ -1,0 +1,86 @@
+/* General styles for all menus */
+.cbp-spmenu {
+	background: #eeeeee;
+	position: fixed;
+    opacity: 0.9;
+}
+
+.cbp-spmenu h3 {
+	color: black;
+	font-size: 1.9em;
+	padding: 8px;
+	margin: 0;
+	font-weight: 300;
+	background: skyblue;
+}
+
+.menuHeader{
+	display: block;
+	color: #fff;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+.menuHeader{
+    display: block;
+    color: black;
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+
+.menuHeader:hover {
+	background: #258ecd;
+}
+
+.menuHeader:active {
+	background: #afdefa;
+	color: #47a3da;
+}
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+	width: 240px;
+	height: 100%;
+	top: 0;
+	z-index: 1000;
+}
+
+.menuHeader{
+	border-bottom: 1px solid #258ecd;
+	padding: 1em;
+}
+
+
+.cbp-spmenu-right {
+	right: -240px;
+}
+
+
+.cbp-spmenu-right.cbp-spmenu-open {
+	right: 0px;
+}
+
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+
+@media screen and (max-height: 26.375em){
+
+	.cbp-spmenu-vertical {
+		font-size: 90%;
+		width: 190px;
+	}
+
+	.cbp-spmenu-right {
+		right: -190px;
+	}
+
+}

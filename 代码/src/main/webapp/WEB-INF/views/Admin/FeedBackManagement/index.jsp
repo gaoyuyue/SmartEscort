@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
     <title>Title</title>
     <%--<script src="/assets/js/jquery-2.1.1.min.js"></script>--%>
     <link rel="stylesheet" href="/assets/css/mobile.css">
@@ -39,8 +40,8 @@
                                     <th width="15%">用户名</th>
                                     <th width="30%">反馈内容</th>
                                     <th width="20%">反馈时间</th>
-                                    <th >选择</th>
-                                    <th><button class="btn btn-danger " id="deleteFeedBack">删除</button></th>
+                                    <th >操作</th>
+                                    <%--<th><button class="btn btn-danger " id="deleteFeedBack">删除所选</button></th>--%>
                                  </div>
                             </tr>
                             </thead>
@@ -97,11 +98,13 @@
                     "title='点击查看内容'>" +result.content +
                     "</td>"+
                     "<td>" + result.submitTime +
-                    "</td><td>"+
-                    "<div class='icheckbox_square-green checked'>" +
-                    "<input type='checkbox' class='checkMe' id='" + result.id + "' value='option1'/>" +
-                    "</div>" +
+//                    "</td><td>"+
+//                    "<div class='icheckbox_square-green checked'>" +
+//                    "<input type='checkbox' class='checkMe' id='" + result.id + "' value='option1'/>" +
+//                    "</div>" +
                     "</td>"+
+                    '<td><a class="md-delete" id="' + result.id+
+                    '">删除</a></td>' +
                     "</tr>"
                 );
 
@@ -110,6 +113,8 @@
             CheckMe();setUnAvaliable()
         };
         Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
+        deleteOne();
+
     };
 
 
@@ -135,7 +140,7 @@
         });
     }
 
-    //点击删除
+    //多选删除
     $("#deleteFeedBack").click(function() {
         swal({
                 title: "确定？",
@@ -169,6 +174,17 @@
                 }
             });
     });
+    //删除单个
+    var deleteOne=function deleteOne() {
+        $(".md-delete").click(function () {
+            var id = this["id"];
+            AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
+            var pageNumber = $(".pagination .active")[0].innerText;
+            loadPage(pageNumber);
+
+        });
+    };
+
 
     $(document).ready(
         function () {
