@@ -8,8 +8,9 @@
 .cbp-spmenu h3 {
 	color: black;
 	font-size: 1.9em;
-	padding: 8px;
+	padding-left: 15px;
 	margin: 0;
+    height: 40px;
 	font-weight: 300;
 	background: skyblue;
 }
@@ -29,12 +30,12 @@
 
 
 .menuHeader:hover {
-	background: #258ecd;
+	background: floralwhite;
 }
 
 .menuHeader:active {
 	background: #afdefa;
-	color: #47a3da;
+	color: orange;
 }
 
 /* Orientation-dependent styles for the content of the menu */
@@ -84,3 +85,31 @@
 	}
 
 }
+
+.menuButton{
+	position: relative;
+	width: 50%;
+	float: left;
+	color:#333;
+	background-color:#fff;
+    padding:6px 12px;
+    border:1px solid transparent;
+    border-radius:4px
+}
+#Ok{
+    background-color: orange;
+}
+#reSet{
+    background-color: grey;
+}
+/*.searchNav {background: #A3D0C3;}*/
+.searchNav input {
+    width: 80%;
+    height: 40px;
+    padding-left: 40px;
+    border: 2px solid #7BA7AB;
+    border-radius: 5px;
+    color: #9E9C9C;
+}
+
+

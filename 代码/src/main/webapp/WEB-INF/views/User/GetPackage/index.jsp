@@ -1,20 +1,18 @@
 <%--#e15400  color--%>
     <%@include file="/user_header.jsp"%>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-   <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
 <script type="text/javascript" src="/assets/js/classie.js"></script>
 <script type="text/javascript" src="/assets/js/modernizr.custom.js"></script>
 <link rel="stylesheet" href="/assets/css/demo/component.css">
 
 
-<div id="top" style="background-color: #eeeeee">
-    <div class="form-group">
-        <input type="text" class="form-control" style="display: inline;width: 70%" value="search">
-        <span class="input-group-addon fa fa-search"  style="display: inline;"></span>
-        <span >
-             <a id="filter-btn" ><img src="/assets/img/filter.png" ></a>
-        </span>
-    </div>
+
+<div class="searchNav" id="top" style="background-color: #eeeeee">
+    <form>
+        <input type="text" placeholder="Search...">
+        <a ><img src="/assets/img/filter.png" class="searchA"></a>
+        <a ><img src="/assets/img/filter.png" id="filter-btn"></a>
+    </form>
 </div>
 
 <div class="weui-panel weui-panel_access">
@@ -72,8 +70,11 @@
         <li class="menuHeader"><strong>包裹大小</strong></li>
     </ul>
 
+<span>
+    <button id="reSet" class="menuButton">重置</button>
+    <button id="Ok" class="menuButton">确定</button>
+</span>
 
-    <button id="Ok" class="weui-btn weui-btn_default" style="padding: 1px">确定</button>
 
 </nav>
 <%--<div id="filterpanel" style="background-color: #eeeeee">--%>
@@ -140,20 +141,24 @@
     });
 
     //加载区域
-    function loadAreaName(){
-        var uploadTable = function(data) {
-            var resultList = data["results"];
-            console.log(resultList);
-            for (i = 0; i < data["totalCount"]; i++) {
-                var result = resultList[i];
-                $jq("#areaName").append(
-                    "<li>"+"result.areaName"+
-                    "</li>"
-                );
-            }
-        };
-        Paging("/User/GetPackage/getAreaName","areaName",uploadTable, pageNumber, 10);
-    }
+    $("#filter-btn").click(function () {
+        function loadAreaName(){
+            var uploadTable = function(data) {
+                var resultList = data["results"];
+                console.log(resultList);
+                for (i = 0; i < data["totalCount"]; i++) {
+                    var result = resultList[i];
+                    $("#areaName").append(
+                        "<li>"+"result.areaName"+
+                        "</li>"
+                    );
+                }
+            };
+            Paging("/User/ManageAddress/addressList","areaName",uploadTable, pageNumber, 10);
+           // Paging("/User/ManageAddress/areaNameList","areaName",uploadTable, pageNumber, 10);
+        }
+    });
+
 
     //滑动菜单
     var menuRight = document.getElementById( 'cbp-spmenu-s2' );
