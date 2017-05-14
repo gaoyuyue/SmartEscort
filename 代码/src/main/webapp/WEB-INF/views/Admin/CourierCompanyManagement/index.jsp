@@ -127,17 +127,19 @@
     }
 
     //让这两个button不可用
-    function setUnAvaliable() {
+    function setUnAvailable() {
         $('#editButton').attr('disabled', "true");
         $('#deleteButton').attr('disabled', "true");
     }
 
     //为checkMe绑定点击事件 重新加载列表后需要重新绑定点击事件
     function CheckMe() {
+        setUnAvailable();
         $(".checkMe").click(function () {
             updateButton();
             deleteButton();
         });
+
     }
 
     //分页加载页面
@@ -157,13 +159,10 @@
                     "</td>" +
                     "</tr>"
                 );
-
-
-                CheckMe();
             }
-
         };
         Paging("/CourierCompanyManagement/getCourierCompanyList", "CourierTable", uploadTable, pageNumber, 10);
+        CheckMe();
     };
 
     //新增
@@ -179,13 +178,12 @@
             });
         } else {
 
-            AjaxPostRequest("/CourierCompanyManagement/createCourier/companyName/" + $("#content").val());
-
+            AjaxPostRequest("/CourierCompanyManagement/createCourier/companyName/" + content);
             $("#createCancelButton").click();
-            var pageNumber = $(".pagination .active")[0].innerText;
-            loadPage(pageNumber);
+            $("#content").val("");
         }
-        $("#content").val("");
+        var pageNumber = $(".pagination .active")[0].innerText;
+        loadPage(pageNumber);
     });
 
     //修改时给input设置值
@@ -212,7 +210,7 @@
             var pageNumber = $(".pagination .active")[0].innerText;
             loadPage(pageNumber);
         }
-        setUnAvaliable();
+        setUnAvailable();
     });
 
     //删除
@@ -240,12 +238,11 @@
                         type: "success",
                         confirmButtonText: "知道了"
                     });
-                    //重新设置为不可点击
-                    setUnAvaliable();
                     var pageNumber = $(".pagination .active")[0].innerText;
                     loadPage(pageNumber);
                 } else {
                     swal("已取消", "未作任何操作", "info");
+                    setUnAvailable()
                 }
             });
     });

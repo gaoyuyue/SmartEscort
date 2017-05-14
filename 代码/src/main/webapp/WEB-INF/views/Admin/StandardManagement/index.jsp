@@ -39,7 +39,7 @@
                                 <th>收费标准</th>
                             </tr>
                             </thead>
-                            <tbody id="CourierTable">
+                            <tbody id="StandardTable">
                             </tbody>
                         </table>
                     </div>
@@ -67,14 +67,14 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="请输入区域" name="areaName" id="price">
+                                <input type="text" class="form-control" placeholder="请输入标准金额" name="areaName" id="standardPrice">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
                             <div class="col-sm-6">
-                                <textarea style="margin: 0px 0px 0px 0px; height: 54px; width: 404px;"  class="form-control" placeholder="请输入详细描述收费标准"  id="description">
-                                </textarea>
+                                <input type="text"  class="form-control" placeholder="请输入描述"  id="standardDescription">
+                                </input>
                             </div>
                         </div>
                     </form>
@@ -91,7 +91,53 @@
     <small class="font-bold">
     </small>
 </div>
+
+<%--弹窗修改--%>
+<div class="modal inmodal fade in" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"
+     style="display: none ; padding-right: 17px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">修改快递取件收费标准</h4>
+                <small class="font-bold">这里可以显示副标题。
+                </small>
+            </div>
+            <small class="font-bold">
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="请输入新的标准金额" name="areaName" id="newStandardPrice">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
+                            <div class="col-sm-6">
+                                <input type="text"  class="form-control"   id="newStandardDescription">
+                                </input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="updateCancelButton">关闭</button>
+                    <button type="button" class="btn btn-primary" id="updateButton">确认修改</button>
+                </div>
+            </small>
+        </div>
+        <small class="font-bold">
+        </small>
+    </div>
+    <small class="font-bold">
+    </small>
+</div>
 <script type="text/javascript">
+
+
+
     function updateButton() {
         if ($("input[class='checkMe']:checked").length == 1) {
             $('#editButton').removeAttr("disabled");
@@ -108,24 +154,140 @@
     }
 
     //让这两个button不可用
-    function setUnAvaliable() {
+    function setUnAvailable() {
         $('#editButton').attr('disabled', "true");
         $('#deleteButton').attr('disabled', "true");
     }
 
     //为checkMe绑定点击事件 重新加载列表后需要重新绑定点击事件
     function CheckMe() {
+        setUnAvailable();
         $(".checkMe").click(function () {
             updateButton();
             deleteButton();
         });
     }
 
-    //f分页加载页面
-    var loadPage=function (pageNumber) {
-        var success=function (data) {
-            console.log(data)
+    //分页加载页面
+    var loadPage = function (pageNumber) {
+        var uploadTable = function (data) {
+            var resultList = data["results"];
+            for (var i = 0; i < data["totalCount"]; i++) {
+                    var result = resultList[i];
+                    $("#StandardTable").append(
+                        "<tr><td>"+
+                    "<div class='icheckbox_square-green checked'>" +
+                    "<input type='checkbox' class='checkMe' id='" + result.id + "' value='option1'/>" +
+                    "</div>" +
+                    "</td>" +
+                    "<td >"+ result.description +
+                    "</td>" +
+                    "<td>" + result.price +
+                        "</td>" +
+                        "</tr>"
+                    );
+            }
         };
-        AjaxGetRequest("/StandardManagement/getStandard",success);
-    }
+        Paging("/StandardManagement/getStandardList", "StandardTable", uploadTable, pageNumber, 10);
+        CheckMe();
+    };
+
+    //新增
+    $("#createButton").click(function () {
+       var price=$("#standardPrice").val();
+        var description = $("#standardDescription").val();
+        if (isNullOrEmpty(description)&&isNullOrEmpty(price)) {
+            swal({
+                title: "错误",
+                text: "不可为空",
+                type: "error",
+
+                confirmButtonText: "知道了"
+            });
+        } else {
+            var data={
+                price:price,
+                description:description
+            };
+            Post("/StandardManagement/createStandard",data);
+            $("#createCancelButton").click();
+        }
+        $("#standardPrice").val("");
+        $("#standardDescription").val("");
+        var pageNumber = $(".pagination .active")[0].innerText;
+        loadPage(pageNumber);
+    });
+
+    //修改时给input设置值
+    $("#editButton").click(function () {
+        var id = $("input[class='checkMe']:checked").attr("id");
+        var thisElement = $("#" + id).parent().parent().next();
+        $("#newStandardPrice").val(thisElement.text());
+        $("#newStandardDescription").val(thisElement.text());
+    });
+
+    //修改
+    $("#updateButton").click(function () {
+        var standardPrice = $("#newStandardPrice").val();
+        var standardDescription = $("#newStandardDescription").val();
+        var id = $("input[class='checkMe']:checked").attr("id");
+        if (isNullOrEmpty(standardPrice)&&isNullOrEmpty(standardDescription)) {
+            swal({
+                title: "错误",
+                text: "必填项不可为空",
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        } else {
+            var data={
+                id:id,
+                price:standardPrice,
+                description:standardDescription
+            };
+            Put("/StandardManagement/updateStandard",data);
+            $("#updateCancelButton").click();
+            var pageNumber = $(".pagination .active")[0].innerText;
+            loadPage(pageNumber);
+        }
+        setUnAvailable();
+    });
+
+    //删除标准
+    $('#deleteButton').click(function () {
+        swal({
+                title: "确定？",
+                text: "你确定删除吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var checkBoxes = $("input[class='checkMe']:checked");
+                    for (var i = 0; i < checkBoxes.length; i++) {
+                        AjaxDeleteRequest("/StandardManagement/deleteStandard/standardId/" + checkBoxes[i].id);
+                    }
+                    swal({
+                        title: "成功",
+                        text: "删除完毕",
+                        type: "success",
+                        confirmButtonText: "知道了"
+                    });
+                    var pageNumber = $(".pagination .active")[0].innerText;
+                    loadPage(pageNumber);
+                } else {
+                    swal("已取消", "未作任何操作", "info");
+                    setUnAvailable();
+                }
+            });
+    });
+
+    $(document).ready(
+        function () {
+            loadPage(1);
+        });
 </script>

@@ -173,9 +173,7 @@
             $("#AddressTable").empty();
             for (var i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
-                //console.log(result);
                 var areaList = result.areaList;
-                //console.log(areaList);
                 for (var j = 0; j < areaList.length; j++) {
                     var area = areaList[j];
                     $("#AddressTable").append(
@@ -209,7 +207,7 @@
             AjaxPostRequest("/AddressManagement/createSchool/schoolName/" + schoolName);
             $("#schoolCancelButton").click();
         }
-        $("#schoolCancelButton").val("");
+        $("#schoolName").val("");
     });
 
     //点击新增区域加载学校
@@ -232,9 +230,9 @@
         } else {
             AjaxPostRequest("/AddressManagement/createArea/areaName/"+ areaName +"/schoolId/" + schoolId);
             $("#areaCancelButton").click();
-            var pageNumber = $(".pagination .active")[0].innerText;
-            loadPage(pageNumber);
         }
+        var pageNumber = $(".pagination .active")[0].innerText;
+        loadPage(pageNumber);
         $("#areaName").val("");
     });
 

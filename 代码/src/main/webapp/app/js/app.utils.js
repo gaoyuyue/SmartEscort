@@ -241,6 +241,72 @@ var AjaxPostRequest = function AjaxPostRequest(url) {
 };
 
 /**
+ * Post方法
+ * @param url
+ * @param data
+ * @param success
+ * @constructor
+ */
+var Post = function (url,data,success) {
+    "use strict";
+
+    $.ajax({
+        url:url,
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function () {
+            swal({
+                title: "添加成功",
+                text: "添加成功",
+                type: "success",
+                confirmButtonText: "知道了"
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            swal({
+                title: "出错了！",
+                text: "错误信息" + XMLHttpRequest.status,
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        }
+    });
+};
+/**
+ * Put方法
+ * @param url
+ * @param data
+ * @param success
+ * @constructor
+ */
+var Put = function (url,data,success) {
+    "use strict";
+
+    $.ajax({
+        url:url,
+        type:"PUT",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function () {
+            swal({
+                title: "修改成功",
+                text: "修改成功",
+                type: "success",
+                confirmButtonText: "知道了"
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            swal({
+                title: "出错了！",
+                text: "错误信息" + XMLHttpRequest.status,
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        }
+    });
+};
+/**
  * 通过PUT修改
  * @param url
  * @constructor

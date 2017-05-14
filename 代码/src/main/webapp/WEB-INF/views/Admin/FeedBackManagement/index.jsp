@@ -68,7 +68,7 @@
                 </h2>
             </div>
             <div class="modal-body">
-                <p id="feedDetail" style="font-size: large">
+                <p id="feedDetail" style="font-size: large;word-break: break-all">
 
                 </p>
 
@@ -98,10 +98,6 @@
                     "title='点击查看内容'>" +result.content +
                     "</td>"+
                     "<td>" + result.submitTime +
-//                    "</td><td>"+
-//                    "<div class='icheckbox_square-green checked'>" +
-//                    "<input type='checkbox' class='checkMe' id='" + result.id + "' value='option1'/>" +
-//                    "</div>" +
                     "</td>"+
                     '<td><a class="md-delete" id="' + result.id+
                     '">删除</a></td>' +
@@ -110,7 +106,7 @@
 
 
             }
-            CheckMe();setUnAvaliable()
+            CheckMe();setUnAvailable()
         };
         Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
         deleteOne();
@@ -129,7 +125,7 @@
     }
 
     //让button不可用
-    function setUnAvaliable() {
+    function setUnAvailable() {
         $('#deleteFeedBack').attr('disabled', "true");
     }
 
@@ -140,40 +136,40 @@
         });
     }
 
-    //多选删除
-    $("#deleteFeedBack").click(function() {
-        swal({
-                title: "确定？",
-                text: "你确定删除吗？",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "删除",
-                cancelButtonText: "取消",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            },
-            function (isConfirm) {
-                if (isConfirm) {
-                    var checkBoxes = $("input[class='checkMe']:checked");
-                    for (var i = 0; i < checkBoxes.length; i++) {
-                        AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + checkBoxes[i].id);
-                    }
-                    swal({
-                        title: "成功",
-                        text: "删除完毕",
-                        type: "success",
-                        confirmButtonText: "知道了"
-                    });
-
-                    setUnAvaliable();
-                    var pageNumber = $(".pagination .active")[0].innerText;
-                    loadPage(pageNumber);
-                } else {
-                    swal("已取消", "未作任何操作", "info");
-                }
-            });
-    });
+   //多选删除
+//    $("#deleteFeedBack").click(function() {
+//        swal({
+//                title: "确定？",
+//                text: "你确定删除吗？",
+//                type: "warning",
+//                showCancelButton: true,
+//                confirmButtonColor: "#DD6B55",
+//                confirmButtonText: "删除",
+//                cancelButtonText: "取消",
+//                closeOnConfirm: false,
+//                closeOnCancel: false
+//            },
+//            function (isConfirm) {
+//                if (isConfirm) {
+//                    var checkBoxes = $("input[class='checkMe']:checked");
+//                    for (var i = 0; i < checkBoxes.length; i++) {
+//                        AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + checkBoxes[i].id);
+//                    }
+//                    swal({
+//                        title: "成功",
+//                        text: "删除完毕",
+//                        type: "success",
+//                        confirmButtonText: "知道了"
+//                    });
+//
+//                    setUnAvaliable();
+//                    var pageNumber = $(".pagination .active")[0].innerText;
+//                    loadPage(pageNumber);
+//                } else {
+//                    swal("已取消", "未作任何操作", "info");
+//                }
+//            });
+//    });
     //删除单个
     var deleteOne=function deleteOne() {
         $(".md-delete").click(function () {
@@ -181,8 +177,8 @@
             AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
             var pageNumber = $(".pagination .active")[0].innerText;
             loadPage(pageNumber);
-
         });
+
     };
 
 

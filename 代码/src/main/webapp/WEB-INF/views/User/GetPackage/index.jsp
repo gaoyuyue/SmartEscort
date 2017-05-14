@@ -3,18 +3,19 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="/assets/js/classie.js"></script>
 <script type="text/javascript" src="/assets/js/modernizr.custom.js"></script>
-<link rel="stylesheet" href="/assets/css/demo/component.css">
-
-
-
-<div class="searchNav" id="top" style="background-color: #eeeeee">
+<style type="text/css">
+    .adds{
+        background-color: green;
+    }
+</style>
+<div class="searchNav" id="top" style="background-color: #eeeeee;position: fixed;">
     <form>
         <input type="text" placeholder="Search...">
         <a ><img src="/assets/img/filter.png" class="searchA"></a>
         <a ><img src="/assets/img/filter.png" id="filter-btn"></a>
     </form>
 </div>
-
+<br>
 <div class="weui-panel weui-panel_access">
     <div class="weui-form-preview">
         <div class="weui-panel__bd">
@@ -52,22 +53,24 @@
                 </div>
             </a>
         </div>
-
     </div>
 </div>
 
 <%--筛选菜单--%>
-<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-
+<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2" style="OVERFLOW-Y: auto;>
+    <ul  class="qwe">
     <h3>筛选</h3>
-    <ul id="areaName">
-        <li class="menuHeader"><strong>区域</strong></li>
+    <strong>区域</strong>
+    <ul id="areaList" class="menuHeader">
+<li><a>asd</a></li>
     </ul>
-    <ul>
-        <li class="menuHeader"><strong>快递类型</strong></li>
+    <strong>快递类型</strong>
+    <ul id="packageType" class="menuHeader">
+
     </ul>
-    <ul>
-        <li class="menuHeader"><strong>包裹大小</strong></li>
+    <strong>包裹大小</strong>
+    <ul id="standard" class="menuHeader">
+
     </ul>
 
 <span>
@@ -76,44 +79,11 @@
 </span>
 
 
-</nav>
-<%--<div id="filterpanel" style="background-color: #eeeeee">--%>
-
-
-    <%--<strong >区域</strong>--%>
-    <%--<ul id="areaName">--%>
-        <%--<li>梅园</li>--%>
-    <%--</ul>--%>
-    <%--<br>--%>
-    <%--<br>--%>
-    <%--<br>--%>
-
-    <%--<strong >快递类型</strong>--%>
-    <%--<ul id="CourierCompany" >--%>
-        <%--<li>顺丰速运</li>--%>
-        <%--<li>百世汇通</li>--%>
-        <%--<li>圆通快递</li>--%>
-        <%--<li>京东快递</li>--%>
-    <%--</ul>--%>
-    <%--<br>--%>
-    <%--<br>--%>
-    <%--<br>--%>
-    <%--<strong >包裹大小</strong>--%>
-    <%--<ul id="pakageSize">--%>
-        <%--<li>大</li>--%>
-        <%--<li>中</li>--%>
-        <%--<li>小</li>--%>
-    <%--</ul><br>--%>
-    <%--<br>--%>
-    <%--<br>--%>
-    <%--<hr>--%>
-    <%--<div class="btn btn-warning btn-block" id="submitDiv">--%>
-        <%--<a href="javascript:void(0);" id="filterSubmit" >确认</a>--%>
-    <%--</div>--%>
-<%--</div>--%>
+</div>
 
 <script>
     $(document).ready(function () {
+        tryTime=0;
         $("#getPackage").addClass("weui-bar__item_on");
     });
 
@@ -140,23 +110,37 @@
         });
     });
 
-    //加载区域
+    //获取
     $("#filter-btn").click(function () {
-        function loadAreaName(){
-            var uploadTable = function(data) {
-                var resultList = data["results"];
-                console.log(resultList);
-                for (i = 0; i < data["totalCount"]; i++) {
-                    var result = resultList[i];
-                    $("#areaName").append(
-                        "<li>"+"result.areaName"+
-                        "</li>"
-                    );
+
+            var areaList = function(data) {
+                for (var i=0;i<data.length;i++){
+                    $("#areaList").append(
+                        "<li>"+data[i]+
+                        "</li>");
                 }
-            };
-            Paging("/User/ManageAddress/addressList","areaName",uploadTable, pageNumber, 10);
-           // Paging("/User/ManageAddress/areaNameList","areaName",uploadTable, pageNumber, 10);
-        }
+                };
+        var packageTypeList = function(data) {
+            for (var i=0;i<data.length;i++){
+                $("#packageType").append(
+                    "<li>"+data[i]+
+                    "</li>");
+            }
+        };
+        var standardList = function(data) {
+            for (var i=0;i<data.length;i++){
+                $("#standard").append(
+                    "<li>"+data[i]+
+                    "</li>");
+            }
+        };
+        if(tryTime==0){
+        Get("/User/GetPackage/courierList",packageTypeList);
+        Get("/User/GetPackage/standardList",standardList);
+        Get("/User/GetPackage/areaList",areaList);
+        tryTime++;
+            }
+
     });
 
 
@@ -169,7 +153,11 @@
         };
     Ok.onclick=function(){
         classie.toggle( menuRight, 'cbp-spmenu-open' );
-    }
+    };
+
+    $("#standard").click(function () {
+        this.addClass("adds");
+    })
 </script>
 
 <%@include file="/user_footer.jsp"%>
