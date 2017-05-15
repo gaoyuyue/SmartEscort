@@ -11,24 +11,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>自定义响应式表格</h5>
-                    <%--<div class="ibox-tools">
-                        &lt;%&ndash;<a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>&ndash;%&gt;
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="table_basic.html#">选项1</a>
-                            </li>
-                            <li><a href="table_basic.html#">选项2</a>
-                            </li>
-                        </ul>
-                        &lt;%&ndash;<a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>&ndash;%&gt;
-                    </div>--%>
+                    <h5>地址管理</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -38,12 +21,6 @@
                         <button type="button" class="btn btn-w-m btn-info" data-toggle="modal" data-target="#myModal2" id="addArea">
                             添加地址
                         </button>
-                        <%--<div class="col-sm-3" style="float: right">
-                            <div class="input-group">
-                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                            </div>
-                        </div>--%>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -241,7 +218,6 @@
             loadPage(1);
         }
     );
-
 
 
 </script>

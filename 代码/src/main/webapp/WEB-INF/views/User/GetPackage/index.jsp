@@ -11,7 +11,7 @@
 <div class="searchNav" id="top" style="background-color: #eeeeee;position: fixed;">
     <form>
         <input type="text" placeholder="Search...">
-        <a ><img src="/assets/img/filter.png" class="searchA"></a>
+        <a ><img src="/assets/img/Search.png" class="searchA"></a>
         <a ><img src="/assets/img/filter.png" id="filter-btn"></a>
     </form>
 </div>

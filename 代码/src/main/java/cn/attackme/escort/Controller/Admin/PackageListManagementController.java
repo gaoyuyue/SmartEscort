@@ -6,11 +6,12 @@ import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static cn.attackme.escort.Model.PackageStatus.待领取;
 
@@ -31,13 +32,34 @@ public class PackageListManagementController {
         return "Admin/PackageListManagement/index";
     }
 
+    //获取全部订单
     @RequiresRoles("admin")
     @ResponseBody
-    @GetMapping("/getPackageList/pageNumber/{pageNumber}/pageSize/{pageSize}")
-    public PageResults<Package> getPackageListByPage(@PathVariable int pageNumber,
-                                                     @PathVariable int pageSize){
-        return packageService.getPackageByStatus(待领取,pageNumber,pageSize);
+    @GetMapping("/PackageList//pageNumber/{pageNumber}/pageSize/{pageSize}")
+    public PageResults<Package> PackageList(@PathVariable int pageNumber,
+                                                 @PathVariable int pageSize){
+        return packageService.getListByPage(pageNumber,pageSize);
+//      return packageService.getPackageByStatus(待领取,pageNumber,pageSize);
+    }
+    //获取全部订单
+    @RequiresRoles("admin")
+    @ResponseBody
+    @GetMapping("/PackageList/packageStatus/{packageStatus}/pageNumber/{pageNumber}/pageSize/{pageSize}")
+    public PageResults<Package> PackageListO(@PathVariable PackageStatus packageStatus , @PathVariable int pageNumber,
+                                            @PathVariable int pageSize){
+        return packageService.getPackageByStatus(packageStatus,pageNumber,pageSize);
+//      return packageService.getPackageByStatus(待领取,pageNumber,pageSize);
     }
 
-
+//    删除订单
+    @RequiresRoles("admin")
+    @DeleteMapping("/deletePackage/id/{id}")
+    public ResponseEntity<Void> deletePackage(@PathVariable int id) {
+        if (packageService.getById(id) == null) {
+            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        } else {
+            packageService.deleteById(id);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+    }
 }

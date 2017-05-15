@@ -86,7 +86,7 @@
     //分页加载页面
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
-            resultList = data["results"];
+            var resultList = data["results"];
             console.log(resultList);
             for (i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
@@ -103,8 +103,6 @@
                     '">删除</a></td>' +
                     "</tr>"
                 );
-
-
             }
             CheckMe();setUnAvailable()
         };
