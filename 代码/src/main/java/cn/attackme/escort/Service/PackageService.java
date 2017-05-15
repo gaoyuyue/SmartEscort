@@ -1,8 +1,7 @@
 package cn.attackme.escort.Service;
 
+import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
-import cn.attackme.escort.Model.PackageStatus;
-import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Repository.Query;
 import cn.attackme.escort.Utils.PageResults;
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +12,35 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PackageService extends BaseService<Package> {
+
+    /**
+     * 筛选包裹
+     * @param area
+     * @param courierCompany
+     * @param standard
+     * @param packageStatus
+     * @param school
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    public PageResults<Package> getPackageByFilter(@NotNull Area area,
+                                                   @NotNull CourierCompany courierCompany,
+                                                   @NotNull Standard standard,
+                                                   @NotNull PackageStatus packageStatus,
+                                                   @NotNull School school,
+                                                   @NotNull int pageNumber,
+                                                   @NotNull int pageSize){
+        Query query = new Query(entityManager);
+        query.from(Package.class)
+                .whereEqual("packageStatus",packageStatus)
+                .whereEqual("school",school)
+                .whereEqual("area",area)
+                .whereEqual("courierCompany",courierCompany)
+                .whereEqual("standard",standard)
+                .setOrder("id","desc");
+        return this.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
 
     /**
      * 根据状态来获取包裹
