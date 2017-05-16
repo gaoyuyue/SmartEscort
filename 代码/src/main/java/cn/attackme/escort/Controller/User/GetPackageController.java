@@ -3,6 +3,7 @@ package cn.attackme.escort.Controller.User;
 import cn.attackme.Wechat.Message.RowMessage;
 import cn.attackme.Wechat.Message.TemplateMessage;
 import cn.attackme.Wechat.Util.MessageUtil;
+import cn.attackme.Wechat.Util.WechatProperties;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.*;
@@ -123,14 +124,23 @@ public class GetPackageController {
         thePackage.setAgency(agency);
         thePackage.setPackageStatus(PackageStatus.已领取);
         packageService.saveOrUpdate(thePackage);
-
         User delegation = thePackage.getDelegation();
+
+        //发送模板消息给交易双方
+
+        String foreUrl = WechatProperties.authorizeUrl+"?appid="+
+                WechatProperties.appid+
+                "&redirect_uri="+
+                WechatProperties.OAuth2Url+
+                "&response_type=code&scope=snsapi_base&state=";
+        String backUrl = "#wechat_redirect";
+
         TemplateMessage delegateMessage = new TemplateMessage();
         delegateMessage.setTouser(delegation.getOpenid());
         delegateMessage.setTemplate_id("1r7zCe-2-qakpyNVNL-8-6SFvBJPtDop4bm6zWTgZlI");
-        delegateMessage.setUrl("escort.attackme.cn/User/MyDart/");
-        RowMessage receiverName = new RowMessage(agency.getName(),"red");
-        RowMessage receiverPhone = new RowMessage(agency.getPhoneNumber(),"yellow");
+        delegateMessage.setUrl(foreUrl+"/User/MyPublish/"+backUrl);
+        RowMessage receiverName = new RowMessage(agency.getName()+"\n","red");
+        RowMessage receiverPhone = new RowMessage(agency.getPhoneNumber(),"red");
         Map<String,RowMessage> delegateMessageMap = new HashMap<>();
         delegateMessageMap.put("receiverName",receiverName);
         delegateMessageMap.put("receiverPhone",receiverPhone);
@@ -139,13 +149,13 @@ public class GetPackageController {
         Address address = thePackage.getAddress();
         TemplateMessage agencyMessage = new TemplateMessage();
         agencyMessage.setTouser(agency.getOpenid());
-        agencyMessage.setTemplate_id("QeaYiX4aFfnKN4_u_zdJh8EBpuQc1oVrJmJQ65WB_zs");
-        agencyMessage.setUrl("escort.attackme.cn/User/MyPublish/");
-        RowMessage publisherName = new RowMessage(agency.getName(),"red");
-        RowMessage publisherPhone = new RowMessage(agency.getPhoneNumber(),"yellow");
-        RowMessage receiveName = new RowMessage(address.getReceiverName(),"yellow");
-        RowMessage receiveNumber = new RowMessage(address.getPhoneNumber(),"yellow");
-        RowMessage receiveMessage = new RowMessage(thePackage.getMessage(),"yellow");
+        agencyMessage.setTemplate_id("T-OcS-GauGMFnEEz3O9uXX_G8AZwbCJoCbFC16e8_iw");
+        agencyMessage.setUrl(foreUrl+"/User/MyDart/"+backUrl);
+        RowMessage publisherName = new RowMessage(agency.getName()+"\n","red");
+        RowMessage publisherPhone = new RowMessage(agency.getPhoneNumber()+"\n","red");
+        RowMessage receiveName = new RowMessage(address.getReceiverName()+"\n","red");
+        RowMessage receiveNumber = new RowMessage(address.getPhoneNumber()+"\n","red");
+        RowMessage receiveMessage = new RowMessage(thePackage.getMessage()+"\n","red");
         Map<String,RowMessage> agencyMessageMap = new HashMap<>();
         agencyMessageMap.put("publisherName",publisherName);
         agencyMessageMap.put("publisherPhone",publisherPhone);

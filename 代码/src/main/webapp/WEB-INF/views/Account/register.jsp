@@ -90,13 +90,15 @@
                 </div>
             </div>
 
+
+
             <div class="weui-cell">
                 <div id="msg" style="color:red;"></div>
             </div>
 
         </div>
         <div class="weui-btn-area">
-            <button type="submit" class="weui-btn weui-btn_primary" id="submit">进入</button>
+            <button type="submit" class="weui-btn weui-btn_primary" id="submit">注册</button>
         </div>
         </form>
     </div>
