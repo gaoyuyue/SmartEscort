@@ -119,11 +119,9 @@
 
 //获取送货人信息
 <script>
-    var success = function (cao) {
-//        $("#agencyName").text("");
-//        $("#agencyName").text(data.agency.name);
-       var agency = cao.message;
-       alert(agency);
+    var success = function () {
+
+
        $("#agencyName").text("ssss");
 
 

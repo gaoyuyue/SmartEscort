@@ -203,7 +203,7 @@
                         text: agencyPhoneNumber,
                         className: "color-black",
                         onClick: function() {
-                            window.location.href = "tel:agencyPhoneNumber";
+                            window.location.href = "tel:${agencyPhoneNumber}";
                         }
                     }
                 ]
