@@ -1,5 +1,8 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.Wechat.Message.RowMessage;
+import cn.attackme.Wechat.Message.TemplateMessage;
+import cn.attackme.Wechat.Util.MessageUtil;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.*;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
@@ -109,12 +114,49 @@ public class GetPackageController {
     @ResponseBody
     @GetMapping("/receive/packageId/{packageId}")
     public ResponseEntity<Void> receive(@PathVariable int packageId){
-        String userName = getSubject().getPrincipal().toString();
-        User user = userService.getById(userName);
         Package thePackage = packageService.getById(packageId);
-        thePackage.setAgency(user);
+        if (thePackage.getAgency() != null){
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
+        }
+        String userName = getSubject().getPrincipal().toString();
+        User agency = userService.getById(userName);
+        thePackage.setAgency(agency);
         thePackage.setPackageStatus(PackageStatus.已领取);
         packageService.saveOrUpdate(thePackage);
+
+        User delegation = thePackage.getDelegation();
+        TemplateMessage delegateMessage = new TemplateMessage();
+        delegateMessage.setTouser(delegation.getOpenid());
+        delegateMessage.setTemplate_id("1r7zCe-2-qakpyNVNL-8-6SFvBJPtDop4bm6zWTgZlI");
+        delegateMessage.setUrl("escort.attackme.cn/User/MyDart/");
+        RowMessage receiverName = new RowMessage(agency.getName(),"red");
+        RowMessage receiverPhone = new RowMessage(agency.getPhoneNumber(),"yellow");
+        Map<String,RowMessage> delegateMessageMap = new HashMap<>();
+        delegateMessageMap.put("receiverName",receiverName);
+        delegateMessageMap.put("receiverPhone",receiverPhone);
+        delegateMessage.setData(delegateMessageMap);
+
+        Address address = thePackage.getAddress();
+        TemplateMessage agencyMessage = new TemplateMessage();
+        agencyMessage.setTouser(agency.getOpenid());
+        agencyMessage.setTemplate_id("QeaYiX4aFfnKN4_u_zdJh8EBpuQc1oVrJmJQ65WB_zs");
+        agencyMessage.setUrl("escort.attackme.cn/User/MyPublish/");
+        RowMessage publisherName = new RowMessage(agency.getName(),"red");
+        RowMessage publisherPhone = new RowMessage(agency.getPhoneNumber(),"yellow");
+        RowMessage receiveName = new RowMessage(address.getReceiverName(),"yellow");
+        RowMessage receiveNumber = new RowMessage(address.getPhoneNumber(),"yellow");
+        RowMessage receiveMessage = new RowMessage(thePackage.getMessage(),"yellow");
+        Map<String,RowMessage> agencyMessageMap = new HashMap<>();
+        agencyMessageMap.put("publisherName",publisherName);
+        agencyMessageMap.put("publisherPhone",publisherPhone);
+        agencyMessageMap.put("receiveName",receiveName);
+        agencyMessageMap.put("receiveNumber",receiveNumber);
+        agencyMessageMap.put("receiveMessage",receiveMessage);
+        agencyMessage.setData(agencyMessageMap);
+
+        MessageUtil.postTemplate(delegateMessage);
+        MessageUtil.postTemplate(agencyMessage);
+
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

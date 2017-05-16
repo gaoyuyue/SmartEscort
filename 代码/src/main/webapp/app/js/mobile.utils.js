@@ -68,10 +68,8 @@ var checkNaN = function (value) {
  */
 var pageNumber = 0;
 var Loading = function (url, updateTable, pageSize) {
+    alert("");
     "use strict";
-    $(document).ajaxStart(function () {
-        Pace.restart();
-    });
     $.ajax({
         url: url + "/pageNumber/" + pageNumber + "/pageSize/" + pageSize,
         contentType: "application/json; charset=utf-8",
