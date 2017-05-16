@@ -40,7 +40,7 @@ public class WaitingEvaluationController {
     private PackageService packageService;
 
     /**
-     * 获取发布的包裹
+     * 获取当前人所有的包裹
      * @return
      */
     @ResponseBody
@@ -48,15 +48,15 @@ public class WaitingEvaluationController {
     public List<Package> packageList(){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
-//        List<Package> receivelist = user.getReceiveList();
+        List<Package> receivelist = user.getReceiveList();
         List<Package> publishList = user.getPublishList();
-//        List<Package> receiveList1 = receivelist.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待评价)).collect(toList());
+        publishList.addAll(receivelist);
         List<Package> publishList1 = publishList.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待评价)).collect(toList());
         return publishList1;
     }
 
     /**
-     * 获取委托人包裹信息
+     * 获取当前人包裹信息
      * @param publishDartId
      * @return
      */
