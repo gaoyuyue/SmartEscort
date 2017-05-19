@@ -4,6 +4,7 @@ package cn.attackme.escort.Controller.System;
 import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.MailService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Service.UserService;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +30,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
 
 @SuppressWarnings({"JavaDoc", "unused"})
@@ -42,6 +45,9 @@ public class AccountController {
 
     @Autowired
     private SchoolService schoolService;
+
+    @Autowired
+    private MailService mailService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -115,6 +121,11 @@ public class AccountController {
             user.setStudentId(studentId);
             user.setOpenid(openid);
             userInfoService.save(user);
+            try {
+                mailService.sendMail("1519035296@qq.com","gaoyuyue@outlook.com","helloworld","helloworld");
+            } catch (MessagingException e) {
+                LogToDB(e);
+            }
             return "redirect:/Account/OAuth2";
         }
         return "redirect:/Account/Register";
@@ -188,7 +199,7 @@ public class AccountController {
                 return "redirect:/Account/Login";
             }
         } catch (Exception e) {
-            LogUtils.LogToDB(e);
+            LogToDB(e);
             if (token != null) {
                 token.clear();
             }

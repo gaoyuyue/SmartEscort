@@ -263,7 +263,6 @@ public class MessageUtil {
     public static void postTemplate(TemplateMessage templateMessage){
         try {
             String result = sendPostBuffer(WechatProperties.sendTemplate+WechatProperties.access_token,new JSONObject(templateMessage).toString());
-            System.out.println(new JSONObject(templateMessage).toString());
         } catch (IOException ex) {
             LogToDB(ex);
         }

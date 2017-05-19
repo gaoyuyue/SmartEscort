@@ -17,6 +17,7 @@
     <import resource="Spring-RedisCache.xml"/>  <!--Spring缓存至Redis-->
     <import resource="Spring-Shiro.xml"/>
     <import resource="Spring-Redis.xml"/>
+    <import resource="Mail.xml"/>
 
     <!--定时任务注解-->
     <task:annotation-driven/>
