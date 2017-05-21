@@ -122,7 +122,7 @@ public class AccountController {
             user.setOpenid(openid);
             userInfoService.save(user);
             try {
-                mailService.sendMail("1519035296@qq.com","gaoyuyue@outlook.com","helloworld","helloworld");
+                mailService.sendMail("1519035296@qq.com","gaoyuyue@outlook.com","有新用户注册","");
             } catch (MessagingException e) {
                 LogToDB(e);
             }
