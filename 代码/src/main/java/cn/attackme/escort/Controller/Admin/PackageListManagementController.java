@@ -4,6 +4,7 @@ import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Service.PackageService;
+import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class PackageListManagementController {
 
     @Autowired
     private PackageService packageService;
-
+    @Autowired
+    private SchoolService schoolService;
     @RequiresRoles("admin")
     @GetMapping("/")
     public String index(){
@@ -34,22 +36,14 @@ public class PackageListManagementController {
     }
 
     //获取全部订单
-//    @RequiresRoles("admin")
-//    @ResponseBody
-//    @GetMapping("/PackageList//pageNumber/{pageNumber}/pageSize/{pageSize}")
-//    public PageResults<Package> PackageList(@PathVariable int pageNumber,
-//                                                 @PathVariable int pageSize){
-//        return packageService.getListByPage(pageNumber,pageSize);
-//      return packageService.getPackageByStatus(待领取,pageNumber,pageSize);
-//    }
-    //获取全部订单
     @RequiresRoles("admin")
     @ResponseBody
-    @GetMapping("/PackageList/packageStatus/{packageStatus}/pageNumber/{pageNumber}/pageSize/{pageSize}")
-    public PageResults<Package> PackageListO(@PathVariable PackageStatus packageStatus ,@PathVariable int pageNumber,
+    @GetMapping("/PackageList/packageStatus/{packageStatus}/schoolId/{schoolId}/pageNumber/{pageNumber}/pageSize/{pageSize}")
+    public PageResults<Package> PackageList(@PathVariable PackageStatus packageStatus ,@PathVariable int schoolId,@PathVariable int pageNumber,
                                              @PathVariable int pageSize){
-        return packageService.getPackageByStatus(packageStatus,pageNumber,pageSize);
-//    return packageService.getPackageByMe(packageStatus,SchoolId,pageNumber,pageSize);
+       School schoolName=schoolService.getById(schoolId);
+       return packageService.getPackageByStatusAndSchool(packageStatus,schoolName,pageNumber,pageSize);
+
     }
 
 //    删除订单

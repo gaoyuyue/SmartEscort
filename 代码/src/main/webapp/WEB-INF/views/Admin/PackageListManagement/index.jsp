@@ -91,8 +91,7 @@
                     )
                 }
             };
-        Paging("/PackageListManagement/PackageList/packageStatus/" + $("#packageStatus").val(),"packageList",updateTable,pageNumber,10);
-//        Paging("/PackageListManagement/PackageList/packageStatus/" + $("#packageStatus").val()+"/school/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
+        Paging("/PackageListManagement/PackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
         deleteOne();
     };
 
