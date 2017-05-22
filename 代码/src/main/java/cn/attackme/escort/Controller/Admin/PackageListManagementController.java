@@ -2,6 +2,7 @@ package cn.attackme.escort.Controller.Admin;
 
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.PackageStatus;
+import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -33,22 +34,22 @@ public class PackageListManagementController {
     }
 
     //获取全部订单
-    @RequiresRoles("admin")
-    @ResponseBody
-    @GetMapping("/PackageList//pageNumber/{pageNumber}/pageSize/{pageSize}")
-    public PageResults<Package> PackageList(@PathVariable int pageNumber,
-                                                 @PathVariable int pageSize){
-        return packageService.getListByPage(pageNumber,pageSize);
+//    @RequiresRoles("admin")
+//    @ResponseBody
+//    @GetMapping("/PackageList//pageNumber/{pageNumber}/pageSize/{pageSize}")
+//    public PageResults<Package> PackageList(@PathVariable int pageNumber,
+//                                                 @PathVariable int pageSize){
+//        return packageService.getListByPage(pageNumber,pageSize);
 //      return packageService.getPackageByStatus(待领取,pageNumber,pageSize);
-    }
+//    }
     //获取全部订单
     @RequiresRoles("admin")
     @ResponseBody
     @GetMapping("/PackageList/packageStatus/{packageStatus}/pageNumber/{pageNumber}/pageSize/{pageSize}")
-    public PageResults<Package> PackageListO(@PathVariable PackageStatus packageStatus , @PathVariable int pageNumber,
-                                            @PathVariable int pageSize){
+    public PageResults<Package> PackageListO(@PathVariable PackageStatus packageStatus ,@PathVariable int pageNumber,
+                                             @PathVariable int pageSize){
         return packageService.getPackageByStatus(packageStatus,pageNumber,pageSize);
-//      return packageService.getPackageByStatus(待领取,pageNumber,pageSize);
+//    return packageService.getPackageByMe(packageStatus,SchoolId,pageNumber,pageSize);
     }
 
 //    删除订单
