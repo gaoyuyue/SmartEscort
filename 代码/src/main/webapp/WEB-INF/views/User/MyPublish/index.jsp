@@ -100,10 +100,15 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="button_position_style">`+
-                            ((e.packageStatus == '待领取') ? `<button type="button" id="deleteDart" publishDartId='`+e.id+`'>取消订单</button>` : `
-                            <button type="button" id="callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</button>`)
-                        +`</div>
+                        <div class="button_sp_area">
+                            <div style="float:right">
+                            `+
+                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="deleteDart" publishDartId='`+e.id+`'>取消订单</a>` : `
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="deleteDart" publishDartId='`+e.id+`'>确认收货</a>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" id="callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
+                        +`
+                            <div>
+                        </div>
                     </div>
                 </div>
 

@@ -110,8 +110,10 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="button_position_style">
-                            <button type="button" id="callSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</button>
+                        <div class="button_sp_area">
+                            <div style="float:right">
+                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" id="callSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>
+                            <div>
                         </div>
                     </div>
                 </div>
