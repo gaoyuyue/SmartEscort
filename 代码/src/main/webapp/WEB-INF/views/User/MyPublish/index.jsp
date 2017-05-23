@@ -238,7 +238,7 @@
                 $("#note").text(data.note);
                 $("#areaName").text(data.area.areaName);
                 $("#areaDetail").text(data.address.detail);
-                if(data.packageStatus == '已领取'){
+                if(data.packageStatus == '待签收'){
                     $("#agencyName").text(data.agency.name);
                     $("#agencyPhoneNumber").text(data.agency.phoneNumber);
                 }

@@ -51,7 +51,7 @@ public class MyPublishController {
         String userName = getSubject().getPrincipal().toString();
         User delegation = userInfoService.getById(userName);
         List<Package> list = delegation.getPublishList();
-        List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.已领取)).collect(toList());
+        List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.待签收)).collect(toList());
         return new ResponseEntity<>(publishList,HttpStatus.OK);
     }
 
