@@ -10,7 +10,7 @@
 <script src="/assets/js/fastclick.js"></script>
 
 <style>
-    #fileUpload{
+    #file{
         display: none;
     }
     #CardUpload{
@@ -32,34 +32,59 @@
                 <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
                     <div class="weui-cell__ft" >请确保学号及姓名清晰可见</div>
                 </div>
-
-                <%--<form>--%>
-                <div>
-
-                    <div  id="CardUpload">
-                         <img src="/assets/img/goback.png"></img>
+                <form enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/User/StudentVerify/upLoad">
+                    <div>
+                        <div  id="CardUpload">
+                             <img id="preview" src="/assets/img/unmaned.png"/>
+                        </div>
+                        <input type="file" id="file" accept="image/gif,image/jpg,image/png,image/jpeg" onchange="loadFile(this)">
                     </div>
-                    <input type="file" id="fileUpload" accept="image/gif,image/jpg,image/png,image/jpeg">
-                </div>
-                <%--</form>--%>
-
+                    <div class="weui-btn-area" disabled="true">
+                        <input class="weui-btn weui-btn_primary" type="submit"/>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确认提交</a>
-    </div>
+
 
 
 <script type="text/javascript">
+$(".weui-btn").click(function () {
+   if ($("#file").this==null){
+       alert("!");
+
+   }
+});
 
     $("#CardUpload").click(function () {
-        $("#fileUpload").click();
-    })
+        $("#file").click();
+    });
+    
+    function loadFile(target) {
+//        $(".weui-btn").removeClass("disabled");
+        var fileSize = target.files[0].size;
+        var size = fileSize / 1024;
+        if(size>5000){
+            alert("照片不能大于5M！");
+            target.value="";
+            $("input").empty();
+        }else {
+            var name = target.value;
+            var fileName = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
+            if (fileName != "jpg" && fileName != "jpeg" && fileName != "png" && fileName != "gif") {
+                alert("不支持的文件格式！");
+                target.value = "";
+                $("input").empty();
+            }else {
+                var fileNames = name.substring(name.lastIndexOf("\\") + 1).toLowerCase();
+                alert("已选择图片"+fileNames);
+
+            }
+        }
 
 
-
-
+    }
 
 
 </script>
