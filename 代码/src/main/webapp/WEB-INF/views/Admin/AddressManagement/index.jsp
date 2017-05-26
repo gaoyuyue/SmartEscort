@@ -138,8 +138,7 @@
             var schoolId = idArr[1];
             console.log(idArr);
             AjaxDeleteRequest("/AddressManagement/deleteAreaBySchool/schoolId/" + schoolId + "/areaId/" + areaId);
-            var pageNumber = $(".pagination .active")[0].innerText;
-            loadPage(pageNumber);
+            loadThis();
         });
     };
 
@@ -183,6 +182,7 @@
         } else {
             AjaxPostRequest("/AddressManagement/createSchool/schoolName/" + schoolName);
             $("#schoolCancelButton").click();
+            loadThis();
         }
         $("#schoolName").val("");
     });
@@ -208,8 +208,7 @@
             AjaxPostRequest("/AddressManagement/createArea/areaName/"+ areaName +"/schoolId/" + schoolId);
             $("#areaCancelButton").click();
         }
-        var pageNumber = $(".pagination .active")[0].innerText;
-        loadPage(pageNumber);
+        loadThis();
         $("#areaName").val("");
     });
 

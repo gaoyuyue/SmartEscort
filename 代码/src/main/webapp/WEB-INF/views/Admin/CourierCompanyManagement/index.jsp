@@ -179,11 +179,10 @@
         } else {
 
             AjaxPostRequest("/CourierCompanyManagement/createCourier/companyName/" + content);
+            loadThis();
             $("#createCancelButton").click();
             $("#content").val("");
         }
-        var pageNumber = $(".pagination .active")[0].innerText;
-        loadPage(pageNumber);
     });
 
     //修改时给input设置值
@@ -207,8 +206,7 @@
         } else {
             AjaxPutRequest("/CourierCompanyManagement/updateCourierCompany/id/" + id + "/updateDescription/" + updateDescriptionVal);
             $("#updateCancelButton").click();
-            var pageNumber = $(".pagination .active")[0].innerText;
-            loadPage(pageNumber);
+            loadThis();
         }
         setUnAvailable();
     });
@@ -238,8 +236,7 @@
                         type: "success",
                         confirmButtonText: "知道了"
                     });
-                    var pageNumber = $(".pagination .active")[0].innerText;
-                    loadPage(pageNumber);
+                    loadThis();
                 } else {
                     swal("已取消", "未作任何操作", "info");
                     setUnAvailable()

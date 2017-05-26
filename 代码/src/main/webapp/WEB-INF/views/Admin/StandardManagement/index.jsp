@@ -210,12 +210,12 @@
                 description:description
             };
             Post("/StandardManagement/createStandard",data);
+            loadThis();
             $("#createCancelButton").click();
         }
         $("#standardPrice").val("");
         $("#standardDescription").val("");
-        var pageNumber = $(".pagination .active")[0].innerText;
-        loadPage(pageNumber);
+
     });
 
     //修改时给input设置值
@@ -246,8 +246,7 @@
             };
             Put("/StandardManagement/updateStandard",data);
             $("#updateCancelButton").click();
-            var pageNumber = $(".pagination .active")[0].innerText;
-            loadPage(pageNumber);
+            loadThis();
         }
         setUnAvailable();
     });
@@ -271,14 +270,14 @@
                     for (var i = 0; i < checkBoxes.length; i++) {
                         AjaxDeleteRequest("/StandardManagement/deleteStandard/standardId/" + checkBoxes[i].id);
                     }
+                    loadThis();
                     swal({
                         title: "成功",
                         text: "删除完毕",
                         type: "success",
                         confirmButtonText: "知道了"
+
                     });
-                    var pageNumber = $(".pagination .active")[0].innerText;
-                    loadPage(pageNumber);
                 } else {
                     swal("已取消", "未作任何操作", "info");
                     setUnAvailable();
@@ -290,4 +289,7 @@
         function () {
             loadPage(1);
         });
+
+
+
 </script>

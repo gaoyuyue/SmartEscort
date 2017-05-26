@@ -173,8 +173,7 @@
         $(".md-delete").click(function () {
             var id = this["id"];
             AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
-            var pageNumber = $(".pagination .active")[0].innerText;
-            loadPage(pageNumber);
+            loadThis();
         });
 
     };

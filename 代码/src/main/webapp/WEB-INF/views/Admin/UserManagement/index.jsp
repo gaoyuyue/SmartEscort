@@ -132,8 +132,7 @@
                             type: "success",
                             confirmButtonText: "知道了"
                         });
-                        var pageNumber = $(".pagination .active")[0].innerText;
-                        loadPage(pageNumber);
+                        loadThis();
                     }else {
                         swal("已取消", "未作任何操作", "info");
                     }

@@ -100,8 +100,7 @@
         $(".md-delete").click(function () {
             var id = this["id"];
             AjaxDeleteRequest("/PackageListManagement/deletePackage/id/" + id);
-            var pageNumber = $(".pagination .active")[0].innerText;
-            loadPage(pageNumber);
+            loadThis();
         });
     }
 

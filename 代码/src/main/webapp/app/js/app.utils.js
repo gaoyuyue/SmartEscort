@@ -247,7 +247,7 @@ var AjaxPostRequest = function AjaxPostRequest(url) {
  * @param success
  * @constructor
  */
-var Post = function (url,data,success) {
+var Post = function (url,data) {
     "use strict";
 
     $.ajax({
@@ -277,10 +277,9 @@ var Post = function (url,data,success) {
  * Put方法
  * @param url
  * @param data
- * @param success
  * @constructor
  */
-var Put = function (url,data,success) {
+var Put = function (url,data) {
     "use strict";
 
     $.ajax({
@@ -476,3 +475,11 @@ var loadSchool = function (id) {
     };
     AjaxGetRequest("/UserManagement/getSchoolList", success);
 };
+
+function loadThis() {
+    var pageNumber = $(".pagination .active").innerText;
+    if(pageNumber==null){
+        loadPage(1);
+    }else {
+        loadPage(pageNumber);}
+}

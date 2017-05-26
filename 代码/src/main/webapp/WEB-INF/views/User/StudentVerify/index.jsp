@@ -14,7 +14,7 @@
         display: none;
     }
     #CardUpload{
-        background-color: #eeeeee;
+        /*background-color: #eeeeee;*/
         text-align: center;
     }
 </style>
@@ -34,6 +34,7 @@
                 </div>
                 <form enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/User/StudentVerify/upLoad">
                     <div>
+                        <br>
                         <div  id="CardUpload">
                              <img id="preview" src="/assets/img/unmaned.png"/>
                         </div>
