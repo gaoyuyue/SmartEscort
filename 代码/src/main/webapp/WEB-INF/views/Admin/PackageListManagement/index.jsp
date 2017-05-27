@@ -18,7 +18,6 @@
                         <div class=" m-b-xs col-lg-6">
                             <select class="input-sm   " title="请选择订单状态" id="packageStatus">
                                 <option value="待领取">待领取</option>
-                                <option value="已领取">已领取</option>
                                 <option value="已撤销">已撤销</option>
                                 <option value="待签收">待签收</option>
                                 <option value="待评价">待评价</option>
