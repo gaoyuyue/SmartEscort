@@ -130,43 +130,41 @@
     var updateTable = function (data) {
         const results = data.results;
         results.forEach(function (element) {
-            $("#packageTable").append(`
-                <div class="weui-panel__bd">
-                    <a href="#" class="weui-media-box weui-media-box_appmsg confirmation packageOne" packageId="` + element.id + `">
-                        <div style="clear: both">
-                            <div class="weui-media-box__hd">
-                                <img class="weui-media-box__thumb" src="/assets/img/SF.jpg">
-                            </div>
-                            <div class="weui-form-preview__item">
-                                <span class="weui-form-preview__value" >高语越</span>
+            $("#packageTable").append(''+
+                '<div +class="weui-panel__bd">'+
+                '   <a href="#" class="weui-media-box weui-media-box_appmsg confirmation packageOne" packageId="` '+ element.id +' `">'+
+                '       <div style="clear: both">'+
+                '           <div class="weui-media-box__hd">'+
+                '               <img class="weui-media-box__thumb" src="/assets/img/SF.jpg">'+
+                '           </div>'+
+                '           <div class="weui-form-preview__item">'+
+                '               <span class="weui-form-preview__value" >'+element.delegation.name+'</span>'+
                                 <%--<span class="weui-form-preview__value">男</span>--%>
-                                <img src="/assets/img/boy.png" width="51" height="51">
-
-                            </div>
-                        </div>
-                        <div style="clear: both">
-                            <div class="weui-form-preview__item">
-                                <label class="weui-form-preview__label">发布日期</label>
-                                <span class="weui-form-preview__value">2016-4-18</span>
-                            </div>
-
-                            <div class="weui-form-preview__item">
-                                <label class="weui-form-preview__label">区域</label>
-                                <span class="weui-form-preview__value">梅园</span>
-                            </div>
-                            <div class="weui-form-preview__item" id="packageSize">
-                                <label class="weui-form-preview__label">大小</label>
-                                <span class="weui-form-preview__value" >大（有自行车辣么大）</span>
-                            </div>
-
-                            <div class="weui-form-preview__item" id="price">
-                                <label class="weui-form-preview__label">价格</label>
-                                <span class="weui-form-preview__value" >24元</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            `);
+                '               <img +src="/assets/img/boy.png" width="51" height="51">'+
+                '           </div>'+
+                '       </div>'+
+                '       <div style="clear: both">'+
+                '           <div class="weui-form-preview__item">'+
+                '               <label class="weui-form-preview__label">发布日期</label>'+
+                '               <span class="weui-form-preview__value">'+element.publishTime+'</span>'+
+                '          </div>'+
+                '           <div class="weui-form-preview__item">'+
+                '               <label class="weui-form-preview__label">区域</label>'+
+                '               <span class="weui-form-preview__value">'+element.area.areaName+'</span>'+
+                '           </div>'+
+                '           <div class="weui-form-preview__item" id="packageSize">'+
+                '             <label class="weui-form-preview__label">大小</label>'+
+                '                   <span class="weui-form-preview__value" >'+element.standard.description+'</span>'+
+            '                            </div>'+
+            '           <div class="weui-form-preview__item" id="price">'+
+                '               <label class="weui-form-preview__label">价格</label>'+
+                '               <span class="weui-form-preview__value" >'+element.standard.price+'</span>'+
+                '           </div>'+
+                '</div>'+
+                '</a>'+
+                '</div>'+
+                    '<hr>'
+            );
         });
 
         $(".packageOne").click(function () {
