@@ -68,14 +68,12 @@
             var resultList = data["results"];
             for (var i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
-                if (result.agency==null) {
-                    result.agency="";
-                }
+                var theName=result.agency==null?"":result.agency.name;
                     $("#packageList").append(
                         '<tr>' +
-                        '<td >' + result.delegation.userName +
+                        '<td >' + result.delegation.name +
                         '</td>' +
-                        '<td>' + result.agency.userName+
+                        '<td>' + theName+
                         '</td>' +
                         '<td>' + result.courierCompany.companyName +
                         '</td>'+
