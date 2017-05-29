@@ -8,12 +8,10 @@
         background-color: green;
     }
 </style>
-<div class="searchNav" id="top" style="background-color: #eeeeee;position: fixed;">
-    <form>
+<div class="searchNav" id="top" style="background-color: #eeeeee;position: absolute;text-align: center">
         <input type="text" placeholder="Search...">
-        <a><img src="/assets/img/Search.png" class="searchA"></a>
-        <a><img src="/assets/img/filter.png" id="filter-btn"></a>
-    </form>
+        <img src="/assets/img/Search.png" class="searchA">
+        <img src="/assets/img/filter.png" id="filter-btn">
 </div>
 <br>
 <div class="weui-panel weui-panel_access">
@@ -112,19 +110,19 @@
 //
 //
 //    //滑动菜单
-//    var menuRight = document.getElementById('cbp-spmenu-s2');
-//    var showRight = document.getElementById('filter-btn');
-//    showRight.onclick = function () {
-//        classie.toggle(this, 'active');
-//        classie.toggle(menuRight, 'cbp-spmenu-open');
-//    };
-//    Ok.onclick = function () {
-//        classie.toggle(menuRight, 'cbp-spmenu-open');
-//    };
-//
-//    $("#standard").click(function () {
-//        this.addClass("adds");
-//    });
+    var menuRight = document.getElementById('cbp-spmenu-s2');
+    var showRight = document.getElementById('filter-btn');
+    showRight.onclick = function () {
+        classie.toggle(this, 'active');
+        classie.toggle(menuRight, 'cbp-spmenu-open');
+    };
+    Ok.onclick = function () {
+        classie.toggle(menuRight, 'cbp-spmenu-open');
+    };
+
+    $("#standard").click(function () {
+        this.addClass("adds");
+    });
 
 
     var updateTable = function (data) {
