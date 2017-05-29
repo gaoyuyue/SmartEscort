@@ -26,12 +26,11 @@
     <div class="page list js_show">
         <div class="page__bd">
             <div class="weui-cells">
-                    <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
-                        您好，请上传学生证照片进行认证。
+                    <div class="" style="border-bottom: 1px solid #ebebeb;padding: 10px">
+                        <div>您好，请上传学生证照片进行认证。</div>
+                        <div style="color: grey">请确保学号及姓名清晰可见</div>
+
                     </div>
-                <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
-                    <div class="weui-cell__ft" >请确保学号及姓名清晰可见</div>
-                </div>
                 <form enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/User/StudentVerify/upLoad">
                     <div>
                         <br>

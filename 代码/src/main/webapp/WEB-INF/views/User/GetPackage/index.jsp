@@ -129,13 +129,15 @@
 
     var updateTable = function (data) {
         const results = data.results;
+        var prefix="/assets/img/";
+        var suffix=".jpg";
         results.forEach(function (element) {
             $("#packageTable").append(''+
                 '<div +class="weui-panel__bd">'+
                 '   <a href="#" class="weui-media-box weui-media-box_appmsg confirmation packageOne" packageId="` '+ element.id +' `">'+
                 '       <div style="clear: both">'+
                 '           <div class="weui-media-box__hd">'+
-                '               <img class="weui-media-box__thumb" src="/assets/img/SF.jpg">'+
+                '               <img class="weui-media-box__thumb" src='+prefix+element.courierCompany.companyName+suffix+'>'+
                 '           </div>'+
                 '           <div class="weui-form-preview__item">'+
                 '               <span class="weui-form-preview__value" >'+element.delegation.name+'</span>'+

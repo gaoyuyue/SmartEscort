@@ -68,6 +68,9 @@
             var resultList = data["results"];
             for (var i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
+                if (result.agency==null) {
+                    result.agency="";
+                }
                     $("#packageList").append(
                         '<tr>' +
                         '<td >' + result.delegation.userName +
