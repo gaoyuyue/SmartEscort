@@ -21,9 +21,8 @@
 </div>
 
 <%--筛选菜单--%>
-<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2" style="OVERFLOW-Y: auto;>
-    <ul  class=" qwe
-">
+<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2" style="OVERFLOW-Y: auto;height: auto">
+
 <h3>筛选</h3>
 <strong>区域</strong>
 <ul id="areaList" class="menuHeader">
@@ -42,8 +41,6 @@
     <button id="reSet" class="menuButton">重置</button>
     <button id="Ok" class="menuButton">确定</button>
 </span>
-
-
 </div>
 
 <script>
