@@ -6,9 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<div class="page tabbar js_show">
+    <div class="page__bd" style="height: 100%;">
+        <div class="weui-tab">
+            <div class="weui-tab__panel" id="main">
             </div>
             <div class="weui-tabbar">
-                <a href="/User/StudentVerify/" id="home" class="weui-tabbar__item">
+                <a href="/User/StudentVerify/" id="home" class="weui-tabbar__item weui-bar__item_on">
                     <span style="display: inline-block;position: relative;">
                         <div alt="" class="weui-tabbar__icon">
                             <i class="fa fa-home"></i>

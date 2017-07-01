@@ -6,11 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title></title>
 
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <!-- 引入 WeUI -->
@@ -29,9 +24,3 @@
             });
         });
     </script>
-</head>
-<body>
-<div class="page tabbar js_show">
-    <div class="page__bd" style="height: 100%;">
-        <div class="weui-tab">
-            <div class="weui-tab__panel" id="main">
