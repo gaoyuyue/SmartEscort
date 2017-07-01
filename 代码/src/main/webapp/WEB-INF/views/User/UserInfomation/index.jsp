@@ -8,6 +8,40 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+<style>
+    .tt span{ display: none; }
+    .tt:hover{ z-index:25; }
+    .tt:hover span.tooltip{
+        display:block;
+        position:absolute;
+        top:0px; left:0;
+        padding: 15px 0 0 0;
+        width:200px;
+        color: #993300;
+        text-align: center;
+        filter: alpha(opacity:90);
+        KHTMLOpacity: 0.90;
+        MozOpacity: 0.90;
+        opacity: 0.90;
+    }
+    .tt:hover span.top{
+        display: block;
+        padding: 30px 8px 0px;
+        background: url(/assets/img/bubble.gif) no-repeat top;
+    }
+    .tt:hover span.middle{ /* different middle bg for stretch */
+        display: block;
+        padding: 0px 8px;
+        background: url(/assets/img/bubble_filler.gif) repeat bottom;
+    }
+    .tt:hover span.bottom{
+        display: block;
+        padding:3px 8px 10px;
+        color: #548912;
+        background: url(/assets/img/bubble.gif) no-repeat bottom;
+    }
+</style>
+
 <div id="frame">
     <div id="top">
         <span id="list">
@@ -20,11 +54,20 @@
         <div class="page__bd">
             <div class="weui-cells">
                 <a class="open-popup" >
-                    <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
+                    <div class="weui-cell tt" style="border-bottom: 1px solid #ebebeb">
                         <div class="weui-cell__bd">
                             <p style="font-family: SimSun">用户名</p>
                         </div>
-                        <div class="weui-cell__ft" id="userName" title="修改用户名，请联系客服"></div>
+                        <div class="weui-cell__ft" id="userName" title="修改用户名，请联系客服">
+                        </div>
+                        <span class="tooltip">
+                                <span class="top">
+                                </span>
+                                <span class="middle">修改用户名，请联系客服
+                                </span>
+                                <span class="bottom">
+                                </span>
+                        </span>
                     </div>
                 </a>
                 <a class="open-popup" data-target="#updateName">
