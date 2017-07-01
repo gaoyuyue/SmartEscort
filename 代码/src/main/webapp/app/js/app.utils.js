@@ -101,7 +101,7 @@ var checkNaN = function (value) {
  * @constructor
  */
 var Paging = function Paging(url, tableId, updateTable, pageNumber, pageSize) {
-    "use strict";
+    // "use strict";
     $(document).ajaxStart(function () {
         Pace.restart();
     });
@@ -117,13 +117,13 @@ var Paging = function Paging(url, tableId, updateTable, pageNumber, pageSize) {
             var currentPage = data["currentPage"];
             var pageCount = data["pageCount"];
             var nextPage = data["nextPage"];
+            nowPage=currentPage;
             //拼接上一页
             if (previousPage < 1 || previousPage >= currentPage) {//上一页不可达
                 pagination.append("<li class='disabled paging'><a pageNumber='1'>&laquo;</a></li>");
             } else {
                 pagination.append("<li class='paging'><a pageNumber=" + previousPage + ">&laquo;</a></li>");
             }
-
             //拼接页码
             for (var page = 1; page <= pageCount; page++) {
                 if (page == currentPage) {
@@ -477,9 +477,10 @@ var loadSchool = function (id) {
 };
 
 function loadThis() {
-    var pageNumber = $(".pagination .active").innerText;
-    if(pageNumber==null){
-        loadPage(1);
-    }else {
-        loadPage(pageNumber);}
-}
+    // var pageNumber = $(".pagination .active")[0].innerText;
+    // if(pageNumber==null){
+    //     alert("!!!");
+    //     loadPage(1);
+    // }else {
+        loadPage(nowPage);}
+// }
