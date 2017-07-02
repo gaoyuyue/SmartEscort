@@ -54,7 +54,7 @@ public class MyPublishController {
         List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.待签收)).collect(toList());
         return new ResponseEntity<>(publishList,HttpStatus.OK);
     }
-    
+
     /**
      * 撤销订单与确认收货
      * @param publishDartId

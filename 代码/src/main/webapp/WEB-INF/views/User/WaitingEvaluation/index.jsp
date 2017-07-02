@@ -105,8 +105,7 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                            <button type="button" id="deleteDart" publishDartId='`+e.id+`'>删除订单</button>
-                            <button type="button"><a href="/User/EvaluationDetail/" style="color: black">评价</a></button>
+                            <a href="/User/EvaluationDetail/" class="weui-btn weui-btn_mini weui-btn_primary">评价</a>
                         </div>
                     </div>
                 </div>
@@ -185,17 +184,6 @@
                 </div>
            `);
 
-        });
-        $("#deleteDart").click(function () {
-            const publishDartId = $(this).attr("publishDartId");
-            $.confirm("确认取消订单吗？", "提示", function() {
-                Delete("/User/WaitingEvaluation/delete/publishDartId/"+publishDartId,function () {
-                    window.location.href = "/User/WaitingEvaluation/";
-                });
-            }, function() {
-                $(this).remove();
-                $(".weui-mask").remove();
-            });
         });
         $(".childPage").click(function () {
             const publishDartId = $(this).attr("publishDartId");
