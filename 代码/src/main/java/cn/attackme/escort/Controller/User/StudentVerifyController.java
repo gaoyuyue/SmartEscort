@@ -1,22 +1,16 @@
 package cn.attackme.escort.Controller.User;
 
-import com.mysql.cj.api.Session;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.UserInfoService;
+import cn.attackme.escort.Utils.LogUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
+import static cn.attackme.escort.Utils.ImageUtils.decodeBase64ToImage;
+import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
  * Created by Administrator on 2017/5/23.
@@ -24,22 +18,35 @@ import java.util.Date;
 @Controller
 @RequestMapping("/User/StudentVerify")
 public class StudentVerifyController {
+    @Autowired
+    private UserInfoService userInfoService;
+
     @GetMapping("/")
     public String index(){return "User/StudentVerify/index" ;}
 
-    @RequestMapping("/upLoad")
-    public String upLoad(MultipartFile uploadFile, HttpSession session)throws Exception{
-//
-//       if (uploadFile.getSize()>0){
-//            String fileName=uploadFile.getOriginalFilename();
-//            String suffix=session.getServletContext().getRealPath("/VerifyPics");
-//           File file=new File(suffix,fileName);
-//           uploadFile.transferTo(file);
-//       }
-       return "User/PersonalCenter/index";
+    @GetMapping("/success")
+    public String success(){
+        return "User/StudentVerify/success";
     }
 
+    @GetMapping("/failure")
+    public String failure(){
+        return "User/StudentVerify/failure";
+    }
 
+    @RequestMapping("/upLoad")
+    public String upLoad(@RequestParam("dataUrl") String dataUrl){
+        try {
+            String userName = getSubject().getPrincipal().toString();
+            User user = userInfoService.getById(userName);
+            user.setStuCardUrl(decodeBase64ToImage(dataUrl, "D:/"));
+            userInfoService.saveOrUpdate(user);
+        } catch (Exception e) {
+            LogUtils.LogToDB(e);
+            return "/User/StudentVerify/failure";
+        }
+        return "/User/StudentVerify/success";
+    }
 }
 
 

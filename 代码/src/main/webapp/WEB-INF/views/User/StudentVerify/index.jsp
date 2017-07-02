@@ -22,21 +22,18 @@
                     <div style="color: grey">请确保学号及姓名清晰可见</div>
 
                 </div>
-                <form enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath }/User/StudentVerify/upLoad">
+                <form method="post" action="${pageContext.request.contextPath }/User/StudentVerify/upLoad">
                     <div>
                         <br>
                         <div id="cardUpload" style="text-align: center;">
                             <img id="previewer" src="/assets/img/unmaned.png" style="width: 250px;height: 250px"/>
                         </div>
-                        <input type="file" style="display: none" id="filechooser" accept="image/gif,image/jpg,image/png,image/jpeg">
+                        <input type="file" style="display: none" id="filechooser">
                         <br>
                     </div>
+                    <input type="hidden" id="dataUrl" name="dataUrl"/>
                     <div class="weui-btn-area" disabled="true">
-                        <input class="weui-btn weui-btn_primary" type="submit" onclick="
-                        if ($('#file').this==null){
-                            alert('未选择照片！');
-                            return false;
-                        }"/>
+                        <input class="weui-btn weui-btn_primary" type="submit" onclick="if(filechooser.files.length === 0){alert('请选择图片！');return false;}"/>
                     </div>
                 </form>
             </div>
@@ -115,7 +112,7 @@ filechooser.onchange = function() {
 
 function toPreviewer(dataUrl) {
     previewer.src = dataUrl;
-    filechooser.value = '';
+    $("#dataUrl").val(dataUrl);
 }
 
 function compress(img, fileType) {
@@ -140,7 +137,5 @@ function compress(img, fileType) {
 }
 
 </script>
-
-
 
 <%@include file="/user_footer.jsp"%>

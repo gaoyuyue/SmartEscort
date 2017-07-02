@@ -76,6 +76,11 @@ public class User implements Serializable{
     @Setter
     private String studentId;
 
+    //学生证照片url
+    @Getter
+    @Setter
+    private String stuCardUrl;
+
     @Setter
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.EXTRA)
