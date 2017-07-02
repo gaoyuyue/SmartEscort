@@ -34,4 +34,4 @@
 <div class="page tabbar js_show">
     <div class="page__bd" style="height: 100%;">
         <div class="weui-tab">
-            <div class="weui-tab__panel" id="main">
+            <div class="weui-tab__panel" id="main" style="background-color: #eeeeee">

@@ -18,7 +18,7 @@
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
 
 </head>
-<body>
+<body style="background-color: #eeeeee">
     <div id="top">
         <span id="list">
             <a href="javascript:window.location.href='/User/PostPackage/selectAddress';"><img src="/assets/img/goback.png" align="top"></a>
@@ -33,8 +33,6 @@
                 <input class="weui-input" id="name" type="text" placeholder="收货人姓名">
             </div>
         </div>
-    </div>
-    <div class="weui-cells">
         <div class="weui-cell">
             <div class="weui-cell__bd">
                 <input class="weui-input" id="phone" type="number" placeholder="手机号码">
@@ -59,8 +57,9 @@
         </div>
     </div>
 
-    <a id="saveButton" href="javascript:;" class="weui-btn weui-btn_warn">保存</a>
-
+    <div class="weui-cells">
+        <a id="saveButton" href="javascript:;" class="weui-btn weui-btn_warn">保存</a>
+    </div>
     <script src="/assets/js/jquery-weui.min.js"></script>
     <script src="/assets/js/fastclick.js"></script>
     <script src="/app/js/mobile.utils.js"></script>

@@ -10,7 +10,7 @@
 <%@include file="/user_header.jsp"%>
 
 <!--页面-->
-<div class="page badge js_show" style="background-color: #eeeeeb">
+<div class="page badge js_show">
     <div class="navn1" >
         <img class="img-circle navicon" src="/assets/img/a5.jpg" style="width: 50px;display: block">
     </div>

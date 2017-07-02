@@ -9,12 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 <link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
-
-<div id="addressTable" style="width: 100%">
+<div id="addressTable" style="width: 100%;background-color: #ffffff">
 
 </div>
 
-<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
+<%--<HR style="width: 100%" color=#E57E2A SIZE=5>--%>
 
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
@@ -23,9 +22,6 @@
             <input class="weui-input" id="packageSize" placeholder="请选择包裹大小" type="text" value="">
         </div>
     </div>
-</div>
-
-<div class="weui-cells weui-cells_form">
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>
         <div class="weui-cell__bd">
@@ -40,9 +36,6 @@
             <input id="price" class="weui-input" type="text" placeholder="请输入价格（元）">
         </div>
     </div>
-</div>
-
-<div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__bd">
             <input id="note" class="weui-input" type="text" placeholder="请输入备注信息">
@@ -58,8 +51,8 @@
     </div>
 </div>
 
-<div class="weui-btn-area">
-    <a class="weui-btn weui-btn_primary" href="javascript:postPackage()" id="showTooltips">发布</a>
+<div class="weui-btn-area weui-cells_form">
+    <a class="weui-btn weui-btn_warn" href="javascript:postPackage()" id="showTooltips">发布</a>
 </div>
 
 <script src="/assets/js/jquery-weui.min.js"></script>
@@ -178,5 +171,4 @@
     };
 
 </script>
-
 <%@include file="/user_footer.jsp"%>

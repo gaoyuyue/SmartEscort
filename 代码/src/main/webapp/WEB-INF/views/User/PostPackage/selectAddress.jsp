@@ -23,7 +23,7 @@
     <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
 
 </head>
-<body>
+<body style="background-color: #eeeeee">
 <div id="frame">
     <div id="navbarSuspension">
         <div id="top">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="weui-tabbar">
-        <a href="/User/PostPackage/addAddress" class="weui-btn weui-btn_primary footer_weui-btn">新增收获地址</a>
+        <a href="/User/PostPackage/addAddress" class="weui-btn weui-btn_warn footer_weui-btn">新增收获地址</a>
     </div>
 </div>
 
@@ -51,8 +51,9 @@
     var success = function (data) {
         $("#addressList").empty();
         data.forEach(function (e,i) {
-            $("#addressList").append(`
-                <div class="weui-cells_radio">
+            $("#addressList").append(
+                `<div style="height: 15px;"></div>
+                <div class="weui-cells_radio" style="background-color: #ffffff">
                     <label class="weui-cell weui-check__label" for="`+e.id+`">
                       <div style="width: 90%" class="weui-cell__bd">
                          <div>
@@ -72,10 +73,7 @@
                       </div>
                     </label>
                 </div>
-
-                `+((i<data.length-1)?
-                    `<div style="background-color: #DCDCDC;height: 5px;">
-                     </div>` : "")
+                `
             );
         });
 

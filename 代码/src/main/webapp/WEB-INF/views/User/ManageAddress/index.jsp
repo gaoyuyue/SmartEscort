@@ -22,7 +22,7 @@
     <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
 
 </head>
-<body>
+<body style="background-color: #eeeeee">
 <div id="frame">
     <div id="navbarSuspension">
         <div id="top">
@@ -35,12 +35,12 @@
     </div>
 
     <div class="weui-tab__panel">
-        <div class="address_manage" id="addressList">
+        <div class="address_manage" id="addressList" style="background-color: #ffffff">
         </div>
     </div>
 
     <div class="weui-tabbar">
-        <a href="/User/ManageAddress/add" class="weui-btn weui-btn_primary footer_weui-btn">新增收获地址</a>
+        <a href="/User/ManageAddress/add" class="weui-btn weui-btn_warn footer_weui-btn">新增收获地址</a>
     </div>
 </div>
 
@@ -51,6 +51,8 @@
         $("#addressList").empty();
         data.forEach(function (e,i) {
              $("#addressList").append(`
+                <div style="height: 15px;background-color: #eeeeee">
+                </div>
                 <div class="address_one">
                     <div class="address_name-phone">
                         <span style="margin: 5px" >`+e.receiverName+`</span>
@@ -75,12 +77,9 @@
                         &nbsp;
                         <a href="#" class="editAddress" style="float: right;color: black;" addressId='`+e.id+`'>编辑</a>
                         <img src="/assets/img/edit_icon.png" width="23" height="23" style="float: right">
-
                     </div>
                 </div>
-                `+((i<data.length-1)?
-                    `<div style="background-color: #DCDCDC;height: 8px;">
-                     </div>` : "")
+                 `+((i===data.length-1)?`<div style="background-color: #ffffff;height: 1px"></div>`:``)
              );
         });
         $(".deleteOne").click(function () {
