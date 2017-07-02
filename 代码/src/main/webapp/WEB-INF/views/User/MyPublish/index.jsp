@@ -103,8 +103,8 @@
                         <div class="button_sp_area">
                             <div style="float:right">
                             `+
-                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="deleteDart" publishDartId='`+e.id+`'>取消订单</a>` : `
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="deleteDart" publishDartId='`+e.id+`'>确认收货</a>
+                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="cancelDart" publishDartId='`+e.id+`'>取消订单</a>` : `
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="receivedDart" publishDartId='`+e.id+`'>确认收货</a>
                             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" id="callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
                         +`
                             <div>
@@ -188,10 +188,32 @@
            `);
 
         });
-        $("#deleteDart").click(function () {
+        $("#cancelDart").click(function () {
+            "use strict";
             const publishDartId = $(this).attr("publishDartId");
             $.confirm("确认取消订单吗？", "提示", function() {
-                Delete("/User/MyPublish/delete/publishDartId/"+publishDartId,function () {
+                $.ajax({
+                    url:"/User/MyPublish/cancel/publishDartId/"+publishDartId,
+                    type:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify(publishDartId),
+                    success:function () {
+                        window.location.href = "/User/MyPublish/";
+                    },
+                    error:function (XMLHttpRequest) {
+
+                    }
+                });
+            }, function() {
+
+            });
+        });
+
+
+        $("#receivedDart").click(function () {
+            const publishDartId = $(this).attr("publishDartId");
+            $.confirm("确认收到货物吗？", "提示", function() {
+                Put("/User/MyPublish/received/publishDartId/"+publishDartId,function () {
                     window.location.href = "/User/MyPublish/";
                 });
             }, function() {

@@ -56,7 +56,7 @@ public class MyPublishController {
     }
 
     /**
-     * 取消订单
+     * 删除订单
      * @param publishDartId
      * @return
      */
@@ -65,7 +65,24 @@ public class MyPublishController {
     @DeleteMapping("/delete/publishDartId/{publishDartId}")
     public ResponseEntity<Void> deleteDart(@PathVariable int publishDartId){
         packageService.deleteById(publishDartId);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * 撤销订单
+     * @param publishDartId
+     * @return
+     */
+    @RequiresRoles("user")
+    @ResponseBody
+    @PutMapping("/cancel/publishDartId/{publishDartId}")
+    public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
+        Package aPackage = packageService.getById(publishDartId);
+        if(aPackage.getPackageStatus() == PackageStatus.待领取){
+            aPackage.setPackageStatus(PackageStatus.已撤销);
+        }
+        packageService.saveOrUpdate(aPackage);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
