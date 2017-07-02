@@ -147,7 +147,7 @@
         var uploadTable = function (data) {
             var resultList = data["results"];
             $("#AddressTable").empty();
-            for (var i = 0; i < data["totalCount"]; i++) {
+            for (var i = 0; i < resultList.length; i++) {
                 var result = resultList[i];
                 var areaList = result.areaList;
                 for (var j = 0; j < areaList.length; j++) {
@@ -164,9 +164,10 @@
                     );
                 }
             }
+            deleteMe();
         };
         Paging("/AddressManagement/getAddressList", "AddressTable", uploadTable, pageNumber, 10);
-        deleteMe();
+
     };
 
     //新增学校
