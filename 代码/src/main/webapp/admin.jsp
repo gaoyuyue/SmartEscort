@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="assets/img/logo.png">
-    <title>Title</title>
+    <title>校园快递后台管理系统</title>
     <%@include file="admin_css.jsp" %>
 </head>
 <body class="pace-done">
@@ -129,7 +129,7 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a href="mailbox.html">
+                                    <a href="">
                                         <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                     </a>
                                 </div>
@@ -137,12 +137,12 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="">
                             <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
-                                <a href="mailbox.html">
+                                <a href="">
                                     <div>
                                         <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
                                         <span class="pull-right text-muted small">4分钟前</span>
@@ -151,7 +151,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="profile.html">
+                                <a href="">
                                     <div>
                                         <i class="fa fa-qq fa-fw"></i> 3条新回复
                                         <span class="pull-right text-muted small">12分钟钱</span>
@@ -161,7 +161,7 @@
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
-                                    <a href="notifications.html">
+                                    <a href="">
                                         <strong>查看所有 </strong>
                                         <i class="fa fa-angle-right"></i>
                                     </a>
