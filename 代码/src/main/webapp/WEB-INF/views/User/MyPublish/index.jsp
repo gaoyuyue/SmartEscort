@@ -208,17 +208,24 @@
 
             });
         });
-
-
         $("#receivedDart").click(function () {
+            "use strict";
             const publishDartId = $(this).attr("publishDartId");
             $.confirm("确认收到货物吗？", "提示", function() {
-                Put("/User/MyPublish/received/publishDartId/"+publishDartId,function () {
-                    window.location.href = "/User/MyPublish/";
+                $.ajax({
+                    url:"/User/MyPublish/cancel/publishDartId/"+publishDartId,
+                    type:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify(publishDartId),
+                    success:function () {
+                        window.location.href = "/User/MyPublish/";
+                    },
+                    error:function (XMLHttpRequest) {
+
+                    }
                 });
             }, function() {
-                $(this).remove();
-                $(".weui-mask").remove();
+
             });
         });
         $("#callSender").click(function () {

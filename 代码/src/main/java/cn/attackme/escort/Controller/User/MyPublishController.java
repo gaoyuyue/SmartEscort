@@ -54,22 +54,9 @@ public class MyPublishController {
         List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.待签收)).collect(toList());
         return new ResponseEntity<>(publishList,HttpStatus.OK);
     }
-
+    
     /**
-     * 删除订单
-     * @param publishDartId
-     * @return
-     */
-    @RequiresRoles("user")
-    @ResponseBody
-    @DeleteMapping("/delete/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> deleteDart(@PathVariable int publishDartId){
-        packageService.deleteById(publishDartId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    /**
-     * 撤销订单
+     * 撤销订单与确认收货
      * @param publishDartId
      * @return
      */
@@ -80,6 +67,8 @@ public class MyPublishController {
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);
+        }else if(aPackage.getPackageStatus() == PackageStatus.待签收){
+            aPackage.setPackageStatus(PackageStatus.待评价);
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);
