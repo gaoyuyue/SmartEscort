@@ -6,5 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%@include file="userDashboard.jsp"%>
+<%@include file="user_header.jsp"%>
+<script>
+    $(document).ready(function () {
+        $("#home").addClass("weui-bar__item_on");
+    });
+</script>
+<%@include file="user_footer.jsp"%>
