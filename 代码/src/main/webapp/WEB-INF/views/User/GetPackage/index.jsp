@@ -38,8 +38,8 @@
 </ul>
 
 <span>
-    <button id="reSet" class="menuButton">重置</button>
-    <button id="Ok" class="menuButton">确定</button>
+    <button id="reSet" class="weui-btn weui-btn_mini weui-btn_primary" style="background-color: #FF6905">重置</button>
+    <button id="Ok" class="weui-btn weui-btn_mini weui-btn_primary" style="background-color: #FF6905">确定</button>
 </span>
 </div>
 
