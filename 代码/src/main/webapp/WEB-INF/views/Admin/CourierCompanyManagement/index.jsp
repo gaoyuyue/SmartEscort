@@ -139,7 +139,6 @@
             updateButton();
             deleteButton();
         });
-
     }
 
     //分页加载页面
@@ -147,7 +146,7 @@
         var uploadTable = function (data) {
             var resultList = data["results"];
             console.log(resultList);
-            for (var i = 0; i < data["totalCount"]; i++) {
+            for (var i = 0; i < resultList.length; i++) {
                 var result = resultList[i];
                 $("#CourierTable").append(
                     "<tr><td>" +
@@ -160,9 +159,10 @@
                     "</tr>"
                 );
             }
+            CheckMe();
         };
         Paging("/CourierCompanyManagement/getCourierCompanyList", "CourierTable", uploadTable, pageNumber, 10);
-        CheckMe();
+
     };
 
     //新增

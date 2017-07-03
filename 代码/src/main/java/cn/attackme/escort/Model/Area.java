@@ -35,6 +35,7 @@ public class Area implements Serializable{
     @ManyToOne
     @JoinColumn(name = "school")
     @Setter
+//    @Getter
     private School school;
 
     public Area(String areaName, School school) {

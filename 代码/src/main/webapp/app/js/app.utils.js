@@ -150,12 +150,15 @@ var Paging = function Paging(url, tableId, updateTable, pageNumber, pageSize) {
             updateTable(data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status!=200){
             swal({
                 title: "出错了！",
                 text: "错误信息" + XMLHttpRequest.status,
                 type: "error",
                 confirmButtonText: "知道了"
             });
+            }
+
         }
     });
 };

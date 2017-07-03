@@ -83,12 +83,17 @@
 
 </body>
 <script>
+
+    function deleteFeedBack(id) {
+        AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
+        loadThis();
+    }
     //分页加载页面
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
             var resultList = data["results"];
             console.log(resultList);
-            for (i = 0; i < data["totalCount"]; i++) {
+            for (i = 0; i < resultList.length; i++) {
                 var result = resultList[i];
                 $("#FeedBack").append(
                     "<tr>"+
@@ -99,83 +104,14 @@
                     "</td>"+
                     "<td>" + result.submitTime +
                     "</td>"+
-                    '<td><a class="md-delete" id="' + result.id+
+                    '<td><a onclick="deleteFeedBack(this.id)"  class="md-delete" id="' + result.id+
                     '">删除</a></td>' +
                     "</tr>"
                 );
             }
-            CheckMe();setUnAvailable()
+
         };
         Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
-        deleteOne();
-
-    };
-
-
-
-
-    function deleteButton() {
-        if ($("input[class='checkMe']:checked").length) {
-            $('#deleteFeedBack').removeAttr("disabled");
-        } else {
-            $('#deleteFeedBack').attr('disabled', "true");
-        }
-    }
-
-    //让button不可用
-    function setUnAvailable() {
-        $('#deleteFeedBack').attr('disabled', "true");
-    }
-
-    //为checkMe绑定点击事件 重新加载列表后需要重新绑定点击事件
-    function CheckMe() {
-        $(".checkMe").click(function () {
-            deleteButton();
-        });
-    }
-
-   //多选删除
-//    $("#deleteFeedBack").click(function() {
-//        swal({
-//                title: "确定？",
-//                text: "你确定删除吗？",
-//                type: "warning",
-//                showCancelButton: true,
-//                confirmButtonColor: "#DD6B55",
-//                confirmButtonText: "删除",
-//                cancelButtonText: "取消",
-//                closeOnConfirm: false,
-//                closeOnCancel: false
-//            },
-//            function (isConfirm) {
-//                if (isConfirm) {
-//                    var checkBoxes = $("input[class='checkMe']:checked");
-//                    for (var i = 0; i < checkBoxes.length; i++) {
-//                        AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + checkBoxes[i].id);
-//                    }
-//                    swal({
-//                        title: "成功",
-//                        text: "删除完毕",
-//                        type: "success",
-//                        confirmButtonText: "知道了"
-//                    });
-//
-//                    setUnAvaliable();
-//                    var pageNumber = $(".pagination .active")[0].innerText;
-//                    loadPage(pageNumber);
-//                } else {
-//                    swal("已取消", "未作任何操作", "info");
-//                }
-//            });
-//    });
-    //删除单个
-    var deleteOne=function deleteOne() {
-        $(".md-delete").click(function () {
-            var id = this["id"];
-            AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
-            loadThis();
-        });
-
     };
 
 
@@ -188,8 +124,6 @@
     function feedBackDetail(a){
         $("#feedDetail").text(a);
     }
-
-
 
 
 </script>
