@@ -98,7 +98,6 @@
                     <i class="fa fa-comment fa-stack-1x fa-inverse"></i>
                 </span>
                 <span style="vertical-align: middle" class="font_color">&nbsp;意见反馈</span>
-                <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
             </div>
             <div class="weui-cell__ft"></div>
         </div>

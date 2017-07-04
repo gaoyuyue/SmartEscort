@@ -68,6 +68,12 @@
                     <div class="weui-cell__ft">
                     </div>
                 </a>
+                <a class="weui-cell open-popup" href="/User/StudentVerify/" id="isdisabled">
+                    <div class="weui-cell__bd">
+                        <p style="font-family: SimSun;color: black">学生认证</p>
+                    </div>
+                    <div class="weui-cell__ft" id="isVerify" style="color: red"></div>
+                </a>
             </div>
         </div>
     </div>
@@ -156,6 +162,7 @@
        window.location.href = "/User/UserInfomation/";
     });
 </script>
+
 <%--修改用户信息--%>
 <script>
     var loadPage=function loadPage() {
@@ -172,6 +179,12 @@
             var updatePhoneNumber = data.phoneNumber;
             $("#updateName_other").val(updateName);
             $("#updatePhoneNumber_other").val(updatePhoneNumber);
+            if(data.authed == true){
+                $("#isVerify").text("已认证");
+                $("#isdisabled").removeAttr('href');
+            } else {
+                $("#isVerify").text("未认证");
+            }
         }
         Get("/User/UserInfomation/current",success);
     };
