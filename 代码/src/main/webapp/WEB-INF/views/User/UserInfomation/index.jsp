@@ -8,40 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
-<style>
-    .tt span{ display: none; }
-    .tt:hover{ z-index:25; }
-    .tt:hover span.tooltip{
-        display:block;
-        position:absolute;
-        top:0px; left:0;
-        padding: 15px 0 0 0;
-        width:200px;
-        color: #993300;
-        text-align: center;
-        filter: alpha(opacity:90);
-        KHTMLOpacity: 0.90;
-        MozOpacity: 0.90;
-        opacity: 0.90;
-    }
-    .tt:hover span.top{
-        display: block;
-        padding: 30px 8px 0px;
-        background: url(/assets/img/bubble.gif) no-repeat top;
-    }
-    .tt:hover span.middle{ /* different middle bg for stretch */
-        display: block;
-        padding: 0px 8px;
-        background: url(/assets/img/bubble_filler.gif) repeat bottom;
-    }
-    .tt:hover span.bottom{
-        display: block;
-        padding:3px 8px 10px;
-        color: #548912;
-        background: url(/assets/img/bubble.gif) no-repeat bottom;
-    }
-</style>
-
 <div id="frame">
     <div id="top">
         <span id="list">
@@ -54,7 +20,7 @@
         <div class="page__bd">
             <div class="weui-cells">
                 <a class="open-popup" >
-                    <div class="weui-cell tt" style="border-bottom: 1px solid #ebebeb">
+                    <div class="weui-cell Prompt_bubble" style="border-bottom: 1px solid #ebebeb">
                         <div class="weui-cell__bd">
                             <p style="font-family: SimSun">用户名</p>
                         </div>
@@ -111,12 +77,12 @@
         <div class="weui-popup__overlay"></div>
         <div class="weui-popup__modal">
             <div class="top_other">
-                <span class="list_other"><a class="close-popup">取消</a></span>
+                <span class="list_other"><a class="close-popup refresh_page">取消</a></span>
                 <span><a class="logo_other show-warning update">保存</a></span>
             </div>
-            <div class="weui-cell">
+            <div class="weui-cell" style="border-bottom: 1px solid #cbcbcb">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="updateName_other" type="text" style="border: 1px solid grey;border-radius:6px;">
+                    <input class="weui-input updatetextfocus" id="updateName_other" type="text">
                 </div>
             </div>
         </div>
@@ -126,12 +92,12 @@
         <div class="weui-popup__overlay"></div>
         <div class="weui-popup__modal">
             <div class="top_other">
-                <span class="list_other"><a class="close-popup">取消</a></span>
+                <span class="list_other"><a class="close-popup refresh_page">取消</a></span>
                 <span><a class="logo_other show-warning update">保存</a></span>
             </div>
-            <div class="weui-cell">
+            <div class="weui-cell" style="border-bottom: 1px solid #cbcbcb">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="updatePhoneNumber_other" type="number" style="border: 1px solid grey;border-radius:6px;">
+                    <input class="weui-input updatetextfocus" id="updatePhoneNumber_other" type="number">
                 </div>
             </div>
         </div>
@@ -141,12 +107,12 @@
         <div class="weui-popup__overlay"></div>
         <div class="weui-popup__modal">
             <div class="top_other">
-                <span class="list_other"><a class="close-popup">取消</a></span>
+                <span class="list_other"><a class="close-popup refresh_page">取消</a></span>
                 <span><a class="logo_other" id="editPassWord">保存</a></span>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="password" id="newPassword" placeholder="请输入新密码" onKeyUp="CheckIntensity(this.value)"><tr></tr>
+                    <input class="weui-input updatetextfocus" type="password" id="newPassword" placeholder="请输入新密码" onKeyUp="CheckIntensity(this.value)"><tr></tr>
                 </div>
             </div>
             <div class="weui-cell">
@@ -182,6 +148,12 @@
         console.log("open popup");
     }).on("close", ".weui-popup-modal", function() {
         console.log("close popup");
+    });
+    $(".updatetextfocus").focus(function () {
+        $(this).val("");
+    });
+    $(".refresh_page").click(function () {
+       window.location.href = "/User/UserInfomation/";
     });
 </script>
 <%--修改用户信息--%>
