@@ -43,35 +43,9 @@
 
 
 <script type="text/javascript">
-    $("#cardUpload").click(function () {
-        $("#filechooser").click();
-    });
-    
-//    function loadFile(target) {
-////        $(".weui-btn").removeClass("disabled");
-//        var fileSize = target.files[0].size;
-//        var size = fileSize / 1024;
-//        if(size>5000){
-//            alert("照片不能大于5M！");
-//            target.value="";
-//            $("input").empty();
-//        }else {
-//            var name = target.value;
-//            var fileName = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
-//            if (fileName != "jpg" && fileName != "jpeg" && fileName != "png" && fileName != "gif") {
-//                alert("不支持的文件格式！");
-//                target.value = "";
-//                $("input").empty();
-//            }else {
-//                var fileNames = name.substring(name.lastIndexOf("\\") + 1).toLowerCase();
-//                alert("已选择图片"+fileNames);
-//
-//            }
-//        }
-//
-//
-//    }
-
+$("#cardUpload").click(function () {
+    $("#filechooser").click();
+});
 
 //图片预览
 var filechooser = document.getElementById('filechooser');
