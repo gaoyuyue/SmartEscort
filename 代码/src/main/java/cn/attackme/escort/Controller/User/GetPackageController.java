@@ -8,6 +8,7 @@ import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.*;
 import cn.attackme.escort.Utils.PageResults;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -111,7 +112,7 @@ public class GetPackageController {
     }
 
     //领取包裹
-    @RequiresRoles("user")
+    @RequiresRoles(value = {"user","authed"},logical = Logical.AND)
     @ResponseBody
     @GetMapping("/receive/packageId/{packageId}")
     public ResponseEntity<Void> receive(@PathVariable int packageId){
@@ -127,7 +128,6 @@ public class GetPackageController {
         User delegation = thePackage.getDelegation();
 
         //发送模板消息给交易双方
-
         String foreUrl = WechatProperties.authorizeUrl+"?appid="+
                 WechatProperties.appid+
                 "&redirect_uri="+

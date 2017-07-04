@@ -9,8 +9,8 @@
     }
 </style>
 <div class="searchNav" id="top" style="background-color: #eeeeee;position: absolute;text-align: center">
-        <input type="text" placeholder="Search...">
-        <img src="/assets/img/Search.png" class="searchA">
+        <%--<input type="text" placeholder="Search...">--%>
+        <%--<img src="/assets/img/Search.png" class="searchA">--%>
         <img src="/assets/img/filter.png" id="filter-btn">
 </div>
 <br>
@@ -127,45 +127,46 @@
         var prefix="/assets/img/";
         var suffix=".jpg";
         results.forEach(function (element) {
-            $("#packageTable").append(''+
-                '<div +class="weui-panel__bd">'+
-                '   <a href="#" class="weui-media-box weui-media-box_appmsg confirmation packageOne" packageId="` '+ element.id +' `">'+
-                '       <div style="clear: both">'+
-                '           <div class="weui-media-box__hd">'+
-                '               <img class="weui-media-box__thumb" src='+prefix+element.courierCompany.companyName+suffix+'>'+
-                '           </div>'+
-                '           <div class="weui-form-preview__item">'+
-                '               <span class="weui-form-preview__value" >'+element.delegation.userName+'</span>'+
-                                <%--<span class="weui-form-preview__value">男</span>--%>
-                '               <img +src="/assets/img/boy.png" width="51" height="51">'+
-                '           </div>'+
-                '       </div>'+
-                '       <div style="clear: both">'+
-                '           <div class="weui-form-preview__item">'+
-                '               <label class="weui-form-preview__label">发布日期</label>'+
-                '               <span class="weui-form-preview__value">'+element.publishTime+'</span>'+
-                '          </div>'+
-                '           <div class="weui-form-preview__item">'+
-                '               <label class="weui-form-preview__label">区域</label>'+
-                '               <span class="weui-form-preview__value">'+element.area.areaName+'</span>'+
-                '           </div>'+
-                '           <div class="weui-form-preview__item" id="packageSize">'+
-                '             <label class="weui-form-preview__label">大小</label>'+
-                '                   <span class="weui-form-preview__value" >'+element.standard.description+'</span>'+
-            '                            </div>'+
-            '           <div class="weui-form-preview__item" id="price">'+
-                '               <label class="weui-form-preview__label">价格</label>'+
-                '               <span class="weui-form-preview__value" >'+element.standard.price+'</span>'+
-                '           </div>'+
-                '</div>'+
-                '</a>'+
-                '</div>'+
-                    '<hr>'
-            );
+            $("#packageTable").append(`
+                <div +class="weui-panel__bd">
+                   <a href="#" class="weui-media-box weui-media-box_appmsg confirmation packageOne" packageId=`+ element.id +`>
+                       <div style="clear: both">
+                          <div class="weui-media-box__hd">
+                               <img class="weui-media-box__thumb" src=`+prefix+element.courierCompany.companyName+suffix+`>
+                           </div>
+                           <div class="weui-form-preview__item">
+                               <span class="weui-form-preview__value" >`+element.delegation.userName+`</span>
+                               <%--<span class="weui-form-preview__value">男</span>--%>
+                               <img +src="/assets/img/boy.png" width="51" height="51">
+                           </div>
+                       </div>
+                       <div style="clear: both">
+                           <div class="weui-form-preview__item">
+                               <label class="weui-form-preview__label">发布日期</label>
+                               <span class="weui-form-preview__value">`+element.publishTime+`</span>
+                          </div>
+                           <div class="weui-form-preview__item">
+                               <label class="weui-form-preview__label">区域</label>
+                               <span class="weui-form-preview__value">`+element.area.areaName+`</span>
+                           </div>
+                           <div class="weui-form-preview__item" id="packageSize">
+                             <label class="weui-form-preview__label">大小</label>
+                                   <span class="weui-form-preview__value" >`+element.standard.description+`</span>
+                                        </div>
+                       <div class="weui-form-preview__item" id="price">
+                               <label class="weui-form-preview__label">价格</label>
+                               <span class="weui-form-preview__value" >`+element.standard.price+`</span>
+                           </div>
+                </div>
+                </a>
+                </div>
+                    <hr>
+            `);
         });
 
         $(".packageOne").click(function () {
             const packageId = $(this).attr("packageId");
+            console.log(packageId);
             $.ajax({
                 url: "/User/GetPackage/receive/packageId/" + packageId,
                 type: "GET",
@@ -173,7 +174,8 @@
                     window.location.reload();
                 },
                 error: function (XMLHttpRequest) {
-                    alert("此单已被领取！");
+                    if(XMLHttpRequest.status === 404)alert("未认证用户不能使用此功能！");
+                    else alert("此任务已被接收！");
                 }
             });
         });
