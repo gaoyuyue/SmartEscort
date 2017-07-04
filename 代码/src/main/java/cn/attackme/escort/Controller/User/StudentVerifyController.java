@@ -39,7 +39,9 @@ public class StudentVerifyController {
         try {
             String userName = getSubject().getPrincipal().toString();
             User user = userInfoService.getById(userName);
-            user.setStuCardUrl(decodeBase64ToImage(dataUrl, "D:/"));
+            String userHome = System.getProperty("user.home");
+            String fileSeparator = System.getProperty("file.separator");
+            user.setStuCardUrl(decodeBase64ToImage(dataUrl, userHome+fileSeparator+"Images"+fileSeparator));
             userInfoService.saveOrUpdate(user);
         } catch (Exception e) {
             LogUtils.LogToDB(e);
