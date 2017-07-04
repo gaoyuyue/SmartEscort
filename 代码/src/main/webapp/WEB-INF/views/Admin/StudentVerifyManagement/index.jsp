@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>用户管理</h5>
+                    <h5>学生认证管理</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -29,8 +29,9 @@
                                 <th>昵称</th>
                                 <th>手机号</th>
                                 <th>学工号</th>
-                                <th>信誉积分</th>
-                                <th>状态</th>
+                                <th>验证</th>
+                                <%--<th>信誉积分</th>--%>
+                                <%--<th>状态</th>--%>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -61,33 +62,13 @@
                         '</td>' +
                         '<td>' + item.phoneNumber +
                         '</td>' +
-                        '<td>' + item.studentId +
-                        '</td>' +
-                        '<td>' + item.integration +
-                        '</td>' +
-                        '<td>' + "正常" +
-                        '</td>' +
-                        '<td> <a class="modifyUser" id="' + item.userName + "_true" +
-                        '">禁用</a></td>' +
-                        '</tr>'
-                    )
-                } else {
-                    $("#userTable").append(
-                        '<tr>' +
-                        '<td>' + item.userName +
-                        '</td>' +
-                        '<td>' + item.name +
-                        '</td>' +
-                        '<td>' + item.phoneNumber +
                         '</td>' +
                         '<td>' + item.studentId +
                         '</td>' +
-                        '<td>' + item.integration +
+                        '<td>' + "!" +
                         '</td>' +
-                        '<td>' + "已禁用" +
-                        '</td>' +
-                        '<td> <a class="modifyUser" id="' + item.userName + "_false" +
-                        '">取消禁用</a></td>' +
+                        '<td>'
+                        + '</td>' +
                         '</tr>'
                     )
                 }

@@ -53,11 +53,14 @@
                         <strong>镖</strong>
                     </div>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="#" url="/UserManagement/" class="redirect"><i class="fa fa-users"></i><span class="nav-label">用户管理</span> </a>
                 </li>
                 <li class="">
-                    <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
+                    <a href="#" url="/StudentVerifyManagement/" class="redirect"><i class="fa fa-check-circle-o"></i> <span class="nav-label">学生认证</span> </a>
+                </li>
+                <li class="">
+                <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
                 </li>
                 <li class="">
                     <a href="#" url="/PackageListManagement/" class="redirect"><i class="fa fa-th-list"></i> <span class="nav-label">任务列表管理</span></a>
