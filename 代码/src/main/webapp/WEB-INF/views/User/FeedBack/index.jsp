@@ -47,7 +47,9 @@
         }
         $("#remainingwords").text( 200 - $("#counts").val().length ) ;
     });
-
+    $(document).ready(function () {
+        $("#personalCenter").addClass("weui-bar__item_on");
+    });
 </script>
 <script language="javascript" type="text/javascript">
     $("#showTooltips").click(function () {

@@ -41,20 +41,7 @@ public class EvaluationDetailController {
     @Autowired
     private PackageService packageService;
 
-    /**
-     * 通过包裹获取代理人信息
-     * @return
-     */
-    @RequiresRoles("user")
-    @ResponseBody
-    @RequestMapping("/agency")
-    public ResponseEntity<List<Package>> getAgencyInfo(){
-        String userName = getSubject().getPrincipal().toString();
-        User user = userInfoService.getById(userName);
-        List<Package> publishList = user.getPublishList();
-        List<Package> publishList1 = publishList.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待评价)).collect(toList());
-        return new ResponseEntity<>(publishList1,HttpStatus.OK);
-    }
+
 
 
 }
