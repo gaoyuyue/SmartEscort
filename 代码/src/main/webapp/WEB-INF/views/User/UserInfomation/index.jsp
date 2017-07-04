@@ -161,6 +161,9 @@
     $(".refresh_page").click(function () {
        window.location.href = "/User/UserInfomation/";
     });
+    $(document).ready(function () {
+        $("#personalCenter").addClass("weui-bar__item_on");
+    });
 </script>
 
 <%--修改用户信息--%>

@@ -17,4 +17,9 @@
         <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#personalCenter").addClass("weui-bar__item_on");
+    });
+</script>
 <%@include file="/user_footer.jsp"%>
