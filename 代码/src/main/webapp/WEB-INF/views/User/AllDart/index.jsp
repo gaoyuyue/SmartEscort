@@ -240,5 +240,8 @@
     $(document).ready(function () {
         Get("/User/WaitingEvaluation/packageList",success);
     });
+    $(document).ready(function () {
+        $("#personalCenter").addClass("weui-bar__item_on");
+    });
 </script>
 <%@include file="/user_footer.jsp"%>

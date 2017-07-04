@@ -247,6 +247,9 @@
     function showNavbarSuspension() {
         $("#navbarSuspension").css('display','block');
     }
+    $(document).ready(function () {
+        $("#personalCenter").addClass("weui-bar__item_on");
+    });
 </script>
 
 
