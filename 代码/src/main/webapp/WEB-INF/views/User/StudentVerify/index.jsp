@@ -6,13 +6,29 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/user_header.jsp"%>
-<script src="/assets/js/fastclick.js"></script>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>管理收货地址</title>
 
-<%--学生认证页面--%>
-<div >
+    <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
+    <script src="/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="/app/js/mobile.utils.js"></script>
+
+    <!-- 引入 WeUI -->
+    <link rel="stylesheet" href="/assets/css/weui.min.css"/>
+    <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+</head>
+<body style="background-color: #eeeeee">
+<div id="frame">
     <div id="top">
-        <a id="title" >学生认证</a>
+        <span id="list">
+            <a href="javascript:window.location.href='/User/PersonalCenter/'"><img src="/assets/img/goback.png" align="top"></a>
+        </span>
+        <a id="title">学生认证</a>
+        <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
     </div>
     <div class="page list js_show">
         <div class="page__bd">
@@ -39,8 +55,7 @@
             </div>
         </div>
     </div>
-
-
+</div>
 
 <script type="text/javascript">
 $("#cardUpload").click(function () {
@@ -111,5 +126,5 @@ function compress(img, fileType) {
 }
 
 </script>
+</body>
 
-<%@include file="/user_footer.jsp"%>

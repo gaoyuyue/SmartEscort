@@ -54,6 +54,11 @@ public class User implements Serializable{
     @Setter
     private boolean isDeleted;
 
+    //是否认证
+    @Getter
+    @Setter
+    private boolean isAuthed;
+
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)

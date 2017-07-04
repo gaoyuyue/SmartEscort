@@ -1,6 +1,5 @@
 package cn.attackme.escort.Controller.User;
 
-import cn.attackme.Wechat.Util.SecurityUtil;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.SecurityUtils;

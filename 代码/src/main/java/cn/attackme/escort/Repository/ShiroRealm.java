@@ -41,6 +41,7 @@ public class ShiroRealm extends AuthorizingRealm {
         User user = userService.getById(userName);
         if (user != null) {
             role = user.getRole();
+            if (user.isAuthed()) info.addRole("authed");
         } else {
             throw new AuthorizationException();
         }

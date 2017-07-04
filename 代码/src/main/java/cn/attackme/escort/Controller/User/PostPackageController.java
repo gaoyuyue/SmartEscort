@@ -4,19 +4,19 @@ package cn.attackme.escort.Controller.User;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.*;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.FlashMap;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
-import java.sql.*;
-import java.util.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
@@ -52,6 +52,12 @@ public class PostPackageController {
     @GetMapping("/success")
     public String success(){
         return "User/PostPackage/success";
+    }
+
+    @RequiresRoles("user")
+    @GetMapping("/failure")
+    public String failure(){
+        return "User/PostPackage/failure";
     }
 
     @RequiresRoles("user")
@@ -168,7 +174,7 @@ public class PostPackageController {
     }
 
     //创建包裹
-    @RequiresRoles("user")
+    @RequiresRoles(value = {"user","authed"},logical = Logical.AND)
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<Void> create(@RequestBody Package p){

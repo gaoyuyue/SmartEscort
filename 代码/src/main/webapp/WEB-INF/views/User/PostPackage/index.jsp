@@ -67,7 +67,7 @@
     });
 
     var success = function () {
-        window.location.href = "/User/PostPackage/success";
+
     };
 
     function postPackage() {
@@ -85,7 +85,23 @@
             note:$("#note").val(),
             message:$("#message").val()
         };
-        Post("/User/PostPackage/",data,success);
+//        Post("/User/PostPackage/",data,success);
+        $.ajax({
+            url:"/User/PostPackage/",
+            type:"POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success:function () {
+                window.location.href = "/User/PostPackage/success";
+            },
+            error:function (XMLHttpRequest) {
+                if(XMLHttpRequest.status === 404){
+                    alert("未认证用户不能使用该功能！");
+                }else {
+                    window.location.href = "/User/PostPackage/failure";
+                }
+            }
+        });
     }
 
     $(function() {
