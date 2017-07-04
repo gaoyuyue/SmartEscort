@@ -89,7 +89,7 @@
     </div>
 </div>
 
-//控制评论字数
+<%--//控制评论字数--%>
 <script language="javascript" type="text/javascript">
     $("#counts").keyup(function(){
         if($("#counts").val().length > 100){
@@ -99,7 +99,7 @@
     });
 </script>
 
-//点星星
+<%--//点星星--%>
 <script type="text/javascript">
     $(function(){
         $(document).on('mouseover','i[cjmark]',function(){
@@ -117,7 +117,7 @@
     })
 </script>
 
-//获取送货人信息
+<%--//获取送货人信息--%>
 <script>
     var success = function () {
 
