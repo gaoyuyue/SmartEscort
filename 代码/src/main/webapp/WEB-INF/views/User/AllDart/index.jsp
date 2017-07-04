@@ -8,8 +8,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+<style>
+    .dart_border_padding{
+        padding: 0px 21px;
+    }
+    .status_style{
+        color: orange;
+        font-family: SimSun-ExtB;
+        font-size: 15px
+    }
+</style>
 <div id="frame">
-
     <div id="navbarSuspension">
         <div id="top">
             <span id="list">
@@ -22,11 +31,11 @@
             <div class="page__bd">
                 <div class="weui-tab">
                     <div class="weui-navbar">
-                        <div class="weui-navbar__item weui-bar__item_on font_color">
-                            <a href="/User/AllDart/" style="color:orange;" class="font_color">全部镖单</a>
+                        <div class="weui-navbar__item font_color weui-bar__item_on">
+                            <a href="/User/AllDart/" style="color:orange;" class="font_color">全部订单</a>
                         </div>
                         <div class="weui-navbar__item font_color">
-                            <a href="/User/MyPublish/" class="font_color">我的发布</a>
+                            <a href="/User/MyPublish/"class="font_color">我的发布</a>
                         </div>
                         <div class="weui-navbar__item font_color">
                             <a href="/User/MyDart/" class="font_color">我的接单</a>
@@ -40,17 +49,11 @@
         </div>
     </div>
 
-
     <div class="weui-tab__panel">
         <div class="page__bd" style="height: 50%;margin-top: 100px" id="packageList">
 
-
         </div>
     </div>
-
-
-
-
 </div>
 
 
@@ -97,8 +100,7 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                            <button type="button" class="deleteDart" publishDartId='`+e.id+`'>删除订单</button>
-                            <button type="button"><a href="/User/EvaluationDetail/" style="color: black">评价</a></button>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary deleteDart" publishDartId='`+e.id+`'>删除订单</a>
                         </div>
                     </div>
                 </div>
@@ -178,17 +180,28 @@
            `);
 
         });
+
         $(".deleteDart").click(function () {
+            "use strict";
             const publishDartId = $(this).attr("publishDartId");
-            $.confirm("确认取消订单吗？", "提示", function() {
-                Delete("/User/WaitingEvaluation/delete/publishDartId/"+publishDartId,function () {
-                    window.location.href = "/User/WaitingEvaluation/";
+            $.confirm("确认删除订单吗？", "提示", function() {
+                $.ajax({
+                    url:"/User/AllDart/delete/publishDartId/"+publishDartId,
+                    type:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify(publishDartId),
+                    success:function () {
+                        window.location.href = "/User/AllDart/";
+                    },
+                    error:function (XMLHttpRequest) {
+
+                    }
                 });
             }, function() {
-                $(this).remove();
-                $(".weui-mask").remove();
+
             });
         });
+
         $(".childPage").click(function () {
             const publishDartId = $(this).attr("publishDartId");
             var packageData = function packageData(data) {
@@ -211,14 +224,18 @@
                 $("#message").text(data.message);
                 $("#price").text(data.price);
                 $("#note").text(data.note);
-                $("#agencyName").text(data.agency.name);
-                $("#agencyPhoneNumber").text(data.agency.phoneNumber);
                 $("#areaName").text(data.area.areaName);
                 $("#areaDetail").text(data.address.detail);
+                if(data.packageStatus == '已评价'){
+                    $("#agencyName").text(data.agency.name);
+                    $("#agencyPhoneNumber").text(data.agency.phoneNumber);
+                }
 
                 $("#agencyDetail").empty();
                 $("#agencyDetail").append(
-                    `
+                    (data.packageStatus == '已评价')
+                        ?
+                        `
                                          <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
                                                <div class="weui-cell__bd">
                                                     <p>送货人姓名</p>
@@ -232,14 +249,48 @@
                                                <div class="weui-cell__ft" id="agencyPhoneNumber">`+data.agency.phoneNumber+`</div>
                                          </div>
                                 `
+                        :
+                        `
+                                    <div class="weui-panel__bd">
+                                            <div class="weui-media-box weui-media-box_small-appmsg">
+                                                <div class="weui-cells">
+                                                     <div class="weui-cell weui-cell_access">
+                                                        <div class="weui-cell__hd"><img src="/assets/img/jusanglian.png" alt="" style="width:20px;margin-right:50px;display:block"></div>
+                                                        <div class="weui-cell__bd weui-cell_primary">
+                                                            <p>您的订单已被取消</p>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                            `
                 );
             };
-            Get("/User/WaitingEvaluation/dartDetail/publishDartId/"+publishDartId,packageData);
+            Get("/User/AllDart/dartDetail/publishDartId/"+publishDartId,packageData);
         });
     };
     $(document).ready(function () {
-        Get("/User/WaitingEvaluation/packageList",success);
+        Get("/User/AllDart/packageList",success);
     });
+</script>
+
+<script src="/assets/js/fastclick.js"></script>
+<script>
+    $(function() {
+        FastClick.attach(document.body);
+    });
+    <%--嵌套页面--%>
+    $(document).on("open", ".weui-popup-modal", function() {
+        console.log("open popup");
+    }).on("close", ".weui-popup-modal", function() {
+        console.log("close popup");
+    });
+    function hideNavbarSuspension() {
+        $("#navbarSuspension").css('display','none');
+    }
+    function showNavbarSuspension() {
+        $("#navbarSuspension").css('display','block');
+    }
     $(document).ready(function () {
         $("#personalCenter").addClass("weui-bar__item_on");
     });
