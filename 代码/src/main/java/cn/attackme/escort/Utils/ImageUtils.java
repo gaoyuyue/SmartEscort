@@ -1,11 +1,9 @@
 package cn.attackme.escort.Utils;
 
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -31,11 +29,15 @@ public class ImageUtils {
         return imageName;
     }
 
-    public static String encodeImageToBase64(String path,String name,String formate) throws IOException {
-        BufferedImage bufferedImage = ImageIO.read(new File(path+name));
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ImageIO.write(bufferedImage,formate,outputStream);
-        return encodeBase64String(outputStream.toByteArray());
+    public static String encodeImageToBase64(String path,String name) throws IOException {
+        InputStream in = new FileInputStream(path+name);
+        byte[] bytes = new byte[in.available()];
+        in.read(bytes);
+        String base64String = encodeBase64String(bytes);
+        String[] split = base64String.split("/", 3);
+        String head = split[0].substring(0, 4) + ":" + split[0].substring(4, split[0].length())+"/"+split[1].substring(0,split[1].length()-6)+";"
+                +split[1].substring(split[1].length()-6,split[1].length())+",/";
+        return head+split[2];
     }
 
     private static String getImageName(String base64){
