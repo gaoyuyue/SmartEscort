@@ -4,11 +4,9 @@ package cn.attackme.escort.Controller.System;
 import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
-import cn.attackme.escort.Service.MailService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Service.UserService;
-import cn.attackme.escort.Utils.LogUtils;
 import cn.attackme.escort.Utils.ValidateCode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -21,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
-import javax.mail.MessagingException;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,9 +42,6 @@ public class AccountController {
 
     @Autowired
     private SchoolService schoolService;
-
-    @Autowired
-    private MailService mailService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -121,11 +115,6 @@ public class AccountController {
             user.setStudentId(studentId);
             user.setOpenid(openid);
             userInfoService.save(user);
-            try {
-                mailService.sendMail("1519035296@qq.com","gaoyuyue@outlook.com","有新用户注册","");
-            } catch (MessagingException e) {
-                LogToDB(e);
-            }
             return "redirect:/Account/OAuth2";
         }
         return "redirect:/Account/Register";

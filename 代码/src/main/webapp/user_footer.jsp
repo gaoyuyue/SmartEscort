@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
             </div>
             <div class="weui-tabbar">
-                <a href="/User/StudentVerify/" id="home" class="weui-tabbar__item">
+                <a href="/" id="home" class="weui-tabbar__item">
                     <span style="display: inline-block;position: relative;">
                         <div alt="" class="weui-tabbar__icon">
                             <i class="fa fa-home"></i>
