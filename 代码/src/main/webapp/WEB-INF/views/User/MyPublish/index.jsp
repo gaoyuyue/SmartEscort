@@ -103,9 +103,9 @@
                         <div class="button_sp_area">
                             <div style="float:right">
                             `+
-                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="cancelDart" publishDartId='`+e.id+`'>取消订单</a>` : `
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="receivedDart" publishDartId='`+e.id+`'>确认收货</a>
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" id="callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
+                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" publishDartId='`+e.id+`'>取消订单</a>` : `
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" publishDartId='`+e.id+`'>确认收货</a>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
                         +`
                             <div>
                         </div>
@@ -188,7 +188,7 @@
            `);
 
         });
-        $("#cancelDart").click(function () {
+        $(".cancelDart").click(function () {
             "use strict";
             const publishDartId = $(this).attr("publishDartId");
             $.confirm("确认取消订单吗？", "提示", function() {
@@ -208,7 +208,7 @@
 
             });
         });
-        $("#receivedDart").click(function () {
+        $(".receivedDart").click(function () {
             "use strict";
             const publishDartId = $(this).attr("publishDartId");
             $.confirm("确认收到货物吗？", "提示", function() {
@@ -228,7 +228,7 @@
 
             });
         });
-        $("#callSender").click(function () {
+        $(".callSender").click(function () {
             const agencyPhoneNumber = $(this).attr("agencyPhoneNumber");
             $.actions({
                 title: "送货人联系方式",

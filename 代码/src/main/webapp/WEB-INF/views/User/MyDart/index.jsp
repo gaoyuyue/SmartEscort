@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" id="callSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>
+                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary callSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
            `);
 
         });
-        $("#callSender").click(function () {
+        $(".callSender").click(function () {
             const delegationPhoneNumber = $(this).attr("delegationPhoneNumber");
             $.actions({
                 title: "收货联系方式",

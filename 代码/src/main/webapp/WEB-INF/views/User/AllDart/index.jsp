@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                            <button type="button" id="deleteDart" publishDartId='`+e.id+`'>删除订单</button>
+                            <button type="button" class="deleteDart" publishDartId='`+e.id+`'>删除订单</button>
                             <button type="button"><a href="/User/EvaluationDetail/" style="color: black">评价</a></button>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
            `);
 
         });
-        $("#deleteDart").click(function () {
+        $(".deleteDart").click(function () {
             const publishDartId = $(this).attr("publishDartId");
             $.confirm("确认取消订单吗？", "提示", function() {
                 Delete("/User/WaitingEvaluation/delete/publishDartId/"+publishDartId,function () {
