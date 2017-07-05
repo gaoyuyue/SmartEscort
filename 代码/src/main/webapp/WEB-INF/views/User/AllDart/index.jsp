@@ -225,7 +225,7 @@
                 $("#price").text(data.price);
                 $("#note").text(data.note);
                 $("#areaName").text(data.area.areaName);
-                $("#areaDetail").text(data.address.detail);
+                $("#areaDetail").text(data.addressDetail);
                 if(data.packageStatus == '已评价'){
                     $("#agencyName").text(data.agency.name);
                     $("#agencyPhoneNumber").text(data.agency.phoneNumber);

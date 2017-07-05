@@ -12,7 +12,7 @@
     .starShow{float:left;width:26px;height:20px;background:url(/assets/img/star.png) 0 -20px no-repeat;}
     .starPosition{
         position: absolute;
-        width: 375px;
+        width: 300px;
         height: 30px;
     }
     .starPosition_inner{
@@ -60,38 +60,31 @@
     <div class="weui-cells weui-cells_form"style="background-color: #F9F9F9">
         <div class="weui-cell">
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea textarea" id="counts" placeholder="请填写您对此次交易的评价，并进行相应的打分" rows="3" style="background-color: #F9F9F9;font-family: SimSun-ExtB;font-size: 15px"></textarea>
+                <textarea class="weui-textarea textarea" id="counts" placeholder="请填写您对此次交易的评价，并进行相应的打分" rows="5" style="background-color: #F9F9F9;font-family: SimSun-ExtB;font-size: 15px"></textarea>
                 <div class="weui-textarea-counter"><span id="remainingwords">0</span>/500</div>
             </div>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <div class="weui-uploader">
+    <%--<div class="weui-cell">--%>
+        <%--<div class="weui-cell__bd">--%>
+            <%--<div class="weui-uploader">--%>
 
-                <div class="weui-uploader__bd">
-                    <ul class="weui-uploader__files" id="uploaderFiles">
-                        <li class="weui-uploader__file" style="background-image:url(/assets/img/a1.jpg)"></li>
-                        <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">
-                            <div class="weui-uploader__file-content">
-                                <i class="weui-icon-warn"></i>
-                            </div>
-                        </li>
-                        <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">
-                            <div class="weui-uploader__file-content">50%</div>
-                        </li>
-                    </ul>
-                    <div class="weui-uploader__input-box">
-                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
-                    </div>
-                </div>
-                <div class="weui-uploader__hd">
-                    <p class="weui-uploader__title">图片上传</p>
-                    <div class="weui-uploader__info">0/2</div>
-                </div>
-            </div>
-        </div>
-    </div>
+                <%--<div class="weui-uploader__bd">--%>
+                    <%--<ul class="weui-uploader__files" id="uploaderFiles">--%>
+                        <%--<li class="weui-uploader__file" style="background-image:url(/assets/img/a1.jpg)"></li>--%>
+                        <%--<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">--%>
+                            <%--<div class="weui-uploader__file-content">--%>
+                                <%--<i class="weui-icon-warn"></i>--%>
+                            <%--</div>--%>
+                        <%--</li>--%>
+                    <%--</ul>--%>
+                    <%--<div class="weui-uploader__input-box">--%>
+                        <%--<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 
 
 </div>
@@ -133,7 +126,7 @@
                 current(temp);
             }
             star[i].onclick = function(){
-                temp = this.index - 2;
+                temp = this.index + 1;
 //                document.getElementsByTagName('p')[0].innerHTML = temp + ' 颗星';
 //                if(temp == 5){
 //                    $("#scoreShow").val("90-100分")

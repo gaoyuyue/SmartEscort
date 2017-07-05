@@ -210,7 +210,7 @@
                 $("#agencyName").text(data.agency.name);
                 $("#agencyPhoneNumber").text(data.agency.phoneNumber);
                 $("#areaName").text(data.area.areaName);
-                $("#areaDetail").text(data.address.detail);
+                $("#areaDetail").text(data.addressDetail);
 
                 $("#agencyDetail").empty();
                 $("#agencyDetail").append(
