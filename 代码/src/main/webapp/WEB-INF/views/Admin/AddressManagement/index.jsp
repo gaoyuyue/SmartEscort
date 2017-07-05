@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>地址管理</h5>
+                    <h5>区域管理</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -166,7 +166,7 @@
             }
             deleteMe();
         };
-        Paging("/AddressManagement/getAddressList", "AddressTable", uploadTable, pageNumber, 10);
+        Paging("/AddressManagement/getAddressList", "AddressTable", uploadTable, pageNumber, 5);
 
     };
 

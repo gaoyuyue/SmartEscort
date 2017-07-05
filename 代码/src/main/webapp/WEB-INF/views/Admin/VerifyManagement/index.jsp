@@ -53,7 +53,7 @@
             $("#userTable").empty();
             for (var i = 0; i < resultList.length; i++) {
                 var item = resultList[i];
-                if (item.deleted == false) {
+                if (item.authed == false) {
                     $("#userTable").append(
                         '<tr>' +
                         '<td>' + item.userName +
@@ -67,55 +67,36 @@
                         '</td>' +
                         '<td>' + "!" +
                         '</td>' +
-                        '<td>'
-                        + '</td>' +
+                        '<td><a onclick="Author(this.id)"  class="btn btn-success" id="'+item.userName+
+                        '">通过</a>&nbsp;<a onclick="NoAuthor(this.id)"  class="btn btn-warning" id="'+
+                        '">不通过</a></td>' +
                         '</tr>'
                     )
                 }
             }
         };
         Paging("/UserManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 10);
-        modifyUser();
     };
 
-    //是否禁用
-    var modifyUser = function modifyUser() {
-        $(".modifyUser").click(function () {
-            var id = this["id"];
-            var arr = id.split("_");
-            var userName = arr[0];
-            var stage = arr[1];
-            console.log(userName);
-            console.log(stage);
-            swal(
-                {
-                    title: "确定？",
-                    text: "请再次确认你的操作",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if(isConfirm){
-                        AjaxPutRequest("/UserManagement/disabledUser/userName/" + userName + "/stage/" + stage);
-                        swal({
-                            title: "成功",
-                            text: "操作成功",
-                            type: "success",
-                            confirmButtonText: "知道了"
-                        });
-                        loadThis();
-                    }else {
-                        swal("已取消", "未作任何操作", "info");
-                    }
-                }
-            )
-        })
-    };
+
+    //是否认证
+    function Author(id) {
+        alert(id);
+        var userName = id;
+        AjaxPutRequest("/VerifyManagement/Authored/userName/" + userName);
+        swal({
+            title: "成功",
+            text: "操作成功",
+            type: "success",
+            confirmButtonText: "知道了"
+        });
+        loadThis();
+    }
+
+
+    function NoAuthor(id) {
+        alert("Developing!");
+    }
 
     $(document).ready(
         function () {
