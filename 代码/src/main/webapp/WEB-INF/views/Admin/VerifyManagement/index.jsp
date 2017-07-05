@@ -25,8 +25,8 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>用户名</th>
                                 <th>昵称</th>
+                                <th>姓名</th>
                                 <th>手机号</th>
                                 <th>学工号</th>
                                 <th>验证</th>
@@ -56,7 +56,7 @@
                 if (item.authed == false&&item.stuCardUrl!=null) {
                     $("#userTable").append(
                         '<tr>' +
-                        '<td>' + item.userName +
+                        '<td>' + item.nickName +
                         '</td>' +
                         '<td>' + item.name +
                         '</td>' +

@@ -31,7 +31,7 @@
                             <thead>
                             <tr>
                                 <div class="row">
-                                    <th width="15%">用户名</th>
+                                    <th width="15%">姓名</th>
                                     <th width="30%">反馈内容</th>
                                     <th width="20%">反馈时间</th>
                                     <th >操作</th>
@@ -86,7 +86,7 @@
                 var result = resultList[i];
                 $("#FeedBack").append(
                     "<tr>"+
-                    "<td>" + result.user.userName +
+                    "<td>" + result.name +
                     "</td>" +
                     "<td class='feedContent active avoidOverflow' data-toggle='modal' data-target='#modal' onclick='feedBackDetail(this.innerText)' " +
                     "title='点击查看内容'>" +result.content +

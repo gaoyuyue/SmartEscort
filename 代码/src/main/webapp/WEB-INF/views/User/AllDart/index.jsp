@@ -141,39 +141,49 @@
                     </div>
                         <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
 
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>快递类型</p>
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>快递类型</p>
+                                </div>
+                                <div class="weui-cell__ft" id="courierCompany"></div>
                             </div>
-                            <div class="weui-cell__ft" id="courierCompany"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>包裹大小</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>包裹大小</p>
+                                </div>
+                                <div class="weui-cell__ft" id="standardDescription"></div>
                             </div>
-                            <div class="weui-cell__ft" id="standardDescription"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>短信</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" style="border-bottom: 1px solid #ebebeb">
+                                    <p>价格</p>
+                                </div>
+                                <div class="weui-cell__ft" id="price"></div>
                             </div>
-                            <div class="weui-cell__ft" id="message"></div>
                         </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>价格</p>
-                            </div>
-                            <div class="weui-cell__ft" id="price"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>备注</p>
-                            </div>
-                            <div class="weui-cell__ft" id="note"></div>
-                        </div>
-                        <div id="agencyDetail">
 
-                         </div>
+                        <br>
+
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>短信</p>
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" id="message">
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" >
+                                    <p>备注</p>
+                                </div>
+                                <div class="weui-cell__ft" id="note"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="weui-cells" id="agencyDetail">
+                        </div>
 
                     </div>
                 </div>
