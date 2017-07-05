@@ -53,7 +53,7 @@
             $("#userTable").empty();
             for (var i = 0; i < resultList.length; i++) {
                 var item = resultList[i];
-                if (item.authed == false) {
+                if (item.authed == false&&item.stuCardUrl!=null) {
                     $("#userTable").append(
                         '<tr>' +
                         '<td>' + item.userName +
@@ -67,7 +67,7 @@
                         '</td>' +
                         '<td>' + "!" +
                         '</td>' +
-                        '<td><a onclick="Author(this.id)"  class="btn btn-success" id="'+item.userName+
+                        '<td><a onclick="Author(this.id)"  class="btn btn-success Author" id="'+item.userName+
                         '">通过</a>&nbsp;<a onclick="NoAuthor(this.id)"  class="btn btn-warning" id="'+
                         '">不通过</a></td>' +
                         '</tr>'
@@ -78,6 +78,13 @@
         Paging("/UserManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 10);
     };
 
+
+    //绑定事件
+    function checkMe() {
+        $(".Author").click(function () {
+            var id=
+        })
+    }
 
     //是否认证
     function Author(id) {

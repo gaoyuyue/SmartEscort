@@ -54,6 +54,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <ul class="pagination" id="pagination"></ul>
 
                 </div>
             </div>

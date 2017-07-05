@@ -3,7 +3,9 @@ package cn.attackme.escort.Service;
 import cn.attackme.escort.Model.Area;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Repository.Query;
+import cn.attackme.escort.Utils.PageResults;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 
@@ -22,4 +24,5 @@ public class AreaService extends BaseService<Area>{
                 .setMaxResults(1)
                 .getSingleResult();
     }
+
 }

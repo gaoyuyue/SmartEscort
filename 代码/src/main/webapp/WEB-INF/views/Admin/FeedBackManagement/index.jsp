@@ -10,7 +10,6 @@
 <head>
 
     <title>Title</title>
-    <%--<script src="/assets/js/jquery-2.1.1.min.js"></script>--%>
     <link rel="stylesheet" href="/assets/css/mobile.css">
 </head>
 <body>
@@ -25,11 +24,6 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-3" style="float: right">
-                            <%--<div class="input-group">--%>
-                                <%--<input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span--%>
-                                    <%--class="input-group-btn">--%>
-                                        <%--<button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>--%>
-                            <%--</div>--%>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -41,7 +35,6 @@
                                     <th width="30%">反馈内容</th>
                                     <th width="20%">反馈时间</th>
                                     <th >操作</th>
-                                    <%--<th><button class="btn btn-danger " id="deleteFeedBack">删除所选</button></th>--%>
                                  </div>
                             </tr>
                             </thead>
@@ -84,10 +77,6 @@
 </body>
 <script>
 
-    function deleteFeedBack(id) {
-        AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
-        loadThis();
-    }
     //分页加载页面
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
@@ -104,12 +93,12 @@
                     "</td>"+
                     "<td>" + result.submitTime +
                     "</td>"+
-                    '<td><a onclick="deleteFeedBack(this.id)"  class="md-delete" id="' + result.id+
+                    '<td><a class="md-delete" id="' + result.id+
                     '">删除</a></td>' +
                     "</tr>"
                 );
             }
-
+            deleteMe();
         };
         Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
     };
@@ -120,6 +109,14 @@
             loadPage(1);
 
     });
+    //绑定点击事件
+    var deleteMe = function deleteMe() {
+        $(".md-delete").click(function () {
+            var id = this["id"];
+            AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
+            loadThis();
+        });
+    };
 
     function feedBackDetail(a){
         $("#feedDetail").text(a);
