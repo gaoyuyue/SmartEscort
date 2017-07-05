@@ -30,9 +30,6 @@ public class Standard implements Serializable{
     @GenericGenerator(name = "generator",strategy = "increment")
     private Integer id;
 
-    //价格
-    private Integer price;
-
     //标准描述
     private String description;
 }

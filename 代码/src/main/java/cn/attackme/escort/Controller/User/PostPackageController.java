@@ -165,7 +165,7 @@ public class PostPackageController {
         }
         address.setUser(user);
         String areaName = address.getArea().getAreaName();
-        Area area = areaService.getByName(areaName);
+        Area area = areaService.getByNameAndSchool(areaName,user.getSchool());
         address.setArea(area);
         httpSession.setAttribute("address",address);
         httpSession.setAttribute("hasCache",true);
@@ -182,10 +182,8 @@ public class PostPackageController {
         User user = userInfoService.getById(userName);
         p.setSchool(user.getSchool());
         p.setDelegation(user);
-        Integer addressId = p.getAddress().getId();
-        Address address = addressService.getById(addressId);
-        p.setArea(address.getArea());
-        p.setAddress(address);
+        Area area = areaService.getById(p.getArea().getId());
+        p.setArea(area);
         String companyName = p.getCourierCompany().getCompanyName();
         CourierCompany courierCompany = courierCompanyService.getByName(companyName);
         p.setCourierCompany(courierCompany);

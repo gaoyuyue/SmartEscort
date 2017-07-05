@@ -66,14 +66,13 @@
         Get("/User/PostPackage/courierList",getCourier);
     });
 
-    var success = function () {
-
-    };
-
     function postPackage() {
         var data = {
-            address:{
-                id:$("#cacheLink").attr("addressId")
+            addressDetail:$("#cacheLink").attr("detail"),
+            receiverPhoneNumber:$("#cacheLink").attr("phoneNumber"),
+            receiverName:$("#receiverName").attr("receiverName"),
+            area:{
+                id:$("#cacheLink").attr("areaId")
             },
             standard:{
                 description:$("#packageSize").val()
@@ -85,7 +84,6 @@
             note:$("#note").val(),
             message:$("#message").val()
         };
-//        Post("/User/PostPackage/",data,success);
         $.ajax({
             url:"/User/PostPackage/",
             type:"POST",
@@ -150,13 +148,15 @@
             );
         }else {
             $("#addressTable").append(
-                `<a class="weui-cell_access" href="/User/PostPackage/selectAddress" id="cacheLink" addressId="`+data.address.id+`">
+                `<a class="weui-cell_access" href="/User/PostPackage/selectAddress" id="cacheLink" receiverName="`
+                +data.address.receiverName+`" phoneNumber="`+data.address.phoneNumber+`" areaId="`
+                +data.address.area.id+`" detail="`+data.address.detail+`">
                     <label class="weui-cell weui-check__label">
                         <div style="float: left;width: 10%">
                             <div class="address_icon">
                             </div>
                         </div>
-                      <div style="width: 80%" class="weui-cell__bd">
+                      <div style="width: 80%" class="weui-cell__bd" >
                          <div>
                             <span >`+data.address.receiverName+`</span>
                             <span > </span>

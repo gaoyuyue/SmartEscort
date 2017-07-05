@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Console;
 import java.io.IOException;
 
+import static cn.attackme.Wechat.Util.OAuth2Util.getUserInfoByOpenId;
 import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
 
@@ -101,11 +104,18 @@ public class AccountController {
                              @RequestParam("phoneNumber") String phoneNumber,
                              @RequestParam("studentId") String studentId,
                              @RequestParam("schoolName") String schoolName,
-                             HttpSession httpSession) {
+                             HttpSession httpSession) throws Exception {
         String openid = (String) httpSession.getAttribute("openid");
+
+
         if (null != openid) {
+            JSONObject userInfo = getUserInfoByOpenId(openid);
+            System.out.println(userInfo);
             User user = new User();
             School school = schoolService.getByName(schoolName);
+            user.setHeadImageUrl(userInfo.getString("headimgurl"));
+            user.setNickName(userInfo.getString("nickname"));
+            user.setSex(userInfo.getInt("sex") == 1);
             user.setSchool(school);
             user.setPhoneNumber(phoneNumber);
             user.setName(name);

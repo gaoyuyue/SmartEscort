@@ -30,10 +30,20 @@ public class User implements Serializable{
     @Setter
     private String userName;
 
-    //昵称
+    //真实姓名
     @Getter
     @Setter
     private String name;
+
+    //性别
+    @Getter
+    @Setter
+    private boolean sex;
+
+    //微信昵称
+    @Getter
+    @Setter
+    private String nickName;
 
     //微信号
     @Getter
@@ -42,7 +52,6 @@ public class User implements Serializable{
 
     @Setter
     private String passWord;
-
 
     //个人信息中的手机号
     @Getter
@@ -80,6 +89,11 @@ public class User implements Serializable{
     @Getter
     @Setter
     private String studentId;
+
+    //头像url
+    @Getter
+    @Setter
+    private String headImageUrl;
 
     //学生证照片url
     @Getter

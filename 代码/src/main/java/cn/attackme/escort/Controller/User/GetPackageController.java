@@ -101,11 +101,11 @@ public class GetPackageController {
                                                          @PathVariable String standardId,
                                                          @PathVariable int pageNumber,
                                                          @PathVariable int pageSize){
-        Area area = areaService.getByName(areaId);
         CourierCompany courierCompany = courierCompanyService.getByName(courierCompanyId);
         Standard standard = standardService.getByDescription(standardId);
         String userName = getSubject().getPrincipal().toString();
         User user = userService.getById(userName);
+        Area area = areaService.getByNameAndSchool(areaId,user.getSchool());
         PageResults<Package> results = packageService.getPackageByFilter(area, courierCompany, standard,
                 PackageStatus.待领取, user.getSchool(), pageNumber, pageSize);
         return new ResponseEntity<PageResults<Package>>(results,HttpStatus.OK);
@@ -146,15 +146,14 @@ public class GetPackageController {
         delegateMessageMap.put("receiverPhone",receiverPhone);
         delegateMessage.setData(delegateMessageMap);
 
-        Address address = thePackage.getAddress();
         TemplateMessage agencyMessage = new TemplateMessage();
         agencyMessage.setTouser(agency.getOpenid());
         agencyMessage.setTemplate_id("T-OcS-GauGMFnEEz3O9uXX_G8AZwbCJoCbFC16e8_iw");
         agencyMessage.setUrl(foreUrl+"/User/MyDart/"+backUrl);
         RowMessage publisherName = new RowMessage(agency.getName()+"\n","red");
         RowMessage publisherPhone = new RowMessage(agency.getPhoneNumber()+"\n","red");
-        RowMessage receiveName = new RowMessage(address.getReceiverName()+"\n","red");
-        RowMessage receiveNumber = new RowMessage(address.getPhoneNumber()+"\n","red");
+        RowMessage receiveName = new RowMessage(thePackage.getReceiverName()+"\n","red");
+        RowMessage receiveNumber = new RowMessage(thePackage.getReceiverPhoneNumber()+"\n","red");
         RowMessage receiveMessage = new RowMessage(thePackage.getMessage()+"\n","red");
         Map<String,RowMessage> agencyMessageMap = new HashMap<>();
         agencyMessageMap.put("publisherName",publisherName);

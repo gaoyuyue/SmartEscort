@@ -1,8 +1,6 @@
 package cn.attackme.escort.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -99,9 +97,17 @@ public class Package implements Serializable {
     @JoinColumn(name = "area")
     private Area area;
 
-    //收货地址
-    @OneToOne
-    @JoinColumn(name = "address")
-    private Address address;
+    //详细地址
+    @Setter
+    @Getter
+    private String addressDetail;
+
+    @Setter
+    @Getter
+    private String receiverPhoneNumber;
+
+    @Setter
+    @Getter
+    private String receiverName;
 
 }

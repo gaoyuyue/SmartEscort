@@ -72,7 +72,7 @@ public class ManageAddressController {
         }
         address.setUser(user);
         String areaName = address.getArea().getAreaName();
-        Area area = areaService.getByName(areaName);
+        Area area = areaService.getByNameAndSchool(areaName,user.getSchool());
         address.setArea(area);
         addressService.save(address);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -95,7 +95,9 @@ public class ManageAddressController {
     @PutMapping("/edit")
     public ResponseEntity<Void> editUpdate(@RequestBody Address address){
         Address oldAddress = addressService.getById(address.getId());
-        Area area = areaService.getByName(address.getArea().getAreaName());
+        String userName = getSubject().getPrincipal().toString();
+        User user = userInfoService.getById(userName);
+        Area area = areaService.getByNameAndSchool(address.getArea().getAreaName(),user.getSchool());
         address.setArea(area);
         address.setDefault(oldAddress.isDefault());
         address.setUser(oldAddress.getUser());
