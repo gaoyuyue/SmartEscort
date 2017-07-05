@@ -36,7 +36,7 @@ public class PersonalCenterController {
     @ResponseBody
     @PutMapping("/userName/{userName}/password/{password}")
     public ResponseEntity<User> userPassword(@PathVariable String userName,
-                                                   @PathVariable String password) {
+                                             @PathVariable String password) {
         User user = userInfoService.getById(userName);
         user.setPassWord(getSHA_256(password));
         userInfoService.save(user);

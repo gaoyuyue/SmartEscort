@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.Console;
 import java.io.IOException;
+import java.util.UUID;
 
 import static cn.attackme.Wechat.Util.OAuth2Util.getUserInfoByOpenId;
 import static cn.attackme.escort.Utils.LogUtils.LogToDB;
@@ -90,17 +90,13 @@ public class AccountController {
     /**
      * 注册用户
      *
-     * @param userName
-     * @param passWord
      * @param name
      * @param phoneNumber
      * @param httpSession
      * @return
      */
     @PostMapping("/Account/Register")
-    public String createUser(@RequestParam("userName") String userName,
-                             @RequestParam("passWord") String passWord,
-                             @RequestParam("name") String name,
+    public String createUser(@RequestParam("name") String name,
                              @RequestParam("phoneNumber") String phoneNumber,
                              @RequestParam("studentId") String studentId,
                              @RequestParam("schoolName") String schoolName,
@@ -119,9 +115,9 @@ public class AccountController {
             user.setSchool(school);
             user.setPhoneNumber(phoneNumber);
             user.setName(name);
-            user.setPassWord(getSHA_256(passWord));
+            user.setPassWord(getSHA_256(openid+ UUID.randomUUID().toString()));
             user.setRole(Role.user);
-            user.setUserName(userName);
+            user.setUserName(openid);
             user.setStudentId(studentId);
             user.setOpenid(openid);
             userInfoService.save(user);
