@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -66,6 +63,23 @@ public class MyDartController {
     public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
+    }
+
+    /**
+     * 确认收货
+     * @param publishDartId
+     * @return
+     */
+    @RequiresRoles("user")
+    @ResponseBody
+    @PutMapping("/cancel/publishDartId/{publishDartId}")
+    public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
+        Package aPackage = packageService.getById(publishDartId);
+        if(aPackage.getPackageStatus() == PackageStatus.待签收){
+            aPackage.setPackageStatus(PackageStatus.待评价);
+        }
+        packageService.saveOrUpdate(aPackage);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
