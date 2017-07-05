@@ -86,7 +86,7 @@
                 var result = resultList[i];
                 $("#FeedBack").append(
                     "<tr>"+
-                    "<td>" + result.name +
+                    "<td>" + result.user.name +
                     "</td>" +
                     "<td class='feedContent active avoidOverflow' data-toggle='modal' data-target='#modal' onclick='feedBackDetail(this.innerText)' " +
                     "title='点击查看内容'>" +result.content +
