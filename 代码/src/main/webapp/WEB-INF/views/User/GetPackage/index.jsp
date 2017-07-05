@@ -3,12 +3,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="/assets/js/classie.js"></script>
 <script type="text/javascript" src="/assets/js/modernizr.custom.js"></script>
+<script type="text/javascript">
+    $(document.body).pullToRefresh().on("pull-to-refresh", function() {
+        setTimeout(function() {
+            $(document.body).pullToRefreshDone();
+        }, 2000);
+    });/*
+    $(function() {
+        FastClick.attach(document.body);
+    });*/
+</script>
 <div class="searchNav" id="top" >
     <%--<input type="text" placeholder="Search...">--%>
     <%--<img src="/assets/img/Search.png" class="searchA">--%>
     <img src="/assets/img/filter.png" id="filter-btn">
 </div>
-<div class="weui-panel weui-panel_access">
+<div ontouchstart class="weui-panel weui-panel_access " >
     <div class="weui-form-preview" id="packageTable">
     </div>
 </div>

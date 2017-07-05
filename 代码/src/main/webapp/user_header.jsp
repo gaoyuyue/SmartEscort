@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
     <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/assets/css/demo/demos.css">
 
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/assets/js/jquery-weui.min.js"></script>
@@ -30,7 +31,14 @@
         });
     </script>
 </head>
-<body>
+<body class="weui-pull-to-refresh">
+<div class="weui-pull-to-refresh__layer">
+    <div class="weui-pull-to-refresh__arrow"></div>
+    <div class="weui-pull-to-refresh__preloader"></div>
+    <div class="down">下拉刷新</div>
+    <div class="up">释放刷新</div>
+    <div class="refresh">正在刷新</div>
+</div>
 <div class="page tabbar js_show">
     <div class="page__bd" style="height: 100%;">
         <div class="weui-tab">
