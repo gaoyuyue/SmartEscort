@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,6 +41,18 @@ public class EvaluationDetailController {
 
     @Autowired
     private PackageService packageService;
+
+    /**
+     * 获取当前人包裹信息
+     * @param publishDartId
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/dartDetail/publishDartId/{publishDartId}")
+    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+        Package aPackage = packageService.getById(publishDartId);
+        return new ResponseEntity<>(aPackage,HttpStatus.OK);
+    }
 
 
 

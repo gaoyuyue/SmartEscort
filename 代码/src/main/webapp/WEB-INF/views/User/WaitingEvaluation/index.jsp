@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                            <a href="/User/EvaluationDetail/" class="weui-btn weui-btn_mini weui-btn_primary">评价</a>
+                            <a href="/User/EvaluationDetail/" class="weui-btn weui-btn_mini weui-btn_primary localStorage" publishDartId = '`+e.id+`'>评价</a>
                         </div>
                     </div>
                 </div>
@@ -242,6 +242,12 @@
             };
             Get("/User/WaitingEvaluation/dartDetail/publishDartId/"+publishDartId,packageData);
         });
+
+        $(".localStorage").click(function () {
+            const publishDartId = $(this).attr("publishDartId");
+            localStorage["publishDartId"] = publishDartId;
+        });
+
     };
     $(document).ready(function () {
         Get("/User/WaitingEvaluation/packageList",success);

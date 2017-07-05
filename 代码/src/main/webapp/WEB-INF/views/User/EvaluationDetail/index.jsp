@@ -10,23 +10,6 @@
 <%@include file="/user_header.jsp"%>
 <style>
     .starShow{float:left;width:26px;height:20px;background:url(/assets/img/star.png) 0 -20px no-repeat;}
-    .starPosition{
-        position: absolute;
-        width: 300px;
-        height: 30px;
-    }
-    .starPosition_inner{
-        position: absolute;
-        width: 200px;
-        height: 20px;
-        left: 120px;
-    }
-    .starPosition_outer{
-        position: absolute;
-        width: 100px;
-        height: 20px;
-        left: 20px;
-    }
 </style>
 <div id="frame" style="background-color: #FFFFFF">
     <div id="top">
@@ -34,7 +17,7 @@
             <a href="/User/WaitingEvaluation/"><img src="/assets/img/goback.png" align="top"></a>
         </span>
         <a id="title">发表评价</a>
-        <a id="title_submit" href="javascript:void(0);">提交</a>
+        <a id="title_submit" href="javascript:void(0);" class="delete">提交</a>
     </div>
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_appmsg">
@@ -46,57 +29,40 @@
             </div>
         </div>
     </div>
-    <div class="starPosition">
-        <%--<div class="starPosition_outer" id="scoreShow"></div>--%>
-        <div class="starPosition_inner">
-            <a href="javascript:;" class="starShow"></a>
-            <a href="javascript:;" class="starShow"></a>
-            <a href="javascript:;" class="starShow"></a>
-            <a href="javascript:;" class="starShow"></a>
-            <a href="javascript:;" class="starShow"></a>
-        </div>
-    </div>
     <br>
-    <div class="weui-cells weui-cells_form"style="background-color: #F9F9F9">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea textarea" id="counts" placeholder="请填写您对此次交易的评价，并进行相应的打分" rows="5" style="background-color: #F9F9F9;font-family: SimSun-ExtB;font-size: 15px"></textarea>
-                <div class="weui-textarea-counter"><span id="remainingwords">0</span>/500</div>
-            </div>
+    <br>
+    <br>
+    <div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <p>标题文字</p>
+        </div>
+        <div class="weui-cell__ft">
+            <a href="javascript:;" class="starShow"></a>
+            <a href="javascript:;" class="starShow"></a>
+            <a href="javascript:;" class="starShow"></a>
+            <a href="javascript:;" class="starShow"></a>
+            <a href="javascript:;" class="starShow"></a>
         </div>
     </div>
-    <%--<div class="weui-cell">--%>
-        <%--<div class="weui-cell__bd">--%>
-            <%--<div class="weui-uploader">--%>
+    </div>
 
-                <%--<div class="weui-uploader__bd">--%>
-                    <%--<ul class="weui-uploader__files" id="uploaderFiles">--%>
-                        <%--<li class="weui-uploader__file" style="background-image:url(/assets/img/a1.jpg)"></li>--%>
-                        <%--<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">--%>
-                            <%--<div class="weui-uploader__file-content">--%>
-                                <%--<i class="weui-icon-warn"></i>--%>
-                            <%--</div>--%>
-                        <%--</li>--%>
-                    <%--</ul>--%>
-                    <%--<div class="weui-uploader__input-box">--%>
-                        <%--<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
+
+
+
+
+
 
 
 </div>
 
-<%--//控制评论字数--%>
-<script language="javascript" type="text/javascript">
-    $("#counts").keyup(function(){
-        if($("#counts").val().length > 500){
-            $("#counts").val( $("#counts").val().substring(0,500) );
-        }
-        $("#remainingwords").text($("#counts").val().length ) ;
-    });
+<script>
+    var publishDartId = localStorage["publishDartId"];
+    var success = function success(data) {
+
+    };
+    Get("/User/EvaluationDetail/dartDetail/publishDartId/"+publishDartId,success);
+
 </script>
 
 <script>
@@ -109,7 +75,6 @@
 <script type="text/javascript">
     window.onload = function(){
         var star = document.getElementsByTagName('a');
-        var oDiv = document.getElementsByTagName('div')[0];
         var temp = 0;
         for(var i = 0, len = star.length; i < len; i++){
             star[i].index = i;
