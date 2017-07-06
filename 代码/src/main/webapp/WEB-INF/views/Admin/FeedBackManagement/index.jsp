@@ -107,7 +107,6 @@
     $(document).ready(
         function () {
             loadPage(1);
-
     });
     //绑定点击事件
     var deleteMe = function deleteMe() {

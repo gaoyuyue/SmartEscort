@@ -36,7 +36,7 @@
                             <tr>
                                 <th>选择</th>
                                 <th>收费标准描述</th>
-                                <th>收费标准</th>
+                                <%--<th>收费标准</th>--%>
                             </tr>
                             </thead>
                             <tbody id="StandardTable">
@@ -64,12 +64,12 @@
             <small class="font-bold">
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="请输入标准金额" name="areaName" id="standardPrice">
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>--%>
+                            <%--<div class="col-sm-6">--%>
+                                <%--<input type="text" class="form-control" placeholder="请输入标准金额" name="areaName" id="standardPrice">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
                             <div class="col-sm-6">
@@ -107,12 +107,12 @@
             <small class="font-bold">
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="请输入新的标准金额" name="areaName" id="newStandardPrice">
-                            </div>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>--%>
+                            <%--<div class="col-sm-6">--%>
+                                <%--<input type="text" class="form-control" placeholder="请输入新的标准金额" name="areaName" id="newStandardPrice">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
                             <div class="col-sm-6">
@@ -182,8 +182,8 @@
                     "</td>" +
                     "<td >"+ result.description +
                     "</td>" +
-                    "<td>" + result.price +
-                        "</td>" +
+//                    "<td>" + result.price +
+//                        "</td>" +
                         "</tr>"
                     );
             }
@@ -194,9 +194,9 @@
 
     //新增
     $("#createButton").click(function () {
-       var price=$("#standardPrice").val();
+//       var price=$("#standardPrice").val();
         var description = $("#standardDescription").val();
-        if (isNullOrEmpty(description)&&isNullOrEmpty(price)) {
+        if (isNullOrEmpty(description)) {
             swal({
                 title: "错误",
                 text: "不可为空",
@@ -206,14 +206,14 @@
             });
         } else {
             var data={
-                price:price,
+                price:1,
                 description:description
             };
             Post("/StandardManagement/createStandard",data);
             loadThis();
             $("#createCancelButton").click();
         }
-        $("#standardPrice").val("");
+//        $("#standardPrice").val("");
         $("#standardDescription").val("");
 
     });
@@ -228,10 +228,10 @@
 
     //修改
     $("#updateButton").click(function () {
-        var standardPrice = $("#newStandardPrice").val();
+//        var standardPrice = $("#newStandardPrice").val();
         var standardDescription = $("#newStandardDescription").val();
         var id = $("input[class='checkMe']:checked").attr("id");
-        if (isNullOrEmpty(standardPrice)&&isNullOrEmpty(standardDescription)) {
+        if (isNullOrEmpty(standardDescription)) {
             swal({
                 title: "错误",
                 text: "必填项不可为空",
@@ -241,7 +241,7 @@
         } else {
             var data={
                 id:id,
-                price:standardPrice,
+                price:1,
                 description:standardDescription
             };
             Put("/StandardManagement/updateStandard",data);

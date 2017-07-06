@@ -192,4 +192,16 @@ public class UserInfoService extends BaseService<User>{
                 .whereEqual("school",school);
         return super.getListByPageAndQuery(currentPageNumber,pageSize,query);
     }
+
+    public PageResults<User> getListPageByUrlAndAuth(@NotNull School school,
+                                                     @NotNull boolean isAuthed,
+                                                     @NotNull Integer pageNumber,
+                                                     @NotNull Integer pageSize){
+        Query query=new Query(entityManager);
+        query.from(User.class)
+                .whereEqual("school",school)
+                .whereEqual("isAuthed",isAuthed);
+        return super.getListByPageAndQuery(pageNumber,pageSize,query);
+
+    }
 }

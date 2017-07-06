@@ -53,7 +53,7 @@
             $("#userTable").empty();
             for (var i = 0; i < resultList.length; i++) {
                 var item = resultList[i];
-                if (item.authed == false&&item.stuCardUrl!=null) {
+                if (item.stuCardUrl!=null) {
                     $("#userTable").append(
                         '<tr>' +
                         '<td>' + item.nickName +
@@ -65,45 +65,45 @@
                         '</td>' +
                         '<td>' + item.studentId +
                         '</td>' +
-                        '<td>' + "!" +
+                        '<td><img class="stuCard" src="" width="20px" height="20px"/>'+
                         '</td>' +
-                        '<td><a onclick="Author(this.id)"  class="btn btn-success Author" id="'+item.userName+
-                        '">通过</a>&nbsp;<a onclick="NoAuthor(this.id)"  class="btn btn-warning" id="'+
-                        '">不通过</a></td>' +
+                        '<td><a class="btn btn-success Author" name="'+item.userName+
+                        '">通过</a>&nbsp;<a class="btn btn-warning NoAuthor" name="'+item.userName+
+                        '">不通过</a>' +
+                        '</td>' +
                         '</tr>'
                     )
                 }
             }
+            checkMe();
         };
-        Paging("/UserManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 10);
+        Paging("/VerifyManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 10);
     };
 
 
     //绑定事件
     function checkMe() {
+
+        //通过认证
         $(".Author").click(function () {
-            var id=
+            var userName = this["name"];
+            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/"+"true");
+            loadThis();
+        });
+
+        //不通过
+        $(".NoAuthor").click(function () {
+            var userName = this["name"];
+            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/"+"false");
+            loadThis();
+        });
+
+        //查看图片
+        $(".stuCard").mouseover(function () {
+            alert("develpin");
         })
     }
 
-    //是否认证
-    function Author(id) {
-        alert(id);
-        var userName = id;
-        AjaxPutRequest("/VerifyManagement/Authored/userName/" + userName);
-        swal({
-            title: "成功",
-            text: "操作成功",
-            type: "success",
-            confirmButtonText: "知道了"
-        });
-        loadThis();
-    }
-
-
-    function NoAuthor(id) {
-        alert("Developing!");
-    }
 
     $(document).ready(
         function () {
