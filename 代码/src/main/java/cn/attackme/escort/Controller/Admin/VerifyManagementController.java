@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import cn.attackme.escort.Utils.ImageUtils;
+
+import java.io.IOException;
 
 /**
  * Created by Administrator on 2017/5/23.
@@ -64,6 +67,16 @@ public class VerifyManagementController {
         }
     }
 
+    //获取Img
+    @RequiresRoles("admin")
+    @ResponseBody
+    @GetMapping("/CardImg/userName/{userName}")
+    public String CardImg(@PathVariable String userName)throws IOException{
+        User user = userInfoService.getById(userName);
+        String userHome = System.getProperty("user.home");
+        String fileSeparator = System.getProperty("file.separator");
+        return ImageUtils.encodeImageToBase64(userHome+fileSeparator+"Images"+fileSeparator,user.getStuCardUrl());
+    }
 }
 
 

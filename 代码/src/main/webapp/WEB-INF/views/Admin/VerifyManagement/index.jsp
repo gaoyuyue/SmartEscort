@@ -41,6 +41,7 @@
                     </div>
                     <ul class="pagination" id="pagination"></ul>
                 </div>
+                <img id="test" src="" width="300px">
             </div>
         </div>
     </div>
@@ -65,8 +66,8 @@
                         '</td>' +
                         '<td>' + item.studentId +
                         '</td>' +
-                        '<td><img class="stuCard" src="" width="20px" height="20px"/>'+
-                        '</td>' +
+                        '<td><a class="stuCard" name="'+item.userName+
+                        '"><i class="fa fa-search"></i></a></td>'+
                         '<td><a class="btn btn-success Author" name="'+item.userName+
                         '">通过</a>&nbsp;<a class="btn btn-warning NoAuthor" name="'+item.userName+
                         '">不通过</a>' +
@@ -77,12 +78,12 @@
             }
             checkMe();
         };
-        Paging("/VerifyManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 10);
+        Paging("/VerifyManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 5);
     };
-
 
     //绑定事件
     function checkMe() {
+        var pre = document.getElementById("test");
 
         //通过认证
         $(".Author").click(function () {
@@ -100,9 +101,15 @@
 
         //查看图片
         $(".stuCard").mouseover(function () {
-            alert("develpin");
+            var id=this["name"];
+            AjaxGetRequest("/VerifyManagement/CardImg/userName/"+id,loadImg);
+            function loadImg(data) {
+                pre.src=data;
+            }
         })
     }
+
+
 
 
     $(document).ready(
