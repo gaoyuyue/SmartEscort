@@ -172,7 +172,7 @@
                                <img class="weui-media-box__thumb" src=` + prefix + element.courierCompany.companyName + suffix + `>
                            </div>
                            <div class="weui-form-preview__item">
-                               <span class="weui-form-preview__value" >` + element.delegation.userName + `</span>
+                               <span class="weui-form-preview__value" >` + element.delegation.nickName + `</span>
                                <%--<span class="weui-form-preview__value">男</span>--%>
                                <img +src="/assets/img/boy.png" width="51" height="51">
                            </div>
