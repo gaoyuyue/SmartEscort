@@ -182,8 +182,6 @@
                     "</td>" +
                     "<td >"+ result.description +
                     "</td>" +
-//                    "<td>" + result.price +
-//                        "</td>" +
                         "</tr>"
                     );
             }
@@ -194,7 +192,6 @@
 
     //新增
     $("#createButton").click(function () {
-//       var price=$("#standardPrice").val();
         var description = $("#standardDescription").val();
         if (isNullOrEmpty(description)) {
             swal({
@@ -206,14 +203,12 @@
             });
         } else {
             var data={
-                price:1,
                 description:description
             };
             Post("/StandardManagement/createStandard",data);
             loadThis();
             $("#createCancelButton").click();
         }
-//        $("#standardPrice").val("");
         $("#standardDescription").val("");
 
     });
@@ -228,7 +223,6 @@
 
     //修改
     $("#updateButton").click(function () {
-//        var standardPrice = $("#newStandardPrice").val();
         var standardDescription = $("#newStandardDescription").val();
         var id = $("input[class='checkMe']:checked").attr("id");
         if (isNullOrEmpty(standardDescription)) {
@@ -241,7 +235,6 @@
         } else {
             var data={
                 id:id,
-                price:1,
                 description:standardDescription
             };
             Put("/StandardManagement/updateStandard",data);

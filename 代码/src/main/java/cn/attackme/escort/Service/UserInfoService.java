@@ -200,7 +200,8 @@ public class UserInfoService extends BaseService<User>{
         Query query=new Query(entityManager);
         query.from(User.class)
                 .whereEqual("school",school)
-                .whereEqual("isAuthed",isAuthed);
+                .whereEqual("isAuthed",isAuthed)
+                .whereIsNotNull("stuCardUrl");
         return super.getListByPageAndQuery(pageNumber,pageSize,query);
 
     }
