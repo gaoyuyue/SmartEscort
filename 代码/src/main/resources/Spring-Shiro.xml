@@ -102,6 +102,7 @@
             <value>
                 /User/ManageAddress/schoolNameList = anon
                 /UMITeam/areaNameList/** = anon
+                /UMITeam/success = anon
                 /UMITeam/ = anon
                 /Wechat/** = anon
                 /OAuth2/** = anon

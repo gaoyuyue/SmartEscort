@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: arthurme
-  Date: 2017/7/2
-  Time: 19:17
+  Date: 2017/4/10
+  Time: 18:37
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>发布失败</title>
+    <title>提交成功</title>
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
 </head>
@@ -20,12 +20,12 @@
     <div class="weui-msg">
         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
-            <h2 class="weui-msg__title">发布失败</h2>
+            <h2 class="weui-msg__title">提交成功</h2>
+            <p class="weui-msg__desc">内容详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现<a href="javascript:void(0);">${orderNumber}</a></p>
         </div>
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
-                <a href="/User/PostPackage/" class="weui-btn weui-btn_warn">继续发布</a>
-                <a href="/User/PersonalCenter/" class="weui-btn weui-btn_default">前往个人中心</a>
+                <a href="/UMITeam/" class="weui-btn weui-btn_primary">继续提交</a>
             </p>
         </div>
         <div class="weui-msg__extra-area">

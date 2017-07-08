@@ -3,6 +3,7 @@ package cn.attackme.escort.Controller.UMITeam;
 import cn.attackme.escort.Model.Area;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.UMIPackage;
+import cn.attackme.escort.Service.AreaService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UMIPackageService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -10,10 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
+import static cn.attackme.escort.Utils.OrderUtil.genOrderNo;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -26,6 +31,8 @@ public class UMIPackageController {
     private SchoolService schoolService;
     @Autowired
     private UMIPackageService umiPackageService;
+    @Autowired
+    private AreaService areaService;
 
     @GetMapping("/")
     public String index(){
@@ -38,11 +45,31 @@ public class UMIPackageController {
         return "UMITeam/admin";
     }
 
+    @GetMapping("/success")
+    public String success(){
+        return "UMITeam/success";
+    }
+
     @PostMapping("/")
-    @ResponseBody
-    public ResponseEntity<Void> create(@RequestBody UMIPackage umiPackage){
-        umiPackageService.save(umiPackage);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    public String create(@RequestParam String name,
+                         @RequestParam String phoneNumber,
+                         @RequestParam String detailAddress,
+                         @RequestParam String message,
+                         @RequestParam String schoolName,
+                         @RequestParam String areaName,
+                         Model model){
+        try {
+            School school = schoolService.getByName(schoolName);
+            Area area = areaService.getByNameAndSchool(areaName, school);
+            String orderNo = genOrderNo();
+            UMIPackage umiPackage = new UMIPackage(orderNo,name,phoneNumber,message,school,area,detailAddress,new Date());
+            umiPackageService.save(umiPackage);
+            model.addAttribute("orderNumber",orderNo);
+            return "UMITeam/success";
+        }catch (Exception e){
+            LogToDB(e);
+            return "UMITeam/failure";
+        }
     }
 
     @GetMapping("/areaNameList/schoolName/{schoolName}")

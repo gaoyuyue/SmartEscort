@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>发布失败</title>
+    <title>提交失败</title>
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
 </head>
@@ -24,8 +24,7 @@
         </div>
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
-                <a href="/User/PostPackage/" class="weui-btn weui-btn_warn">继续发布</a>
-                <a href="/User/PersonalCenter/" class="weui-btn weui-btn_default">前往个人中心</a>
+                <a href="/UMITeam/" class="weui-btn weui-btn_warn">重新提交</a>
             </p>
         </div>
         <div class="weui-msg__extra-area">
