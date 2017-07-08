@@ -12,12 +12,12 @@
     .starShow{float:left;width:26px;height:20px;background:url(/assets/img/star.png) 0 -20px no-repeat;}
 </style>
 <div id="frame" style="background-color: #EFEFF4">
-    <div id="top" STYLE="background-color: #09BB07">
+    <div id="top">
         <span id="list" style="color: white">
             <a href="/User/WaitingEvaluation/"><img src="/assets/img/goback.png" align="top"></a>
         </span>
-        <a id="title" style="color: white">发表评价</a>
-        <%--<a id="title_submit" href="javascript:void(0);">提交</a>--%>
+        <a id="title">发表评价</a>
+        <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
     </div>
     <%--<div class="weui-panel__bd"  style="border-bottom: 2px solid #cbcbcb;background-color: #ffffff">--%>
         <%--<div class="weui-media-box weui-media-box_appmsg">--%>
