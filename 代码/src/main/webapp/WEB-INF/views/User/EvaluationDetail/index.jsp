@@ -36,7 +36,7 @@
     <%--</div>--%>
     <div class="weui-cells">
         <div class="weui-cell">
-            <div class="weui-cell__bd">
+            <div class="weui-cell__bd" style="font-size: 26px">
                 <p>人员态度</p>
             </div>
             <div class="weui-cell__ft">
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="weui-cell">
-            <div class="weui-cell__bd">
+            <div class="weui-cell__bd" style="font-size: 26px">
                 <p>服务态度</p>
             </div>
             <div class="weui-cell__ft" id="Service_attitude">
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="weui-cell">
-            <div class="weui-cell__bd">
+            <div class="weui-cell__bd" style="font-size: 26px">
                 <p>包裹完整度</p>
             </div>
             <div class="weui-cell__ft">
