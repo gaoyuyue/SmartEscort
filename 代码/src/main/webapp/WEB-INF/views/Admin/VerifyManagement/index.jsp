@@ -54,7 +54,6 @@
             $("#userTable").empty();
             for (var i = 0; i < resultList.length; i++) {
                 var item = resultList[i];
-                if (item.stuCardUrl!=null) {
                     $("#userTable").append(
                         '<tr>' +
                         '<td>' + item.nickName +
@@ -73,8 +72,7 @@
                         '">不通过</a>' +
                         '</td>' +
                         '</tr>'
-                    )
-                }
+                    );
             }
             checkMe();
         };
