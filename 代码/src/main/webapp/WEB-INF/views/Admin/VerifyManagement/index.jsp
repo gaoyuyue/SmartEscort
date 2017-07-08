@@ -5,6 +5,7 @@
   Time: 19:49
   To change this template use File | Settings | File Templates.
 --%>
+<scrip></scrip>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -41,19 +42,43 @@
                     </div>
                     <ul class="pagination" id="pagination"></ul>
                 </div>
-                <div id="test" style="display: none" ><img id="preview" src=""  width="300px"></div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
+<div class="modal inmodal fade in" role="dialog" tabindex="-1" aria-labelledby="addUserModalLabel" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">关闭</span>
+                </button>
+                <img id="preview" src="" width="300px">
+                <h4 class="modal-title"></h4>
+                <small class="font-bold">
+                </small>
+            </div>
+            <small class="font-bold">
+                <div class="modal-footer">
+                    <button class="btn btn-success Author" name="">通过</button>
+                    <button class="btn btn-warning NoAuthor" name="">不通过</button>
+                    <button id="cancel" type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </small>
+        </div>
+        <small class="font-bold">
+        </small>
+    </div>
+</div>
 
-    var loadPage = function loadPage(pageNumber) {
-        var uploadTable = function (data) {
-            var resultList = data["results"];
-            $("#userTable").empty();
-            for (var i = 0; i < resultList.length; i++) {
-                var item = resultList[i];
+    <script type="text/javascript">
+
+        var loadPage = function loadPage(pageNumber) {
+            var uploadTable = function (data) {
+                var resultList = data["results"];
+                $("#userTable").empty();
+                for (var i = 0; i < resultList.length; i++) {
+                    var item = resultList[i];
                     $("#userTable").append(
                         '<tr>' +
                         '<td>' + item.nickName +
@@ -65,80 +90,65 @@
                         '</td>' +
                         '<td>' + item.studentId +
                         '</td>' +
-                        '<td><a class="stuCard" name="'+item.userName+
-                        '"><i class="fa fa-search"></i></a></td>'+
-                        '<td><a class="btn btn-success Author" name="'+item.userName+
-                        '">通过</a>&nbsp;<a class="btn btn-warning NoAuthor" name="'+item.userName+
+                        '<td><a data-toggle="modal" data-target="#myModal" class="stuCard" name="' + item.userName +
+                        '"><i class="fa fa-search"></i></a></td>' +
+                        '<td><a class="btn btn-success Author" name="' + item.userName +
+                        '">通过</a>&nbsp;<a class="btn btn-warning NoAuthor" name="' + item.userName +
                         '">不通过</a>' +
                         '</td>' +
                         '</tr>'
                     );
-            }
-            checkMe();
-        };
-        Paging("/VerifyManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 5);
-    };
-
-    //绑定事件
-    function checkMe() {
-        var pre=document.getElementById("preview");
-
-        //通过认证
-        $(".Author").click(function () {
-            var userName = this["name"];
-            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/"+"true");
-            loadThis();
-        });
-
-        //不通过
-        $(".NoAuthor").click(function () {
-            var userName = this["name"];
-            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/"+"false");
-            loadThis();
-        });
-
-
-        function mousePosition(ev){
-            ev = ev || window.event;
-            if(ev.pageX || ev.pageY){
-                return {x:ev.pageX, y:ev.pageY};
-            }
-            return {
-                x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-                y:ev.clientY + document.body.scrollTop - document.body.clientTop
+                }
+                checkMe();
             };
+            Paging("/VerifyManagement/userPageResults/school/" + $("#school option:selected").val(), "userTable", uploadTable, pageNumber, 5);
+        };
+
+        //绑定事件
+        function checkMe() {
+            var pre = document.getElementById("preview");
+
+            //通过认证
+            $(".Author").click(function () {
+                var userName = this["name"];
+                AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true");
+                loadThis();
+                $("#cancel").click();
+            });
+
+            //不通过
+            $(".NoAuthor").click(function () {
+                var userName = this["name"];
+                AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "false");
+                loadThis();
+                $("#cancel").click();
+            });
+
+
+            //查看图片
+            $(".stuCard").click(function () {
+                pre.src="";
+                var id = this["name"];
+//                var par=$(this).parent().prev();
+//                alert(par.innerText);
+                AjaxGetRequest("/VerifyManagement/CardImg/userName/" + id, loadImg);
+                $(".modal-footer").children().attr("name",id);
+                $(".modal-title").val();
+                function loadImg(data) {
+                    pre.src = data;
+                }
+
+            });
         }
 
-        //查看图片
-        $(".stuCard").mouseover(function (e) {
-            var id=this["name"];
-            AjaxGetRequest("/VerifyManagement/CardImg/userName/"+id,loadImg);
-            function loadImg(data) {
-                var mousePos = mousePosition(e);
-                var  xOffset = 0;
-                var  yOffset = 0;
-                pre.src=data;
-                $("#test").show().css("position","absolute").css("top",(mousePos.y - yOffset) + "px").css("left",(mousePos.x + xOffset) + "px");
-
+        $(document).ready(
+            function () {
+                loadSchool("school");
+                loadPage(1);
+                $("#school").change(function () {
+                    loadPage(1)
+                })
             }
-        });
+        );
 
-        $(".stuCard").mouseleave(function () {
-            $("#test").hide();
-        })
-    }
-
-
-
-
-    $(document).ready(
-        function () {
-            loadSchool("school");
-            loadPage(1);
-            $("#school").change(function () {
-                loadPage(1)
-            })
-        }
-    );
-
-</script>
+    </script>
