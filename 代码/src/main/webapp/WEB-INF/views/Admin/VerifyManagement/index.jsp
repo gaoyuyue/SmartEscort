@@ -41,7 +41,7 @@
                     </div>
                     <ul class="pagination" id="pagination"></ul>
                 </div>
-                <img id="test" src="" width="300px">
+                <div id="test" style="display: none" ><img id="preview" src=""  width="300px"></div>
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
 
     //绑定事件
     function checkMe() {
-        var pre = document.getElementById("test");
+        var pre=document.getElementById("preview");
 
         //通过认证
         $(".Author").click(function () {
@@ -97,13 +97,34 @@
             loadThis();
         });
 
+
+        function mousePosition(ev){
+            ev = ev || window.event;
+            if(ev.pageX || ev.pageY){
+                return {x:ev.pageX, y:ev.pageY};
+            }
+            return {
+                x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                y:ev.clientY + document.body.scrollTop - document.body.clientTop
+            };
+        }
+
         //查看图片
-        $(".stuCard").mouseover(function () {
+        $(".stuCard").mouseover(function (e) {
             var id=this["name"];
             AjaxGetRequest("/VerifyManagement/CardImg/userName/"+id,loadImg);
             function loadImg(data) {
+                var mousePos = mousePosition(e);
+                var  xOffset = 0;
+                var  yOffset = 0;
                 pre.src=data;
+                $("#test").show().css("position","absolute").css("top",(mousePos.y - yOffset) + "px").css("left",(mousePos.x + xOffset) + "px");
+
             }
+        });
+
+        $(".stuCard").mouseleave(function () {
+            $("#test").hide();
         })
     }
 
