@@ -108,6 +108,7 @@
                 <div id="showDartDetail" class='weui-popup__container'>
                     <div class="weui-popup__overlay"></div>
                     <div class="weui-popup__modal">
+                    <div class="weui-tab__panel">
                         <div class="top_other">
                             <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
                             <span ><a class="title_other">订单详情</a></span>
@@ -135,8 +136,6 @@
                                     <span id="areaDetail"></span>
                                 </div>
                             </div>
-                          <div class="weui-cell__ft" style="width: 5%">
-                          </div>
                         </label>
                     </div>
                         <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
@@ -184,7 +183,7 @@
                         <br>
                         <div class="weui-cells" id="agencyDetail">
                         </div>
-
+                    </div>
                     </div>
                 </div>
            `);
