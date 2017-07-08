@@ -111,6 +111,16 @@
             </div>
             <div class="weui-cell__ft"></div>
         </div>
+        <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/AboutUs/'">
+            <div class="weui-cell__bd">
+                 <span class="fa-stack fa-lg">
+                    <i class="fa fa-square fa-stack-2x" style="color: #bb514b"></i>
+                    <i class="fa fa-thumbs-o-up fa-stack-1x fa-inverse"></i>
+                </span>
+                <span style="vertical-align: middle" class="font_color">&nbsp;关于我们</span>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
