@@ -17,8 +17,17 @@
     <div class="navn2" >
         <strong><p id="userName" class="navuser"></p></strong>
     </div>
-    <div class="navn3" >
-        <p style="font-size: 13px;color: #888888;" class="navuser">摘要信息</p>
+    <div class="navn3" style="height: 35px">
+        <%--<p style="font-size: 13px;color: #888888;" class="navuser">信用分</p>--%>
+            <div class="button_sp_area navuser">
+                <a href="/User/MyIntegration/" class="weui-btn weui-btn_mini weui-btn_primary" style="border-radius: 100px;background-color: orange">
+                    <div>
+                        <span>信用分:</span>
+                        <span></span>
+                        <span id="integration"></span>
+                    </div>
+                </a>
+            </div>
     </div>
 
     <div class="page__hd">
@@ -123,6 +132,16 @@
         </div>
     </div>
 </div>
+<script>
+    var success = function success(data) {
+      $("#integration").text("");
+
+      $("#integration").text(data.integration);
+    };
+    $(document).ready(function () {
+        Get("/User/MyIntegration/information",success);
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#personalCenter").addClass("weui-bar__item_on");

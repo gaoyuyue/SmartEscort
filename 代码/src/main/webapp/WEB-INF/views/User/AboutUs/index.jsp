@@ -85,9 +85,6 @@
     $(function() {
         FastClick.attach(document.body);
     });
-    $(document).ready(function () {
-        $("#personalCenter").addClass("weui-bar__item_on");
-    });
 </script>
             </div>
         </div>
