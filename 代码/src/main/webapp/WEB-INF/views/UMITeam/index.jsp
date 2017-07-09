@@ -12,12 +12,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+    <link href="/assets/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/weui.min.css"/>
     <link rel="stylesheet" href="/assets/css/jquery-weui.min.css"/>
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
-
-</head>
+    <style type="text/css">
+        .QQ_S{}
+    </style>
 <body style="background-color: #eeeeee">
 
 <form method="post" action="/UMITeam/">
@@ -33,7 +35,7 @@
             </div>
         </div>
     </div>
-
+    <%--<a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=1519035296&version=1&src_type=web&web_src=escort.attackme.cn">手机QQ客服</a>--%>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>
@@ -41,6 +43,9 @@
                 <input class="weui-input" id="packageType" placeholder="请选择快递类型" type="text" name="courierCompany">
             </div>
         </div>
+    </div>
+
+    <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__hd"><label for="name" class="weui-label">学校</label></div>
             <div class="weui-cell__bd">
@@ -76,6 +81,13 @@
     </div>
 </form>
 
+<div style="width:60px;height: 75px;position:fixed;right:0;top:0;display:block;border:0px solid;border-radius:5px; background-color: #018d75">
+    <ul style="text-align: center">
+        <li><div style="height: 20px;margin-top: 2px"><span style="font-weight:bold;font-size: small;color:#c2c2c2">联系客服</span></div></li>
+        <li><div style="height: 10px"></div></li>
+        <li><a href="mqqwpa://im/chat?chat_type=wpa&uin=1519035296&version=1&src_type=web&web_src=escort.attackme.cn"><div style="height: 35px"><i class="fa fa-qq fa-stack-2x" style="color: #c2c2c2"></i></div></a></li>
+    </ul>
+</div>
 
 <script src="/assets/js/jquery-weui.min.js"></script>
 <script src="/assets/js/fastclick.js"></script>
@@ -109,27 +121,6 @@
             items: data
         });
     };
-
-//    var postSuccess = function () {
-//        window.location.href = "/UMITeam/success";
-//    };
-
-//    $("#saveButton").click(function () {
-//        var data = {
-//            name:$("#name").val(),
-//            phoneNumber:$("#phone").val(),
-//            detailAddress:$("#detailAddress").val(),
-//            message:$("#message").val(),
-//            area:{
-//                areaName:$("#area").val()
-//            },
-//            school:{
-//                schoolName:$("#schoolName").val()
-//            }
-//        };
-//        Post("/UMITeam/",data,postSuccess);
-//    });
-
 </script>
 
 </body>
