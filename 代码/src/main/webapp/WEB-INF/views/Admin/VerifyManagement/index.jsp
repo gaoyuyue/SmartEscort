@@ -29,10 +29,8 @@
                                 <th>昵称</th>
                                 <th>姓名</th>
                                 <th>手机号</th>
-                                <th>学工号</th>
+                                <th>学(工)号</th>
                                 <th>验证</th>
-                                <%--<th>信誉积分</th>--%>
-                                <%--<th>状态</th>--%>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -54,9 +52,8 @@
                         class="sr-only">关闭</span>
                 </button>
                 <img id="preview" src="" width="300px">
-                <h4 class="modal-title"></h4>
-                <small class="font-bold">
-                </small>
+                <h4 class="modal-Name"></h4>
+                <h4  class="modal-Id"> </h4>
             </div>
             <small class="font-bold">
                 <div class="modal-footer">
@@ -129,15 +126,15 @@
             $(".stuCard").click(function () {
                 pre.src="";
                 var id = this["name"];
-//                var par=$(this).parent().prev();
-//                alert(par.innerText);
+                var stuId=$(this).parent().prev().text();
+                var stuName=$(this).parent().prev().prev().prev().text();
                 AjaxGetRequest("/VerifyManagement/CardImg/userName/" + id, loadImg);
                 $(".modal-footer").children().attr("name",id);
-                $(".modal-title").val();
+                $(".modal-Name").text("姓名："+stuName);
+                $(".modal-Id").text("学（工）号："+stuId);
                 function loadImg(data) {
                     pre.src = data;
                 }
-
             });
         }
 
