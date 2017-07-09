@@ -74,8 +74,10 @@
                 <li class="">
                     <a href="#" url="/FeedBackManagement/" class="redirect"><i class="fa fa-thumbs-up"></i> <span class="nav-label">用户反馈</span> </a>
                 </li>
+                <li class="">
+                    <a href="#" url="/UMITeam/admin" class="redirect"><i class="fa fa-tasks"></i> <span class="nav-label">团队接单</span> </a>
+                </li>
             </ul>
-
         </div>
     </nav>
 

@@ -10,6 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
 /**
  * 快递类型管理
  * Created by hujian on 2017/3/25.
@@ -71,5 +75,14 @@ public class CourierCompanyManagementController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
+    }
+
+    //获取快递类型
+    @RequiresRoles("admin")
+    @ResponseBody
+    @GetMapping("/courierList")
+    public ResponseEntity<List<CourierCompany>> courierList(){
+        List<CourierCompany> stringList = courierCompanyService.getAll();
+        return new ResponseEntity<List<CourierCompany>>(stringList,HttpStatus.OK);
     }
 }

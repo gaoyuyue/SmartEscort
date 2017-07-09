@@ -1,11 +1,9 @@
 package cn.attackme.escort.Controller.UMITeam;
 
-import cn.attackme.escort.Model.Area;
-import cn.attackme.escort.Model.School;
-import cn.attackme.escort.Model.UMIPackage;
-import cn.attackme.escort.Service.AreaService;
-import cn.attackme.escort.Service.SchoolService;
-import cn.attackme.escort.Service.UMIPackageService;
+import cn.attackme.escort.Model.*;
+import cn.attackme.escort.Model.Package;
+import cn.attackme.escort.Service.*;
+import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,11 @@ public class UMIPackageController {
     @Autowired
     private UMIPackageService umiPackageService;
     @Autowired
+    private PackageService packageService;
+    @Autowired
     private AreaService areaService;
+    @Autowired
+    private CourierCompanyService courierCompanyService;
 
     @GetMapping("/")
     public String index(){
@@ -57,12 +59,14 @@ public class UMIPackageController {
                          @RequestParam String message,
                          @RequestParam String schoolName,
                          @RequestParam String areaName,
+                         @RequestParam String courierCompany,
                          Model model){
         try {
+            CourierCompany company = courierCompanyService.getByName(courierCompany);
             School school = schoolService.getByName(schoolName);
             Area area = areaService.getByNameAndSchool(areaName, school);
             String orderNo = genOrderNo();
-            UMIPackage umiPackage = new UMIPackage(orderNo,name,phoneNumber,message,school,area,detailAddress,new Date());
+            UMIPackage umiPackage = new UMIPackage(orderNo,name,phoneNumber,message,PackageStatus.待领取,school,area,company,detailAddress,new Date());
             umiPackageService.save(umiPackage);
             model.addAttribute("orderNumber",orderNo);
             return "UMITeam/success";
@@ -78,5 +82,33 @@ public class UMIPackageController {
         School school = schoolService.getByName(schoolName);
         List<String> areaNameList = school.getAreaList().stream().map(Area::getAreaName).collect(toList());
         return new ResponseEntity<List<String>>(areaNameList,HttpStatus.OK);
+    }
+
+    @RequiresRoles("admin")
+    @GetMapping("/packageList/packageType/{packageType}/areaId/{areaId}/packageStatus/{packageStatus}/pageNumber/{pageNumber}/pageSize/{pageSize}")
+    public ResponseEntity<PageResults<Package>> packageList(
+                                                            @PathVariable int packageType,
+                                                            @PathVariable int areaId,
+                                                            @PathVariable PackageStatus packageStatus,
+                                                            @PathVariable int pageNumber,
+                                                            @PathVariable int pageSize){
+        Area area = areaService.getById(areaId);
+        CourierCompany courierCompany = courierCompanyService.getById(packageType);
+        PageResults<Package> pageResults = packageService.getListPageByAreaAndStatusAndType(area, packageStatus, courierCompany, pageNumber, pageSize);
+        return new ResponseEntity<PageResults<Package>>(pageResults,HttpStatus.OK);
+    }
+
+    @RequiresRoles("admin")
+    @GetMapping("/umiPackageList/packageType/{packageType}/areaId/{areaId}/packageStatus/{packageStatus}/pageNumber/{pageNumber}/pageSize/{pageSize}")
+    public ResponseEntity<PageResults<UMIPackage>> umiPackageList(
+                                                                  @PathVariable int packageType,
+                                                                  @PathVariable int areaId,
+                                                                  @PathVariable PackageStatus packageStatus,
+                                                                  @PathVariable int pageNumber,
+                                                                  @PathVariable int pageSize){
+        Area area = areaService.getById(areaId);
+        CourierCompany courierCompany = courierCompanyService.getById(packageType);
+        PageResults<UMIPackage> pageResults = umiPackageService.getListPageByAreaAndStatusAndType(area, packageStatus, courierCompany, pageNumber, pageSize);
+        return new ResponseEntity<PageResults<UMIPackage>>(pageResults,HttpStatus.OK);
     }
 }

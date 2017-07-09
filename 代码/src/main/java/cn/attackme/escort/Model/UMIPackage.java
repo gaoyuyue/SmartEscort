@@ -3,7 +3,6 @@ package cn.attackme.escort.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,6 +23,7 @@ public class UMIPackage {
     private String name;
     private String phoneNumber;
     private String message;
+    private PackageStatus packageStatus;
 
     @ManyToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinColumn(name = "school")
@@ -32,6 +32,11 @@ public class UMIPackage {
     @OneToOne
     @JoinColumn(name = "area")
     private Area area;
+
+    @OneToOne
+    @JoinColumn(name = "courierCompany")
+    private CourierCompany courierCompany;
+
     private String detailAddress;
     private Date createDate;
 }

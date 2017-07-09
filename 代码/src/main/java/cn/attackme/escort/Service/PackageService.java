@@ -79,4 +79,17 @@ public class PackageService extends BaseService<Package> {
                 .setOrder("id","desc");
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }
+
+    public PageResults<Package> getListPageByAreaAndStatusAndType(@NotNull Area area,
+                                                                     @NotNull PackageStatus packageStatus,
+                                                                     @NotNull CourierCompany courierCompany,
+                                                                     @NotNull int pageNumber,
+                                                                     @NotNull int pageSize){
+        Query query = new Query(entityManager);
+        query.from(Package.class).
+                whereEqual("area",area).
+                whereEqual("packageStatus",packageStatus).
+                whereEqual("courierCompany",courierCompany);
+        return this.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
 }

@@ -105,7 +105,6 @@ public class PostPackageController {
     }
 
     //获取快递类型
-    @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/courierList")
     public ResponseEntity<List<String>> courierList(){

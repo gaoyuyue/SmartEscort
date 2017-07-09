@@ -100,6 +100,7 @@
         <property name="unauthorizedUrl" value="/Account/Login"/>
         <property name="filterChainDefinitions">
             <value>
+                /User/PostPackage/courierList = anon
                 /User/ManageAddress/schoolNameList = anon
                 /UMITeam/areaNameList/** = anon
                 /UMITeam/success = anon

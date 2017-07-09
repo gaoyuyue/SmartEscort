@@ -36,6 +36,12 @@
 
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="packageType" placeholder="请选择快递类型" type="text" name="courierCompany">
+            </div>
+        </div>
+        <div class="weui-cell">
             <div class="weui-cell__hd"><label for="name" class="weui-label">学校</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" id="schoolName" name="schoolName" placeholder="请选择学校" type="text">
@@ -89,10 +95,17 @@
     });
     $(document).ready(function () {
         Get("/User/ManageAddress/schoolNameList",schoolSuccess);
+        Get("/User/PostPackage/courierList",getCourier);
     });
     var areaSuccess = function (data) {
         $("#area").select("update",{
             title: "选择区域",
+            items: data
+        });
+    };
+    const getCourier = function (data) {
+        $("#packageType").select({
+            title: "选择快递类型",
             items: data
         });
     };
