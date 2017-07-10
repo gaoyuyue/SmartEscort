@@ -513,6 +513,7 @@ function loadThis() {
 
 
 var getLocalTime = function(nS) {
+    if(nS!=null){
     var time = new Date(nS);
     var y = time.getFullYear();
     var m = time.getMonth() + 1;
@@ -521,4 +522,7 @@ var getLocalTime = function(nS) {
     var mm = time.getMinutes();
     var s = time.getSeconds();
     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+    }else {
+        return "";
+    }
 };

@@ -71,6 +71,8 @@
         var updateTable=function (data) {
             console.log(data);
             var resultList = data["results"];
+            //根据订单种类加载
+            if($("#theWay").val()=="wechat"){
             for (var i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
                 var theName=result.agency==null?"":result.agency.name;
@@ -84,15 +86,39 @@
                         '</td>'+
                         '<td>' + result.standard.description +
                         '</td>'+
-                        '<td>' + result.publishTime +
+                        '<td>' + getLocalTime(result.publishTime) +
                         '</td>'+
-                        '<td>' + result.beginTime +
+                        '<td>' + getLocalTime(result.beginTime) +
                         '</td>'+
-                        '<td>' + result.endTime +
+                        '<td>' + getLocalTime(result.endTime) +
                         '</td>'+
                         '</tr>'
                     )
                 }
+            }else {
+                for (var i = 0; i < data["totalCount"]; i++) {
+                    var result = resultList[i];
+                    var theName=result.agency==null?"":result.agency.name;
+                    $("#packageList").append(
+                        '<tr>' +
+                        '<td >' + result.name +
+                        '</td>' +
+                        '<td>' + theName+
+                        '</td>' +
+                        '<td>' + result.courierCompany.companyName +
+                        '</td>'+
+                        '<td>' + "*" +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.createDate) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.receiveDate) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.endDate) +
+                        '</td>'+
+                        '</tr>'
+                    )
+                }
+            }
             };
         if($("#theWay").val()=="wechat"){
         Paging("/PackageListManagement/PackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
