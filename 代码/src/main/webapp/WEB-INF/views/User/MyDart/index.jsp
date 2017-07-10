@@ -102,8 +102,8 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" publishDartId='`+e.id+`'>确认收货</a>
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>
+                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 0px;" publishDartId='`+e.id+`'>确认送达</a>
+                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>
                         </div>
                     </div>
                 </div>

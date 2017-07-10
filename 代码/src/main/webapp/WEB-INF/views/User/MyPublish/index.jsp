@@ -103,9 +103,9 @@
                         <div class="button_sp_area">
                             <div style="float:right;">
                             `+
-                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 6px;" publishDartId='`+e.id+`'>取消订单</a>` : `
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" publishDartId='`+e.id+`'>确认收货</a>
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
+                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 3px;" publishDartId='`+e.id+`'>取消订单</a>` : `
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 3px;" publishDartId='`+e.id+`'>确认收货</a>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 3px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
                             +`
                             <div>
                         </div>

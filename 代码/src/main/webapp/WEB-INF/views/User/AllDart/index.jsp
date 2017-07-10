@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="button_position_style JudgmentStatus">
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary deleteDart" publishDartId='`+e.id+`'>删除订单</a>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary deleteDart" style="margin: 0px;" publishDartId='`+e.id+`'>删除订单</a>
                         </div>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                             </div>
                         </div>
                         <div class="button_position_style JudgmentStatus">
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 6px;" publishDartId='`+e.id+`'>取消订单</a>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 0px;" publishDartId='`+e.id+`'>取消订单</a>
                         </div>
                     </div>
                 </div>
@@ -235,32 +235,6 @@
                             <span ><a class="title_other">订单详情</a></span>
                             <span><a class="logo_other show-warning update" href="/"><img src="/assets/img/home.png" align="top"></a></span>
                         </div>
-
-                        <div class="weui-cell_access">
-                        <label class="weui-cell weui-check__label">
-                            <div style="float: left;width: 10%">
-                                <div class="address_icon">
-                                </div>
-                            </div>
-                            <div style="width: 80%" class="weui-cell__bd">
-                                <div>
-                                    <span >收货人：  </span>
-                                    <span id="delegationName"></span>
-                                    <span > </span>
-                                    <span style="float: right" id="delegationPhoneNumber"></span>
-                                </div>
-                                <div>
-                                    <span>收货地址：</span>
-                                    <span>
-                                    </span>
-                                    <span id="areaName"></span>
-                                    <span id="areaDetail"></span>
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
-
                         <div class="weui-cells">
                             <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
                                 <div class="weui-cell__bd">
@@ -340,11 +314,11 @@
                             </div>
                             <div class="button_position_style JudgmentStatus">
                             `+
-                        ((e.agency.userName == array.userName) ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" publishDartId='`+e.id+`'>确认收货</a>
-                        <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default calldelegateSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
+                        ((e.agency.userName == array.userName) ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 0px;" publishDartId='`+e.id+`'>确认送达</a>
+                        <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default calldelegateSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
                             : `
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" publishDartId='`+e.id+`'>确认收货</a>
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callagencySender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 0px;" publishDartId='`+e.id+`'>确认收货</a>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callagencySender" style="margin: 0px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
                         +`
                             </div>
                         </div>
@@ -462,7 +436,7 @@
                             </div>
                         </div>
                         <div class="button_position_style JudgmentStatus">
-                            <a href="/User/EvaluationDetail/" class="weui-btn weui-btn_mini weui-btn_primary localStorage" publishDartId = '`+e.id+`'>评价</a>
+                            <a href="/User/EvaluationDetail/" class="weui-btn weui-btn_mini weui-btn_primary localStorage" style="margin: 0px;" publishDartId = '`+e.id+`'>评价</a>
                         </div>
                     </div>
                 </div>
