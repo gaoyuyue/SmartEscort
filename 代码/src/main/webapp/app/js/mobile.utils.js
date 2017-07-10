@@ -176,3 +176,18 @@ var Delete = function (url,success) {
         }
     });
 };
+
+var getLocalTime = function(nS) {
+    if(nS!=null){
+        var time = new Date(nS);
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes();
+        var s = time.getSeconds();
+        return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+    }else {
+        return "";
+    }
+};

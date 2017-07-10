@@ -1,8 +1,6 @@
 package cn.attackme.escort.Controller.Admin;
 
 
-import cn.attackme.Wechat.Message.LinkMessage;
-import cn.attackme.Wechat.Message.RowMessage;
 import cn.attackme.Wechat.Message.TemplateMessage;
 import cn.attackme.Wechat.Util.MessageUtil;
 import cn.attackme.Wechat.Util.WechatProperties;
@@ -21,8 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2017/5/23.

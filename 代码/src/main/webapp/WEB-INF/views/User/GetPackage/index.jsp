@@ -1,203 +1,117 @@
 <%--#e15400  color--%>
 <%@include file="/user_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script type="text/javascript" src="/assets/js/classie.js"></script>
-<script type="text/javascript" src="/assets/js/modernizr.custom.js"></script>
-<script type="text/javascript">
-    $(document.body).pullToRefresh().on("pull-to-refresh", function() {
-        setTimeout(function() {
-            $(document.body).pullToRefreshDone();
-        }, 2000);
-    });/*
-    $(function() {
-        FastClick.attach(document.body);
-    });*/
-</script>
+
 <div class="searchNav" id="top" >
-    <%--<input type="text" placeholder="Search...">--%>
-    <%--<img src="/assets/img/Search.png" class="searchA">--%>
     <img src="/assets/img/filter.png" id="filter-btn">
 </div>
 <div ontouchstart class="weui-panel weui-panel_access " >
-    <div class="weui-form-preview" id="packageTable">
-    </div>
-</div>
-
-<%--筛选菜单--%>
-<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2" style="OVERFLOW-Y: auto;height: auto">
-
-    <div>
-        <h4>筛选</h4>
-        <div class="weui-cells">
-            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">区域</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="select2">
-                        <option value="1">中国</option>
-                        <option value="2">美国</option>
-                        <option value="3">英国</option>
-                    </select>
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">快递类型</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="select2">
-                        <option value="1">申通</option>
-                        <option value="2">申通</option>
-                        <option value="3">申通</option>
-                    </select>
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">包裹大小</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="select2">
-                        <option value="1">大</option>
-                        <option value="2">中</option>
-                        <option value="3">小</option>
-                    </select>
-                </div>
-            </div>
-            <div style="float: right">
-                <button id="reSet" class="weui-btn weui-btn_mini weui-btn_primary" style="background-color: #FF6905">重置
-                </button>
-                <button id="Ok" class="weui-btn weui-btn_mini weui-btn_primary" style="background-color: #FF6905">确定
-                </button>
-                &nbsp;
-            </div>
-
+    <div class="weui-form-preview">
+        <div class="weui-panel__bd" id="packageTable">
+            <%--<a href="javascript:void(0);">--%>
+                <%--<div class="weui-media-box">--%>
+                    <%--<div class="weui-media-box_appmsg">--%>
+                        <%--<div class="weui-media-box__hd">--%>
+                            <%--<img class="weui-media-box__thumb" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">--%>
+                        <%--</div>--%>
+                        <%--<div class="weui-media-box__bd">--%>
+                            <%--<div class="weui-form-preview__item">--%>
+                                <%--<label style="color: #0d0d0d;font-size: 16px">标题标题</label>--%>
+                                <%--<span style="margin-top: 2px;float: right;color:#cecece;font-size:13px">7月10日</span>--%>
+                            <%--</div>--%>
+                            <%--<ul class="weui-media-box__info">--%>
+                                <%--<li class="weui-media-box__info__meta"><i class="fa fa-mars" style="color: #00a2d4"></i></li>--%>
+                                <%--<li class="weui-media-box__info__meta">梅园</li>--%>
+                                <%--<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">申通</li>--%>
+                            <%--</ul>--%>
+                            <%--<p class="weui-media-box__desc"></p>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="weui-form-preview__item" style="margin-top: 5px">--%>
+                        <%--<label class="weui-form-preview__label" style="font-size: 15px">详细地址</label>--%>
+                        <%--<span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">梅四北327</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="weui-form-preview__item">--%>
+                        <%--<label class="weui-form-preview__label" style="font-size: 15px">备注</label>--%>
+                        <%--<span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">啦啦啦啦啦啦啦</span>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div style="height: 15px;background-color: #eeeeee;"></div>--%>
+            <%--</a>--%>
+            <%--<a href="javascript:void(0);">--%>
+                <%--<div class="weui-media-box">--%>
+                    <%--<div class="weui-media-box_appmsg">--%>
+                        <%--<div class="weui-media-box__hd">--%>
+                            <%--<img class="weui-media-box__thumb" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAMAAAAOusbgAAAAeFBMVEUAwAD///+U5ZTc9twOww7G8MYwzDCH4YcfyR9x23Hw+/DY9dhm2WZG0kbT9NP0/PTL8sux7LFe115T1VM+zz7i+OIXxhes6qxr2mvA8MCe6J6M4oz6/frr+us5zjn2/fa67rqB4IF13XWn6ad83nxa1loqyirn+eccHxx4AAAC/klEQVRo3u2W2ZKiQBBF8wpCNSCyLwri7v//4bRIFVXoTBBB+DAReV5sG6lTXDITiGEYhmEYhmEYhmEYhmEY5v9i5fsZGRx9PyGDne8f6K9cfd+mKXe1yNG/0CcqYE86AkBMBh66f20deBc7wA/1WFiTwvSEpBMA2JJOBsSLxe/4QEEaJRrASP8EVF8Q74GbmevKg0saa0B8QbwBdjRyADYxIhqxAZ++IKYtciPXLQVG+imw+oo4Bu56rjEJ4GYsvPmKOAB+xlz7L5aevqUXuePWVhvWJ4eWiwUQ67mK51qPj4dFDMlRLBZTqF3SDvmr4BwtkECu5gHWPkmDfQh02WLxXuvbvC8ku8F57GsI5e0CmUwLz1kq3kD17R1In5816rGvQ5VMk5FEtIiWislTffuDpl/k/PzscdQsv8r9qWq4LRWX6tQYtTxvI3XyrwdyQxChXioOngH3dLgOFjk0all56XRi/wDFQrGQU3Os5t0wJu1GNtNKHdPqYaGYQuRDfbfDf26AGLYSyGS3ZAK4S8XuoAlxGSdYMKwqZKM9XJMtyqXi7HX/CiAZS6d8bSVUz5J36mEMFDTlAFQzxOT1dzLRljjB6+++ejFqka+mXIe6F59mw22OuOw1F4T6lg/9VjL1rLDoI9Xzl1MSYDNHnPQnt3D1EE7PrXjye/3pVpr1Z45hMUdcACc5NVQI0bOdS1WA0wuz73e7/5TNqBPhQXPEFGJNV2zNqWI7QKBd2Gn6AiBko02zuAOXeWIXjV0jNqdKegaE/kJQ6Bfs4aju04lMLkA2T5wBSYPKDGF3RKhFYEa6A1L1LG2yacmsaZ6YPOSAMKNsO+N5dNTfkc5Aqe26uxHpx7ZirvgCwJpWq/lmX1hA7LyabQ34tt5RiJKXSwQ+0KU0V5xg+hZrd4Bn1n4EID+WkQdgLfRNtvil9SPfwy+WQ7PFBWQz6dGWZBLkeJFXZGCfLUjCgGgqXo5TuSu3cugdcTv/HjqnBTEMwzAMwzAMwzAMwzAMw/zf/AFbXiOA6frlMAAAAABJRU5ErkJggg==" alt="">--%>
+                        <%--</div>--%>
+                        <%--<div class="weui-media-box__bd">--%>
+                            <%--<div class="weui-form-preview__item">--%>
+                                <%--<label style="color: #0d0d0d;font-size: 16px">标题标题</label>--%>
+                                <%--<span style="margin-top: 2px;float: right;color:#cecece;font-size:13px">7月10日</span>--%>
+                            <%--</div>--%>
+                            <%--<ul class="weui-media-box__info">--%>
+                                <%--<li class="weui-media-box__info__meta"><i class="fa fa-venus" style="color: #BB2B2B"></i></li>--%>
+                                <%--<li class="weui-media-box__info__meta">梅园</li>--%>
+                                <%--<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">申通</li>--%>
+                            <%--</ul>--%>
+                            <%--<p class="weui-media-box__desc"></p>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="weui-form-preview__item" style="margin-top: 5px">--%>
+                        <%--<label class="weui-form-preview__label" style="font-size: 15px">详细地址</label>--%>
+                        <%--<span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">梅四北327</span>--%>
+                    <%--</div>--%>
+                    <%--<div class="weui-form-preview__item">--%>
+                        <%--<label class="weui-form-preview__label" style="font-size: 15px">备注</label>--%>
+                        <%--<span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">啦啦啦啦啦啦啦</span>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div style="height: 15px;background-color: #eeeeee;"></div>--%>
+            <%--</a>--%>
         </div>
     </div>
-
 </div>
+
 
 <script>
     $(document).ready(function () {
-//        tryTime = 0;
         $("#getPackage").addClass("weui-bar__item_on");
     });
 
-
-    //订单详情
-    //    $(".weui-form-preview__item").on('click', function () {
-    //        var packageSize = $("#packageSize").val();
-    //        var packageType = "";
-    //        var price = $("#price").val();
-    //        var remakers = "";
-    //
-    //        $.confirm({
-    //            title: '确定要接单吗？',
-    //            text: '大小' + packageSize + '<br/>' +
-    //            '类型' + packageType + '<br/>' +
-    //            '价格' + price + '<br/>' +
-    //            '备注:' + '<br/>' +
-    //            '<textarea rows="5" cols="10"></textarea>',
-    //            onOK: function () {
-    //                //点击确认
-    //            },
-    //            onCancel: function () {
-    //            }
-    //        });
-    //    });
-    //
-    //    //获取
-    //    $("#filter-btn").click(function () {
-    //
-    //        var areaList = function (data) {
-    //            for (var i = 0; i < data.length; i++) {
-    //                $("#areaList").append(
-    //                    "<li>" + data[i] +
-    //                    "</li>");
-    //            }
-    //        };
-    //        var packageTypeList = function (data) {
-    //            for (var i = 0; i < data.length; i++) {
-    //                $("#packageType").append(
-    //                    "<li>" + data[i] +
-    //                    "</li>");
-    //            }
-    //        };
-    //        var standardList = function (data) {
-    //            for (var i = 0; i < data.length; i++) {
-    //                $("#standard").append(
-    //                    "<li>" + data[i] +
-    //                    "</li>");
-    //            }
-    //        };
-    //        if (tryTime == 0) {
-    //            Get("/User/GetPackage/courierList", packageTypeList);
-    //            Get("/User/GetPackage/standardList", standardList);
-    //            Get("/User/GetPackage/areaList", areaList);
-    //            tryTime++;
-    //        }
-    //
-    //    });
-    //
-    //
-    //    //滑动菜单
-    var menuRight = document.getElementById('cbp-spmenu-s2');
-    var showRight = document.getElementById('filter-btn');
-    showRight.onclick = function () {
-        classie.toggle(this, 'active');
-        classie.toggle(menuRight, 'cbp-spmenu-open');
-    };
-    Ok.onclick = function () {
-        classie.toggle(menuRight, 'cbp-spmenu-open');
-    };
-
-
-
-    $("#standard").click(function () {
-        this.addClass("adds");
-    });
-
-
     var updateTable = function (data) {
         const results = data.results;
-        var prefix = "/assets/img/";
-        var suffix = ".jpg";
         results.forEach(function (element) {
-            $("#packageTable").append(
-                `<div +class="weui-panel__bd">
-                   <a href="#" class="weui-media-box weui-media-box_appmsg confirmation packageOne" packageId=` + element.id + `>
-                       <div style="clear: both">
-                          <div class="weui-media-box__hd">
-                               <img class="weui-media-box__thumb" src=` + prefix + element.courierCompany.companyName + suffix + `>
-                           </div>
-                           <div class="weui-form-preview__item">
-                               <span class="weui-form-preview__value" >` + element.delegation.nickName + `</span>
-                               <%--<span class="weui-form-preview__value">男</span>--%>
-                               <img +src="/assets/img/boy.png" width="51" height="51">
-                           </div>
-                       </div>
-                       <div style="clear: both">
-                           <div class="weui-form-preview__item">
-                               <label class="weui-form-preview__label">发布日期</label>
-                               <span class="weui-form-preview__value">` + element.publishTime + `</span>
-                          </div>
-                           <div class="weui-form-preview__item">
-                               <label class="weui-form-preview__label">区域</label>
-                               <span class="weui-form-preview__value">` + element.area.areaName + `</span>
-                           </div>
-                           <div class="weui-form-preview__item" id="packageSize">
-                             <label class="weui-form-preview__label">大小</label>
-                                   <span class="weui-form-preview__value" >` + element.standard.description + `</span>
-                                        </div>
-                       <div class="weui-form-preview__item" id="price">
-                               <label class="weui-form-preview__label">价格</label>
-                               <span class="weui-form-preview__value" >` + element.standard.price + `</span>
-                           </div>
-                </div>
+            $("#packageTable").append(`
+                 <a href="javascript:void(0); packageId=`+element.id+`">
+                    <div class="weui-media-box">
+                        <div class="weui-media-box_appmsg">
+                            <div class="weui-media-box__hd">
+                                <img class="weui-media-box__thumb" src="`+element.delegation.headImageUrl+`" alt="">
+                            </div>
+                            <div class="weui-media-box__bd">
+                                <div class="weui-form-preview__item">
+                                    <label style="color: #0d0d0d;font-size: 16px">` + element.delegation.nickName + `</label>
+                                    <span style="margin-top: 2px;float: right;color:#cecece;font-size:13px">` + getLocalTime(element.publishTime) +`</span>
+                                </div>
+                                <ul class="weui-media-box__info">
+                                    <li class="weui-media-box__info__meta">`+((element.delegation.sex)?`<i class="fa fa-mars" style="color: #00a2d4"></i>`:`<i class="fa fa-venus" style="color: #BB2B2B"></i>`)+`</li>
+                                    <li class="weui-media-box__info__meta">`+element.area.areaName+`</li>
+                                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">`+element.courierCompany.companyName+`</li>
+                                    <li class="weui-media-box__info__meta" style="float: right;color: red;font-size: 16px;font-weight: bold">`+element.price+`</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="weui-form-preview__item" style="margin-top: 5px">
+                            <label class="weui-form-preview__label" style="font-size: 15px">详细地址</label>
+                            <span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">`+element.addressDetail+`</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label" style="font-size: 15px">备注</label>
+                            <span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">`+element.note+`</span>
+                        </div>
+                    </div>
+                    <div style="height: 15px;background-color: #eeeeee;"></div>
                 </a>
-                </div>
-                    <hr>
             `);
         });
 
