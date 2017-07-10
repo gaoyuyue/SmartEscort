@@ -5,6 +5,7 @@ import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,12 +47,14 @@ public class AllDartController {
     @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/packageList")
-    public ResponseEntity<List<Package>> packageList(){
+    public List<Package> packageList(){
         String userName = getSubject().getPrincipal().toString();
-        User delegation = userInfoService.getById(userName);
-        List<Package> list = delegation.getPublishList();
-        List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.已评价 || p.getPackageStatus() == PackageStatus.已撤销)).collect(toList());
-        return new ResponseEntity<>(publishList, HttpStatus.OK);
+        User user = userInfoService.getById(userName);
+        List<Package> receivelist = user.getReceiveList();
+        List<Package> publishList = user.getPublishList();
+        publishList.addAll(receivelist);
+        List<Package> publishList1 = publishList.stream().filter(p -> !(p.getPackageStatus() == PackageStatus.已删除)).collect(toList());
+        return publishList1;
     }
 
     /**
@@ -85,5 +88,31 @@ public class AllDartController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * 撤销订单与确认收货
+     * @param publishDartId
+     * @return
+     */
+    @RequiresRoles("user")
+    @ResponseBody
+    @PutMapping("/cancel/publishDartId/{publishDartId}")
+    public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
+        Package aPackage = packageService.getById(publishDartId);
+        if(aPackage.getPackageStatus() == PackageStatus.待领取){
+            aPackage.setPackageStatus(PackageStatus.已撤销);
+        }else if(aPackage.getPackageStatus() == PackageStatus.待签收){
+            aPackage.setPackageStatus(PackageStatus.待评价);
+        }
+        packageService.saveOrUpdate(aPackage);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @GetMapping("/userInformation")
+    public User getInfo(){
+        final String userName = SecurityUtils.getSubject().getPrincipal().toString();
+        return userInfoService.getById(userName);
+    }
 
 }

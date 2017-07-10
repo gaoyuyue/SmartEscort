@@ -106,7 +106,7 @@
                             ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 6px;" publishDartId='`+e.id+`'>取消订单</a>` : `
                             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" publishDartId='`+e.id+`'>确认收货</a>
                             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
-                        +`
+                            +`
                             <div>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                         text: agencyPhoneNumber,
                         className: "color-black",
                         onClick: function() {
-                            window.location.href = "tel:${agencyPhoneNumber}";
+                            window.location.href = "tel:"+agencyPhoneNumber;
                         }
                     }
                 ]

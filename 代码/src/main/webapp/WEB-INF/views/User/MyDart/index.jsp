@@ -219,7 +219,7 @@
                         text: delegationPhoneNumber,
                         className: "color-black",
                         onClick: function() {
-                            window.location.href = "tel:delegationPhoneNumber";
+                            window.location.href = "tel:"+delegationPhoneNumber;
                         }
                     }
                 ]
