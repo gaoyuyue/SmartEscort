@@ -515,3 +515,14 @@ function loadThis() {
     // }else {
         loadPage(nowPage);}
 // }
+
+var getLocalTime = function(nS) {
+    var time = new Date(nS);
+    var y = time.getFullYear();
+    var m = time.getMonth() + 1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+};

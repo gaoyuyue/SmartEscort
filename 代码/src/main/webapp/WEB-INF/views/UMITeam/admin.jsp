@@ -73,8 +73,11 @@
                         <td>`+result.receiverPhoneNumber+`</td>
                         <td>`+result.addressDetail+`</td>
                         <td>`+result.message+`</td>
-                        <td>`+result.publishTime+`</td>
-                        <td></td>
+                        <td>`+getLocalTime(result.publishTime)+`</td>
+                        <td>`+((result.packageStatus === "待领取")?
+                        `<a packageId=`+result.id+` href="#" class="getLink">领取</a>`:
+                        (result.packageStatus === "待签收")?
+                            `<a packageId=`+result.id+` href="#" class="accomplishLink">完成</a>`:``)+`</td>
                     </tr>
                 `);
             }
@@ -89,8 +92,12 @@
                         <td>`+result.phoneNumber+`</td>
                         <td>`+result.detailAddress+`</td>
                         <td>`+result.message+`</td>
-                        <td>`+result.createDate+`</td>
-                        <td></td>
+                        <td>`+getLocalTime(result.createDate)+`</td>
+                        <td>`+ ((result.packageStatus === "待领取")?
+                                `<a packageId=`+result.orderNumber+` href="#" class="getULink">领取</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:
+                            (result.packageStatus === "待签收")?
+                                `<a packageId=`+result.orderNumber+` href="#" class="accomplishULink">完成</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:``)
+                        +`</td>
                     </tr>
                 `);
             }
@@ -100,7 +107,18 @@
         }else {
             Paging("/UMITeam/packageList/packageType/"+$("#packageType").val()+"/areaId/"+$("#area").val()+"/packageStatus/" + $("#packageStatus").val(),"packageList",updatePackageTable,pageNumber,10);
         }
-        deleteOne();
+        $(".getULink").click(function () {
+            AjaxPutRequest("/UMITeam/getUMIPackage/packageId/"+$(this).attr("packageId"));
+            loadThis();
+        });
+        $(".accomplishULink").click(function () {
+            AjaxPutRequest("/UMITeam/accomplishUMIPackage/packageId/"+$(this).attr("packageId"));
+            loadThis();
+        });
+        $(".deleteULink").click(function () {
+            AjaxPutRequest("/UMITeam/deleteUMIPackage/packageId/"+$(this).attr("packageId"));
+            loadThis();
+        });
     };
 
     //删除订单
@@ -135,5 +153,4 @@
                 loadPage(1);
             });
         });
-
 </script>

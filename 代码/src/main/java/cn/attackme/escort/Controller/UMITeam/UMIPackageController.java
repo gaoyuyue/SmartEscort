@@ -111,4 +111,31 @@ public class UMIPackageController {
         PageResults<UMIPackage> pageResults = umiPackageService.getListPageByAreaAndStatusAndType(area, packageStatus, courierCompany, pageNumber, pageSize);
         return new ResponseEntity<PageResults<UMIPackage>>(pageResults,HttpStatus.OK);
     }
+
+    @RequiresRoles("admin")
+    @PutMapping("/getUMIPackage/packageId/{packageId}")
+    public ResponseEntity<Void> getUMIPackage(@PathVariable String packageId){
+        UMIPackage umiPackage = umiPackageService.getById(packageId);
+        umiPackage.setPackageStatus(PackageStatus.待签收);
+        umiPackageService.saveOrUpdate(umiPackage);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @RequiresRoles("admin")
+    @PutMapping("/accomplishUMIPackage/packageId/{packageId}")
+    public ResponseEntity<Void> accomplishUMIPackage(@PathVariable String packageId){
+        UMIPackage umiPackage = umiPackageService.getById(packageId);
+        umiPackage.setPackageStatus(PackageStatus.待评价);
+        umiPackageService.saveOrUpdate(umiPackage);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @RequiresRoles("admin")
+    @PutMapping("/deleteUMIPackage/packageId/{packageId}")
+    public ResponseEntity<Void> deleteUMIPackage(@PathVariable String packageId){
+        UMIPackage umiPackage = umiPackageService.getById(packageId);
+        umiPackage.setPackageStatus(PackageStatus.已撤销);
+        umiPackageService.saveOrUpdate(umiPackage);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }
