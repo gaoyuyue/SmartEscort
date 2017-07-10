@@ -12,6 +12,11 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>任务列表管理</h5>
+                    <div class="input-group col-sm-3" style="float: right">
+                    <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
+                        class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                </div>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -59,7 +64,6 @@
                         </table>
                     </div>
                     <ul class="pagination" id="pagination"></ul>
-
                 </div>
             </div>
         </div>
@@ -69,7 +73,6 @@
 <script>
     var loadPage=function (pageNumber) {
         var updateTable=function (data) {
-            console.log(data);
             var resultList = data["results"];
             //根据订单种类加载
             if($("#theWay").val()=="wechat"){

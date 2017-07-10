@@ -22,14 +22,6 @@
                                 id="editButton" disabled="disabled">修改
                         </button>
                         <button type="button" class="btn btn-danger" id="deleteButton" disabled="disabled">删除</button>
-
-                        <div class="col-sm-3" style="float: right">
-                            <div class="input-group">
-                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
-                                    class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                            </div>
-                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -145,7 +137,6 @@
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
             var resultList = data["results"];
-            console.log(resultList);
             for (var i = 0; i < resultList.length; i++) {
                 var result = resultList[i];
                 $("#CourierTable").append(
@@ -230,12 +221,6 @@
                     for (var i = 0; i < checkBoxes.length; i++) {
                         AjaxDeleteRequest("/CourierCompanyManagement/deleteCourierCompany/id/" + checkBoxes[i].id);
                     }
-                    swal({
-                        title: "成功",
-                        text: "删除完毕",
-                        type: "success",
-                        confirmButtonText: "知道了"
-                    });
                     loadThis();
                 } else {
                     swal("已取消", "未作任何操作", "info");

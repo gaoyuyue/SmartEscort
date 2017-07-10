@@ -15,7 +15,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class=" m-b-xs col-lg-6">
+                        <div class=" m-b-xs col-lg-8">
                             <select class="input-sm   " title="请选择发布方式" id="theWay">
                                 <option value="qq">qq</option>
                                 <option value="wechat">微信</option>

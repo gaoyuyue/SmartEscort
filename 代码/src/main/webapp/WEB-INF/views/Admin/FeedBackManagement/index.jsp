@@ -83,7 +83,6 @@
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
             var resultList = data["results"];
-            console.log(resultList);
             for (i = 0; i < resultList.length; i++) {
                 var result = resultList[i];
                 $("#FeedBack").append(

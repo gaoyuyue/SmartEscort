@@ -21,14 +21,6 @@
                                 id="editButton" disabled="disabled">修改
                         </button>
                         <button type="button" class="btn btn-danger" id="deleteButton" disabled="disabled">删除</button>
-
-                        <div class="col-sm-3" style="float: right" >
-                            <div class="input-group">
-                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
-                                    class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                            </div>
-                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -58,18 +50,12 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title">新增快递取件收费标准</h4>
-                <small class="font-bold">这里可以显示副标题。
+                <small class="font-bold">
                 </small>
             </div>
             <small class="font-bold">
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>--%>
-                            <%--<div class="col-sm-6">--%>
-                                <%--<input type="text" class="form-control" placeholder="请输入标准金额" name="areaName" id="standardPrice">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
                             <div class="col-sm-6">
@@ -107,12 +93,6 @@
             <small class="font-bold">
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>--%>
-                            <%--<div class="col-sm-6">--%>
-                                <%--<input type="text" class="form-control" placeholder="请输入新的标准金额" name="areaName" id="newStandardPrice">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
                             <div class="col-sm-6">

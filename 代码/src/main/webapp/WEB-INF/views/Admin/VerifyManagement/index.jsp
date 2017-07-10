@@ -111,7 +111,7 @@
                 var userName = this["name"];
                 AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true");
                 loadThis();
-                $("#cancel").click();
+                $(".sr-only").click();
             });
 
             //不通过
@@ -119,7 +119,7 @@
                 var userName = this["name"];
                 AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "false");
                 loadThis();
-                $("#cancel").click();
+                $(".sr-only").click();
             });
 
 
