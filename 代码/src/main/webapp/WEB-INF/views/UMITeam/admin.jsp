@@ -39,15 +39,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped" >
-                            <thead>
-                            <tr>
-                                <th>发布人</th>
-                                <th>手机号码</th>
-                                <th>详细地址</th>
-                                <th>短信内容</th>
-                                <th>发布时间</th>
-                                <th>操作</th>
-                            </tr>
+                            <thead id="tableTop">
                             </thead>
                             <tbody id="packageList">
                             </tbody>
@@ -63,6 +55,17 @@
 </div>
 <script>
     var loadPage=function (pageNumber) {
+        $("#tableTop").empty();
+        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>手机号码</th>
+                    <th>详细地址</th>
+                    <th>短信内容</th><th>
+                    `+(($("#packageStatus").val() == "待领取")?`发布时间</th><th>操作</th>`:($("#packageStatus").val() == "待签收")?`领取时间</th><th>操作</th>`:`完成时间</th>`)
+            +`
+                </tr>
+            `);
         var updatePackageTable=function (data) {
             var resultList = data["results"];
             for (var i = 0; i < data["totalCount"]; i++) {
@@ -128,15 +131,6 @@
             loadThis();
         });
     };
-
-    //删除订单
-    function deleteOne() {
-        $(".md-delete").click(function () {
-            var id = this["id"];
-            AjaxDeleteRequest("/PackageListManagement/deletePackage/id/" + id);
-            loadThis();
-        });
-    }
 
     $(document).ready(
         function () {
