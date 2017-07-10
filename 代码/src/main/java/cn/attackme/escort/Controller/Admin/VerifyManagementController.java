@@ -89,7 +89,7 @@ public class VerifyManagementController {
                 String backUrl = "#wechat_redirect";
                 TemplateMessage authoredMessage = new TemplateMessage();
                 authoredMessage.setTouser(user.getOpenid());
-                authoredMessage.setTemplate_id("w_wsVvI8hOFlnSYvetbiJZZ3NkM_BuI0RkUnIyL6XPs");
+                authoredMessage.setTemplate_id("WGfq640oRdKmj8soG_ELosHGTE6GGwu4Hp29BTyU5ls");
                 authoredMessage.setUrl(foreUrl+"/User/UserInfomation/"+backUrl);
                 MessageUtil.postTemplate(authoredMessage);
                 return new ResponseEntity<Void>(HttpStatus.OK);
