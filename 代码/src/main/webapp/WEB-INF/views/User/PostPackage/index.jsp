@@ -9,6 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 <link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
+
+<div id="top" style="background-color:#08ddff">
+    <h3 style="color: white">任务发布</h3>
+</div>
 <div id="addressTable" style="width: 100%;background-color: #ffffff">
 
 </div>

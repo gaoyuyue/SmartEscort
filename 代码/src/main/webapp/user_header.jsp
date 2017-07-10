@@ -31,14 +31,7 @@
         });
     </script>
 </head>
-<body class="weui-pull-to-refresh">
-<div class="weui-pull-to-refresh__layer">
-    <div class="weui-pull-to-refresh__arrow"></div>
-    <div class="weui-pull-to-refresh__preloader"></div>
-    <div class="down">下拉刷新</div>
-    <div class="up">释放刷新</div>
-    <div class="refresh">正在刷新</div>
-</div>
+<body>
 <div class="page tabbar js_show">
     <div class="page__bd" style="height: 100%;">
         <div class="weui-tab">
