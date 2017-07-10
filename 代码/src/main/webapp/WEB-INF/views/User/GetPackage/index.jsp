@@ -85,16 +85,26 @@
 
         $(".packageOne").click(function () {
             const packageId = $(this).attr("packageId");
-            console.log(packageId);
-            $.ajax({
-                url: "/User/GetPackage/receive/packageId/" + packageId,
-                type: "GET",
-                success: function () {
-                    window.location.reload();
+            $.confirm({
+                title: '提示',
+                text: '确认领取本任务？',
+                onOK: function () {
+                    $.ajax({
+                        url: "/User/GetPackage/receive/packageId/" + packageId,
+                        type: "GET",
+                        success: function () {
+                            $.toast("领取成功",function () {
+                                window.location.reload();
+                            });
+                        },
+                        error: function (XMLHttpRequest) {
+                            if (XMLHttpRequest.status === 404) alert("未认证用户不能使用此功能！");
+                            else alert("此任务已被接收！");
+                        }
+                    });
                 },
-                error: function (XMLHttpRequest) {
-                    if (XMLHttpRequest.status === 404) alert("未认证用户不能使用此功能！");
-                    else alert("此任务已被接收！");
+                onCancel: function () {
+                    $.toast("取消操作", "cancel");
                 }
             });
         });
