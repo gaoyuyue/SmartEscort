@@ -1,5 +1,6 @@
 package cn.attackme.escort.Service;
 
+import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Repository.Query;
@@ -156,8 +157,10 @@ public class UserInfoService extends BaseService<User>{
 
     @Override
     public PageResults<User> getListByPage(@NotNull Integer currentPageNumber, @NotNull Integer pageSize) {
+        String role="user";
         Query query = new Query(entityManager);
         query.from(User.class)
+                .whereEqual("role",role)
                 .whereEqual("isDeleted", false);
         return super.getListByPageAndQuery(currentPageNumber, pageSize, query);
     }
@@ -184,16 +187,19 @@ public class UserInfoService extends BaseService<User>{
         return super.getCountByQuery(query);
     }
 
-    public PageResults<User> getListByPageAndSchool(@NotNull School school,
+    public PageResults<User> getListByPageAndSchool(@NotNull Role role,
+                                                    @NotNull School school,
                                                     @NotNull Integer currentPageNumber,
                                                     @NotNull Integer pageSize){
         Query query=new Query(entityManager);
         query.from(User.class)
-                .whereEqual("school",school);
+                .whereEqual("school",school)
+                .whereEqual("role",role);
         return super.getListByPageAndQuery(currentPageNumber,pageSize,query);
     }
 
-    public PageResults<User> getListPageByUrlAndAuth(@NotNull School school,
+    public PageResults<User> getListPageByUrlAndAuth(@NotNull Role role,
+                                                     @NotNull School school,
                                                      @NotNull boolean isAuthed,
                                                      @NotNull Integer pageNumber,
                                                      @NotNull Integer pageSize){
@@ -201,6 +207,7 @@ public class UserInfoService extends BaseService<User>{
         query.from(User.class)
                 .whereEqual("school",school)
                 .whereEqual("isAuthed",isAuthed)
+                .whereEqual("role",role)
                 .whereIsNotNull("stuCardUrl");
         return super.getListByPageAndQuery(pageNumber,pageSize,query);
 

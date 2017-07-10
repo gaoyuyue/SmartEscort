@@ -1,6 +1,7 @@
 package cn.attackme.escort.Controller.Admin;
 
 
+import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.SchoolService;
@@ -43,7 +44,7 @@ public class VerifyManagementController {
                                              @PathVariable int pageNumber,
                                              @PathVariable int pageSize){
         School school=schoolService.getById(schoolId);
-        return userInfoService.getListPageByUrlAndAuth(school,false,pageNumber,pageSize);
+        return userInfoService.getListPageByUrlAndAuth(Role.user,school,false,pageNumber,pageSize);
     }
 
     //认证

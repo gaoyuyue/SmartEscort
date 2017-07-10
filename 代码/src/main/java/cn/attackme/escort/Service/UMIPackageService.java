@@ -29,10 +29,21 @@ public class UMIPackageService extends BaseService<UMIPackage>{
                                                                      @NotNull int pageNumber,
                                                                      @NotNull int pageSize){
         Query query = new Query(entityManager);
-        query.from(UMIPackage.class).
-                whereEqual("area",area).
-                whereEqual("packageStatus",packageStatus).
-                whereEqual("courierCompany",courierCompany);
+        query.from(UMIPackage.class)
+                .whereEqual("area",area)
+                .whereEqual("packageStatus",packageStatus)
+                .whereEqual("courierCompany",courierCompany);
+        return this.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
+
+    public PageResults<UMIPackage> getPackageByStatusAndSchool(@NotNull School school,
+                                                               @NotNull PackageStatus packageStatus,
+                                                               @NotNull int pageNumber,
+                                                               @NotNull int pageSize){
+        Query query = new Query(entityManager);
+        query.from(UMIPackage.class)
+                .whereEqual("school",school)
+                .whereEqual("packageStatus",packageStatus);
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }
 }

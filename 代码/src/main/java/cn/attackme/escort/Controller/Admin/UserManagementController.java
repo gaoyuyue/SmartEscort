@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.Admin;
 
+import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.SchoolService;
@@ -26,8 +27,6 @@ public class UserManagementController {
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
-    private UserService userService;
-    @Autowired
     private SchoolService schoolService;
 
     @RequiresRoles("admin")
@@ -52,7 +51,7 @@ public class UserManagementController {
                                              @PathVariable int pageSize,
                                              @PathVariable int schoolId){
         School school = schoolService.getById(schoolId);
-        return userInfoService.getListByPageAndSchool(school,pageNumber,pageSize);
+        return userInfoService.getListByPageAndSchool(Role.user,school,pageNumber,pageSize);
     }
 
     //获取全部学校

@@ -16,6 +16,11 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class=" m-b-xs col-lg-6">
+                            <select class="input-sm   " title="请选择来源" id="theWay">
+                                <option value="wechat">微信</option>
+                                <option value="qq">qq</option>
+                            </select>
+                            &nbsp;
                             <select class="input-sm   " title="请选择订单状态" id="packageStatus">
                                 <option value="待领取">待领取</option>
                                 <option value="已撤销">已撤销</option>
@@ -39,7 +44,6 @@
                                 <th>发布时间</th>
                                 <th>执行时间</th>
                                 <th>完成时间</th>
-                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody id="packageList">
@@ -86,29 +90,24 @@
                         '</td>'+
                         '<td>' + result.endTime +
                         '</td>'+
-                        '<td><a class="md-delete" id="' + result.id+
-                        '">删除</a></td>' +
                         '</tr>'
                     )
                 }
             };
+        if($("#theWay").val()=="wechat"){
         Paging("/PackageListManagement/PackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
-        deleteOne();
+            }else {
+            Paging("/PackageListManagement/UMLPackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
+        }
     };
-
-    //删除订单
-    function deleteOne() {
-        $(".md-delete").click(function () {
-            var id = this["id"];
-            AjaxDeleteRequest("/PackageListManagement/deletePackage/id/" + id);
-            loadThis();
-        });
-    }
 
     $(document).ready(
         function () {
             loadSchool("school");
             loadPage(1);
+            $("#theWay").change(function () {
+                loadPage(1);
+            });
             $("#packageStatus").change(function () {
                 loadPage(1);
             });

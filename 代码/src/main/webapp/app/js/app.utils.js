@@ -508,13 +508,9 @@ var loadPackageType = function (typeSelectId) {
 };
 
 function loadThis() {
-    // var pageNumber = $(".pagination .active")[0].innerText;
-    // if(pageNumber==null){
-    //     alert("!!!");
-    //     loadPage(1);
-    // }else {
-        loadPage(nowPage);}
-// }
+        loadPage(nowPage);
+    }
+
 
 var getLocalTime = function(nS) {
     var time = new Date(nS);
