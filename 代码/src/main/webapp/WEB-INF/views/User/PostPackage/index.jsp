@@ -70,7 +70,7 @@
         var data = {
             addressDetail:$("#cacheLink").attr("detail"),
             receiverPhoneNumber:$("#cacheLink").attr("phoneNumber"),
-            receiverName:$("#receiverName").attr("receiverName"),
+            receiverName:$("#cacheLink").attr("receiverName"),
             area:{
                 id:$("#cacheLink").attr("areaId")
             },

@@ -75,7 +75,7 @@ public class UMIPackageController {
             School school = schoolService.getByName(schoolName);
             Area area = areaService.getByNameAndSchool(areaName, school);
             String orderNo = genOrderNo();
-            UMIPackage umiPackage = new UMIPackage(orderNo,name,phoneNumber,message,PackageStatus.待领取,school,area,company,detailAddress,new Date());
+            UMIPackage umiPackage = new UMIPackage(orderNo,name,phoneNumber,message,PackageStatus.待领取,school,area,company,detailAddress,new Date(),null,null);
             umiPackageService.save(umiPackage);
             model.addAttribute("orderNumber",orderNo);
             return "UMITeam/success";
@@ -132,6 +132,7 @@ public class UMIPackageController {
     @PutMapping("/getUMIPackage/packageId/{packageId}")
     public ResponseEntity<Void> getUMIPackage(@PathVariable String packageId){
         UMIPackage umiPackage = umiPackageService.getById(packageId);
+        umiPackage.setReceiveDate(new Date());
         umiPackage.setPackageStatus(PackageStatus.待签收);
         umiPackageService.saveOrUpdate(umiPackage);
         return new ResponseEntity<Void>(HttpStatus.OK);
@@ -141,6 +142,7 @@ public class UMIPackageController {
     @PutMapping("/accomplishUMIPackage/packageId/{packageId}")
     public ResponseEntity<Void> accomplishUMIPackage(@PathVariable String packageId){
         UMIPackage umiPackage = umiPackageService.getById(packageId);
+        umiPackage.setEndDate(new Date());
         umiPackage.setPackageStatus(PackageStatus.待评价);
         umiPackageService.saveOrUpdate(umiPackage);
         return new ResponseEntity<Void>(HttpStatus.OK);
@@ -161,6 +163,7 @@ public class UMIPackageController {
         Package umiPackage = packageService.getById(packageId);
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
+        umiPackage.setReceiveTime(new Date());
         umiPackage.setAgency(user);
         umiPackage.setPackageStatus(PackageStatus.待签收);
         packageService.saveOrUpdate(umiPackage);
@@ -184,7 +187,6 @@ public class UMIPackageController {
         delegateMessage.setData(delegateMessageMap);
 
         MessageUtil.postTemplate(delegateMessage);
-
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -192,6 +194,7 @@ public class UMIPackageController {
     @PutMapping("/accomplishPackage/packageId/{packageId}")
     public ResponseEntity<Void> accomplishPackage(@PathVariable int packageId){
         Package umiPackage = packageService.getById(packageId);
+        umiPackage.setEndTime(new Date());
         umiPackage.setPackageStatus(PackageStatus.待评价);
         packageService.saveOrUpdate(umiPackage);
         return new ResponseEntity<Void>(HttpStatus.OK);

@@ -39,4 +39,6 @@ public class UMIPackage {
 
     private String detailAddress;
     private Date createDate;
+    private Date receiveDate;
+    private Date endDate;
 }
