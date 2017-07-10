@@ -71,8 +71,10 @@
                 </button>
             </div>
         </div>
+
     </div>
 </div>
+<button data-toggle='modal' data-target='#modal' id="ToDetail" hidden="hidden">123</button>
 
 </body>
 <script>
@@ -88,10 +90,10 @@
                     "<tr>"+
                     "<td>" + result.user.name +
                     "</td>" +
-                    "<td class='feedContent active avoidOverflow' data-toggle='modal' data-target='#modal' onclick='feedBackDetail(this.innerText)' " +
+                    "<td class='feedContent active avoidOverflow' " +
                     "title='点击查看内容'>" +result.content +
                     "</td>"+
-                    "<td>" + result.submitTime +
+                    "<td>" + getLocalTime(result.submitTime) +
                     "</td>"+
                     '<td><a class="md-delete" id="' + result.id+
                     '">删除</a></td>' +
@@ -103,24 +105,23 @@
         Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
     };
 
-
     $(document).ready(
         function () {
             loadPage(1);
     });
     //绑定点击事件
-    var deleteMe = function deleteMe() {
+    function deleteMe() {
         $(".md-delete").click(function () {
             var id = this["id"];
             AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
             loadThis();
         });
-    };
-
-    function feedBackDetail(a){
-        $("#feedDetail").text(a);
+        $(".feedContent").click(function () {
+            var content=$(this).text();
+            $("#ToDetail").click();
+            $("#feedDetail").text(content);
+        })
     }
-
 
 </script>
 </html>
