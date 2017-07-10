@@ -30,7 +30,7 @@
                                 <th>姓名</th>
                                 <th>手机号</th>
                                 <th>学(工)号</th>
-                                <th>验证</th>
+                                <%--<th>验证</th>--%>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -59,7 +59,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-success Author" name="">通过</button>
                     <button class="btn btn-warning NoAuthor" name="">不通过</button>
-                    <button id="cancel" type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <%--<button id="cancel" type="button" class="btn btn-white" data-dismiss="modal">关闭</button>--%>
                 </div>
             </small>
         </div>
@@ -88,10 +88,11 @@
                         '<td>' + item.studentId +
                         '</td>' +
                         '<td><a data-toggle="modal" data-target="#myModal" class="stuCard" name="' + item.userName +
-                        '"><i class="fa fa-search"></i></a></td>' +
-                        '<td><a class="btn btn-success Author" name="' + item.userName +
-                        '">通过</a>&nbsp;<a class="btn btn-warning NoAuthor" name="' + item.userName +
-                        '">不通过</a>' +
+                        '">认证</a></td>' +
+//                        <i class="fa fa-search"></i>
+//                        '<td><a class="btn btn-success Author" name="' + item.userName +
+//                        '">通过</a>&nbsp;<a class="btn btn-warning NoAuthor" name="' + item.userName +
+//                        '">不通过</a>' +
                         '</td>' +
                         '</tr>'
                     );
