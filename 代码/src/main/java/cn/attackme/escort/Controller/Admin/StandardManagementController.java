@@ -1,9 +1,6 @@
 package cn.attackme.escort.Controller.Admin;
 
-import cn.attackme.escort.Model.Address;
-import cn.attackme.escort.Model.Area;
 import cn.attackme.escort.Model.Standard;
-import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.StandardService;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -12,10 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
  * Created by hujian on 2017/4/25.

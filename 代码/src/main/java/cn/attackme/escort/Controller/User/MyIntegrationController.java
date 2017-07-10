@@ -1,13 +1,10 @@
 package cn.attackme.escort.Controller.User;
 
-import cn.attackme.Wechat.Util.SecurityUtil;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

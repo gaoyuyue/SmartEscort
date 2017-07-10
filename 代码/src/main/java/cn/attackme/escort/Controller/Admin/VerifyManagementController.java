@@ -6,6 +6,7 @@ import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
+import cn.attackme.escort.Utils.ImageUtils;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import cn.attackme.escort.Utils.ImageUtils;
 
 import java.io.IOException;
 

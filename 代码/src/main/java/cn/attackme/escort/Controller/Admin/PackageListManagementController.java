@@ -1,7 +1,9 @@
 package cn.attackme.escort.Controller.Admin;
 
-import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
+import cn.attackme.escort.Model.PackageStatus;
+import cn.attackme.escort.Model.School;
+import cn.attackme.escort.Model.UMIPackage;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UMIPackageService;
