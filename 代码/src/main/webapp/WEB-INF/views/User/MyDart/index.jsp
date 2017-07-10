@@ -156,7 +156,7 @@
                                 <div class="weui-cell__ft" id="standardDescription"></div>
                             </div>
                             <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                                <div class="weui-cell__bd" style="border-bottom: 1px solid #ebebeb">
+                                <div class="weui-cell__bd">
                                     <p>价格</p>
                                 </div>
                                 <div class="weui-cell__ft" id="price"></div>
