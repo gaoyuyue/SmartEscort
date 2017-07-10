@@ -12,6 +12,14 @@ import org.jetbrains.annotations.NotNull;
  */
 @Service
 public class UMIPackageService extends BaseService<UMIPackage>{
+    /**
+     * 根据学校和区域获取分页列表
+     * @param school
+     * @param area
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
     public PageResults<UMIPackage> getListPageBySchoolAndArea(@NotNull School school,
                                                               @NotNull Area area,
                                                               @NotNull int pageNumber,
@@ -23,6 +31,15 @@ public class UMIPackageService extends BaseService<UMIPackage>{
         return this.getListByPageAndQuery(pageNumber, pageSize, query);
     }
 
+    /**
+     * 根据快递类型、状态、区域获取分页列表
+     * @param area
+     * @param packageStatus
+     * @param courierCompany
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
     public PageResults<UMIPackage> getListPageByAreaAndStatusAndType(@NotNull Area area,
                                                                      @NotNull PackageStatus packageStatus,
                                                                      @NotNull CourierCompany courierCompany,

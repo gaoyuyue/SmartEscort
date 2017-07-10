@@ -80,6 +80,15 @@ public class PackageService extends BaseService<Package> {
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }
 
+    /**
+     * 根据快递类型、状态、区域获取分页列表
+     * @param area
+     * @param packageStatus
+     * @param courierCompany
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
     public PageResults<Package> getListPageByAreaAndStatusAndType(@NotNull Area area,
                                                                      @NotNull PackageStatus packageStatus,
                                                                      @NotNull CourierCompany courierCompany,
@@ -91,5 +100,27 @@ public class PackageService extends BaseService<Package> {
                 whereEqual("packageStatus",packageStatus).
                 whereEqual("courierCompany",courierCompany);
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
+
+    /**
+     * 根据代理人、快递类型、状态、区域获取分页列表
+     * @param user
+     * @param area
+     * @param packageStatus
+     * @param courierCompany
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    public PageResults<Package> getListPageByAreaAndStatusAndTypeAndUser(@NotNull User user,
+                                                                  @NotNull Area area,
+                                                                  @NotNull PackageStatus packageStatus,
+                                                                  @NotNull CourierCompany courierCompany,
+                                                                  @NotNull int pageNumber,
+                                                                  @NotNull int pageSize){
+        Query query = new Query(entityManager);
+        query.from(Package.class).
+                whereEqual("agency",user);
+        return this.getListPageByAreaAndStatusAndType(area,packageStatus,courierCompany,pageNumber,pageSize);
     }
 }

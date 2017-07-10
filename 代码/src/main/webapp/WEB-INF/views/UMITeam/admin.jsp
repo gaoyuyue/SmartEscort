@@ -119,6 +119,14 @@
             AjaxPutRequest("/UMITeam/deleteUMIPackage/packageId/"+$(this).attr("packageId"));
             loadThis();
         });
+        $(".getLink").click(function () {
+            AjaxPutRequest("/UMITeam/getPackage/packageId/"+$(this).attr("packageId"));
+            loadThis();
+        });
+        $(".accomplishLink").click(function () {
+            AjaxPutRequest("/UMITeam/accomplishPackage/packageId/"+$(this).attr("packageId"));
+            loadThis();
+        });
     };
 
     //删除订单
