@@ -60,7 +60,7 @@
                     <a href="#" url="/VerifyManagement/" class="redirect"><i class="fa fa-check-circle-o"></i> <span class="nav-label">学生认证</span> </a>
                 </li>
                 <li class="li">
-                <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">区域管理</span> </a>
+                <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-map-marker"></i> <span class="nav-label">区域管理</span> </a>
                 </li>
                 <li class="li">
                     <a href="#" url="/PackageListManagement/" class="redirect"><i class="fa fa-th-list"></i> <span class="nav-label">任务列表管理</span></a>

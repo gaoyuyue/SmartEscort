@@ -244,13 +244,6 @@
                         AjaxDeleteRequest("/StandardManagement/deleteStandard/standardId/" + checkBoxes[i].id);
                     }
                     loadThis();
-                    swal({
-                        title: "成功",
-                        text: "删除完毕",
-                        type: "success",
-                        confirmButtonText: "知道了"
-
-                    });
                 } else {
                     swal("已取消", "未作任何操作", "info");
                     setUnAvailable();
