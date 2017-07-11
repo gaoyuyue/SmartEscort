@@ -77,9 +77,6 @@ public class Package implements Serializable {
     @JoinColumn(name = "delegationEvaluation")
     private Evaluation delegationEvaluation;
 
-    //包裹开始派送时间
-    private Date beginTime;
-
     //委托人签收时间
     private Date endTime;
 
