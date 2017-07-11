@@ -124,7 +124,7 @@ public class GetPackageController {
         User agency = userService.getById(userName);
         thePackage.getEvaluation().setAgency(agency);
         thePackage.setAgency(agency);
-        thePackage.setPackageStatus(PackageStatus.待签收);
+        thePackage.setPackageStatus(PackageStatus.待送达);
         packageService.saveOrUpdate(thePackage);
         User delegation = thePackage.getDelegation();
 

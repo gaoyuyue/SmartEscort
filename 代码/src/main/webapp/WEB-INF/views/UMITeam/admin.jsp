@@ -32,8 +32,8 @@
                             &nbsp;
                             <select class="input-sm   " title="请选择订单状态" id="packageStatus">
                                 <option value="待领取">待领取</option>
-                                <option value="待签收">待签收</option>
-                                <option value="待评价">已完成</option>
+                                <option value="待送达">待送达</option>
+                                <option value="已完成">已完成</option>
                             </select>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     <th>手机号码</th>
                     <th>详细地址</th>
                     <th>短信内容</th><th>
-                    `+(($("#packageStatus").val() == "待领取")?`发布时间</th><th>操作</th>`:($("#packageStatus").val() == "待签收")?`领取时间</th><th>操作</th>`:`完成时间</th>`)
+                    `+(($("#packageStatus").val() == "待领取")?`发布时间</th><th>操作</th>`:($("#packageStatus").val() == "待送达")?`领取时间</th><th>操作</th>`:`完成时间</th>`)
             +`
                 </tr>
             `);
@@ -79,7 +79,7 @@
                         <td>`+getLocalTime(result.publishTime)+`</td>
                         <td>`+((result.packageStatus === "待领取")?
                         `<a packageId=`+result.id+` href="#" class="getLink">领取</a>`:
-                        (result.packageStatus === "待签收")?
+                        (result.packageStatus === "待送达")?
                             `<a packageId=`+result.id+` href="#" class="accomplishLink">完成</a>`:``)+`</td>
                     </tr>
                 `);
@@ -98,7 +98,7 @@
                         <td>`+getLocalTime(result.createDate)+`</td>
                         <td>`+ ((result.packageStatus === "待领取")?
                                 `<a packageId=`+result.orderNumber+` href="#" class="getULink">领取</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:
-                            (result.packageStatus === "待签收")?
+                            (result.packageStatus === "待送达")?
                                 `<a packageId=`+result.orderNumber+` href="#" class="accomplishULink">完成</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:``)
                         +`</td>
                     </tr>
