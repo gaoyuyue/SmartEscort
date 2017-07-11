@@ -97,7 +97,7 @@
                         </a>
                         <div class="weui-form-preview__hd dart_border_padding">
                             <div class="weui-form-preview__item">
-                                <label class="weui-form-preview__label status_style">`+e.packageStatus+`</label>
+                                <label class="weui-form-preview__label status_style">待评价</label>
                                 <span class="weui-form-preview__value" style="font-size: 15px">
                                     付款金额 :
                                     <b>`+e.price+`</b>
