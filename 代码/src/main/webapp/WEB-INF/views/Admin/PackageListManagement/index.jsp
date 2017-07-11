@@ -23,15 +23,16 @@
                         <div class=" m-b-xs col-lg-6">
                             <select class="input-sm   " title="请选择来源" id="theWay">
                                 <option value="wechat">微信</option>
+
                                 <option value="qq">qq</option>
                             </select>
                             &nbsp;
                             <select class="input-sm   " title="请选择订单状态" id="packageStatus">
-                                <option value="待领取">待领取</option>
-                                <option value="已撤销">已撤销</option>
-                                <option value="待签收">待签收</option>
-                                <option value="待评价">待评价</option>
-                                <option value="已评价">已评价</option>
+                            <option value="待领取">待领取</option>
+                            <option value="已撤销">已撤销</option>
+                            <option value="待签收">待签收</option>
+                            <option value="待送达">待送达</option>
+                            <option value="已完成">已完成</option>
                             </select>
                             &nbsp;
                             <select id="school" class="input-sm input-s-sm inline" title="请选择学校">
@@ -135,6 +136,22 @@
             loadSchool("school");
             loadPage(1);
             $("#theWay").change(function () {
+                $("#packageStatus").html("");
+                if($("#theWay").val()=="wechat"){
+                $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="已撤销">已撤销</option>
+                    <option value="待签收">待签收</option>
+                    <option value="待送达">待送达</option>
+                    <option value="已完成">已完成</option>
+            `);
+                }else {
+                    $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="待送达">待送达</option>
+                    <option value="已完成">已完成</option>
+            `)
+                }
                 loadPage(1);
             });
             $("#packageStatus").change(function () {

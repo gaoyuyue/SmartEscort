@@ -142,6 +142,22 @@
                 loadPage(1);
             });
             $("#theWay").change(function () {
+                $("#packageStatus").html("");
+                if($("#theWay").val()=="wechat"){
+                    $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="已撤销">已撤销</option>
+                    <option value="待签收">待签收</option>
+                    <option value="待送达">待送达</option>
+                    <option value="已完成">已完成</option>
+            `);
+                }else {
+                    $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="待送达">待送达</option>
+                    <option value="已完成">已完成</option>
+            `)
+                }
                 loadPage(1);
             });
             $("#packageStatus").change(function () {
