@@ -32,4 +32,7 @@ public class Evaluation  implements Serializable{
 
     private Integer agencyScore;
     private Integer delegationScore;
+
+    @Enumerated(EnumType.STRING)
+    private EvaluationDescription evaluationDescription;
 }
