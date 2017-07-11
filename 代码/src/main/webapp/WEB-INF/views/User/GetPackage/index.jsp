@@ -125,14 +125,18 @@
             dataType: "json",
             success: function (data) {
                 var nextPageNumber = data["nextPage"];
+                if(data["pageCount"]<=1){
+                    $("#mainDiv").destroyInfinite();
+                    $("#loadingText").html("没有更多了");
+                }
                 if (nextPageNumber < pageNumber) {
                     $("#mainDiv").destroyInfinite();
                     $("#loadingText").html("没有更多了");
                     return;
                 }
                 updateTable(data);
-                pageNumber = pageNumber+1;
                 success();
+                pageNumber = pageNumber+1;
             },
             error: function (XMLHttpRequest) {
             }
