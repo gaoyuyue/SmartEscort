@@ -66,6 +66,9 @@ public class Package implements Serializable {
     //包裹状态
     @Enumerated(EnumType.STRING)
     private PackageStatus packageStatus;
+    
+    @Enumerated(EnumType.STRING)
+    private OrderResult orderResult;
 
     //所属学校
     @ManyToOne (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
@@ -94,4 +97,6 @@ public class Package implements Serializable {
     @OneToOne
     @JoinColumn(name = "evaluation")
     private Evaluation evaluation;
+
+
 }
