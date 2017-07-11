@@ -103,14 +103,14 @@
                         <div class="button_sp_area">
                             <div style="float:right;">
                             `+(
-                                (e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 3px;" publishDartId='`+e.id+`'>取消订单</a>`
+                                (e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 3px;" publishDartId='`+e.id+`'>撤销订单</a>`
                             :
                             (
                                 (e.packageStatus == '待签收') ?
                             `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 3px;" publishDartId='`+e.id+`'>确认签收</a>
                             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 3px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`
                             :
-                            `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 3px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`
+                            `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary callSender" style="margin: 3px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`
                                 )
                             )+`
                             <div>
@@ -181,7 +181,7 @@
         $(".cancelDart").click(function () {
             "use strict";
             const publishDartId = $(this).attr("publishDartId");
-            $.confirm("确认取消订单吗？", "提示", function() {
+            $.confirm("确认撤销订单吗？", "提示", function() {
                 $.ajax({
                     url:"/User/MyPublish/cancel/publishDartId/"+publishDartId,
                     type:"PUT",
@@ -257,7 +257,7 @@
                 $("#note").text(data.note);
                 $("#areaName").text(data.area.areaName);
                 $("#areaDetail").text(data.addressDetail);
-                if(data.packageStatus == '待签收'){
+                if(data.packageStatus == '待签收' || data.packageStatus == '待送达'){
                     $("#agencyName").text(data.agency.name);
                     $("#agencyPhoneNumber").text(data.agency.phoneNumber);
                 }

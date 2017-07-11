@@ -62,7 +62,7 @@ public class MyPublishController {
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/cancel/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);
@@ -81,7 +81,7 @@ public class MyPublishController {
      */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }

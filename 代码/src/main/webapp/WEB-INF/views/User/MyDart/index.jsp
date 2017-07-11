@@ -103,11 +103,11 @@
                         </div>
                         <div class="button_position_style">
                         `+(
-                            (e.packageStatus == '待送达')?
+                            (e.packageStatus == '待送达')  ?
                                 `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 0px;" publishDartId='`+e.id+`'>确认送达</a>
                                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
                                 :
-                                `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
+                                `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary callSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
 
                          )+`
 

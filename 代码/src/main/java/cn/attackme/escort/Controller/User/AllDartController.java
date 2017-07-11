@@ -64,7 +64,7 @@ public class AllDartController {
      */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }
@@ -77,14 +77,14 @@ public class AllDartController {
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/delete/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> deleteDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> deleteDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
-//        if(aPackage.getPackageStatus() == PackageStatus.已撤销){
-//            aPackage.setPackageStatus(PackageStatus.已删除);
-//        }else if(aPackage.getPackageStatus() == PackageStatus.已评价){
-//            aPackage.setPackageStatus(PackageStatus.已删除);
-//        }
-//        packageService.saveOrUpdate(aPackage);
+        if(aPackage.getPackageStatus() == PackageStatus.已撤销){
+            aPackage.setCancel(true);
+        }else if(aPackage.getPackageStatus() == PackageStatus.已完成){
+            aPackage.setCancel(true);
+        }
+        packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -96,7 +96,7 @@ public class AllDartController {
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/cancel/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);

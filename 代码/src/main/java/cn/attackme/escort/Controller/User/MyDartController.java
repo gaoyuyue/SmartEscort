@@ -60,7 +60,7 @@ public class MyDartController {
      */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }
@@ -73,7 +73,7 @@ public class MyDartController {
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/cancel/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待送达){
             aPackage.setPackageStatus(PackageStatus.待签收);

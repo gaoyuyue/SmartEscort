@@ -62,7 +62,7 @@ public class WaitingEvaluationController {
      */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }
@@ -75,7 +75,7 @@ public class WaitingEvaluationController {
     @RequiresRoles("user")
     @ResponseBody
     @DeleteMapping("/delete/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> deleteDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> deleteDart(@PathVariable String publishDartId){
         packageService.deleteById(publishDartId);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
