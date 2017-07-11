@@ -19,13 +19,11 @@
         <a id="title">发表评价</a>
         <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
     </div>
-    <%--<div class="weui-cells">--%>
-        <div class="weui-cell" style="border-bottom:2px solid #cbcbcb;background-color: white">
-            <div class="weui-cell__bd" style="font-size: 22px">
-                <p>服务评价</p>
-            </div>
+    <div class="weui-cell" style="border-bottom:2px solid #cbcbcb;background-color: white">
+        <div class="weui-cell__bd" style="font-size: 22px">
+            <p>服务评价</p>
         </div>
-    <%--</div>--%>
+    </div>
     <div id="childPage">
     </div>
 </div>
@@ -34,88 +32,86 @@
     var publishDartId = localStorage["publishDartId"];
     var success = function success(data) {
         var userInformation = function userInformation(user) {
-            console.log(user)
             if(user.userName==data.delegation.userName){
                 //委托人的评价页面
                 $("#childPage").append(`
-    <div class="weui-cells">
-        <div class="weui-cell" style="padding: 18px 15px">
-            <div class="weui-cell__bd">
-                <p>服务态度</p>
-            </div>
-            <div class="weui-cell__ft" id="Service_attitude">
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-            </div>
-        </div>
-        <div class="weui-cell" style="padding: 18px 15px">
-            <div class="weui-cell__bd">
-                <p>包裹完整度</p>
-            </div>
-            <div class="weui-cell__ft">
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-            </div>
-        </div>
-        <div class="weui-cell" style="padding: 18px 15px">
-            <div class="weui-cell__bd">
-                <p>配送速度</p>
-            </div>
-            <div class="weui-cell__ft">
-                <a href="javascript:;" class="starShow" name="starName"></a>
-                <a href="javascript:;" class="starShow" name="starName"></a>
-                <a href="javascript:;" class="starShow" name="starName"></a>
-                <a href="javascript:;" class="starShow" name="starName"></a>
-                <a href="javascript:;" class="starShow" name="starName"></a>
-            </div>
-        </div>
-    </div>
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="padding: 18px 15px">
+                                <div class="weui-cell__bd">
+                                    <p>服务态度</p>
+                                </div>
+                                <div class="weui-cell__ft" id="Service_attitude">
+                                    <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="padding: 18px 15px">
+                                <div class="weui-cell__bd">
+                                    <p>包裹完整度</p>
+                                </div>
+                                <div class="weui-cell__ft">
+                                    <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                    <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="padding: 18px 15px">
+                                <div class="weui-cell__bd">
+                                    <p>配送速度</p>
+                                </div>
+                                <div class="weui-cell__ft">
+                                    <a href="javascript:;" class="starShow" name="starName"></a>
+                                    <a href="javascript:;" class="starShow" name="starName"></a>
+                                    <a href="javascript:;" class="starShow" name="starName"></a>
+                                    <a href="javascript:;" class="starShow" name="starName"></a>
+                                    <a href="javascript:;" class="starShow" name="starName"></a>
+                                </div>
+                            </div>
+                        </div>
 
-    <div class="demos-content-padded">
-        <a href="javascript:;" class="weui-btn weui-btn_primary">提交评价</a>
-    </div>
-        `)
+                        <div class="demos-content-padded">
+                            <a href="javascript:;" class="weui-btn weui-btn_primary">提交评价</a>
+                        </div>
+                `)
             }else {
                 //代理人的评价页面
                 $("#childPage").append(`
-    <div class="weui-cells">
-        <div class="weui-cell" style="padding: 18px 15px">
-            <div class="weui-cell__bd">
-                <p>服务态度</p>
-            </div>
-            <div class="weui-cell__ft" id="Service_attitude">
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-                <a href="javascript:;" class="starShow" name="starName_two"></a>
-            </div>
-        </div>
-        <div class="weui-cell" style="padding: 18px 15px">
-            <div class="weui-cell__bd">
-                <p>信息准确度</p>
-            </div>
-            <div class="weui-cell__ft">
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-                <a href="javascript:;" class="starShow" name="starName_three"></a>
-            </div>
-        </div>
-    </div>
+                    <div class="weui-cells">
+                        <div class="weui-cell" style="padding: 18px 15px">
+                            <div class="weui-cell__bd">
+                                <p>服务态度</p>
+                            </div>
+                            <div class="weui-cell__ft" id="Service_attitude">
+                                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                            </div>
+                        </div>
+                        <div class="weui-cell" style="padding: 18px 15px">
+                            <div class="weui-cell__bd">
+                                <p>信息准确度</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="demos-content-padded">
-        <a href="javascript:;" class="weui-btn weui-btn_primary">提交评价</a>
-    </div>
-    `);
-
+                    <div class="demos-content-padded">
+                        <a href="javascript:;" class="weui-btn weui-btn_primary">提交评价</a>
+                    </div>
+                `);
             }
         };
         Get("/User/EvaluationDetail/userInformation",userInformation);
