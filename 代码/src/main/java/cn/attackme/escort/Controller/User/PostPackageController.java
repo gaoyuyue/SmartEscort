@@ -42,6 +42,8 @@ public class PostPackageController {
     private AddressService addressService;
     @Autowired
     private AreaService areaService;
+    @Autowired
+    private EvaluationService evaluationService;
 
     @RequiresRoles("user")
     @GetMapping("/")
@@ -182,6 +184,7 @@ public class PostPackageController {
         User user = userInfoService.getById(userName);
         String packageId = genOrderNo();
         Evaluation evaluation = new Evaluation(packageId, null, user, null, null);
+        evaluationService.save(evaluation);
         p.setId(packageId);
         p.setEvaluation(evaluation);
         p.setSchool(user.getSchool());
