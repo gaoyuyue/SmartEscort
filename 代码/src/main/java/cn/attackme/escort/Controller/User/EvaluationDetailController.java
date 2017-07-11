@@ -52,9 +52,10 @@ public class EvaluationDetailController {
      * @param publishDartId
      * @return
      */
+    @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }
