@@ -133,7 +133,7 @@ public class UMIPackageController {
     public ResponseEntity<Void> getUMIPackage(@PathVariable String packageId){
         UMIPackage umiPackage = umiPackageService.getById(packageId);
         umiPackage.setReceiveDate(new Date());
-        umiPackage.setPackageStatus(PackageStatus.待签收);
+        umiPackage.setPackageStatus(PackageStatus.待送达);
         umiPackageService.saveOrUpdate(umiPackage);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
@@ -143,7 +143,7 @@ public class UMIPackageController {
     public ResponseEntity<Void> accomplishUMIPackage(@PathVariable String packageId){
         UMIPackage umiPackage = umiPackageService.getById(packageId);
         umiPackage.setEndDate(new Date());
-        umiPackage.setPackageStatus(PackageStatus.待评价);
+        umiPackage.setPackageStatus(PackageStatus.已完成);
         umiPackageService.saveOrUpdate(umiPackage);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
@@ -159,13 +159,13 @@ public class UMIPackageController {
 
     @RequiresRoles("admin")
     @PutMapping("/getPackage/packageId/{packageId}")
-    public ResponseEntity<Void> getPackage(@PathVariable int packageId){
+    public ResponseEntity<Void> getPackage(@PathVariable String packageId){
         Package umiPackage = packageService.getById(packageId);
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
         umiPackage.setReceiveTime(new Date());
         umiPackage.setAgency(user);
-        umiPackage.setPackageStatus(PackageStatus.待签收);
+        umiPackage.setPackageStatus(PackageStatus.待送达);
         packageService.saveOrUpdate(umiPackage);
 
         String foreUrl = WechatProperties.authorizeUrl+"?appid="+
@@ -192,10 +192,10 @@ public class UMIPackageController {
 
     @RequiresRoles("admin")
     @PutMapping("/accomplishPackage/packageId/{packageId}")
-    public ResponseEntity<Void> accomplishPackage(@PathVariable int packageId){
+    public ResponseEntity<Void> accomplishPackage(@PathVariable String packageId){
         Package umiPackage = packageService.getById(packageId);
         umiPackage.setEndTime(new Date());
-        umiPackage.setPackageStatus(PackageStatus.待评价);
+        umiPackage.setPackageStatus(PackageStatus.待签收);
         packageService.saveOrUpdate(umiPackage);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }

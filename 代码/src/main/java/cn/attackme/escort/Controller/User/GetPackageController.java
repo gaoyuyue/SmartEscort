@@ -115,13 +115,14 @@ public class GetPackageController {
     @RequiresRoles(value = {"user","authed"},logical = Logical.AND)
     @ResponseBody
     @GetMapping("/receive/packageId/{packageId}")
-    public ResponseEntity<Void> receive(@PathVariable int packageId){
+    public ResponseEntity<Void> receive(@PathVariable String packageId){
         Package thePackage = packageService.getById(packageId);
         if (thePackage.getAgency() != null){
             return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
         }
         String userName = getSubject().getPrincipal().toString();
         User agency = userService.getById(userName);
+        thePackage.getEvaluation().setAgency(agency);
         thePackage.setAgency(agency);
         thePackage.setPackageStatus(PackageStatus.待签收);
         packageService.saveOrUpdate(thePackage);

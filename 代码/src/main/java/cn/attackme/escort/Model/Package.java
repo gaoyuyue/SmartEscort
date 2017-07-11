@@ -1,12 +1,10 @@
 package cn.attackme.escort.Model;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 包裹
@@ -22,9 +20,7 @@ public class Package implements Serializable {
     private static final long serialVersionUID = -4591451869882553177L;
 
     @Id
-    @GeneratedValue(generator = "generator")
-    @GenericGenerator(name = "generator",strategy = "increment")
-    private Integer id;
+    private String id;
 
     //代理人
     @OneToOne
@@ -55,9 +51,6 @@ public class Package implements Serializable {
     //留言
     private String note;
 
-    //满意程度
-    private Integer score;
-
     //是否被取消
     private boolean isCancel;
 
@@ -66,16 +59,6 @@ public class Package implements Serializable {
 
     //任务领取时间
     private Date receiveTime;
-
-    //代理人对委托人的评价
-    @OneToOne
-    @JoinColumn(name = "agencyEvaluation")
-    private Evaluation agencyEvaluation;
-
-    //委托人对代理人的评价
-    @OneToOne
-    @JoinColumn(name = "delegationEvaluation")
-    private Evaluation delegationEvaluation;
 
     //委托人签收时间
     private Date endTime;
@@ -107,4 +90,8 @@ public class Package implements Serializable {
     @Getter
     private String receiverName;
 
+    //评价表
+    @OneToOne
+    @JoinColumn(name = "evaluation")
+    private Evaluation evaluation;
 }
