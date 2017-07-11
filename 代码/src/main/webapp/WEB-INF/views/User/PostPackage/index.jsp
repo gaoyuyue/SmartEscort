@@ -60,7 +60,7 @@
 </div>
 
 <script src="/assets/js/jquery-weui.min.js"></script>
-<script src="/assets/js/fastclick.js"></script>
+
 <script src="/app/js/mobile.utils.js"></script>
 <script>
     $(document).ready(function () {
@@ -106,9 +106,6 @@
         });
     }
 
-    $(function() {
-        FastClick.attach(document.body);
-    });
 
     const getStandard = function (data) {
         $("#packageSize").select({
