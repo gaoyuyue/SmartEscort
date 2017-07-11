@@ -49,7 +49,7 @@ public class MyDartController {
         String userName = getSubject().getPrincipal().toString();
         User agency = userInfoService.getById(userName);
         List<Package> list = agency.getReceiveList();
-        List<Package> receiveList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收)).collect(toList());
+        List<Package> receiveList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
         return new ResponseEntity<>(receiveList, HttpStatus.OK);
     }
 
@@ -75,8 +75,8 @@ public class MyDartController {
     @PutMapping("/cancel/publishDartId/{publishDartId}")
     public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
         Package aPackage = packageService.getById(publishDartId);
-        if(aPackage.getPackageStatus() == PackageStatus.待签收){
-            aPackage.setPackageStatus(PackageStatus.待评价);
+        if(aPackage.getPackageStatus() == PackageStatus.待送达){
+            aPackage.setPackageStatus(PackageStatus.待签收);
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);

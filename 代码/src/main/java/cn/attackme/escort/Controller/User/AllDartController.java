@@ -53,7 +53,7 @@ public class AllDartController {
         List<Package> receivelist = user.getReceiveList();
         List<Package> publishList = user.getPublishList();
         publishList.addAll(receivelist);
-        List<Package> publishList1 = publishList.stream().filter(p -> !(p.getPackageStatus() == PackageStatus.已删除)).collect(toList());
+        List<Package> publishList1 = publishList.stream().collect(toList());
         return publishList1;
     }
 
@@ -79,12 +79,12 @@ public class AllDartController {
     @PutMapping("/delete/publishDartId/{publishDartId}")
     public ResponseEntity<Void> deleteDart(@PathVariable int publishDartId){
         Package aPackage = packageService.getById(publishDartId);
-        if(aPackage.getPackageStatus() == PackageStatus.已撤销){
-            aPackage.setPackageStatus(PackageStatus.已删除);
-        }else if(aPackage.getPackageStatus() == PackageStatus.已评价){
-            aPackage.setPackageStatus(PackageStatus.已删除);
-        }
-        packageService.saveOrUpdate(aPackage);
+//        if(aPackage.getPackageStatus() == PackageStatus.已撤销){
+//            aPackage.setPackageStatus(PackageStatus.已删除);
+//        }else if(aPackage.getPackageStatus() == PackageStatus.已评价){
+//            aPackage.setPackageStatus(PackageStatus.已删除);
+//        }
+//        packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -100,8 +100,10 @@ public class AllDartController {
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);
-        }else if(aPackage.getPackageStatus() == PackageStatus.待签收){
-            aPackage.setPackageStatus(PackageStatus.待评价);
+        }else if(aPackage.getPackageStatus() == PackageStatus.待送达){
+            aPackage.setPackageStatus(PackageStatus.待签收);
+        } else if(aPackage.getPackageStatus() == PackageStatus.待签收){
+            aPackage.setPackageStatus(PackageStatus.已完成);
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);

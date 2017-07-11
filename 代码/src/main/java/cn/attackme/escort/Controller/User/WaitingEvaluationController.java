@@ -51,7 +51,7 @@ public class WaitingEvaluationController {
         List<Package> receivelist = user.getReceiveList();
         List<Package> publishList = user.getPublishList();
         publishList.addAll(receivelist);
-        List<Package> publishList1 = publishList.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待评价)).collect(toList());
+        List<Package> publishList1 = publishList.stream().filter(p -> (p.getPackageStatus() == PackageStatus.已完成)).collect(toList());
         return publishList1;
     }
 
