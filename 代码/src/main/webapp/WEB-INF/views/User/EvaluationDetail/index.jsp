@@ -34,6 +34,7 @@
     var publishDartId = localStorage["publishDartId"];
     var success = function success(data) {
         var userInformation = function userInformation(user) {
+            console.log(user)
             if(user.userName==data.delegation.userName){
                 //委托人的评价页面
                 $("#childPage").append(`
@@ -64,7 +65,7 @@
         </div>
         <div class="weui-cell" style="padding: 18px 15px">
             <div class="weui-cell__bd">
-                <p>包裹完整度</p>
+                <p>配送速度</p>
             </div>
             <div class="weui-cell__ft">
                 <a href="javascript:;" class="starShow" name="starName"></a>
@@ -117,8 +118,9 @@
 
             }
         };
-        Get("/User/AllDart/userInformation",userInformation);
+        Get("/User/EvaluationDetail/userInformation",userInformation);
     };
+
     Get("/User/EvaluationDetail/dartDetail/publishDartId/"+publishDartId,success);
 
 </script>
