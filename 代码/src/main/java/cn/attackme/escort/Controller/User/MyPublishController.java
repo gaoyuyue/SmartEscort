@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.OrderResult;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
@@ -66,8 +67,10 @@ public class MyPublishController {
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);
+            aPackage.setOrderResult(OrderResult.发布人撤销任务);
         }else if(aPackage.getPackageStatus() == PackageStatus.待签收){
             aPackage.setPackageStatus(PackageStatus.已完成);
+            aPackage.setOrderResult(OrderResult.交易成功);
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);

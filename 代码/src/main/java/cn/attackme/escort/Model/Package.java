@@ -66,7 +66,7 @@ public class Package implements Serializable {
     //包裹状态
     @Enumerated(EnumType.STRING)
     private PackageStatus packageStatus;
-    
+
     @Enumerated(EnumType.STRING)
     private OrderResult orderResult;
 
