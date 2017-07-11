@@ -1,8 +1,11 @@
 package cn.attackme.escort.Controller.User;
 
 import cn.attackme.escort.Model.Package;
+import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,16 @@ public class EvaluationDetailController {
 
     @Autowired
     private PackageService packageService;
+
+    //获取用户
+    @RequiresRoles("user")
+    @ResponseBody
+    @GetMapping("/userInformation")
+    public User getInfo(){
+        final String userName = SecurityUtils.getSubject().getPrincipal().toString();
+        return userInfoService.getById(userName);
+    }
+
 
     /**
      * 获取当前人包裹信息

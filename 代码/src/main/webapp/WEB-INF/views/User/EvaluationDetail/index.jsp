@@ -27,8 +27,16 @@
         </div>
     <%--</div>--%>
     <div id="childPage">
-    </div>>
+    </div>
+</div>
 
+<script>
+    var publishDartId = localStorage["publishDartId"];
+    var success = function success(data) {
+        var userInformation = function userInformation(user) {
+            if(user.userName==data.delegation.userName){
+                //委托人的评价页面
+                $("#childPage").append(`
     <div class="weui-cells">
         <div class="weui-cell" style="padding: 18px 15px">
             <div class="weui-cell__bd">
@@ -71,21 +79,45 @@
     <div class="demos-content-padded">
         <a href="javascript:;" class="weui-btn weui-btn_primary">提交评价</a>
     </div>
+        `)
+            }else {
+                //代理人的评价页面
+                $("#childPage").append(`
+    <div class="weui-cells">
+        <div class="weui-cell" style="padding: 18px 15px">
+            <div class="weui-cell__bd">
+                <p>服务态度</p>
+            </div>
+            <div class="weui-cell__ft" id="Service_attitude">
+                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                <a href="javascript:;" class="starShow" name="starName_two"></a>
+                <a href="javascript:;" class="starShow" name="starName_two"></a>
+            </div>
+        </div>
+        <div class="weui-cell" style="padding: 18px 15px">
+            <div class="weui-cell__bd">
+                <p>信息准确度</p>
+            </div>
+            <div class="weui-cell__ft">
+                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                <a href="javascript:;" class="starShow" name="starName_three"></a>
+                <a href="javascript:;" class="starShow" name="starName_three"></a>
+            </div>
+        </div>
+    </div>
 
+    <div class="demos-content-padded">
+        <a href="javascript:;" class="weui-btn weui-btn_primary">提交评价</a>
+    </div>
+    `);
 
-
-
-
-
-
-
-
-</div>
-
-<script>
-    var publishDartId = localStorage["publishDartId"];
-    var success = function success(data) {
-
+            }
+        };
+        Get("/User/AllDart/userInformation",userInformation);
     };
     Get("/User/EvaluationDetail/dartDetail/publishDartId/"+publishDartId,success);
 
