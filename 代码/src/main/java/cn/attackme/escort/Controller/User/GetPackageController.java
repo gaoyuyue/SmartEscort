@@ -85,6 +85,9 @@ public class GetPackageController {
         String userName = getSubject().getPrincipal().toString();
         User user = userService.getById(userName);
         PageResults<Package> results = packageService.getPackageByStatusAndSchool(PackageStatus.待领取, user.getSchool(), pageNumber, pageSize);
+        List<Package> packages = results.getResults().stream().filter(p -> !p.getDelegation().equals(user)).collect(toList());
+        packages.forEach(p->p.setMessage(null));
+        results.setResults(packages);
         return new ResponseEntity<PageResults<Package>>(results,HttpStatus.OK);
     }
 
@@ -122,7 +125,9 @@ public class GetPackageController {
         }
         String userName = getSubject().getPrincipal().toString();
         User agency = userService.getById(userName);
-        thePackage.getEvaluation().setAgency(agency);
+        if (thePackage.getDelegation().equals(agency)){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
         thePackage.setAgency(agency);
         thePackage.setPackageStatus(PackageStatus.待送达);
         packageService.saveOrUpdate(thePackage);

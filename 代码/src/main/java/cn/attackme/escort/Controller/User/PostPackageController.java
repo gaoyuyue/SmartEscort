@@ -42,8 +42,6 @@ public class PostPackageController {
     private AddressService addressService;
     @Autowired
     private AreaService areaService;
-    @Autowired
-    private EvaluationService evaluationService;
 
     @RequiresRoles("user")
     @GetMapping("/")
@@ -182,11 +180,7 @@ public class PostPackageController {
     public ResponseEntity<Void> create(@RequestBody Package p){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
-        String packageId = genOrderNo();
-        Evaluation evaluation = new Evaluation(packageId, null, user, null, null);
-        evaluationService.save(evaluation);
-        p.setId(packageId);
-        p.setEvaluation(evaluation);
+        p.setId(genOrderNo());
         p.setSchool(user.getSchool());
         p.setDelegation(user);
         Area area = areaService.getById(p.getArea().getId());

@@ -92,11 +92,4 @@ public class Package implements Serializable {
     @Setter
     @Getter
     private String receiverName;
-
-    //评价表
-    @OneToOne
-    @JoinColumn(name = "evaluation")
-    private Evaluation evaluation;
-
-
 }
