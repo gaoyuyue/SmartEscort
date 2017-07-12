@@ -48,19 +48,12 @@
                                 <th>快递类型</th>
                                 <th>快递大小</th>
                                 <th>发布时间</th>
-                                <th>执行时间</th>
-                                <th>完成时间</th>
+                                <th>领取时间</th>
+                                <th>送达时间</th>
+                                <th>结束时间</th>
                             </tr>
                             </thead>
                             <tbody id="packageList">
-                            <tr>
-                                <td> </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -92,7 +85,9 @@
                         '</td>'+
                         '<td>' + getLocalTime(result.publishTime) +
                         '</td>'+
-                        '<td>' + getLocalTime(result.beginTime) +
+                        '<td>' + getLocalTime(result.receiveTime) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.deliveryTime) +
                         '</td>'+
                         '<td>' + getLocalTime(result.endTime) +
                         '</td>'+

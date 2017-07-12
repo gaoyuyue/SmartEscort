@@ -55,17 +55,6 @@
 </div>
 <script>
     var loadPage=function (pageNumber) {
-        $("#tableTop").empty();
-        $("#tableTop").append(`
-                <tr>
-                    <th>发布人</th>
-                    <th>手机号码</th>
-                    <th>详细地址</th>
-                    <th>短信内容</th><th>
-                    `+(($("#packageStatus").val() == "待领取")?`发布时间</th><th>操作</th>`:($("#packageStatus").val() == "待送达")?`领取时间</th><th>操作</th>`:`完成时间</th>`)
-            +`
-                </tr>
-            `);
         var updatePackageTable=function (data) {
             var resultList = data["results"];
             for (var i = 0; i < data["totalCount"]; i++) {
@@ -76,11 +65,16 @@
                         <td>`+result.receiverPhoneNumber+`</td>
                         <td>`+result.addressDetail+`</td>
                         <td>`+result.message+`</td>
-                        <td>`+getLocalTime(result.publishTime)+`</td>
-                        <td>`+((result.packageStatus === "待领取")?
-                        `<a packageId=`+result.id+` href="#" class="getLink">领取</a>`:
+                        `+((result.packageStatus === "待领取")?
+                        `<td>`+getLocalTime(result.publishTime)+`</td>
+                        <td><a packageId=`+result.id+` href="#" class="getLink">领取</a>`:
                         (result.packageStatus === "待送达")?
-                            `<a packageId=`+result.id+` href="#" class="accomplishLink">完成</a>`:``)+`</td>
+                        `<td>`+getLocalTime(result.receiveTime)+`</td>
+                        <td><a packageId=`+result.id+` href="#" class="accomplishLink">送达</a>`:
+                        (result.packageStatus === "待签收")?
+                        `<td>`+getLocalTime(result.deliveryTime)+`</td>
+                        <td>`:
+                        `<td>`+getLocalTime(result.endTime))+`</td>
                     </tr>
                 `);
             }
@@ -94,20 +88,42 @@
                         <td>`+result.name+`</td>
                         <td>`+result.phoneNumber+`</td>
                         <td>`+result.detailAddress+`</td>
-                        <td>`+result.message+`</td>
-                        <td>`+getLocalTime(result.createDate)+`</td>
-                        <td>`+ ((result.packageStatus === "待领取")?
-                                `<a packageId=`+result.orderNumber+` href="#" class="getULink">领取</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:
-                            (result.packageStatus === "待送达")?
-                                `<a packageId=`+result.orderNumber+` href="#" class="accomplishULink">完成</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:``)
+                        <td>`+result.message+`</td>` +
+                        ((result.packageStatus === "待领取")?
+                                `<td>`+getLocalTime(result.createDate)+`</td>
+                                <td><a packageId=`+result.orderNumber+` href="#" class="getULink">领取</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:
+                        (result.packageStatus === "待送达")?
+                                `<td>`+getLocalTime(result.receiveDate)+`</td>
+                                <td><a packageId=`+result.orderNumber+` href="#" class="accomplishULink">完成</a>&nbsp;<a packageId=`+result.orderNumber+` href="#" class="deleteULink">撤销</a>`:
+                                `<td>`+getLocalTime(result.receiveDate))
                         +`</td>
                     </tr>
                 `);
             }
         };
         if($("#theWay").val() === "qq"){
+            $("#tableTop").empty();
+            $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>手机号码</th>
+                    <th>详细地址</th>
+                    <th>短信内容</th><th>
+                    `+(($("#packageStatus").val() == "待领取")?`发布时间</th><th>操作</th>`:($("#packageStatus").val() == "待送达")?`领取时间</th><th>操作</th>`:`完成时间</th>`)
+                +`</tr>
+            `);
             Paging("/UMITeam/umiPackageList/packageType/"+$("#packageType").val()+"/areaId/"+$("#area").val()+"/packageStatus/" + $("#packageStatus").val(),"packageList",updateUMIPackageTable,pageNumber,10);
         }else {
+            $("#tableTop").empty();
+            $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>手机号码</th>
+                    <th>详细地址</th>
+                    <th>短信内容</th><th>
+                    `+(($("#packageStatus").val() == "待领取")?`发布时间</th><th>操作</th>`:($("#packageStatus").val() == "待送达")?`领取时间</th><th>操作</th>`:($("#packageStatus").val() == "待签收")?`送达时间</th>`:`结束时间</th>`)
+                +`</tr>
+            `);
             Paging("/UMITeam/packageList/packageType/"+$("#packageType").val()+"/areaId/"+$("#area").val()+"/packageStatus/" + $("#packageStatus").val(),"packageList",updatePackageTable,pageNumber,10);
         }
         $(".getULink").click(function () {
@@ -142,7 +158,7 @@
                 loadPage(1);
             });
             $("#theWay").change(function () {
-                $("#packageStatus").html("");
+                $("#packageStatus").empty();
                 if($("#theWay").val()=="wechat"){
                     $("#packageStatus").append(`
                     <option value="待领取">待领取</option>
