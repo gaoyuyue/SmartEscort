@@ -9,6 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 <link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
+<div id="top" style="background-color:#08ddff">
+    <h3 style="color: white">任务列表</h3>
+</div>
 
 <div id="addressTable" style="width: 100%;background-color: #ffffff;clear:both;border: 1.5px solid white">
 
@@ -79,7 +82,7 @@
         var data = {
             addressDetail:$("#cacheLink").attr("detail"),
             receiverPhoneNumber:$("#cacheLink").attr("phoneNumber"),
-            receiverName:$("#receiverName").attr("receiverName"),
+            receiverName:$("#cacheLink").attr("receiverName"),
             area:{
                 id:$("#cacheLink").attr("areaId")
             },
@@ -93,7 +96,6 @@
             note:$("#note").val(),
             message:$("#message").val()
         };
-//        alert(data.area.id);
 //       function chadress(data) {
 //           if(data.addressDetail ==""){
 //               $("#addresstable").css({"borderColor":"red"});
