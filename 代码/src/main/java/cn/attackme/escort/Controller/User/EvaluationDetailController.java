@@ -91,6 +91,8 @@ public class EvaluationDetailController {
                 aPackage.setAgencyEvaluate(true);
                 packageService.saveOrUpdate(aPackage);
             }
+            other.setIntegration(other.getIntegration() + theLastScore);
+            userInfoService.saveOrUpdate(other);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
