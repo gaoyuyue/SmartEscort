@@ -1,9 +1,7 @@
 package cn.attackme.escort.Controller.Admin;
 
 
-import cn.attackme.Wechat.Message.TemplateMessage;
 import cn.attackme.Wechat.Util.MessageUtil;
-import cn.attackme.Wechat.Util.WechatProperties;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Service.CreditRecordService;
 import cn.attackme.escort.Service.SchoolService;
@@ -64,34 +62,12 @@ public class VerifyManagementController {
                 userInfoService.save(user);
                 CreditRecord creditRecord = new CreditRecord(null, user, 50, CreditRecordDescription.完成认证);
                 creditRecordService.save(creditRecord);
-                //发送消息给用户
-                String foreUrl = WechatProperties.authorizeUrl+"?appid="+
-                        WechatProperties.appid+
-                        "&redirect_uri="+
-                        WechatProperties.OAuth2Url+
-                        "&response_type=code&scope=snsapi_base&state=";
-                String backUrl = "#wechat_redirect";
-                TemplateMessage authoredMessage = new TemplateMessage();
-                authoredMessage.setTouser(user.getOpenid());
-                authoredMessage.setTemplate_id("QWNFfg_U6M45WKOEFTNGZpvQZmFz7JNK6C4YroMETo4");
-                authoredMessage.setUrl(foreUrl+"/User/UserInfomation/"+backUrl);
-                MessageUtil.postTemplate(authoredMessage);
+                MessageUtil.postTemplate(user.getOpenid(),"QWNFfg_U6M45WKOEFTNGZpvQZmFz7JNK6C4YroMETo4","/User/UserInfomation/",null);
                 return new ResponseEntity<Void>(HttpStatus.OK);
             }else {
                 user.setStuCardUrl(null);
                 userInfoService.save(user);
-                //发送消息给用户
-                String foreUrl = WechatProperties.authorizeUrl+"?appid="+
-                        WechatProperties.appid+
-                        "&redirect_uri="+
-                        WechatProperties.OAuth2Url+
-                        "&response_type=code&scope=snsapi_base&state=";
-                String backUrl = "#wechat_redirect";
-                TemplateMessage authoredMessage = new TemplateMessage();
-                authoredMessage.setTouser(user.getOpenid());
-                authoredMessage.setTemplate_id("WGfq640oRdKmj8soG_ELosHGTE6GGwu4Hp29BTyU5ls");
-                authoredMessage.setUrl(foreUrl+"/User/UserInfomation/"+backUrl);
-                MessageUtil.postTemplate(authoredMessage);
+                MessageUtil.postTemplate(user.getOpenid(),"WGfq640oRdKmj8soG_ELosHGTE6GGwu4Hp29BTyU5ls","/User/UserInfomation/",null);
                 return new ResponseEntity<Void>(HttpStatus.OK);
             }
         }else {

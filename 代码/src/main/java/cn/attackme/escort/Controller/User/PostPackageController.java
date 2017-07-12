@@ -1,6 +1,7 @@
 package cn.attackme.escort.Controller.User;
 
 
+import cn.attackme.Wechat.Message.RowMessage;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.*;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static cn.attackme.Wechat.Util.MessageUtil.postTemplate;
 import static cn.attackme.escort.Utils.OrderUtil.genOrderNo;
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
@@ -199,6 +201,9 @@ public class PostPackageController {
         packageService.save(p);
         CreditRecord creditRecord = new CreditRecord(null, user, 1, CreditRecordDescription.完成发布);
         creditRecordService.save(creditRecord);
+        Map<String,RowMessage> messageMap = new HashMap<>();
+        messageMap.put("orderId",new RowMessage(p.getId(),"red"));
+        postTemplate(user.getOpenid(), "EjU0qPvrtUW7NoTw43iGMgK8uvJym30vlhqW4M-2T-o", "/User/MyPublish/", messageMap);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 }

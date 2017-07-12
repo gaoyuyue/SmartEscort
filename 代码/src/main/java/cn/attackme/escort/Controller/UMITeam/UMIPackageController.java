@@ -1,9 +1,7 @@
 package cn.attackme.escort.Controller.UMITeam;
 
 import cn.attackme.Wechat.Message.RowMessage;
-import cn.attackme.Wechat.Message.TemplateMessage;
 import cn.attackme.Wechat.Util.MessageUtil;
-import cn.attackme.Wechat.Util.WechatProperties;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.*;
@@ -168,25 +166,14 @@ public class UMIPackageController {
         umiPackage.setPackageStatus(PackageStatus.待送达);
         packageService.saveOrUpdate(umiPackage);
 
-        String foreUrl = WechatProperties.authorizeUrl+"?appid="+
-                WechatProperties.appid+
-                "&redirect_uri="+
-                WechatProperties.OAuth2Url+
-                "&response_type=code&scope=snsapi_base&state=";
-        String backUrl = "#wechat_redirect";
-
-        TemplateMessage delegateMessage = new TemplateMessage();
-        delegateMessage.setTouser(umiPackage.getDelegation().getOpenid());
-        delegateMessage.setTemplate_id("1r7zCe-2-qakpyNVNL-8-6SFvBJPtDop4bm6zWTgZlI");
-        delegateMessage.setUrl(foreUrl+"/User/MyPublish/"+backUrl);
         RowMessage receiverName = new RowMessage(user.getName()+"\n","red");
         RowMessage receiverPhone = new RowMessage(user.getPhoneNumber(),"red");
         Map<String,RowMessage> delegateMessageMap = new HashMap<>();
         delegateMessageMap.put("receiverName",receiverName);
         delegateMessageMap.put("receiverPhone",receiverPhone);
-        delegateMessage.setData(delegateMessageMap);
+//        delegateMessage.setData(delegateMessageMap);
 
-        MessageUtil.postTemplate(delegateMessage);
+        MessageUtil.postTemplate(umiPackage.getDelegation().getOpenid(),"1r7zCe-2-qakpyNVNL-8-6SFvBJPtDop4bm6zWTgZlI","/User/MyPublish/",delegateMessageMap);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
