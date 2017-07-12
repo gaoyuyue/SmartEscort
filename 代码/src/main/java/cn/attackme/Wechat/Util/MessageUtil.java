@@ -260,9 +260,21 @@ public class MessageUtil {
         return msg;
     }
 
-    public static void postTemplate(TemplateMessage templateMessage){
+    public static void postTemplate(String openid,String templateId,String url,Map<String,RowMessage> messageMap){
+        String foreUrl = WechatProperties.authorizeUrl+"?appid="+
+                WechatProperties.appid+
+                "&redirect_uri="+
+                WechatProperties.OAuth2Url+
+                "&response_type=code&scope=snsapi_base&state=";
+        String backUrl = "#wechat_redirect";
+
+        TemplateMessage templateMessage = new TemplateMessage();
+        templateMessage.setTouser(openid);
+        templateMessage.setTemplate_id(templateId);
+        templateMessage.setUrl(foreUrl+url+backUrl);
+        templateMessage.setData(messageMap);
         try {
-            String result = sendPostBuffer(WechatProperties.sendTemplate+WechatProperties.access_token,new JSONObject(templateMessage).toString());
+            sendPostBuffer(WechatProperties.sendTemplate+WechatProperties.access_token,new JSONObject(templateMessage).toString());
         } catch (IOException ex) {
             LogToDB(ex);
         }

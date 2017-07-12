@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.Wechat.Message.RowMessage;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.CreditRecordService;
@@ -13,8 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static cn.attackme.Wechat.Util.MessageUtil.postTemplate;
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
 
@@ -76,12 +80,19 @@ public class MyPublishController {
             aPackage.setOrderResult(OrderResult.发布人撤销任务);
             delegation.setIntegration(delegation.getIntegration()-1);
             creditRecord = new CreditRecord(null, delegation, -1,CreditRecordDescription.取消订单);
+            Map<String,RowMessage> messageMap = new HashMap<>();
+            messageMap.put("orderId",new RowMessage(aPackage.getId(),"red"));
+            postTemplate(delegation.getOpenid(), "6kCKxbS91lnmC_uTL6LFfmqZ0C1xDR6C0RL_NDHqOlQ", "/User/AllDart/", messageMap);
         }
         if(aPackage.getPackageStatus() == PackageStatus.待签收){
             aPackage.setPackageStatus(PackageStatus.已完成);
             aPackage.setOrderResult(OrderResult.交易成功);
             delegation.setIntegration(delegation.getIntegration()+1);
             creditRecord = new CreditRecord(null, delegation, 1, CreditRecordDescription.确认签收);
+            Map<String,RowMessage> messageMap = new HashMap<>();
+            messageMap.put("orderId",new RowMessage(aPackage.getId(),"red"));
+            postTemplate(delegation.getOpenid(), "4HOfR0ngnVxL_3FZ3wMdbHY9pR6H5_wgyIPWX8GOiK0", "/User/WaitingEvaluation/", messageMap);
+            postTemplate(delegation.getOpenid(), "4HOfR0ngnVxL_3FZ3wMdbHY9pR6H5_wgyIPWX8GOiK0", "/User/WaitingEvaluation/", messageMap);
         }
         aPackage.setEndTime(date);
         packageService.saveOrUpdate(aPackage);

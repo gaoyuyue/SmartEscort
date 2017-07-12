@@ -1,9 +1,7 @@
 package cn.attackme.escort.Controller.User;
 
 import cn.attackme.Wechat.Message.RowMessage;
-import cn.attackme.Wechat.Message.TemplateMessage;
 import cn.attackme.Wechat.Util.MessageUtil;
-import cn.attackme.Wechat.Util.WechatProperties;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Service.*;
@@ -141,29 +139,12 @@ public class GetPackageController {
         CreditRecord creditRecord = new CreditRecord(null, agency, 1, CreditRecordDescription.完成接单);
         creditRecordService.save(creditRecord);
 
-        //发送模板消息给交易双方
-        String foreUrl = WechatProperties.authorizeUrl+"?appid="+
-                WechatProperties.appid+
-                "&redirect_uri="+
-                WechatProperties.OAuth2Url+
-                "&response_type=code&scope=snsapi_base&state=";
-        String backUrl = "#wechat_redirect";
-
-        TemplateMessage delegateMessage = new TemplateMessage();
-        delegateMessage.setTouser(delegation.getOpenid());
-        delegateMessage.setTemplate_id("1r7zCe-2-qakpyNVNL-8-6SFvBJPtDop4bm6zWTgZlI");
-        delegateMessage.setUrl(foreUrl+"/User/MyPublish/"+backUrl);
         RowMessage receiverName = new RowMessage(agency.getName()+"\n","red");
         RowMessage receiverPhone = new RowMessage(agency.getPhoneNumber(),"red");
         Map<String,RowMessage> delegateMessageMap = new HashMap<>();
         delegateMessageMap.put("receiverName",receiverName);
         delegateMessageMap.put("receiverPhone",receiverPhone);
-        delegateMessage.setData(delegateMessageMap);
 
-        TemplateMessage agencyMessage = new TemplateMessage();
-        agencyMessage.setTouser(agency.getOpenid());
-        agencyMessage.setTemplate_id("T-OcS-GauGMFnEEz3O9uXX_G8AZwbCJoCbFC16e8_iw");
-        agencyMessage.setUrl(foreUrl+"/User/MyDart/"+backUrl);
         RowMessage publisherName = new RowMessage(agency.getName()+"\n","red");
         RowMessage publisherPhone = new RowMessage(agency.getPhoneNumber()+"\n","red");
         RowMessage receiveName = new RowMessage(thePackage.getReceiverName()+"\n","red");
@@ -175,10 +156,9 @@ public class GetPackageController {
         agencyMessageMap.put("receiveName",receiveName);
         agencyMessageMap.put("receiveNumber",receiveNumber);
         agencyMessageMap.put("receiveMessage",receiveMessage);
-        agencyMessage.setData(agencyMessageMap);
 
-        MessageUtil.postTemplate(delegateMessage);
-        MessageUtil.postTemplate(agencyMessage);
+        MessageUtil.postTemplate(delegation.getOpenid(),"1r7zCe-2-qakpyNVNL-8-6SFvBJPtDop4bm6zWTgZlI","/User/MyPublish/",delegateMessageMap);
+        MessageUtil.postTemplate(agency.getOpenid(),"T-OcS-GauGMFnEEz3O9uXX_G8AZwbCJoCbFC16e8_iw","/User/MyDart/",agencyMessageMap);
 
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
