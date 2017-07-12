@@ -86,7 +86,8 @@ public class GetPackageController {
         String userName = getSubject().getPrincipal().toString();
         User user = userService.getById(userName);
         PageResults<Package> results = packageService.getPackageByStatusAndSchool(PackageStatus.待领取, user.getSchool(), pageNumber, pageSize);
-        List<Package> packages = results.getResults().stream().filter(p -> !p.getDelegation().equals(user)).collect(toList());
+//        List<Package> packages = results.getResults().stream().filter(p -> !p.getDelegation().equals(user)).collect(toList());
+        List<Package> packages = results.getResults();
         packages.forEach(p->p.setMessage(null));
         results.setResults(packages);
         return new ResponseEntity<PageResults<Package>>(results,HttpStatus.OK);

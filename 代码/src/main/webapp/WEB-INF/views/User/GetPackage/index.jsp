@@ -99,7 +99,9 @@
                         },
                         error: function (XMLHttpRequest) {
                             if (XMLHttpRequest.status === 404) alert("未认证用户不能使用此功能！");
-                            else alert("此任务已被接收！");
+                            else if(XMLHttpRequest.status === 400) alert("不能领取自己发布的任务");
+                            else if(XMLHttpRequest.status === 406) alert("此任务已被接收！");
+                            else alert("领取失败");
                         }
                     });
                 },
