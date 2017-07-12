@@ -1,14 +1,23 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.CreditRecord;
+import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.CreditRecordService;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,12 +37,24 @@ public class MyIntegrationController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private CreditRecordService creditRecordService;
+
     @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/information")
     public User information(){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         return userInfoService.getById(userName);
+    }
+
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @GetMapping("/creditList")
+    public ResponseEntity<List<CreditRecord>> creditList(){
+        List<CreditRecord> creditRecords= creditRecordService.getAll();
+        return new ResponseEntity<>(creditRecords, HttpStatus.OK);
     }
 
 }
