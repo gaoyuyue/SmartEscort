@@ -20,7 +20,7 @@
     <div class="navn3" style="height: 35px">
         <%--<p style="font-size: 13px;color: #888888;" class="navuser">信用分</p>--%>
             <div class="button_sp_area navuser">
-                <a href="/User/MyIntegration/" class="weui-btn weui-btn_mini weui-btn_primary" style="border-radius: 100px;background-color: orange;border: ;">
+                <a href="/User/MyIntegration/" class="weui-btn_mini weui-btn_primary" style="border-radius: 100px;background-color: orange;border: 0;">
                     <div>
                         <span>信用分:</span>
                         <span></span>
