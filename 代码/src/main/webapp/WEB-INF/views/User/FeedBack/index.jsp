@@ -22,10 +22,10 @@
         <a id="title">意见反馈</a>
         <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
         <br>
-        <div style="height: 20px">
-            <span style="text-align: center;color: #8B91A0">您好，请在下方输入您的反馈意见，我们会尽快回复！</span>
+        <div style="height: auto;margin:0;padding:0;line-height: 25px;text-align: left">
+            <span style="color: #8B91A0;position:relative;left: 10px;right: 5px">您好，请在下方输入您的反馈意见，我们会认真查看您的反馈。</span>
         </div>
-        <div class="weui-cells weui-cells_form">
+        <div class="weui-cells weui-cells_form" style="margin:0;padding:0;">
             <div class="weui-cell" >
                 <div class="weui-cell__bd" >
                     <textarea class="weui-textarea textarea" id="counts" placeholder="请输入您的意见" rows="4"></textarea>

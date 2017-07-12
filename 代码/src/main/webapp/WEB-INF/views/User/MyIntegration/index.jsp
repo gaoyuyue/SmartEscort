@@ -17,6 +17,12 @@
     .bold{
         font-weight: bold;
     }
+    .red{
+        color: red;
+    }
+    .green{
+        color: green;
+    }
 </style>
 <div id="frame">
     <div id="navbarSuspension">
@@ -79,7 +85,6 @@
                 <article class="weui-article" style="text-indent: 2em">
                     <h1 style="color: black;font-weight: bolder">信用分规则:</h1>
                     <section>
-                        <%--<h2 class="title">章标题</h2>--%>
                         <section>
                             <p>
                                 新用户起始信用分为100分，信用分数最低为0分。分数越高，代表您的平台使用越规范，分数越低，表示您存在越多的不恰当使用行为。
@@ -104,11 +109,11 @@
                             </tr>
                             <tr>
                                 <td>90-100</td>
-                                <td>+5</td>
+                                <td class="green">+5</td>
                             </tr>
                             <tr>
                                 <td>80-90</td>
-                                <td>+3</td>
+                                <td class="green">+3</td>
                             </tr>
                             <tr>
                                 <td>60-80</td>
@@ -116,11 +121,11 @@
                             </tr>
                             <tr>
                                 <td>40-60</td>
-                                <td>-3</td>
+                                <td class="red">-3</td>
                             </tr>
                             <tr>
                                 <td>40以下</td>
-                                <td>-5</td>
+                                <td class="red">-5</td>
                             </tr>
                             </tbody>
                         </table>
@@ -135,11 +140,11 @@
                             </tr>
                             <tr>
                                 <td>交易成功</td>
-                                <td>+2</td>
+                                <td class="green">+2</td>
                             </tr>
                             <tr>
                                 <td>发布人撤销</td>
-                                <td>-2</td>
+                                <td class="green">-2</td>
                             </tr>
                             <tr>
                                 <td>待领取超时</td>
@@ -147,11 +152,11 @@
                             </tr>
                             <tr>
                                 <td>待签收超时</td>
-                                <td>-1</td>
+                                <td class="red">-1</td>
                             </tr>
                             <tr>
                                 <td>待送达超时</td>
-                                <td>-20</td>
+                                <td class="red">-20</td>
                             </tr>
                             </tbody>
                         </table>
