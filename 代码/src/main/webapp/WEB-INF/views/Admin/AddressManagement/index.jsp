@@ -19,7 +19,7 @@
                                 data-target="#myModal1">添加学校
                         </button>
                         <button type="button" class="btn btn-w-m btn-info" data-toggle="modal" data-target="#myModal2" id="addArea">
-                            添加地址
+                            添加区域
                         </button>
                     </div>
                     <div class="table-responsive">
