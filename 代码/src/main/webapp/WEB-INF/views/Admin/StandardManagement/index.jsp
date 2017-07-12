@@ -28,7 +28,6 @@
                             <tr>
                                 <th>选择</th>
                                 <th>收费标准描述</th>
-                                <%--<th>收费标准</th>--%>
                             </tr>
                             </thead>
                             <tbody id="StandardTable">
