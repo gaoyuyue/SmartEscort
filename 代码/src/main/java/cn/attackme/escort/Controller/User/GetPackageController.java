@@ -44,6 +44,8 @@ public class GetPackageController {
     private PackageService packageService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CreditRecordService creditRecordService;
 
     @GetMapping("/")
     public String index(){
@@ -130,11 +132,14 @@ public class GetPackageController {
         if (thePackage.getDelegation().equals(agency)){
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
+        agency.setIntegration(agency.getIntegration()+1);
         thePackage.setAgency(agency);
         thePackage.setPackageStatus(PackageStatus.待送达);
         thePackage.setReceiveTime(new Date());
         packageService.saveOrUpdate(thePackage);
         User delegation = thePackage.getDelegation();
+        CreditRecord creditRecord = new CreditRecord(null, agency, 1, CreditRecordDescription.完成接单);
+        creditRecordService.save(creditRecord);
 
         //发送模板消息给交易双方
         String foreUrl = WechatProperties.authorizeUrl+"?appid="+

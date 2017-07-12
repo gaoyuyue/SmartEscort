@@ -42,6 +42,8 @@ public class PostPackageController {
     private AddressService addressService;
     @Autowired
     private AreaService areaService;
+    @Autowired
+    private CreditRecordService creditRecordService;
 
     @RequiresRoles("user")
     @GetMapping("/")
@@ -180,6 +182,7 @@ public class PostPackageController {
     public ResponseEntity<Void> create(@RequestBody Package p){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
+        user.setIntegration(user.getIntegration()+1);
         p.setId(genOrderNo());
         p.setSchool(user.getSchool());
         p.setDelegation(user);
@@ -194,6 +197,8 @@ public class PostPackageController {
         p.setPublishTime(new Date());
         p.setPackageStatus(PackageStatus.待领取);
         packageService.save(p);
+        CreditRecord creditRecord = new CreditRecord(null, user, 1, CreditRecordDescription.完成发布);
+        creditRecordService.save(creditRecord);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 }

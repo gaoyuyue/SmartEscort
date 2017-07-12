@@ -1,9 +1,8 @@
 package cn.attackme.escort.Controller.User;
 
-import cn.attackme.escort.Model.OrderResult;
+import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
-import cn.attackme.escort.Model.PackageStatus;
-import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.CreditRecordService;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -41,6 +40,9 @@ public class MyPublishController {
     @Autowired
     private PackageService packageService;
 
+    @Autowired
+    private CreditRecordService creditRecordService;
+
     /**
      * 获取包裹信息
      * @return
@@ -67,16 +69,23 @@ public class MyPublishController {
     public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         Date date = new Date();
+        User delegation = aPackage.getDelegation();
+        CreditRecord creditRecord = null;
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);
             aPackage.setOrderResult(OrderResult.发布人撤销任务);
+            delegation.setIntegration(delegation.getIntegration()-1);
+            creditRecord = new CreditRecord(null, delegation, -1,CreditRecordDescription.取消订单);
         }
         if(aPackage.getPackageStatus() == PackageStatus.待签收){
             aPackage.setPackageStatus(PackageStatus.已完成);
             aPackage.setOrderResult(OrderResult.交易成功);
+            delegation.setIntegration(delegation.getIntegration()+1);
+            creditRecord = new CreditRecord(null, delegation, 1, CreditRecordDescription.确认签收);
         }
         aPackage.setEndTime(date);
         packageService.saveOrUpdate(aPackage);
+        creditRecordService.save(creditRecord);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -92,6 +101,4 @@ public class MyPublishController {
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }
-
-
 }
