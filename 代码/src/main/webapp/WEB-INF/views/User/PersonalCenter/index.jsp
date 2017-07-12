@@ -20,7 +20,7 @@
     <div class="navn3" style="height: 35px">
         <%--<p style="font-size: 13px;color: #888888;" class="navuser">信用分</p>--%>
             <div class="button_sp_area navuser">
-                <a href="/User/MyIntegration/" class="weui-btn weui-btn_mini weui-btn_primary" style="border-radius: 100px;background-color: orange;border: 0px;">
+                <a href="/User/MyIntegration/" class="weui-btn weui-btn_mini weui-btn_primary" style="border-radius: 100px;background-color: orange;border: ;">
                     <div>
                         <span>信用分:</span>
                         <span></span>
@@ -75,31 +75,6 @@
             </div>
             <div class="weui-cell__ft">详细地址管理</div>
         </div>
-        <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/MyConcern/'">
-            <div class="weui-cell__bd">
-                <span class="fa-stack fa-lg">
-                    <i class="fa fa-square fa-stack-2x" style="color: #ADAAE4"></i>
-                    <i class="fa fa-star fa-stack-1x fa-inverse"></i>
-                </span>
-                <span style="vertical-align: middle" class="font_color">&nbsp;我的关注</span>
-                <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </div>
-        <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/Notice/'">
-            <div class="weui-cell__bd">
-                <span class="fa-stack fa-lg">
-                    <i class="fa fa-square fa-stack-2x" style="color: #158C70"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                </span>
-                <span style="vertical-align: middle" class="font_color">&nbsp;通知</span>
-                <span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </div>
-    </div>
-
-    <div class="weui-cells">
         <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/FeedBack/'">
             <div class="weui-cell__bd">
                 <span class="fa-stack fa-lg">
@@ -107,6 +82,30 @@
                     <i class="fa fa-comment fa-stack-1x fa-inverse"></i>
                 </span>
                 <span style="vertical-align: middle" class="font_color">&nbsp;意见反馈</span>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </div>
+        <%--<div class="weui-cell weui-cell_access" onclick="window.location.href='/User/Notice/'">--%>
+            <%--<div class="weui-cell__bd">--%>
+                <%--<span class="fa-stack fa-lg">--%>
+                    <%--<i class="fa fa-square fa-stack-2x" style="color: #158C70"></i>--%>
+                    <%--<i class="fa fa-envelope fa-stack-1x fa-inverse"></i>--%>
+                <%--</span>--%>
+                <%--<span style="vertical-align: middle" class="font_color">&nbsp;通知</span>--%>
+                <%--<span class="weui-badge" style="margin-left: 5px; margin: auto;">8</span>--%>
+            <%--</div>--%>
+            <%--<div class="weui-cell__ft"></div>--%>
+        <%--</div>--%>
+    </div>
+
+    <div class="weui-cells">
+        <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/ContactCustomer/'">
+            <div class="weui-cell__bd">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-square fa-stack-2x" style="color: #ADAAE4"></i>
+                    <i class="fa fa-mobile fa-stack-1x fa-inverse"></i>
+                </span>
+                <span style="vertical-align: middle" class="font_color">&nbsp;联系客服</span>
             </div>
             <div class="weui-cell__ft"></div>
         </div>
