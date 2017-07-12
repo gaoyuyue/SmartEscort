@@ -28,31 +28,31 @@
     </div>
 
     <div class="weui-cells">
-        <div class="weui-cell">
+        <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputname" onclick="checkname()">
             <div class="weui-cell__bd">
-                <input class="weui-input" id="name" type="text" placeholder="收货人姓名">
+                <input class="weui-input" id="name" type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" placeholder="收货人姓名(必填)" >
             </div>
         </div>
-        <div class="weui-cell">
+        <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputphone" onclick="checkphone()">
             <div class="weui-cell__bd">
-                <input class="weui-input" id="phone" type="number" placeholder="手机号码">
+                <input class="weui-input" id="phone" type="text" maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " placeholder="手机号码(必填)">
             </div>
         </div>
     </div>
 
     <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
+        <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputarea" onclick="checkarea()">
             <div class="weui-cell__hd"><label for="name" class="weui-label">区域</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" id="area" placeholder="请选择区域" type="text" value="">
+                <input class="weui-input" id="area" placeholder="请选择区域(必填)" type="text" value="">
             </div>
         </div>
     </div>
 
     <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
+        <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputdetail" onclick="checkdetail()">
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" id="detailAddress" placeholder="详细地址" rows="4"></textarea>
+                <textarea class="weui-textarea" id="detailAddress" placeholder="详细地址(必填)" rows="4"></textarea>
             </div>
         </div>
     </div>
@@ -76,10 +76,21 @@
         $(document).ready(function () {
             Get("/User/ManageAddress/areaNameList",getSuccess);
         });
-
         var postSuccess = function () {
             window.location.href = "/User/PostPackage/";
         };
+        function checkname() {
+            $("#inputname").css("borderColor","white");
+        }
+        function checkphone() {
+            $("#inputphone").css("borderColor","white");
+        }
+        function checkarea() {
+            $("#inputarea").css("borderColor","white");
+        }
+        function checkdetail() {
+            $("#inputdetail").css("borderColor","white");
+        }
 
         $("#saveButton").click(function () {
             var data = {
@@ -90,7 +101,38 @@
                     areaName:$("#area").val()
                 }
             };
-            Post("/User/PostPackage/addAddress",data,postSuccess);
+            function examphone(data) {
+                if(data.phoneNumber =="") {
+                    $("#inputphone").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            function examdetail(data) {
+                if(data.detail =="") {
+                    $("#inputdetail").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            function examname(data) {
+                if(data.receiverName =="") {
+                    $("#inputname").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            function examarea(data) {
+                if(data.area.areaName =="") {
+                    $("#inputarea").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            if(examarea(data)&examdetail(data)&examname(data)&examphone(data))
+            {
+                Post("/User/PostPackage/addAddress",data,postSuccess);
+            }
         });
 
     </script>

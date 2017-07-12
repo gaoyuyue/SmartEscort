@@ -29,20 +29,20 @@
 </div>
 
 <div class="weui-cells">
-    <div class="weui-cell">
+    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputreceiver" onclick="checkreceiver()">
         <div class="weui-cell__bd">
-            <input class="weui-input" id="name" type="text" placeholder="收货人姓名">
+            <input class="weui-input" id="name" type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" placeholder="收货人姓名">
         </div>
     </div>
-    <div class="weui-cell">
+    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputphon" onclick="checkphon()">
         <div class="weui-cell__bd">
-            <input class="weui-input" id="phone" type="number" placeholder="手机号码">
+            <input class="weui-input" id="phone" type="text" maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " placeholder="手机号码">
         </div>
     </div>
 </div>
 
 <div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
+    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputschoolarea" onclick="checkschoolarea()">
         <div class="weui-cell__hd"><label for="area" class="weui-label">学校/区域</label></div>
         <div class="weui-cell__bd">
             <input class="weui-input" id="area" type="text">
@@ -51,7 +51,7 @@
 </div>
 
 <div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
+    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputdetai" onclick="checkdetai()">
         <div class="weui-cell__bd">
             <textarea class="weui-textarea" id="detail" placeholder="详细地址" rows="4"></textarea>
         </div>
@@ -91,7 +91,18 @@
     var success = function () {
         window.location.href = "/User/ManageAddress/";
     };
-
+    function checkreceiver() {
+        $("#inputreceiver").css("borderColor","white");
+    }
+    function checkphon() {
+        $("#inputphon").css("borderColor","white");
+    }
+    function checkschoolarea() {
+        $("#inputschoolarea").css("borderColor","white");
+    }
+    function checkdetai() {
+        $("#inputdetai").css("borderColor","white");
+    }
     $("#saveButton").click(function () {
         const data = {
             id:addressId,
@@ -102,7 +113,37 @@
                 areaName:$("#area").val()
             }
         };
-        Put("/User/ManageAddress/edit",data,success);
+        function examreceiver(data) {
+            if(data.receiverName =="") {
+                $("#inputreceiver").css({"borderColor": "red"});
+                return false;
+            }
+            else return true;
+        }
+        function examphonenumber(data) {
+            if(data.phoneNumber =="") {
+                $("#inputphon").css({"borderColor": "red"});
+                return false;
+            }
+            else return true;
+        }
+        function examdetai(data) {
+            if(data.detail =="") {
+                $("#inputdetai").css({"borderColor": "red"});
+                return false;
+            }
+            else return true;
+        }
+        function examschoolarea(data) {
+            if(data.area.areaName =="") {
+                $("#inputschoolarea").css({"borderColor": "red"});
+                return false;
+            }
+            else return true;
+        }
+        if(examreceiver(data)&examschoolarea(data)&examdetai(data)&examphonenumber(data)) {
+            Put("/User/ManageAddress/edit", data, success);
+        }
     });
 </script>
 

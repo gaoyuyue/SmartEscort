@@ -9,51 +9,49 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
 <link href="/assets/css/jquery-weui.min.css" rel="stylesheet" type="text/css">
-<div id="addressTable" style="width: 100%;background-color: #ffffff">
+
+<div id="addressTable" style="width: 100%;background-color: #ffffff;clear:both;border: 1.5px solid white">
 
 </div>
 
 <%--<HR style="width: 100%" color=#E57E2A SIZE=5>--%>
-
 <div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
+    <div class="weui-cell" id="inputsize" style="clear:both;border: 1.5px solid white" onclick="removesize()">
         <div class="weui-cell__hd"><label class="weui-label">包裹大小</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="packageSize" placeholder="请选择包裹大小" type="text" value="">
+            <input class="weui-input" id="packageSize" placeholder="请选择包裹大小(必填)" type="text" value="">
         </div>
     </div>
-    <div class="weui-cell">
+    <div class="weui-cell" id="inputtype" style="clear:both;border: 1.5px solid white" onclick="removetype()">
         <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="packageType" placeholder="请选择快递类型" type="text" value="">
+            <input class="weui-input" id="packageType" placeholder="请选择快递类型(必填)" type="text" value="">
         </div>
     </div>
 </div>
-
 <div class="weui-cells">
-    <div class="weui-cell">
+    <div class="weui-cell" id="inputPrice" style="clear:both;border: 1.5px solid white" onclick="removestyle()">
         <div class="weui-cell__bd">
-            <input id="price" class="weui-input" type="text" placeholder="请输入价格（元）">
+            <input id="price" class="weui-input" type="number"  placeholder="请输入价格（元）(必填)" >
         </div>
     </div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <input id="note" class="weui-input" type="text" placeholder="请输入备注信息">
+            <input id="note" class="weui-input" type="text" maxlength="100" required placeholder="请输入备注信息(选填)">
         </div>
     </div>
 </div>
-
 <div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
+    <div class="weui-cell" id="inputMessage" style="clear:both;border: 1.5px solid white" onclick="removestyle2()">
         <div class="weui-cell__bd">
-            <textarea class="weui-textarea" id="message" placeholder="短信内容" rows="4"></textarea>
+            <textarea class="weui-textarea" id="message" maxlength="120" placeholder="短信内容(必填)" rows="4"></textarea>
         </div>
     </div>
 </div>
-
 <div class="weui-btn-area weui-cells_form">
     <a class="weui-btn weui-btn_warn" href="javascript:postPackage()" id="showTooltips">发布</a>
 </div>
+
 
 <script src="/assets/js/jquery-weui.min.js"></script>
 <script src="/assets/js/fastclick.js"></script>
@@ -65,7 +63,18 @@
         Get("/User/PostPackage/standardList",getStandard);
         Get("/User/PostPackage/courierList",getCourier);
     });
-
+    function removestyle() {
+        $("#inputPrice").css({"borderColor":"white"});
+    }
+    function removestyle2() {
+        $("#inputMessage").css({"borderColor":"white"});
+    }
+    function removesize() {
+        $("#inputsize").css({"borderColor":"white"});
+    }
+    function removetype() {
+        $("#inputtype").css({"borderColor":"white"});
+    }
     function postPackage() {
         var data = {
             addressDetail:$("#cacheLink").attr("detail"),
@@ -84,27 +93,61 @@
             note:$("#note").val(),
             message:$("#message").val()
         };
-        $.ajax({
-            url:"/User/PostPackage/",
-            type:"POST",
-            contentType: "application/json",
-            data: JSON.stringify(data),
-            success:function () {
-                window.location.href = "/User/PostPackage/success";
-            },
-            error:function (XMLHttpRequest) {
-                if(XMLHttpRequest.status === 404){
-                    alert("未认证用户不能使用该功能！");
-                }else {
-                    window.location.href = "/User/PostPackage/failure";
-                }
+//        alert(data.area.id);
+//       function chadress(data) {
+//           if(data.addressDetail ==""){
+//               $("#addresstable").css({"borderColor":"red"});
+//               return false;
+//           }
+//           else return true;
+//       }
+        function chprice(data) {
+            if(data.price ==""){
+                $("#inputPrice").css({"borderColor":"red"});
+                return false;
             }
-        });
+            else return true;
+        }
+        function chmessage(data) {
+            if(data.message==""){
+                $("#inputMessage").css({"borderColor":"red"});
+                return false;
+            }
+            else return true;
+        }
+        function chtype(data) {
+            if(data.courierCompany.companyName==""){
+                $("#inputtype").css({"borderColor":"red"});
+                return false;
+            }
+            else return true;
+        }
+        function chsize(data) {
+            if(data.standard.description==""){
+                $("#inputsize").css({"borderColor":"red"});
+                return false;
+            }
+            else return true;
+        }
+        if(chprice(data)&chmessage(data)&chtype(data)&chsize(data)){
+            $.ajax({
+                url: "/User/PostPackage/",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function () {
+                    window.location.href = "/User/PostPackage/success";
+                },
+                error: function (XMLHttpRequest) {
+                    if (XMLHttpRequest.status === 404) {
+                        alert("未认证用户不能使用该功能！");
+                    } else {
+                        window.location.href = "/User/PostPackage/failure";
+                    }
+                }
+            });
+        }
     }
-
-    $(function() {
-        FastClick.attach(document.body);
-    });
 
     const getStandard = function (data) {
         $("#packageSize").select({
@@ -173,6 +216,9 @@
                 </a>`
             );
         }
+
+
+
         $("#cacheLink").click(function () {
             var data = {
                 packageSize:$("#packageSize").val(),
@@ -181,10 +227,13 @@
                 note:$("#note").val(),
                 message:$("#message").val()
             };
+
             Post("/User/PostPackage/cache",data,function () {
+
             });
         });
     };
+
 
 </script>
 <%@include file="/user_footer.jsp"%>
