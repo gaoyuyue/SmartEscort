@@ -5,7 +5,6 @@
   Time: 19:49
   To change this template use File | Settings | File Templates.
 --%>
-<scrip></scrip>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -58,7 +57,6 @@
                 <div class="modal-footer">
                     <button class="btn btn-success Author" name="">通过</button>
                     <button class="btn btn-warning NoAuthor" name="">不通过</button>
-                    <%--<button id="cancel" type="button" class="btn btn-white" data-dismiss="modal">关闭</button>--%>
                 </div>
             </small>
         </div>
@@ -101,23 +99,6 @@
         function checkMe() {
             var pre = document.getElementById("preview");
 
-            //通过认证
-            $(".Author").click(function () {
-                var userName = this["name"];
-                AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true");
-                loadThis();
-                $(".sr-only").click();
-            });
-
-            //不通过
-            $(".NoAuthor").click(function () {
-                var userName = this["name"];
-                AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "false");
-                loadThis();
-                $(".sr-only").click();
-            });
-
-
             //查看图片
             $(".stuCard").click(function () {
                 pre.src="";
@@ -144,4 +125,19 @@
             }
         );
 
-    </script>
+        //通过认证
+        $(".Author").click(function () {
+            var userName = this["name"];
+            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true");
+            loadThis();
+            $(".sr-only").click();
+        });
+
+        //不通过
+        $(".NoAuthor").click(function () {
+            var userName = this["name"];
+            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "false");
+            loadThis();
+            $(".sr-only").click();
+        });
+</script>
