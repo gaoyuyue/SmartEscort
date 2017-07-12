@@ -1,8 +1,7 @@
 package cn.attackme.escort.Service;
 
-import cn.attackme.escort.Model.OrderResult;
+import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
-import cn.attackme.escort.Model.PackageStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,8 @@ import java.util.List;
 public class TaskService {
     @Autowired
     private PackageService packageService;
+    @Autowired
+    private CreditRecordService creditRecordService;
 
     @Scheduled(cron = "0 */2 * * * ? ")
     public void timeoutDetection(){
@@ -44,6 +45,16 @@ public class TaskService {
                 p.setEndTime(date);
                 p.setOrderResult(OrderResult.待送达超时);
                 p.setPackageStatus(PackageStatus.已撤销);
+                User agency = p.getAgency();
+                int score = agency.getIntegration() - 20;
+                if (score<=0){
+                    agency.setDeleted(true);
+                }else {
+                    agency.setIntegration(score);
+                }
+                p.setAgency(agency);
+                CreditRecord creditRecord = new CreditRecord(null, agency, -20, CreditRecordDescription.送达超时);
+                creditRecordService.save(creditRecord);
             }
             if(p.getPackageStatus().equals(PackageStatus.待签收) && deliveryTime.after(p.getDeliveryTime())){
                 p.setEndTime(date);

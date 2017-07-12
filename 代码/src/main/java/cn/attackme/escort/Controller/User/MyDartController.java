@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -66,7 +67,7 @@ public class MyDartController {
     }
 
     /**
-     * 确认收货
+     * 确认送达
      * @param publishDartId
      * @return
      */
@@ -77,6 +78,7 @@ public class MyDartController {
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待送达){
             aPackage.setPackageStatus(PackageStatus.待签收);
+            aPackage.setDeliveryTime(new Date());
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);

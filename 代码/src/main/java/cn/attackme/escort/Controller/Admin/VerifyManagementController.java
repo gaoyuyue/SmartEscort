@@ -4,9 +4,8 @@ package cn.attackme.escort.Controller.Admin;
 import cn.attackme.Wechat.Message.TemplateMessage;
 import cn.attackme.Wechat.Util.MessageUtil;
 import cn.attackme.Wechat.Util.WechatProperties;
-import cn.attackme.escort.Model.Role;
-import cn.attackme.escort.Model.School;
-import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Model.*;
+import cn.attackme.escort.Service.CreditRecordService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Utils.ImageUtils;
@@ -31,6 +30,8 @@ public class VerifyManagementController {
     private UserInfoService userInfoService;
     @Autowired
     private SchoolService schoolService;
+    @Autowired
+    private CreditRecordService creditRecordService;
 
     //页面
     @RequiresRoles("admin")
@@ -59,7 +60,10 @@ public class VerifyManagementController {
         if(user!=null){
             if (isPass) {
                 user.setAuthed(true);
+                user.setIntegration(user.getIntegration()+50);
                 userInfoService.save(user);
+                CreditRecord creditRecord = new CreditRecord(null, user, 50, CreditRecordDescription.完成认证);
+                creditRecordService.save(creditRecord);
                 //发送消息给用户
                 String foreUrl = WechatProperties.authorizeUrl+"?appid="+
                         WechatProperties.appid+

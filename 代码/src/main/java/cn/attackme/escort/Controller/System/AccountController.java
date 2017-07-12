@@ -1,9 +1,8 @@
 package cn.attackme.escort.Controller.System;
 
 
-import cn.attackme.escort.Model.Role;
-import cn.attackme.escort.Model.School;
-import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Model.*;
+import cn.attackme.escort.Service.CreditRecordService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Service.UserService;
@@ -45,6 +44,9 @@ public class AccountController {
 
     @Autowired
     private SchoolService schoolService;
+
+    @Autowired
+    private CreditRecordService creditRecordService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -109,6 +111,7 @@ public class AccountController {
             System.out.println(userInfo);
             User user = new User();
             School school = schoolService.getByName(schoolName);
+            user.setIntegration(50);
             user.setHeadImageUrl(userInfo.getString("headimgurl"));
             user.setNickName(userInfo.getString("nickname"));
             user.setSex(userInfo.getInt("sex") == 1);
@@ -121,6 +124,8 @@ public class AccountController {
             user.setStudentId(studentId);
             user.setOpenid(openid);
             userInfoService.save(user);
+            CreditRecord creditRecord = new CreditRecord(null, user, 50, CreditRecordDescription.完善信息);
+            creditRecordService.save(creditRecord);
             return "redirect:/Account/OAuth2";
         }
         return "redirect:/Account/Register";

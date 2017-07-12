@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -65,13 +66,16 @@ public class MyPublishController {
     @PutMapping("/cancel/publishDartId/{publishDartId}")
     public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
+        Date date = new Date();
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);
             aPackage.setOrderResult(OrderResult.发布人撤销任务);
-        }else if(aPackage.getPackageStatus() == PackageStatus.待签收){
+        }
+        if(aPackage.getPackageStatus() == PackageStatus.待签收){
             aPackage.setPackageStatus(PackageStatus.已完成);
             aPackage.setOrderResult(OrderResult.交易成功);
         }
+        aPackage.setEndTime(date);
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);
     }
