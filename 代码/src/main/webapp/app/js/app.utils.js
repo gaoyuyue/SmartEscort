@@ -407,7 +407,6 @@ var bindRedirect = function bindRedirect() {
         Pace.restart();
     });
     $(".redirect").click(function () {
-        console.log(this);
         var attribute = this.getAttribute("url");
         AsynchronousLoading(attribute);
     });
