@@ -161,7 +161,7 @@
             }
             deleteMe();
         };
-        Paging("/AddressManagement/getAddressList", "AddressTable", uploadTable, pageNumber, 5);
+        Paging("/AddressManagement/getAddressList", "AddressTable", uploadTable, pageNumber, 10);
 
     };
 
