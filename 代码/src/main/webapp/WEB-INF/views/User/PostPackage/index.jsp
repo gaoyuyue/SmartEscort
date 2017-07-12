@@ -219,8 +219,6 @@
             );
         }
 
-
-
         $("#cacheLink").click(function () {
             var data = {
                 packageSize:$("#packageSize").val(),

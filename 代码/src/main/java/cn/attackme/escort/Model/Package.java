@@ -84,15 +84,14 @@ public class Package implements Serializable {
     private Area area;
 
     //详细地址
-    @Setter
-    @Getter
     private String addressDetail;
 
-    @Setter
-    @Getter
     private String receiverPhoneNumber;
 
-    @Setter
-    @Getter
     private String receiverName;
+
+    //委托人是否评价
+    private boolean isDelegationEvaluated;
+    //代理人是否评价
+    private boolean isAgencyEvaluate;
 }

@@ -5,12 +5,14 @@ import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -48,11 +50,10 @@ public class WaitingEvaluationController {
     public List<Package> packageList(){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
-        List<Package> receivelist = user.getReceiveList();
-        List<Package> publishList = user.getPublishList();
+        List<Package> receivelist = user.getReceiveList().stream().filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isAgencyEvaluate())).collect(toList());
+        List<Package> publishList = user.getPublishList().stream().filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isDelegationEvaluated())).collect(toList());
         publishList.addAll(receivelist);
-        List<Package> publishList1 = publishList.stream().filter(p -> (p.getPackageStatus() == PackageStatus.已完成)).collect(toList());
-        return publishList1;
+        return publishList;
     }
 
     /**
@@ -66,18 +67,4 @@ public class WaitingEvaluationController {
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }
-
-    /**
-     * 删除订单
-     * @param publishDartId
-     * @return
-     */
-    @RequiresRoles("user")
-    @ResponseBody
-    @DeleteMapping("/delete/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> deleteDart(@PathVariable String publishDartId){
-        packageService.deleteById(publishDartId);
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
-
 }
