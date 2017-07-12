@@ -7,6 +7,8 @@ import cn.attackme.escort.Utils.PageResults;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by hujian on 2017/3/25.
  */
@@ -122,5 +124,18 @@ public class PackageService extends BaseService<Package> {
         query.from(Package.class).
                 whereEqual("agency",user);
         return this.getListPageByAreaAndStatusAndType(area,packageStatus,courierCompany,pageNumber,pageSize);
+    }
+
+    /**
+     * 根据状态列表获取包裹列表
+     * @param packageStatusList
+     * @return
+     */
+    public List<Package> getListByStatusList(@NotNull List<Object> packageStatusList){
+        Query query = new Query(entityManager);
+        return query.from(Package.class).
+                whereValueIn("packageStatus", packageStatusList).
+                createTypedQuery().
+                getResultList();
     }
 }

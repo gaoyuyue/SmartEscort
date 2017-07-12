@@ -60,6 +60,9 @@ public class Package implements Serializable {
     //任务领取时间
     private Date receiveTime;
 
+    //代理人送达时间
+    private Date deliveryTime;
+
     //委托人签收时间
     private Date endTime;
 
