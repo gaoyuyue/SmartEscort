@@ -36,7 +36,7 @@
                         </span>
                     </div>
                 </a>
-                <a class="open-popup" data-target="#updateName">
+                <a class="open-popup" data-target="#updateName" id="unUpdate">
                     <div class="weui-cell" style="border-bottom: 1px solid #ebebeb">
                         <div class="weui-cell__bd">
                             <p style="font-family: SimSun">姓名</p>
@@ -185,6 +185,7 @@
             if(data.authed == true){
                 $("#isVerify").text("已认证");
                 $("#isdisabled").removeAttr('href');
+                $("#unUpdate").removeAttr('data-target');
             } else {
                 $("#isVerify").text("未认证");
             }
