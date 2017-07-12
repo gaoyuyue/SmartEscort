@@ -76,7 +76,7 @@
 
         <div id="IntegrationRules" class='weui-popup__container'>
             <div class="weui-popup__overlay"></div>
-            <div class="weui-popup__modal">
+            <div class="weui-popup__modal"  style="background-color: #EEEEEE">
                 <div class="top_other">
                     <span class="list_other"><a class="close-popup refresh_page"><img src="/assets/img/goback.png" align="top"></a></span>
                     <span ><a class="title_other">我的信用分</a></span>

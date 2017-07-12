@@ -37,9 +37,9 @@ public class AddressManagementController {
     @RequiresRoles("admin")
     @ResponseBody
     @GetMapping("/getAddressList/pageNumber/{pageNumber}/pageSize/{pageSize}")
-    public PageResults<School> getAddressList(@PathVariable int pageNumber,
+    public PageResults<Area> getAddressList(@PathVariable int pageNumber,
                                               @PathVariable int pageSize) {
-        return schoolService.getListByPage(pageNumber, pageSize);
+        return areaService.getListByPageOrderBySchool(pageNumber,pageSize);
     }
 
     //删除Area
