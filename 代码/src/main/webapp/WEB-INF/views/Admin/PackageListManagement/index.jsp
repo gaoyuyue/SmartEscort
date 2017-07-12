@@ -43,14 +43,7 @@
                         <table class="table table-striped" >
                             <thead id="tableTop">
                             <tr>
-                                <th>发布人</th>
-                                <th>接受人</th>
-                                <th>快递类型</th>
-                                <th>快递大小</th>
-                                <th>发布时间</th>
-                                <th>领取时间</th>
-                                <th>送达时间</th>
-                                <th>结束时间</th>
+
                             </tr>
                             </thead>
                             <tbody id="packageList">
@@ -139,7 +132,7 @@
                                 '<tr>' +
                                 '<td >' + result.delegation.name +
                                 '</td>' +
-                                '<td>' + theName+
+                                '<td>' + result.agency.name+
                                 '</td>' +
                                 '<td>' + result.courierCompany.companyName +
                                 '</td>'+
@@ -172,7 +165,7 @@
                                 '<tr>' +
                                 '<td >' + result.delegation.name +
                                 '</td>' +
-                                '<td>' + theName+
+                                '<td>' + result.agency.name+
                                 '</td>' +
                                 '<td>' + result.courierCompany.companyName +
                                 '</td>'+
@@ -205,12 +198,11 @@
 `);
                         for (var i = 0; i < data["totalCount"]; i++) {
                             var result = resultList[i];
-                            var theName=result.agency==null?"":result.agency.name;
                             $("#packageList").append(
                                 '<tr>' +
                                 '<td >' + result.delegation.name +
                                 '</td>' +
-                                '<td>' + theName+
+                                '<td>' + result.agency.name +
                                 '</td>' +
                                 '<td>' + result.courierCompany.companyName +
                                 '</td>'+
