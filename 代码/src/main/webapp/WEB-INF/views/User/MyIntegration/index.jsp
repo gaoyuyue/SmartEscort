@@ -16,6 +16,7 @@
     }
     .bold{
         font-weight: bold;
+        font-size: 15px;
     }
     .red{
         color: red;
@@ -82,25 +83,25 @@
                     <span ><a class="title_other">我的信用分</a></span>
                     <span><a class="logo_other show-warning update" href="/"><img src="/assets/img/home.png" align="top"></a></span>
                 </div>
-                <article class="weui-article" style="text-indent: 2em">
-                    <h1 style="color: black;font-weight: bolder">信用分规则:</h1>
+                <article class="weui-article" style="padding: 0px 0px">
+                    <h1 style="color: black;font-weight: bolder;margin-bottom: 0em">信用分规则:</h1>
                     <section>
-                        <section>
-                            <p>
+                        <section style="text-indent: 2em;">
+                            <p style="margin: 0 0 0cm">
                                 新用户起始信用分为100分，信用分数最低为0分。分数越高，代表您的平台使用越规范，分数越低，表示您存在越多的不恰当使用行为。
                             </p>
-                            <p>
+                            <p style="margin: 0 0 0cm">
                                 当您的信用分数为零时，为了保证大家能拥有良好的使用体验，很抱歉，您将无法使用本平台。
                             </p>
-                            <p>
+                            <p style="margin: 0 0 0cm">
                                 若信用分变化存在错误，请拨打110-110进行申诉。
                             </p>
                         </section>
-
                     </section>
-                    <section style="text-align: center">
-                        <h1 style="color: black;font-weight: bolder;text-align: left">信用分变化规则：</h1>
-                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center">
+
+                    <section style="text-align: left;padding: 0px 0px">
+                        <h1 style="color: black;font-weight: bolder;text-align: left;margin-bottom: 0em">信用分变化规则：</h1>
+                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center;">
                             <thead>双方互评</thead>
                             <tbody>
                             <tr>
@@ -129,8 +130,6 @@
                             </tr>
                             </tbody>
                         </table>
-                        <br>
-                        <br>
                         <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center">
                             <thead>完成订单</thead>
                             <tbody>
@@ -139,23 +138,32 @@
                                 <td class="bold">信用分变化</td>
                             </tr>
                             <tr>
-                                <td>交易成功</td>
-                                <td class="green">+2</td>
+                                <td>完善信息</td>
+                                <td class="green">+50</td>
                             </tr>
                             <tr>
-                                <td>发布人撤销</td>
-                                <td class="green">-2</td>
+                                <td>完成认证</td>
+                                <td class="green">+50</td>
                             </tr>
                             <tr>
-                                <td>待领取超时</td>
-                                <td>+0</td>
+                            <tr>
+                                <td>完成发布</td>
+                                <td class="green">+1</td>
                             </tr>
                             <tr>
-                                <td>待签收超时</td>
+                                <td>完成接单</td>
+                                <td class="green">+1</td>
+                            </tr>
+                            <tr>
+                                <td>确认签收</td>
+                                <td class="green">+1</td>
+                            </tr>
+                            <tr>
+                                <td>撤销订单</td>
                                 <td class="red">-1</td>
                             </tr>
                             <tr>
-                                <td>待送达超时</td>
+                                <td>送达超时</td>
                                 <td class="red">-20</td>
                             </tr>
                             </tbody>
