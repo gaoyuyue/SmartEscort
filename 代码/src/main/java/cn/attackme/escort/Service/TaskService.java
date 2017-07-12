@@ -26,15 +26,15 @@ public class TaskService {
         Date date = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.HOUR, -24);
+        calendar.add(Calendar.HOUR, -2);
         Date publishTime = calendar.getTime();
         calendar.setTime(date);
-        calendar.add(Calendar.HOUR, -12);
+        calendar.add(Calendar.HOUR, -1);
         Date receiveTime = calendar.getTime();
         calendar.setTime(date);
-        calendar.add(Calendar.HOUR, -12);
+        calendar.add(Calendar.HOUR, -1);
         Date deliveryTime = calendar.getTime();
-        for (Package p : packageList){
+        packageList.stream().forEach(p->{
             if(p.getPackageStatus().equals(PackageStatus.待领取) && publishTime.after(p.getPublishTime())){
                 p.setEndTime(date);
                 p.setOrderResult(OrderResult.待领取超时);
@@ -50,6 +50,7 @@ public class TaskService {
                 p.setOrderResult(OrderResult.待签收超时);
                 p.setPackageStatus(PackageStatus.已完成);
             }
-        }
+        });
+        packageService.saveOrUpdateAll(packageList);
     }
 }

@@ -26,7 +26,7 @@
     $("#mainDiv").pullToRefresh().on("pull-to-refresh", function() {
         pageNumber = 1;
         $("#packageTable").empty();
-        Loadings("/User/GetPackage/allList",updateTable, 4,function () {
+        Loadings("/User/GetPackage/allList",updateTable, 10,function () {
             $("#mainDiv").pullToRefreshDone();
         });
         $("#loadingText").html(`
@@ -41,7 +41,7 @@
     $("#mainDiv").infinite().on("infinite", function() {
         if(loading) return;
         loading = true;
-        Loadings("/User/GetPackage/allList", updateTable, 4,function () {
+        Loadings("/User/GetPackage/allList", updateTable, 10,function () {
             loading = false;
         });
     });
@@ -114,7 +114,7 @@
 
     $(document).ready(function () {
         $("#getPackage").addClass("weui-bar__item_on");
-        Loadings("/User/GetPackage/allList", updateTable, 4,function () {
+        Loadings("/User/GetPackage/allList", updateTable, 10,function () {
         });
     });
 
