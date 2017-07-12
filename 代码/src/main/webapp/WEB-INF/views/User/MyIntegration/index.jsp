@@ -49,25 +49,12 @@
                     </div>
 
                     <div class="weui-cells">
-                        <div class="weui-cells__title"><strong style="font-size: 16px;color: black">信用分变更记录</strong></div>
-                        <div class="weui-cell weui-cell_access">
-                            <div class="weui-cell__bd">订单完成</div>
-                            <div style="font-size: 10px">
-                                <span style="vertical-align:middle; font-size: 17px;">信用分+1</span>
-                            </div>
+                        <div class="weui-cells__title"><strong style="font-size: 15px;color: black">信用分变更记录</strong></div>
+                        <div id="creditDivisionRecord">
+
                         </div>
-                        <div class="weui-cell weui-cell_access">
-                            <div class="weui-cell__bd">订单完成</div>
-                            <div style="font-size: 10px">
-                                <span style="vertical-align:middle; font-size: 17px;">信用分-1</span>
-                            </div>
-                        </div>
-                        <div class="weui-cell weui-cell_access">
-                            <div class="weui-cell__bd">订单完成</div>
-                            <div style="font-size: 10px">
-                                <span style="vertical-align:middle; font-size: 17px;">信用分+1</span>
-                            </div>
-                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -178,14 +165,39 @@
 
 <script>
     var success = function success(data) {
-        $("#integration").text("");
+      $("#creditDivisionRecord").empty();
+      var information = function information(array) {
+          data.forEach(function (e) {
+              if(array.userName == e.user.userName && e.score > 0){
+                  $("#creditDivisionRecord").prepend(`
+                          <div class="weui-cell weui-cell_access">
+                                <div class="weui-cell__bd">`+e.description+`</div>
+                                <div style="font-size: 10px">
+                                    <span style="vertical-align:middle; font-size: 17px;">信用分</span>
+                                    <span style="vertical-align:middle; font-size: 17px;">+</span>
+                                    <span style="vertical-align:middle; font-size: 17px;">`+e.score+`</span>
+                                </div>
+                          </div>
+        `)
+              } else if(array.userName == e.user.userName && e.score <= 0){
+                  $("#creditDivisionRecord").prepend(`
+                          <div class="weui-cell weui-cell_access">
+                                <div class="weui-cell__bd">`+e.description+`</div>
+                                <div style="font-size: 10px">
+                                    <span style="vertical-align:middle; font-size: 17px;">信用分</span>
+                                    <span style="vertical-align:middle; font-size: 17px;">`+e.score+`</span>
+                                </div>
+                          </div>
+        `)
+              }
+          });
+      };
+        Get("/User/MyIntegration/information",information);
 
-        $("#integration").text(data.integration);
     };
-    $(document).ready(function () {
-        Get("/User/MyIntegration/information",success);
-    });
+    Get("/User/MyIntegration/creditList",success);
 </script>
+
 <script src="/assets/js/fastclick.js"></script>
 <script>
     $(function() {
