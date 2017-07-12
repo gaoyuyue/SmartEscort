@@ -7,6 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/user_header.jsp"%>
+<style>
+    table td{
+        border:1px solid #bfbfbf
+    }
+    td{
+        height: 30px;
+    }
+    .bold{
+        font-weight: bold;
+    }
+</style>
 <div id="frame">
     <div id="navbarSuspension">
         <div id="top">
@@ -65,28 +76,85 @@
                     <span ><a class="title_other">我的信用分</a></span>
                     <span><a class="logo_other show-warning update" href="/"><img src="/assets/img/home.png" align="top"></a></span>
                 </div>
-                <article class="weui-article">
-                    <h1 style="color: black">信用分规则</h1>
+                <article class="weui-article" style="text-indent: 2em">
+                    <h1 style="color: black;font-weight: bolder">信用分规则:</h1>
                     <section>
-                        <h2 class="title">章标题</h2>
+                        <%--<h2 class="title">章标题</h2>--%>
                         <section>
-                            <h3>1.1 节标题</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.
+                                新用户起始信用分为100分，信用分数最低为0分。分数越高，代表您的平台使用越规范，分数越低，表示您存在越多的不恰当使用行为。
+                            </p>
+                            <p>
+                                当您的信用分数为零时，为了保证大家能拥有良好的使用体验，很抱歉，您将无法使用本平台。
+                            </p>
+                            <p>
+                                若信用分变化存在错误，请拨打110-110进行申诉。
                             </p>
                         </section>
-                        <section>
-                            <h3>1.2 节标题</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                        </section>
+
+                    </section>
+                    <section style="text-align: center">
+                        <h1 style="color: black;font-weight: bolder;text-align: left">信用分变化规则：</h1>
+                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center">
+                            <thead>双方互评</thead>
+                            <tbody>
+                            <tr>
+                                <td class="bold">评价分数</td>
+                                <td class="bold">信用分变化</td>
+                            </tr>
+                            <tr>
+                                <td>90-100</td>
+                                <td>+5</td>
+                            </tr>
+                            <tr>
+                                <td>80-90</td>
+                                <td>+3</td>
+                            </tr>
+                            <tr>
+                                <td>60-80</td>
+                                <td>+0</td>
+                            </tr>
+                            <tr>
+                                <td>40-60</td>
+                                <td>-3</td>
+                            </tr>
+                            <tr>
+                                <td>40以下</td>
+                                <td>-5</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center">
+                            <thead>完成订单</thead>
+                            <tbody>
+                            <tr>
+                                <td class="bold">订单结果</td>
+                                <td class="bold">信用分变化</td>
+                            </tr>
+                            <tr>
+                                <td>交易成功</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <td>发布人撤销</td>
+                                <td>-2</td>
+                            </tr>
+                            <tr>
+                                <td>待领取超时</td>
+                                <td>+0</td>
+                            </tr>
+                            <tr>
+                                <td>待签收超时</td>
+                                <td>-1</td>
+                            </tr>
+                            <tr>
+                                <td>待送达超时</td>
+                                <td>-20</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </section>
                 </article>
             </div>
