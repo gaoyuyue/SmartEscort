@@ -167,6 +167,8 @@
     var success = function success(data) {
       $("#creditDivisionRecord").empty();
       var information = function information(array) {
+          $("#integration").text("");
+          $("#integration").text(array.integration);
           data.forEach(function (e) {
               if(array.userName == e.user.userName && e.score > 0){
                   $("#creditDivisionRecord").prepend(`

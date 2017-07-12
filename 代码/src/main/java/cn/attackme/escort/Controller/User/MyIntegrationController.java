@@ -1,7 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
 import cn.attackme.escort.Model.CreditRecord;
-import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.CreditRecordService;
 import cn.attackme.escort.Service.UserInfoService;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * Created by IntelliJ IDEA.
