@@ -97,6 +97,8 @@
                     <th>快递类型</th>
                     <th>快递大小</th>
                     <th>发布时间</th>
+                    <th>结束时间</th>
+                    <th>订单结果</th>
                 <tr>
 `);
                         for (var i = 0; i < data["totalCount"]; i++) {
@@ -110,6 +112,10 @@
                                 '<td>' + result.standard.description +
                                 '</td>'+
                                 '<td>' + getLocalTime(result.publishTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.endTime) +
+                                '</td>'+
+                                '<td>' + result.orderResult +
                                 '</tr>'
                             )
                         }
