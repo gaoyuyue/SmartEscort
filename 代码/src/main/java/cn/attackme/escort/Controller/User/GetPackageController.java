@@ -17,11 +17,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
 
@@ -88,7 +91,16 @@ public class GetPackageController {
         PageResults<Package> results = packageService.getPackageByStatusAndSchool(PackageStatus.待领取, user.getSchool(), pageNumber, pageSize);
 //        List<Package> packages = results.getResults().stream().filter(p -> !p.getDelegation().equals(user)).collect(toList());
         List<Package> packages = results.getResults();
-        packages.forEach(p->p.setMessage(null));
+        packages.forEach(p->{
+            p.setMessage(null);
+            User delegation = p.getDelegation();
+            try {
+                delegation.setNickName(URLDecoder.decode(delegation.getNickName(), "utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                LogToDB(e);
+            }
+            p.setDelegation(delegation);
+        });
         results.setResults(packages);
         return new ResponseEntity<PageResults<Package>>(results,HttpStatus.OK);
     }

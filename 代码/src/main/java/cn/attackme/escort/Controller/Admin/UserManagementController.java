@@ -14,7 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
+
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 
 /**
  * Created by hujian on 2017/3/21.
@@ -50,7 +54,17 @@ public class UserManagementController {
                                              @PathVariable int pageSize,
                                              @PathVariable int schoolId){
         School school = schoolService.getById(schoolId);
-        return userInfoService.getListByPageAndSchool(Role.user,school,pageNumber,pageSize);
+        PageResults<User> pageResults = userInfoService.getListByPageAndSchool(Role.user, school, pageNumber, pageSize);
+        List<User> results = pageResults.getResults();
+        results.stream().forEach(u ->{
+            try {
+                u.setNickName(URLDecoder.decode(u.getNickName(), "utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                LogToDB(e);
+            }
+        });
+        pageResults.setResults(results);
+        return pageResults;
     }
 
     //获取全部学校

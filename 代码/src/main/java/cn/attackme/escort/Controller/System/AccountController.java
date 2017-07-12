@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 import static cn.attackme.Wechat.Util.OAuth2Util.getUserInfoByOpenId;
@@ -105,7 +106,6 @@ public class AccountController {
                              HttpSession httpSession) throws Exception {
         String openid = (String) httpSession.getAttribute("openid");
 
-
         if (null != openid) {
             JSONObject userInfo = getUserInfoByOpenId(openid);
             System.out.println(userInfo);
@@ -113,7 +113,7 @@ public class AccountController {
             School school = schoolService.getByName(schoolName);
             user.setIntegration(50);
             user.setHeadImageUrl(userInfo.getString("headimgurl"));
-            user.setNickName(userInfo.getString("nickname"));
+            user.setNickName(URLEncoder.encode(userInfo.getString("nickname"), "utf-8"));
             user.setSex(userInfo.getInt("sex") == 1);
             user.setSchool(school);
             user.setPhoneNumber(phoneNumber);

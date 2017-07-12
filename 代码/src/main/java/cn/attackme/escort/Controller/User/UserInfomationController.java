@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
 
 /**
@@ -37,9 +40,11 @@ public class UserInfomationController {
      */
     @ResponseBody
     @RequestMapping("/current")
-    public User getInfo(){
+    public User getInfo() throws UnsupportedEncodingException {
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
-        return userInfoService.getById(userName);
+        User user = userInfoService.getById(userName);
+        user.setNickName(URLDecoder.decode(user.getNickName(), "utf-8"));
+        return user;
     }
 
     /**
