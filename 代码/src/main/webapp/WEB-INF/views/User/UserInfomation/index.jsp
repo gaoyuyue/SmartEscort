@@ -56,7 +56,7 @@
                         <div class="weui-cell__bd">
                             <p style="font-family: SimSun">性别</p>
                         </div>
-                        <div class="weui-cell__ft sex">男</div>
+                        <div class="weui-cell__ft sex" id="sex"></div>
                     </div>
             </div>
 
@@ -173,10 +173,16 @@
             $("#userName").empty();
             $("#name").empty();
             $("#phoneNumber").empty();
+            $("#sex").empty();
 
             $("#userName").text(data.nickName);
             $("#name").text(data.name);
             $("#phoneNumber").text(data.phoneNumber);
+            if(data.sex == false){
+                $("#sex").text("女");
+            } else {
+                $("#sex").text("男");
+            }
 
             var updateName = data.name;
             var updatePhoneNumber = data.phoneNumber;
