@@ -92,7 +92,7 @@ public class MyPublishController {
             Map<String,RowMessage> messageMap = new HashMap<>();
             messageMap.put("orderId",new RowMessage(aPackage.getId(),"red"));
             postTemplate(delegation.getOpenid(), "4HOfR0ngnVxL_3FZ3wMdbHY9pR6H5_wgyIPWX8GOiK0", "/User/WaitingEvaluation/", messageMap);
-            postTemplate(delegation.getOpenid(), "4HOfR0ngnVxL_3FZ3wMdbHY9pR6H5_wgyIPWX8GOiK0", "/User/WaitingEvaluation/", messageMap);
+            postTemplate(aPackage.getAgency().getOpenid(), "4HOfR0ngnVxL_3FZ3wMdbHY9pR6H5_wgyIPWX8GOiK0", "/User/WaitingEvaluation/", messageMap);
         }
         aPackage.setEndTime(date);
         packageService.saveOrUpdate(aPackage);
