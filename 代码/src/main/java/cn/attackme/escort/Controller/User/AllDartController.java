@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.OrderResult;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -99,11 +101,15 @@ public class AllDartController {
     public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
+            aPackage.setEndTime(new Date());
             aPackage.setPackageStatus(PackageStatus.已撤销);
         }else if(aPackage.getPackageStatus() == PackageStatus.待送达){
+            aPackage.setDeliveryTime(new Date());
             aPackage.setPackageStatus(PackageStatus.待签收);
         } else if(aPackage.getPackageStatus() == PackageStatus.待签收){
+            aPackage.setEndTime(new Date());
             aPackage.setPackageStatus(PackageStatus.已完成);
+            aPackage.setOrderResult(OrderResult.交易成功);
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);

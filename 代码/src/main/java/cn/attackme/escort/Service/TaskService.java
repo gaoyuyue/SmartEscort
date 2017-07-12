@@ -36,14 +36,17 @@ public class TaskService {
         Date deliveryTime = calendar.getTime();
         for (Package p : packageList){
             if(p.getPackageStatus().equals(PackageStatus.待领取) && publishTime.after(p.getPublishTime())){
+                p.setEndTime(date);
                 p.setOrderResult(OrderResult.待领取超时);
                 p.setPackageStatus(PackageStatus.已撤销);
             }
             if(p.getPackageStatus().equals(PackageStatus.待送达) && receiveTime.after(p.getReceiveTime())){
+                p.setEndTime(date);
                 p.setOrderResult(OrderResult.待送达超时);
                 p.setPackageStatus(PackageStatus.已撤销);
             }
             if(p.getPackageStatus().equals(PackageStatus.待签收) && deliveryTime.after(p.getDeliveryTime())){
+                p.setEndTime(date);
                 p.setOrderResult(OrderResult.待签收超时);
                 p.setPackageStatus(PackageStatus.已完成);
             }
