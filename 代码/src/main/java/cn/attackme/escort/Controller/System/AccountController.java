@@ -148,6 +148,9 @@ public class AccountController {
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassWord());
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
+            if (!user.isAuthed()){
+                return "redirect:/User/StudentVerify/";
+            }
             String state = (String) httpSession.getAttribute("state");
             httpSession.removeAttribute("openid");
             httpSession.removeAttribute("state");
