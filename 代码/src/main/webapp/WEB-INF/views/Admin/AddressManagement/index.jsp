@@ -51,8 +51,6 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title">新建学校名称</h4>
-                <small class="font-bold">这里可以显示副标题
-                </small>
             </div>
             <small class="font-bold">
                 <div class="modal-body" align="center">
@@ -90,8 +88,6 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title">新增学校区域</h4>
-                <small class="font-bold">这里可以显示副标题
-                </small>
             </div>
             <small class="font-bold">
                 <div class="modal-body" align="center">

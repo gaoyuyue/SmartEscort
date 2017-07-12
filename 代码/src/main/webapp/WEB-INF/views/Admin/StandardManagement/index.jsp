@@ -86,8 +86,6 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title">修改快递取件收费标准</h4>
-                <small class="font-bold">这里可以显示副标题。
-                </small>
             </div>
             <small class="font-bold">
                 <div class="modal-body">
