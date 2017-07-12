@@ -25,4 +25,16 @@ public class AreaService extends BaseService<Area>{
                 .getSingleResult();
     }
 
+    /**
+     * 根据学校分类获取区域
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    public PageResults<Area> getListByPageOrderBySchool(@NotNull int pageNumber,@NotNull int pageSize) {
+        Query query = new Query(entityManager);
+        query.from(Area.class)
+                .setOrder("school", "asc");
+        return this.getListByPageAndQuery(pageNumber, pageSize, query);
+    }
 }

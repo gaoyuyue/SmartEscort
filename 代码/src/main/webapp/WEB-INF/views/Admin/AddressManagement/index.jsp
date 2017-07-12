@@ -136,7 +136,6 @@
             var idArr = id.split("/");
             var areaId = idArr[0];
             var schoolId = idArr[1];
-            console.log(idArr);
             AjaxDeleteRequest("/AddressManagement/deleteAreaBySchool/schoolId/" + schoolId + "/areaId/" + areaId);
             loadThis();
         });
@@ -149,20 +148,16 @@
             $("#AddressTable").empty();
             for (var i = 0; i < resultList.length; i++) {
                 var result = resultList[i];
-                var areaList = result.areaList;
-                for (var j = 0; j < areaList.length; j++) {
-                    var area = areaList[j];
-                    $("#AddressTable").append(
-                        '<tr>' +
-                        '<td >' + result.schoolName +
-                        '</td>' +
-                        '<td>' + area.areaName +
-                        '</td>' +
-                        '<td><a class="md-delete" id="' + area.id + "/" + result.id +
-                        '">删除</a></td>' +
-                        '</tr>'
-                    );
-                }
+                $("#AddressTable").append(
+                    '<tr>' +
+                    '<td >' + result.school.schoolName +
+                    '</td>' +
+                    '<td>' + result.areaName +
+                    '</td>' +
+                    '<td><a class="md-delete" id="' + result.id + "/" + result.school.id +
+                    '">删除</a></td>' +
+                    '</tr>'
+                );
             }
             deleteMe();
         };
