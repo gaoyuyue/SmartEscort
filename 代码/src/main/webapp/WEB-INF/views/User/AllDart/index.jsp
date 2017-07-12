@@ -68,10 +68,13 @@
 </script>
 
 <script>
+
     var success = function (data) {
         $("#packageList").empty();
-        data.forEach(function (e) {
-            $("#packageList").append(`
+        var userInformation = function userInformation(array) {
+            data.forEach(function (e) {
+                if(e.cancel != true){
+                    $("#packageList").append(`
                 <div class="weui-cells">
                     <div class="weui-form-preview">
                         <a class="open-popup childPage" data-target="#showDartDetail"  onclick="hideNavbarSuspension()" publishDartId = '`+e.id+`'>
@@ -99,8 +102,28 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="button_position_style">
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary deleteDart" publishDartId='`+e.id+`'>删除订单</a>
+                        <div class="button_position_style JudgmentStatus">
+                        `+(
+                            (e.packageStatus == '已完成' || e.packageStatus == '已撤销') ?
+                                `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary deleteDart" style="margin: 0px;" publishDartId='`+e.id+`'>删除订单</a>`
+                                :
+                                (
+                                    (e.packageStatus == '待领取')  ?
+                                        `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 0px;" publishDartId='`+e.id+`'>取消订单</a>`
+                                        :
+                                        (
+                                            (e.packageStatus == '待签收') ?
+                                                `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 0px;" publishDartId='`+e.id+`'>确认签收</a>
+                                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callagencySender" style="margin: 0px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`
+                                                :
+                                                `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary postDart" style="margin: 0px;" publishDartId='`+e.id+`'>确认送达</a>
+                                                 <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default calldelegateSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
+
+                                        )
+
+                                )
+
+                        )+`
                         </div>
                     </div>
                 </div>
@@ -108,6 +131,7 @@
                 <div id="showDartDetail" class='weui-popup__container'>
                     <div class="weui-popup__overlay"></div>
                     <div class="weui-popup__modal">
+                    <div class="weui-tab__panel">
                         <div class="top_other">
                             <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
                             <span ><a class="title_other">订单详情</a></span>
@@ -135,52 +159,59 @@
                                     <span id="areaDetail"></span>
                                 </div>
                             </div>
-                          <div class="weui-cell__ft" style="width: 5%">
-                          </div>
                         </label>
                     </div>
                         <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
 
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>快递类型</p>
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>快递类型</p>
+                                </div>
+                                <div class="weui-cell__ft" id="courierCompany"></div>
                             </div>
-                            <div class="weui-cell__ft" id="courierCompany"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>包裹大小</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>包裹大小</p>
+                                </div>
+                                <div class="weui-cell__ft" id="standardDescription"></div>
                             </div>
-                            <div class="weui-cell__ft" id="standardDescription"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>短信</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>价格</p>
+                                </div>
+                                <div class="weui-cell__ft" id="price"></div>
                             </div>
-                            <div class="weui-cell__ft" id="message"></div>
                         </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>价格</p>
-                            </div>
-                            <div class="weui-cell__ft" id="price"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>备注</p>
-                            </div>
-                            <div class="weui-cell__ft" id="note"></div>
-                        </div>
-                        <div id="agencyDetail">
 
-                         </div>
+                        <br>
 
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>短信</p>
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" id="message">
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" >
+                                    <p>备注</p>
+                                </div>
+                                <div class="weui-cell__ft" id="note"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="weui-cells" id="agencyDetail">
+                        </div>
+                    </div>
                     </div>
                 </div>
            `);
-
-        });
-
+                }
+            });
         $(".deleteDart").click(function () {
             "use strict";
             const publishDartId = $(this).attr("publishDartId");
@@ -199,6 +230,101 @@
                 });
             }, function() {
 
+            });
+        });
+
+        $(".cancelDart").click(function () {
+            "use strict";
+            const publishDartId = $(this).attr("publishDartId");
+            $.confirm("确认取消订单吗？", "提示", function() {
+                $.ajax({
+                    url:"/User/AllDart/cancel/publishDartId/"+publishDartId,
+                    type:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify(publishDartId),
+                    success:function () {
+                        window.location.href = "/User/AllDart/";
+                    },
+                    error:function (XMLHttpRequest) {
+
+                    }
+                });
+            }, function() {
+
+            });
+        });
+
+        $(".receivedDart").click(function () {
+            "use strict";
+            const publishDartId = $(this).attr("publishDartId");
+            $.confirm("确认签收货物吗？", "提示", function() {
+                $.ajax({
+                    url:"/User/AllDart/cancel/publishDartId/"+publishDartId,
+                    type:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify(publishDartId),
+                    success:function () {
+                        window.location.href = "/User/AllDart/";
+                    },
+                    error:function (XMLHttpRequest) {
+
+                    }
+                });
+            }, function() {
+
+            });
+        });
+
+        $(".postDart").click(function () {
+            "use strict";
+            const publishDartId = $(this).attr("publishDartId");
+            $.confirm("确认送达货物吗？", "提示", function() {
+                $.ajax({
+                    url:"/User/AllDart/cancel/publishDartId/"+publishDartId,
+                    type:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify(publishDartId),
+                    success:function () {
+                        window.location.href = "/User/AllDart/";
+                    },
+                    error:function (XMLHttpRequest) {
+
+                    }
+                });
+            }, function() {
+
+            });
+        });
+
+        $(".callagencySender").click(function () {
+            const agencyPhoneNumber = $(this).attr("agencyPhoneNumber");
+            $.actions({
+                title: "送货人联系方式",
+                actions: [
+                    {
+                        text: agencyPhoneNumber,
+                        className: "color-black",
+                        onClick: function() {
+                            window.location.href = "tel:"+agencyPhoneNumber;
+                        }
+                    }
+                ]
+            });
+        });
+
+        $(".calldelegateSender").click(function () {
+            const delegationPhoneNumber = $(this).attr("delegationPhoneNumber");
+            $.actions({
+                title: "收货联系方式",
+                actions: [
+                    {
+                        text: delegationPhoneNumber,
+                        className: "color-black",
+                        onClick: function() {
+                            window.location.href = "tel:"+delegationPhoneNumber;
+                        }
+                    }
+                ]
             });
         });
 
@@ -225,16 +351,85 @@
                 $("#price").text(data.price);
                 $("#note").text(data.note);
                 $("#areaName").text(data.area.areaName);
-                $("#areaDetail").text(data.address.detail);
+                $("#areaDetail").text(data.addressDetail);
+                $("#agencyDetail").empty();
+//                $("#JudgmentStatus").empty();
                 if(data.packageStatus == '已评价'){
                     $("#agencyName").text(data.agency.name);
                     $("#agencyPhoneNumber").text(data.agency.phoneNumber);
-                }
-
-                $("#agencyDetail").empty();
-                $("#agencyDetail").append(
-                    (data.packageStatus == '已评价')
-                        ?
+                    $("#agencyDetail").append(
+                        `
+                           <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                   <div class="weui-cell__bd">
+                                        <p>送货人姓名</p>
+                                   </div>
+                                   <div class="weui-cell__ft" id="agencyName">`+data.agency.name+`</div>
+                           </div>
+                           <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                   <div class="weui-cell__bd">
+                                        <p>送货人联系方式</p>
+                                   </div>
+                                   <div class="weui-cell__ft" id="agencyPhoneNumber">`+data.agency.phoneNumber+`</div>
+                           </div>
+                        `
+                    );
+                } else if(data.packageStatus == '待领取'){
+                    $("#agencyDetail").append(
+                        `
+                                    <div class="weui-panel__bd">
+                                            <div class="weui-media-box weui-media-box_small-appmsg">
+                                                <div class="weui-cells">
+                                                     <div class="weui-cell weui-cell_access">
+                                                        <div class="weui-cell__hd"><img src="/assets/img/jusanglian.png" alt="" style="width:20px;margin-right:50px;display:block"></div>
+                                                        <div class="weui-cell__bd weui-cell_primary">
+                                                            <p>您的订单还未被领取</p>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                            `
+                    );
+                } else if(data.packageStatus == '已撤销'){
+                    $("#agencyDetail").append(
+                        `
+                        <div class="weui-panel__bd">
+                                <div class="weui-media-box weui-media-box_small-appmsg">
+                                    <div class="weui-cells">
+                                         <div class="weui-cell weui-cell_access">
+                                            <div class="weui-cell__hd"><img src="/assets/img/jusanglian.png" alt="" style="width:20px;margin-right:50px;display:block"></div>
+                                            <div class="weui-cell__bd weui-cell_primary">
+                                                <p>您的订单已被取消</p>
+                                            </div>
+                                         </div>
+                                    </div>
+                                </div>
+                        </div>
+                            `
+                    );
+                } else if(data.packageStatus == '待签收'){
+                    $("#agencyName").text(data.agency.name);
+                    $("#agencyPhoneNumber").text(data.agency.phoneNumber);
+                    $("#agencyDetail").append(
+                        `
+                         <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                               <div class="weui-cell__bd">
+                                    <p>送货人姓名</p>
+                               </div>
+                               <div class="weui-cell__ft" id="agencyName">`+data.agency.name+`</div>
+                         </div>
+                          <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                               <div class="weui-cell__bd">
+                                    <p>送货人联系方式</p>
+                               </div>
+                               <div class="weui-cell__ft" id="agencyPhoneNumber">`+data.agency.phoneNumber+`</div>
+                         </div>
+                        `
+                    );
+                } else if(data.packageStatus == '待评价'){
+                    $("#agencyName").text(data.agency.name);
+                    $("#agencyPhoneNumber").text(data.agency.phoneNumber);
+                    $("#agencyDetail").append(
                         `
                                          <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
                                                <div class="weui-cell__bd">
@@ -249,25 +444,13 @@
                                                <div class="weui-cell__ft" id="agencyPhoneNumber">`+data.agency.phoneNumber+`</div>
                                          </div>
                                 `
-                        :
-                        `
-                                    <div class="weui-panel__bd">
-                                            <div class="weui-media-box weui-media-box_small-appmsg">
-                                                <div class="weui-cells">
-                                                     <div class="weui-cell weui-cell_access">
-                                                        <div class="weui-cell__hd"><img src="/assets/img/jusanglian.png" alt="" style="width:20px;margin-right:50px;display:block"></div>
-                                                        <div class="weui-cell__bd weui-cell_primary">
-                                                            <p>您的订单已被取消</p>
-                                                        </div>
-                                                     </div>
-                                                </div>
-                                            </div>
-                                    </div>
-                            `
-                );
+                    );
+                }
             };
             Get("/User/AllDart/dartDetail/publishDartId/"+publishDartId,packageData);
         });
+        };
+        Get("/User/AllDart/userInformation",userInformation);
     };
     $(document).ready(function () {
         Get("/User/AllDart/packageList",success);

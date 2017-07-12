@@ -1,208 +1,144 @@
-<%--#e15400  color--%>
 <%@include file="/user_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script type="text/javascript" src="/assets/js/classie.js"></script>
-<script type="text/javascript" src="/assets/js/modernizr.custom.js"></script>
-<style type="text/css">
-    .adds {
-        background-color: green;
-    }
-</style>
-<div class="searchNav" id="top" style="background-color: #eeeeee;position: absolute;text-align: center">
-        <%--<input type="text" placeholder="Search...">--%>
-        <%--<img src="/assets/img/Search.png" class="searchA">--%>
-        <img src="/assets/img/filter.png" id="filter-btn">
-</div>
-<br>
-<div class="weui-panel weui-panel_access">
-    <div class="weui-form-preview" id="packageTable">
 
+<div id="top" style="background-color:#08ddff">
+    <h3 style="color: white">任务列表</h3>
+</div>
+<div ontouchstart class="weui-panel weui-panel_access weui-pull-to-refresh" style="overflow-y:auto; overflow-x:hidden; width:100%; height:100%;" id="mainDiv">
+    <div class="weui-pull-to-refresh__layer">
+        <div class='weui-pull-to-refresh__arrow'></div>
+        <div class='weui-pull-to-refresh__preloader'></div>
+        <div class="down">下拉刷新</div>
+        <div class="up">释放刷新</div>
+        <div class="refresh">正在刷新</div>
+    </div>
+    <div class="weui-form-preview">
+        <div class="weui-panel__bd" id="packageTable">
+        </div>
+    </div>
+    <div class="weui-loadmore" id="loadingText">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
     </div>
 </div>
 
-<%--筛选菜单--%>
-<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2" style="OVERFLOW-Y: auto;height: auto">
-
-<h3>筛选</h3>
-<strong>区域</strong>
-<ul id="areaList" class="menuHeader">
-    <li><a>asd</a></li>
-</ul>
-<strong>快递类型</strong>
-<ul id="packageType" class="menuHeader">
-
-</ul>
-<strong>包裹大小</strong>
-<ul id="standard" class="menuHeader">
-
-</ul>
-
-<span>
-    <button id="reSet" class="weui-btn weui-btn_mini weui-btn_primary" style="background-color: #FF6905">重置</button>
-    <button id="Ok" class="weui-btn weui-btn_mini weui-btn_primary" style="background-color: #FF6905">确定</button>
-</span>
-</div>
-
 <script>
-    $(document).ready(function () {
-//        tryTime = 0;
-        $("#getPackage").addClass("weui-bar__item_on");
+    $("#mainDiv").pullToRefresh().on("pull-to-refresh", function() {
+        pageNumber = 1;
+        $("#packageTable").empty();
+        Loadings("/User/GetPackage/allList",updateTable, 4,function () {
+            $("#mainDiv").pullToRefreshDone();
+        });
+        $("#loadingText").html(`
+            <i class="weui-loading"></i>
+            <span class="weui-loadmore__tips">正在加载</span>
+        `);
+        loading = false;
+        $("#mainDiv").infinite();
     });
 
-
-    //订单详情
-//    $(".weui-form-preview__item").on('click', function () {
-//        var packageSize = $("#packageSize").val();
-//        var packageType = "";
-//        var price = $("#price").val();
-//        var remakers = "";
-//
-//        $.confirm({
-//            title: '确定要接单吗？',
-//            text: '大小' + packageSize + '<br/>' +
-//            '类型' + packageType + '<br/>' +
-//            '价格' + price + '<br/>' +
-//            '备注:' + '<br/>' +
-//            '<textarea rows="5" cols="10"></textarea>',
-//            onOK: function () {
-//                //点击确认
-//            },
-//            onCancel: function () {
-//            }
-//        });
-//    });
-//
-//    //获取
-//    $("#filter-btn").click(function () {
-//
-//        var areaList = function (data) {
-//            for (var i = 0; i < data.length; i++) {
-//                $("#areaList").append(
-//                    "<li>" + data[i] +
-//                    "</li>");
-//            }
-//        };
-//        var packageTypeList = function (data) {
-//            for (var i = 0; i < data.length; i++) {
-//                $("#packageType").append(
-//                    "<li>" + data[i] +
-//                    "</li>");
-//            }
-//        };
-//        var standardList = function (data) {
-//            for (var i = 0; i < data.length; i++) {
-//                $("#standard").append(
-//                    "<li>" + data[i] +
-//                    "</li>");
-//            }
-//        };
-//        if (tryTime == 0) {
-//            Get("/User/GetPackage/courierList", packageTypeList);
-//            Get("/User/GetPackage/standardList", standardList);
-//            Get("/User/GetPackage/areaList", areaList);
-//            tryTime++;
-//        }
-//
-//    });
-//
-//
-//    //滑动菜单
-    var menuRight = document.getElementById('cbp-spmenu-s2');
-    var showRight = document.getElementById('filter-btn');
-    showRight.onclick = function () {
-        classie.toggle(this, 'active');
-        classie.toggle(menuRight, 'cbp-spmenu-open');
-    };
-    Ok.onclick = function () {
-        classie.toggle(menuRight, 'cbp-spmenu-open');
-    };
-
-    $("#standard").click(function () {
-        this.addClass("adds");
+    var loading = false;
+    $("#mainDiv").infinite().on("infinite", function() {
+        if(loading) return;
+        loading = true;
+        Loadings("/User/GetPackage/allList", updateTable, 4,function () {
+            loading = false;
+        });
     });
-
 
     var updateTable = function (data) {
         const results = data.results;
-        var prefix="/assets/img/";
-        var suffix=".jpg";
         results.forEach(function (element) {
             $("#packageTable").append(`
-                <div +class="weui-panel__bd">
-                   <a href="#" class="weui-media-box weui-media-box_appmsg confirmation packageOne" packageId=`+ element.id +`>
-                       <div style="clear: both">
-                          <div class="weui-media-box__hd">
-                               <img class="weui-media-box__thumb" src=`+prefix+element.courierCompany.companyName+suffix+`>
-                           </div>
-                           <div class="weui-form-preview__item">
-                               <span class="weui-form-preview__value" >`+element.delegation.userName+`</span>
-                               <%--<span class="weui-form-preview__value">男</span>--%>
-                               <img +src="/assets/img/boy.png" width="51" height="51">
-                           </div>
-                       </div>
-                       <div style="clear: both">
-                           <div class="weui-form-preview__item">
-                               <label class="weui-form-preview__label">发布日期</label>
-                               <span class="weui-form-preview__value">`+element.publishTime+`</span>
-                          </div>
-                           <div class="weui-form-preview__item">
-                               <label class="weui-form-preview__label">区域</label>
-                               <span class="weui-form-preview__value">`+element.area.areaName+`</span>
-                           </div>
-                           <div class="weui-form-preview__item" id="packageSize">
-                             <label class="weui-form-preview__label">大小</label>
-                                   <span class="weui-form-preview__value" >`+element.standard.description+`</span>
-                                        </div>
-                       <div class="weui-form-preview__item" id="price">
-                               <label class="weui-form-preview__label">价格</label>
-                               <span class="weui-form-preview__value" >`+element.standard.price+`</span>
-                           </div>
-                </div>
+                 <a class="packageOne" href="javascript:void(0);" packageId=`+element.id+`>
+                    <div class="weui-media-box">
+                        <div class="weui-media-box_appmsg">
+                            <div class="weui-media-box__hd">
+                                <img class="weui-media-box__thumb" src="`+element.delegation.headImageUrl+`" alt="">
+                            </div>
+                            <div class="weui-media-box__bd">
+                                <div class="weui-form-preview__item">
+                                    <label style="color: #0d0d0d;font-size: 16px">` + element.delegation.nickName + `</label>
+                                    <span style="margin-top: 2px;float: right;color:#cecece;font-size:13px">` + getLocalTime(element.publishTime) +`</span>
+                                </div>
+                                <ul class="weui-media-box__info">
+                                    <li class="weui-media-box__info__meta">`+((element.delegation.sex)?`<i class="fa fa-mars" style="color: #00a2d4"></i>`:`<i class="fa fa-venus" style="color: #BB2B2B"></i>`)+`</li>
+                                    <li class="weui-media-box__info__meta">`+element.area.areaName+`</li>
+                                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">`+element.courierCompany.companyName+`</li>
+                                    <li class="weui-media-box__info__meta" style="float: right;color: red;font-size: 14px;font-weight: bold">`+element.price+`</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="weui-form-preview__item" style="margin-top: 5px">
+                            <label class="weui-form-preview__label" style="font-size: 15px">详细地址</label>
+                            <span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">`+element.addressDetail+`</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label" style="font-size: 15px">备注</label>
+                            <span class="weui-form-preview__value" style="color: #0d0d0d;font-size: 15px">`+element.note+`</span>
+                        </div>
+                    </div>
+                    <div style="height: 15px;background-color: #eeeeee;"></div>
                 </a>
-                </div>
-                    <hr>
             `);
         });
 
         $(".packageOne").click(function () {
             const packageId = $(this).attr("packageId");
-            console.log(packageId);
-            $.ajax({
-                url: "/User/GetPackage/receive/packageId/" + packageId,
-                type: "GET",
-                success: function () {
-                    window.location.reload();
+            $.confirm({
+                title: '提示',
+                text: '确认领取本任务？',
+                onOK: function () {
+                    $.ajax({
+                        url: "/User/GetPackage/receive/packageId/" + packageId,
+                        type: "GET",
+                        success: function () {
+                            $.toast("领取成功",function () {
+                                window.location.reload();
+                            });
+                        },
+                        error: function (XMLHttpRequest) {
+                            if (XMLHttpRequest.status === 404) alert("未认证用户不能使用此功能！");
+                            else alert("此任务已被接收！");
+                        }
+                    });
                 },
-                error: function (XMLHttpRequest) {
-                    if(XMLHttpRequest.status === 404)alert("未认证用户不能使用此功能！");
-                    else alert("此任务已被接收！");
+                onCancel: function () {
+                    $.toast("取消操作", "cancel");
                 }
             });
         });
     };
 
     $(document).ready(function () {
-        Loadings("/User/GetPackage/allList",updateTable,10);
+        $("#getPackage").addClass("weui-bar__item_on");
+        Loadings("/User/GetPackage/allList", updateTable, 4,function () {
+        });
     });
 
-    var pageNumber = 0;
-    var Loadings = function (url, updateTable, pageSize) {
+    var pageNumber = 1;
+    var Loadings = function (url,updateTable,pageSize,success) {
         "use strict";
         $.ajax({
             url: url + "/pageNumber/" + pageNumber + "/pageSize/" + pageSize,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success:function (data) {
+            success: function (data) {
                 var nextPageNumber = data["nextPage"];
-                if(nextPageNumber <= pageNumber){
-                    // $("#loadingText").html("没有更多了");
+                if(data["pageCount"]<=1){
+                    $("#mainDiv").destroyInfinite();
+                    $("#loadingText").html("没有更多了");
+                }
+                if (nextPageNumber < pageNumber) {
+                    $("#mainDiv").destroyInfinite();
+                    $("#loadingText").html("没有更多了");
                     return;
                 }
                 updateTable(data);
-                pageNumber = nextPageNumber;
+                success();
+                pageNumber = pageNumber+1;
             },
-            error:function (XMLHttpRequest) {
-
+            error: function (XMLHttpRequest) {
             }
         });
     };

@@ -25,8 +25,8 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>用户名</th>
                                 <th>昵称</th>
+                                <th>姓名</th>
                                 <th>手机号</th>
                                 <th>学工号</th>
                                 <th>信誉积分</th>
@@ -55,7 +55,7 @@
                 if (item.deleted == false) {
                     $("#userTable").append(
                         '<tr>' +
-                        '<td>' + item.userName +
+                        '<td>' + item.nickName +
                         '</td>' +
                         '<td>' + item.name +
                         '</td>' +
@@ -67,14 +67,14 @@
                         '</td>' +
                         '<td>' + "正常" +
                         '</td>' +
-                        '<td> <a class="modifyUser" id="' + item.userName + "_true" +
+                        '<td> <a class="modifyUser" id="' + item.userName + ":true" +
                         '">禁用</a></td>' +
                         '</tr>'
                     )
                 } else {
                     $("#userTable").append(
                         '<tr>' +
-                        '<td>' + item.userName +
+                        '<td>' + item.nickName +
                         '</td>' +
                         '<td>' + item.name +
                         '</td>' +
@@ -86,7 +86,7 @@
                         '</td>' +
                         '<td>' + "已禁用" +
                         '</td>' +
-                        '<td> <a class="modifyUser" id="' + item.userName + "_false" +
+                        '<td> <a class="modifyUser" id="' + item.userName + ":false" +
                         '">取消禁用</a></td>' +
                         '</tr>'
                     )
@@ -101,7 +101,7 @@
     var modifyUser = function modifyUser() {
         $(".modifyUser").click(function () {
             var id = this["id"];
-            var arr = id.split("_");
+            var arr = id.split(":");
             var userName = arr[0];
             var stage = arr[1];
             console.log(userName);

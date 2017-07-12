@@ -1,12 +1,10 @@
 package cn.attackme.escort.Model;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 包裹
@@ -22,9 +20,7 @@ public class Package implements Serializable {
     private static final long serialVersionUID = -4591451869882553177L;
 
     @Id
-    @GeneratedValue(generator = "generator")
-    @GenericGenerator(name = "generator",strategy = "increment")
-    private Integer id;
+    private String id;
 
     //代理人
     @OneToOne
@@ -55,9 +51,6 @@ public class Package implements Serializable {
     //留言
     private String note;
 
-    //满意程度
-    private Integer score;
-
     //是否被取消
     private boolean isCancel;
 
@@ -67,18 +60,8 @@ public class Package implements Serializable {
     //任务领取时间
     private Date receiveTime;
 
-    //代理人对委托人的评价
-    @OneToOne
-    @JoinColumn(name = "agencyEvaluation")
-    private Evaluation agencyEvaluation;
-
-    //委托人对代理人的评价
-    @OneToOne
-    @JoinColumn(name = "delegationEvaluation")
-    private Evaluation delegationEvaluation;
-
-    //包裹开始派送时间
-    private Date beginTime;
+    //代理人送达时间
+    private Date deliveryTime;
 
     //委托人签收时间
     private Date endTime;
@@ -86,6 +69,9 @@ public class Package implements Serializable {
     //包裹状态
     @Enumerated(EnumType.STRING)
     private PackageStatus packageStatus;
+
+    @Enumerated(EnumType.STRING)
+    private OrderResult orderResult;
 
     //所属学校
     @ManyToOne (cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
@@ -109,5 +95,4 @@ public class Package implements Serializable {
     @Setter
     @Getter
     private String receiverName;
-
 }

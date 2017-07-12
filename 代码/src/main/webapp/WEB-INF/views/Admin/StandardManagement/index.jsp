@@ -21,14 +21,6 @@
                                 id="editButton" disabled="disabled">修改
                         </button>
                         <button type="button" class="btn btn-danger" id="deleteButton" disabled="disabled">删除</button>
-
-                        <div class="col-sm-3" style="float: right" >
-                            <div class="input-group">
-                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
-                                    class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                            </div>
-                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -36,7 +28,7 @@
                             <tr>
                                 <th>选择</th>
                                 <th>收费标准描述</th>
-                                <th>收费标准</th>
+                                <%--<th>收费标准</th>--%>
                             </tr>
                             </thead>
                             <tbody id="StandardTable">
@@ -58,18 +50,12 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title">新增快递取件收费标准</h4>
-                <small class="font-bold">这里可以显示副标题。
+                <small class="font-bold">
                 </small>
             </div>
             <small class="font-bold">
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="请输入标准金额" name="areaName" id="standardPrice">
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
                             <div class="col-sm-6">
@@ -107,12 +93,6 @@
             <small class="font-bold">
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="请输入新的标准金额" name="areaName" id="newStandardPrice">
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
                             <div class="col-sm-6">
@@ -182,8 +162,6 @@
                     "</td>" +
                     "<td >"+ result.description +
                     "</td>" +
-                    "<td>" + result.price +
-                        "</td>" +
                         "</tr>"
                     );
             }
@@ -194,9 +172,8 @@
 
     //新增
     $("#createButton").click(function () {
-       var price=$("#standardPrice").val();
         var description = $("#standardDescription").val();
-        if (isNullOrEmpty(description)&&isNullOrEmpty(price)) {
+        if (isNullOrEmpty(description)) {
             swal({
                 title: "错误",
                 text: "不可为空",
@@ -206,14 +183,12 @@
             });
         } else {
             var data={
-                price:price,
                 description:description
             };
             Post("/StandardManagement/createStandard",data);
             loadThis();
             $("#createCancelButton").click();
         }
-        $("#standardPrice").val("");
         $("#standardDescription").val("");
 
     });
@@ -228,10 +203,9 @@
 
     //修改
     $("#updateButton").click(function () {
-        var standardPrice = $("#newStandardPrice").val();
         var standardDescription = $("#newStandardDescription").val();
         var id = $("input[class='checkMe']:checked").attr("id");
-        if (isNullOrEmpty(standardPrice)&&isNullOrEmpty(standardDescription)) {
+        if (isNullOrEmpty(standardDescription)) {
             swal({
                 title: "错误",
                 text: "必填项不可为空",
@@ -241,7 +215,6 @@
         } else {
             var data={
                 id:id,
-                price:standardPrice,
                 description:standardDescription
             };
             Put("/StandardManagement/updateStandard",data);
@@ -271,13 +244,6 @@
                         AjaxDeleteRequest("/StandardManagement/deleteStandard/standardId/" + checkBoxes[i].id);
                     }
                     loadThis();
-                    swal({
-                        title: "成功",
-                        text: "删除完毕",
-                        type: "success",
-                        confirmButtonText: "知道了"
-
-                    });
                 } else {
                     swal("已取消", "未作任何操作", "info");
                     setUnAvailable();

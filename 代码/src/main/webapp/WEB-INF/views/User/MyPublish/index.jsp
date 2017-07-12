@@ -101,88 +101,78 @@
                             </div>
                         </div>
                         <div class="button_sp_area">
-                            <div style="float:right">
-                            `+
-                            ((e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" publishDartId='`+e.id+`'>取消订单</a>` : `
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" publishDartId='`+e.id+`'>确认收货</a>
-                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`)
-                        +`
+                            <div style="float:right;">
+                            `+(
+                                (e.packageStatus == '待领取') ? `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary cancelDart" style="margin: 3px;" publishDartId='`+e.id+`'>撤销订单</a>`
+                            :
+                            (
+                                (e.packageStatus == '待签收') ?
+                            `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 3px;" publishDartId='`+e.id+`'>确认签收</a>
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 3px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`
+                            :
+                            `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary callSender" style="margin: 3px;" publishDartId='`+e.id+`' agencyPhoneNumber = '`+ e.agency.phoneNumber+`'>联系送货人</a>`
+                                )
+                            )+`
                             <div>
                         </div>
                     </div>
                 </div>
 
-                <div id="showDartDetail" class='weui-popup__container'>
+                <div id="showDartDetail" class='weui-popup__container' style="height: 100%">
                     <div class="weui-popup__overlay"></div>
                     <div class="weui-popup__modal">
+                    <div class="weui-tab__panel">
                         <div class="top_other">
                             <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
                             <span ><a class="title_other">订单详情</a></span>
                             <span><a class="logo_other show-warning update" href="/"><img src="/assets/img/home.png" align="top"></a></span>
                         </div>
 
-                    <div class="weui-cell_access">
-                        <label class="weui-cell weui-check__label">
-                            <div style="float: left;width: 10%">
-                                <div class="address_icon">
+
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>快递类型</p>
+                                </div>
+                                <div class="weui-cell__ft" id="courierCompany"></div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>包裹大小</p>
+                                </div>
+                                <div class="weui-cell__ft" id="standardDescription"></div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>价格</p>
+                                </div>
+                                <div class="weui-cell__ft" id="price"></div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>短信</p>
                                 </div>
                             </div>
-                            <div style="width: 80%" class="weui-cell__bd">
-                                <div>
-                                    <span >收货人：  </span>
-                                    <span id="delegationName"></span>
-                                    <span > </span>
-                                    <span style="float: right" id="delegationPhoneNumber"></span>
-                                </div>
-                                <div>
-                                    <span>收货地址：</span>
-                                    <span>
-                                    </span>
-                                    <span id="areaName"></span>
-                                    <span id="areaDetail"></span>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" id="message">
                                 </div>
                             </div>
-                          <div class="weui-cell__ft" style="width: 5%">
-                          </div>
-                        </label>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" >
+                                    <p>备注</p>
+                                </div>
+                                <div class="weui-cell__ft" id="note"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="weui-cells" id="agencyDetail">
+                        </div>
                     </div>
-                        <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>快递类型</p>
-                            </div>
-                            <div class="weui-cell__ft" id="courierCompany"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>包裹大小</p>
-                            </div>
-                            <div class="weui-cell__ft" id="standardDescription"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>短信</p>
-                            </div>
-                            <div class="weui-cell__ft" id="message"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd" style="border-bottom: 1px solid #ebebeb">
-                                <p>价格</p>
-                            </div>
-                            <div class="weui-cell__ft" id="price"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd" >
-                                <p>备注</p>
-                            </div>
-                            <div class="weui-cell__ft" id="note"></div>
-                        </div>
-                        <div id="agencyDetail">
-
-                        </div>
-
-
-
                     </div>
                 </div>
            `);
@@ -191,7 +181,7 @@
         $(".cancelDart").click(function () {
             "use strict";
             const publishDartId = $(this).attr("publishDartId");
-            $.confirm("确认取消订单吗？", "提示", function() {
+            $.confirm("确认撤销订单吗？", "提示", function() {
                 $.ajax({
                     url:"/User/MyPublish/cancel/publishDartId/"+publishDartId,
                     type:"PUT",
@@ -237,7 +227,7 @@
                         text: agencyPhoneNumber,
                         className: "color-black",
                         onClick: function() {
-                            window.location.href = "tel:${agencyPhoneNumber}";
+                            window.location.href = "tel:"+agencyPhoneNumber;
                         }
                     }
                 ]
@@ -266,8 +256,8 @@
                 $("#price").text(data.price);
                 $("#note").text(data.note);
                 $("#areaName").text(data.area.areaName);
-                $("#areaDetail").text(data.address.detail);
-                if(data.packageStatus == '待签收'){
+                $("#areaDetail").text(data.addressDetail);
+                if(data.packageStatus == '待签收' || data.packageStatus == '待送达'){
                     $("#agencyName").text(data.agency.name);
                     $("#agencyPhoneNumber").text(data.agency.phoneNumber);
                 }

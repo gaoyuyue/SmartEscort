@@ -464,12 +464,10 @@ var appendNotify = function appendNotify(toAppend, title, content, buttonText, U
  */
 var loadSchool = function (id) {
     var success = function (data) {
-        //console.log(data);
         $("#"+id).empty();
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
             $("#"+id).append(
-                /*<option value="0">请选择</option>*/
                 '<option value="' + item.id +
                 '"> ' + item.schoolName +
                 '</option>'
@@ -479,11 +477,52 @@ var loadSchool = function (id) {
     AjaxGetRequest("/UserManagement/getSchoolList", success);
 };
 
+var loadArea = function (areaSelectId,schoolId) {
+    var success = function (data) {
+        $("#"+areaSelectId).empty();
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            $("#"+areaSelectId).append(
+                '<option value="' + item.id +
+                '"> ' + item.areaName +
+                '</option>'
+            )
+        }
+    };
+    AjaxGetRequest("/AddressManagement/areaList/schoolId/"+schoolId, success);
+};
+
+var loadPackageType = function (typeSelectId) {
+    var success = function (data) {
+         $("#"+typeSelectId).empty();
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            $("#"+typeSelectId).append(
+                '<option value="' + item.id +
+                '"> ' + item.companyName +
+                '</option>'
+            );
+        }
+    };
+    AjaxGetRequest("/CourierCompanyManagement/courierList", success);
+};
+
 function loadThis() {
-    // var pageNumber = $(".pagination .active")[0].innerText;
-    // if(pageNumber==null){
-    //     alert("!!!");
-    //     loadPage(1);
-    // }else {
-        loadPage(nowPage);}
-// }
+        loadPage(nowPage);
+    }
+
+
+var getLocalTime = function(nS) {
+    if(nS!=null){
+    var time = new Date(nS);
+    var y = time.getFullYear();
+    var m = time.getMonth() + 1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+    }else {
+        return "";
+    }
+};

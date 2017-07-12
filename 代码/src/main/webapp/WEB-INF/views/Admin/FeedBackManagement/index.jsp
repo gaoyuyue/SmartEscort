@@ -10,7 +10,6 @@
 <head>
 
     <title>Title</title>
-    <%--<script src="/assets/js/jquery-2.1.1.min.js"></script>--%>
     <link rel="stylesheet" href="/assets/css/mobile.css">
 </head>
 <body>
@@ -25,11 +24,6 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-3" style="float: right">
-                            <%--<div class="input-group">--%>
-                                <%--<input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span--%>
-                                    <%--class="input-group-btn">--%>
-                                        <%--<button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>--%>
-                            <%--</div>--%>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -37,11 +31,10 @@
                             <thead>
                             <tr>
                                 <div class="row">
-                                    <th width="15%">用户名</th>
+                                    <th width="15%">姓名</th>
                                     <th width="30%">反馈内容</th>
                                     <th width="20%">反馈时间</th>
                                     <th >操作</th>
-                                    <%--<th><button class="btn btn-danger " id="deleteFeedBack">删除所选</button></th>--%>
                                  </div>
                             </tr>
                             </thead>
@@ -78,53 +71,56 @@
                 </button>
             </div>
         </div>
+
     </div>
 </div>
+<button data-toggle='modal' data-target='#modal' id="ToDetail" hidden="hidden">123</button>
 
 </body>
 <script>
 
-    function deleteFeedBack(id) {
-        AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
-        loadThis();
-    }
     //分页加载页面
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
             var resultList = data["results"];
-            console.log(resultList);
             for (i = 0; i < resultList.length; i++) {
                 var result = resultList[i];
                 $("#FeedBack").append(
                     "<tr>"+
-                    "<td>" + result.user.userName +
+                    "<td>" + result.user.name +
                     "</td>" +
-                    "<td class='feedContent active avoidOverflow' data-toggle='modal' data-target='#modal' onclick='feedBackDetail(this.innerText)' " +
+                    "<td class='feedContent active avoidOverflow' " +
                     "title='点击查看内容'>" +result.content +
                     "</td>"+
-                    "<td>" + result.submitTime +
+                    "<td>" + getLocalTime(result.submitTime) +
                     "</td>"+
-                    '<td><a onclick="deleteFeedBack(this.id)"  class="md-delete" id="' + result.id+
+                    '<td><a class="md-delete" id="' + result.id+
                     '">删除</a></td>' +
                     "</tr>"
                 );
             }
-
+            deleteMe();
         };
         Paging("/FeedBackManagement/getFeedBack", "FeedBack", uploadTable, pageNumber, 10);
     };
 
-
     $(document).ready(
         function () {
             loadPage(1);
-
     });
-
-    function feedBackDetail(a){
-        $("#feedDetail").text(a);
+    //绑定点击事件
+    function deleteMe() {
+        $(".md-delete").click(function () {
+            var id = this["id"];
+            AjaxDeleteRequest("/FeedBackManagement/deleteFeedBack/id/" + id);
+            loadThis();
+        });
+        $(".feedContent").click(function () {
+            var content=$(this).text();
+            $("#ToDetail").click();
+            $("#feedDetail").text(content);
+        })
     }
-
 
 </script>
 </html>

@@ -97,7 +97,7 @@
                         </a>
                         <div class="weui-form-preview__hd dart_border_padding">
                             <div class="weui-form-preview__item">
-                                <label class="weui-form-preview__label status_style">`+e.packageStatus+`</label>
+                                <label class="weui-form-preview__label status_style">待评价</label>
                                 <span class="weui-form-preview__value" style="font-size: 15px">
                                     付款金额 :
                                     <b>`+e.price+`</b>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                            <a href="/User/EvaluationDetail/" class="weui-btn weui-btn_mini weui-btn_primary">评价</a>
+                            <a href="/User/EvaluationDetail/" class="weui-btn weui-btn_mini weui-btn_primary localStorage" publishDartId = '`+e.id+`'>评价</a>
                         </div>
                     </div>
                 </div>
@@ -113,6 +113,7 @@
                 <div id="showDartDetail" class='weui-popup__container'>
                     <div class="weui-popup__overlay"></div>
                     <div class="weui-popup__modal">
+                    <div class="weui-tab__panel">
                         <div class="top_other">
                             <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
                             <span ><a class="title_other">订单详情</a></span>
@@ -120,66 +121,74 @@
                         </div>
 
                         <div class="weui-cell_access">
-                        <label class="weui-cell weui-check__label">
-                            <div style="float: left;width: 10%">
-                                <div class="address_icon">
+                            <label class="weui-cell weui-check__label">
+                                <div style="float: left;width: 10%">
+                                    <div class="address_icon">
+                                    </div>
                                 </div>
-                            </div>
-                            <div style="width: 80%" class="weui-cell__bd">
-                                <div>
-                                    <span >收货人：  </span>
-                                    <span id="delegationName"></span>
-                                    <span > </span>
-                                    <span style="float: right" id="delegationPhoneNumber"></span>
+                                <div style="width: 80%" class="weui-cell__bd">
+                                    <div>
+                                        <span >收货人：  </span>
+                                        <span id="delegationName"></span>
+                                        <span > </span>
+                                        <span style="float: right" id="delegationPhoneNumber"></span>
+                                    </div>
+                                    <div>
+                                        <span>收货地址：</span>
+                                        <span>
+                                        </span>
+                                        <span id="areaName"></span>
+                                        <span id="areaDetail"></span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span>收货地址：</span>
-                                    <span>
-                                    </span>
-                                    <span id="areaName"></span>
-                                    <span id="areaDetail"></span>
-                                </div>
-                            </div>
-                          <div class="weui-cell__ft" style="width: 5%">
-                          </div>
-                        </label>
-                    </div>
+                            </label>
+                        </div>
                         <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
 
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>快递类型</p>
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>快递类型</p>
+                                </div>
+                                <div class="weui-cell__ft" id="courierCompany"></div>
                             </div>
-                            <div class="weui-cell__ft" id="courierCompany"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>包裹大小</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>包裹大小</p>
+                                </div>
+                                <div class="weui-cell__ft" id="standardDescription"></div>
                             </div>
-                            <div class="weui-cell__ft" id="standardDescription"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>短信</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>价格</p>
+                                </div>
+                                <div class="weui-cell__ft" id="price"></div>
                             </div>
-                            <div class="weui-cell__ft" id="message"></div>
                         </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>价格</p>
-                            </div>
-                            <div class="weui-cell__ft" id="price"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>备注</p>
-                            </div>
-                            <div class="weui-cell__ft" id="note"></div>
-                        </div>
-                        <div id="agencyDetail">
 
-                         </div>
+                        <br>
 
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>短信</p>
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" id="message">
+                                </div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" >
+                                    <p>备注</p>
+                                </div>
+                                <div class="weui-cell__ft" id="note"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="weui-cells" id="agencyDetail">
+                        </div>
+                    </div>
                     </div>
                 </div>
            `);
@@ -210,7 +219,7 @@
                 $("#agencyName").text(data.agency.name);
                 $("#agencyPhoneNumber").text(data.agency.phoneNumber);
                 $("#areaName").text(data.area.areaName);
-                $("#areaDetail").text(data.address.detail);
+                $("#areaDetail").text(data.addressDetail);
 
                 $("#agencyDetail").empty();
                 $("#agencyDetail").append(
@@ -232,6 +241,12 @@
             };
             Get("/User/WaitingEvaluation/dartDetail/publishDartId/"+publishDartId,packageData);
         });
+
+        $(".localStorage").click(function () {
+            const publishDartId = $(this).attr("publishDartId");
+            localStorage["publishDartId"] = publishDartId;
+        });
+
     };
     $(document).ready(function () {
         Get("/User/WaitingEvaluation/packageList",success);

@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,7 +49,7 @@ public class MyDartController {
         String userName = getSubject().getPrincipal().toString();
         User agency = userInfoService.getById(userName);
         List<Package> list = agency.getReceiveList();
-        List<Package> receiveList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收)).collect(toList());
+        List<Package> receiveList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
         return new ResponseEntity<>(receiveList, HttpStatus.OK);
     }
 
@@ -63,9 +60,26 @@ public class MyDartController {
      */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
+    }
+
+    /**
+     * 确认收货
+     * @param publishDartId
+     * @return
+     */
+    @RequiresRoles("user")
+    @ResponseBody
+    @PutMapping("/cancel/publishDartId/{publishDartId}")
+    public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
+        Package aPackage = packageService.getById(publishDartId);
+        if(aPackage.getPackageStatus() == PackageStatus.待送达){
+            aPackage.setPackageStatus(PackageStatus.待签收);
+        }
+        packageService.saveOrUpdate(aPackage);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

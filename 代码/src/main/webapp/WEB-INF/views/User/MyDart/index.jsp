@@ -102,7 +102,15 @@
                             </div>
                         </div>
                         <div class="button_position_style">
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary callSender" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>
+                        `+(
+                            (e.packageStatus == '待送达')  ?
+                                `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary receivedDart" style="margin: 0px;" publishDartId='`+e.id+`'>确认送达</a>
+                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default callSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
+                                :
+                                `<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary callSender" style="margin: 0px;" publishDartId='`+e.id+`' delegationPhoneNumber = '`+ e.delegation.phoneNumber+`'>联系收货人</a>`
+
+                         )+`
+
                         </div>
                     </div>
                 </div>
@@ -110,6 +118,7 @@
                 <div id="showDartDetail" class='weui-popup__container'>
                     <div class="weui-popup__overlay"></div>
                     <div class="weui-popup__modal">
+                    <div class="weui-tab__panel">
                         <div class="top_other">
                             <span class="list_other"><a class="close-popup" onclick="showNavbarSuspension()"><img src="/assets/img/goback.png" align="top"></a></span>
                             <span ><a class="title_other">订单详情</a></span>
@@ -137,48 +146,76 @@
                                     <span id="areaDetail"></span>
                                 </div>
                             </div>
-                          <div class="weui-cell__ft" style="width: 5%">
-                          </div>
                         </label>
                     </div>
                         <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>快递类型</p>
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>快递类型</p>
+                                </div>
+                                <div class="weui-cell__ft" id="courierCompany"></div>
                             </div>
-                            <div class="weui-cell__ft" id="courierCompany"></div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>包裹大小</p>
+                                </div>
+                                <div class="weui-cell__ft" id="standardDescription"></div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>价格</p>
+                                </div>
+                                <div class="weui-cell__ft" id="price"></div>
+                            </div>
                         </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>包裹大小</p>
+
+                        <br>
+
+                        <div class="weui-cells">
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd">
+                                    <p>短信</p>
+                                </div>
                             </div>
-                            <div class="weui-cell__ft" id="standardDescription"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>短信</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" id="message">
+                                </div>
                             </div>
-                            <div class="weui-cell__ft" id="message"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>价格</p>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                <div class="weui-cell__bd" >
+                                    <p>备注</p>
+                                </div>
+                                <div class="weui-cell__ft" id="note"></div>
                             </div>
-                            <div class="weui-cell__ft" id="price"></div>
-                        </div>
-                        <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
-                            <div class="weui-cell__bd">
-                                <p>备注</p>
-                            </div>
-                            <div class="weui-cell__ft" id="note"></div>
                         </div>
 
 
-
+                    </div>
                     </div>
                 </div>
            `);
 
+        });
+        $(".receivedDart").click(function () {
+            "use strict";
+            const publishDartId = $(this).attr("publishDartId");
+            $.confirm("确认收到货物吗？", "提示", function() {
+                $.ajax({
+                    url:"/User/MyDart/cancel/publishDartId/"+publishDartId,
+                    type:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify(publishDartId),
+                    success:function () {
+                        window.location.href = "/User/MyDart/";
+                    },
+                    error:function (XMLHttpRequest) {
+
+                    }
+                });
+            }, function() {
+
+            });
         });
         $(".callSender").click(function () {
             const delegationPhoneNumber = $(this).attr("delegationPhoneNumber");
@@ -189,7 +226,7 @@
                         text: delegationPhoneNumber,
                         className: "color-black",
                         onClick: function() {
-                            window.location.href = "tel:delegationPhoneNumber";
+                            window.location.href = "tel:"+delegationPhoneNumber;
                         }
                     }
                 ]
@@ -218,7 +255,7 @@
                 $("#price").text(data.price);
                 $("#note").text(data.note);
                 $("#areaName").text(data.area.areaName);
-                $("#areaDetail").text(data.address.detail);
+                $("#areaDetail").text(data.addressDetail);
             };
             Get("/User/MyDart/dartDetail/publishDartId/"+publishDartId,packageData);
         });

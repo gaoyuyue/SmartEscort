@@ -32,7 +32,7 @@
         <div class="weui-msg__extra-area">
             <div class="weui-footer">
                 <p class="weui-footer__links">
-                    <a href="javascript:void(0);" class="weui-footer__link">智慧软件java组</a>
+                    <a href="javascript:void(0);" class="weui-footer__link">智慧应用软件研发工作室java组</a>
                 </p>
                 <p class="weui-footer__text">Copyright © 2017</p>
             </div>

@@ -96,7 +96,6 @@ public class User implements Serializable{
     private String headImageUrl;
 
     //学生证照片url
-    @Getter
     @Setter
     private String stuCardUrl;
 
@@ -138,5 +137,10 @@ public class User implements Serializable{
     @JsonIgnore
     public List<Package> getReceiveList(){
         return receiveList;
+    }
+
+    @JsonIgnore
+    public String getStuCardUrl(){
+        return stuCardUrl;
     }
 }

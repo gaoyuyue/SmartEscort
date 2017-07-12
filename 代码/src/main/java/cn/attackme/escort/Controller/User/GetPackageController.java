@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +86,9 @@ public class GetPackageController {
         String userName = getSubject().getPrincipal().toString();
         User user = userService.getById(userName);
         PageResults<Package> results = packageService.getPackageByStatusAndSchool(PackageStatus.待领取, user.getSchool(), pageNumber, pageSize);
+        List<Package> packages = results.getResults().stream().filter(p -> !p.getDelegation().equals(user)).collect(toList());
+        packages.forEach(p->p.setMessage(null));
+        results.setResults(packages);
         return new ResponseEntity<PageResults<Package>>(results,HttpStatus.OK);
     }
 
@@ -115,15 +119,19 @@ public class GetPackageController {
     @RequiresRoles(value = {"user","authed"},logical = Logical.AND)
     @ResponseBody
     @GetMapping("/receive/packageId/{packageId}")
-    public ResponseEntity<Void> receive(@PathVariable int packageId){
+    public ResponseEntity<Void> receive(@PathVariable String packageId){
         Package thePackage = packageService.getById(packageId);
         if (thePackage.getAgency() != null){
             return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
         }
         String userName = getSubject().getPrincipal().toString();
         User agency = userService.getById(userName);
+        if (thePackage.getDelegation().equals(agency)){
+            return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        }
         thePackage.setAgency(agency);
-        thePackage.setPackageStatus(PackageStatus.待签收);
+        thePackage.setPackageStatus(PackageStatus.待送达);
+        thePackage.setReceiveTime(new Date());
         packageService.saveOrUpdate(thePackage);
         User delegation = thePackage.getDelegation();
 

@@ -12,16 +12,27 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>任务列表管理</h5>
+                    <div class="input-group col-sm-3" style="float: right">
+                    <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
+                        class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                </div>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class=" m-b-xs col-lg-6">
+                            <select class="input-sm   " title="请选择来源" id="theWay">
+                                <option value="wechat">微信</option>
+
+                                <option value="qq">qq</option>
+                            </select>
+                            &nbsp;
                             <select class="input-sm   " title="请选择订单状态" id="packageStatus">
-                                <option value="待领取">待领取</option>
-                                <option value="已撤销">已撤销</option>
-                                <option value="待签收">待签收</option>
-                                <option value="待评价">待评价</option>
-                                <option value="已评价">已评价</option>
+                            <option value="待领取">待领取</option>
+                            <option value="已撤销">已撤销</option>
+                            <option value="待签收">待签收</option>
+                            <option value="待送达">待送达</option>
+                            <option value="已完成">已完成</option>
                             </select>
                             &nbsp;
                             <select id="school" class="input-sm input-s-sm inline" title="请选择学校">
@@ -39,7 +50,6 @@
                                 <th>发布时间</th>
                                 <th>执行时间</th>
                                 <th>完成时间</th>
-                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody id="packageList">
@@ -54,7 +64,7 @@
                             </tbody>
                         </table>
                     </div>
-
+                    <ul class="pagination" id="pagination"></ul>
                 </div>
             </div>
         </div>
@@ -64,8 +74,9 @@
 <script>
     var loadPage=function (pageNumber) {
         var updateTable=function (data) {
-            console.log(data);
             var resultList = data["results"];
+            //根据订单种类加载
+            if($("#theWay").val()=="wechat"){
             for (var i = 0; i < data["totalCount"]; i++) {
                 var result = resultList[i];
                 var theName=result.agency==null?"":result.agency.name;
@@ -79,35 +90,70 @@
                         '</td>'+
                         '<td>' + result.standard.description +
                         '</td>'+
-                        '<td>' + result.publishTime +
+                        '<td>' + getLocalTime(result.publishTime) +
                         '</td>'+
-                        '<td>' + result.beginTime +
+                        '<td>' + getLocalTime(result.beginTime) +
                         '</td>'+
-                        '<td>' + result.endTime +
+                        '<td>' + getLocalTime(result.endTime) +
                         '</td>'+
-                        '<td><a class="md-delete" id="' + result.id+
-                        '">删除</a></td>' +
                         '</tr>'
                     )
                 }
-            };
+            }else {
+                for (var i = 0; i < data["totalCount"]; i++) {
+                    var result = resultList[i];
+                    var theName=result.agency==null?"":result.agency.name;
+                    $("#packageList").append(
+                        '<tr>' +
+                        '<td >' + result.name +
+                        '</td>' +
+                        '<td>' + theName+
+                        '</td>' +
+                        '<td>' + result.courierCompany.companyName +
+                        '</td>'+
+                        '<td>' + "*" +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.createDate) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.receiveDate) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.endDate) +
+                        '</td>'+
+                        '</tr>'
+                    )
+                }
+            }
+        };
+        if($("#theWay").val()=="wechat"){
         Paging("/PackageListManagement/PackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
-        deleteOne();
+            }else {
+            Paging("/PackageListManagement/UMLPackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
+        }
     };
-
-    //删除订单
-    function deleteOne() {
-        $(".md-delete").click(function () {
-            var id = this["id"];
-            AjaxDeleteRequest("/PackageListManagement/deletePackage/id/" + id);
-            loadThis();
-        });
-    }
 
     $(document).ready(
         function () {
             loadSchool("school");
             loadPage(1);
+            $("#theWay").change(function () {
+                $("#packageStatus").html("");
+                if($("#theWay").val()=="wechat"){
+                $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="已撤销">已撤销</option>
+                    <option value="待签收">待签收</option>
+                    <option value="待送达">待送达</option>
+                    <option value="已完成">已完成</option>
+            `);
+                }else {
+                    $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="待送达">待送达</option>
+                    <option value="已完成">已完成</option>
+            `)
+                }
+                loadPage(1);
+            });
             $("#packageStatus").change(function () {
                 loadPage(1);
             });

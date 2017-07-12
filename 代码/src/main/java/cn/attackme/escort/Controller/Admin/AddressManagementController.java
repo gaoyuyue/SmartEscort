@@ -88,4 +88,11 @@ public class AddressManagementController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
+
+    @RequiresRoles("admin")
+    @GetMapping("/areaList/schoolId/{schoolId}")
+    public ResponseEntity<List<Area>> areaList(@PathVariable int schoolId){
+        School school = schoolService.getById(schoolId);
+        return new ResponseEntity<List<Area>>(school.getAreaList(),HttpStatus.OK);
+    }
 }

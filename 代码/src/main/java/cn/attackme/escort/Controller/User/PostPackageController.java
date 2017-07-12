@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static cn.attackme.escort.Utils.OrderUtil.genOrderNo;
 import static java.util.stream.Collectors.toList;
 import static org.apache.shiro.SecurityUtils.getSubject;
 
@@ -105,7 +106,6 @@ public class PostPackageController {
     }
 
     //获取快递类型
-    @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/courierList")
     public ResponseEntity<List<String>> courierList(){
@@ -180,6 +180,7 @@ public class PostPackageController {
     public ResponseEntity<Void> create(@RequestBody Package p){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
+        p.setId(genOrderNo());
         p.setSchool(user.getSchool());
         p.setDelegation(user);
         Area area = areaService.getById(p.getArea().getId());

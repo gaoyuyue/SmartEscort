@@ -1,11 +1,11 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.OrderResult;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +51,7 @@ public class MyPublishController {
         String userName = getSubject().getPrincipal().toString();
         User delegation = userInfoService.getById(userName);
         List<Package> list = delegation.getPublishList();
-        List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.待签收)).collect(toList());
+        List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
         return new ResponseEntity<>(publishList,HttpStatus.OK);
     }
 
@@ -63,12 +63,14 @@ public class MyPublishController {
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/cancel/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> cancleDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.待领取){
             aPackage.setPackageStatus(PackageStatus.已撤销);
+            aPackage.setOrderResult(OrderResult.发布人撤销任务);
         }else if(aPackage.getPackageStatus() == PackageStatus.待签收){
-            aPackage.setPackageStatus(PackageStatus.待评价);
+            aPackage.setPackageStatus(PackageStatus.已完成);
+            aPackage.setOrderResult(OrderResult.交易成功);
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -82,7 +84,7 @@ public class MyPublishController {
      */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }

@@ -7,6 +7,8 @@ import cn.attackme.escort.Utils.PageResults;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by hujian on 2017/3/25.
  */
@@ -78,5 +80,62 @@ public class PackageService extends BaseService<Package> {
                 .whereEqual("school",school)
                 .setOrder("id","desc");
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
+
+    /**
+     * 根据快递类型、状态、区域获取分页列表
+     * @param area
+     * @param packageStatus
+     * @param courierCompany
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    public PageResults<Package> getListPageByAreaAndStatusAndType(@NotNull Area area,
+                                                                     @NotNull PackageStatus packageStatus,
+                                                                     @NotNull CourierCompany courierCompany,
+                                                                     @NotNull int pageNumber,
+                                                                     @NotNull int pageSize){
+        Query query = new Query(entityManager);
+        query.from(Package.class).
+                whereEqual("area",area).
+                whereEqual("packageStatus",packageStatus).
+                whereEqual("courierCompany",courierCompany);
+        return this.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
+
+    /**
+     * 根据代理人、快递类型、状态、区域获取分页列表
+     * @param user
+     * @param area
+     * @param packageStatus
+     * @param courierCompany
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    public PageResults<Package> getListPageByAreaAndStatusAndTypeAndUser(@NotNull User user,
+                                                                  @NotNull Area area,
+                                                                  @NotNull PackageStatus packageStatus,
+                                                                  @NotNull CourierCompany courierCompany,
+                                                                  @NotNull int pageNumber,
+                                                                  @NotNull int pageSize){
+        Query query = new Query(entityManager);
+        query.from(Package.class).
+                whereEqual("agency",user);
+        return this.getListPageByAreaAndStatusAndType(area,packageStatus,courierCompany,pageNumber,pageSize);
+    }
+
+    /**
+     * 根据状态列表获取包裹列表
+     * @param packageStatusList
+     * @return
+     */
+    public List<Package> getListByStatusList(@NotNull List<Object> packageStatusList){
+        Query query = new Query(entityManager);
+        return query.from(Package.class).
+                whereValueIn("packageStatus", packageStatusList).
+                createTypedQuery().
+                getResultList();
     }
 }

@@ -1,10 +1,10 @@
 package cn.attackme.escort.Controller.Admin;
 
+import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
-import cn.attackme.escort.Service.UserService;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -25,8 +25,6 @@ public class UserManagementController {
 
     @Autowired
     private UserInfoService userInfoService;
-    @Autowired
-    private UserService userService;
     @Autowired
     private SchoolService schoolService;
 
@@ -52,7 +50,7 @@ public class UserManagementController {
                                              @PathVariable int pageSize,
                                              @PathVariable int schoolId){
         School school = schoolService.getById(schoolId);
-        return userInfoService.getListByPageAndSchool(school,pageNumber,pageSize);
+        return userInfoService.getListByPageAndSchool(Role.user,school,pageNumber,pageSize);
     }
 
     //获取全部学校

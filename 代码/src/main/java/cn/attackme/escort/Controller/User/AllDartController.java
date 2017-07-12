@@ -1,10 +1,12 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.OrderResult;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.PackageStatus;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -46,12 +49,14 @@ public class AllDartController {
     @RequiresRoles("user")
     @ResponseBody
     @GetMapping("/packageList")
-    public ResponseEntity<List<Package>> packageList(){
+    public List<Package> packageList(){
         String userName = getSubject().getPrincipal().toString();
-        User delegation = userInfoService.getById(userName);
-        List<Package> list = delegation.getPublishList();
-        List<Package> publishList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.已评价 || p.getPackageStatus() == PackageStatus.已撤销)).collect(toList());
-        return new ResponseEntity<>(publishList, HttpStatus.OK);
+        User user = userInfoService.getById(userName);
+        List<Package> receivelist = user.getReceiveList();
+        List<Package> publishList = user.getPublishList();
+        publishList.addAll(receivelist);
+        List<Package> publishList1 = publishList.stream().collect(toList());
+        return publishList1;
     }
 
     /**
@@ -61,7 +66,7 @@ public class AllDartController {
      */
     @ResponseBody
     @GetMapping("/dartDetail/publishDartId/{publishDartId}")
-    public ResponseEntity<Package> getDartDetail(@PathVariable int publishDartId){
+    public ResponseEntity<Package> getDartDetail(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         return new ResponseEntity<>(aPackage,HttpStatus.OK);
     }
@@ -74,16 +79,48 @@ public class AllDartController {
     @RequiresRoles("user")
     @ResponseBody
     @PutMapping("/delete/publishDartId/{publishDartId}")
-    public ResponseEntity<Void> deleteDart(@PathVariable int publishDartId){
+    public ResponseEntity<Void> deleteDart(@PathVariable String publishDartId){
         Package aPackage = packageService.getById(publishDartId);
         if(aPackage.getPackageStatus() == PackageStatus.已撤销){
-            aPackage.setPackageStatus(PackageStatus.已删除);
-        }else if(aPackage.getPackageStatus() == PackageStatus.已评价){
-            aPackage.setPackageStatus(PackageStatus.已删除);
+            aPackage.setCancel(true);
+        }else if(aPackage.getPackageStatus() == PackageStatus.已完成){
+            aPackage.setCancel(true);
         }
         packageService.saveOrUpdate(aPackage);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * 撤销订单与确认收货
+     * @param publishDartId
+     * @return
+     */
+    @RequiresRoles("user")
+    @ResponseBody
+    @PutMapping("/cancel/publishDartId/{publishDartId}")
+    public ResponseEntity<Void> cancleDart(@PathVariable String publishDartId){
+        Package aPackage = packageService.getById(publishDartId);
+        if(aPackage.getPackageStatus() == PackageStatus.待领取){
+            aPackage.setEndTime(new Date());
+            aPackage.setPackageStatus(PackageStatus.已撤销);
+        }else if(aPackage.getPackageStatus() == PackageStatus.待送达){
+            aPackage.setDeliveryTime(new Date());
+            aPackage.setPackageStatus(PackageStatus.待签收);
+        } else if(aPackage.getPackageStatus() == PackageStatus.待签收){
+            aPackage.setEndTime(new Date());
+            aPackage.setPackageStatus(PackageStatus.已完成);
+            aPackage.setOrderResult(OrderResult.交易成功);
+        }
+        packageService.saveOrUpdate(aPackage);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequiresRoles("user")
+    @ResponseBody
+    @GetMapping("/userInformation")
+    public User getInfo(){
+        final String userName = SecurityUtils.getSubject().getPrincipal().toString();
+        return userInfoService.getById(userName);
+    }
 
 }

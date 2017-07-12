@@ -17,8 +17,17 @@
     <div class="navn2" >
         <strong><p id="userName" class="navuser"></p></strong>
     </div>
-    <div class="navn3" >
-        <p style="font-size: 13px;color: #888888;" class="navuser">摘要信息</p>
+    <div class="navn3" style="height: 35px">
+        <%--<p style="font-size: 13px;color: #888888;" class="navuser">信用分</p>--%>
+            <div class="button_sp_area navuser">
+                <a href="/User/MyIntegration/" class="weui-btn weui-btn_mini weui-btn_primary" style="border-radius: 100px;background-color: orange;border: 0px;">
+                    <div>
+                        <span>信用分:</span>
+                        <span></span>
+                        <span id="integration"></span>
+                    </div>
+                </a>
+            </div>
     </div>
 
     <div class="page__hd">
@@ -111,8 +120,28 @@
             </div>
             <div class="weui-cell__ft"></div>
         </div>
+        <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/AboutUs/'">
+            <div class="weui-cell__bd">
+                 <span class="fa-stack fa-lg">
+                    <i class="fa fa-square fa-stack-2x" style="color: #bb514b"></i>
+                    <i class="fa fa-thumbs-o-up fa-stack-1x fa-inverse"></i>
+                </span>
+                <span style="vertical-align: middle" class="font_color">&nbsp;关于我们</span>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </div>
     </div>
 </div>
+<script>
+    var success = function success(data) {
+      $("#integration").text("");
+
+      $("#integration").text(data.integration);
+    };
+    $(document).ready(function () {
+        Get("/User/MyIntegration/information",success);
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#personalCenter").addClass("weui-bar__item_on");

@@ -53,29 +53,31 @@
                         <strong>镖</strong>
                     </div>
                 </li>
-                <li class="">
+                <li class="li">
                     <a href="#" url="/UserManagement/" class="redirect"><i class="fa fa-users"></i><span class="nav-label">用户管理</span> </a>
                 </li>
-                <li class="">
-                    <a href="#" url="/StudentVerifyManagement/" class="redirect"><i class="fa fa-check-circle-o"></i> <span class="nav-label">学生认证</span> </a>
+                <li class="li">
+                    <a href="#" url="/VerifyManagement/" class="redirect"><i class="fa fa-check-circle-o"></i> <span class="nav-label">学生认证</span> </a>
                 </li>
-                <li class="">
-                <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">地址管理</span> </a>
+                <li class="li">
+                <a href="#" url="/AddressManagement/" class="redirect"><i class="fa fa-map-marker"></i> <span class="nav-label">区域管理</span> </a>
                 </li>
-                <li class="">
+                <li class="li">
                     <a href="#" url="/PackageListManagement/" class="redirect"><i class="fa fa-th-list"></i> <span class="nav-label">任务列表管理</span></a>
                 </li>
-                <li class="">
+                <li class="li">
                     <a href="#" url="/CourierCompanyManagement/" class="redirect"><i class="fa fa-truck"></i> <span class="nav-label">快递类型管理</span> </a>
                 </li>
-                <li class="">
+                <li class="li">
                     <a href="#" url="/StandardManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">取件收费标准管理</span> </a>
                 </li>
-                <li class="">
+                <li class="li">
                     <a href="#" url="/FeedBackManagement/" class="redirect"><i class="fa fa-thumbs-up"></i> <span class="nav-label">用户反馈</span> </a>
                 </li>
+                <li class="li">
+                    <a href="#" url="/UMITeam/admin" class="redirect"><i class="fa fa-tasks"></i> <span class="nav-label">团队接单</span> </a>
+                </li>
             </ul>
-
         </div>
     </nav>
 
@@ -195,7 +197,7 @@
     };
     AjaxGetRequest("/UserManagement/UserInfo", fillUser);
 
-    $("#side-menu").find("li").click(function () {
+    $(".li").click(function () {
         $(".active").removeClass("active");
         $(this).addClass("active");
     });
