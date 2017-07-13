@@ -29,14 +29,14 @@
         </div>
         <form action="/Account/Register" method="post" name="form1">
         <div class="weui-cells weui-cells_form">
-            <div class="weui-cell" >
+            <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="nameLimit">
                 <div class="weui-cell__hd"><label class="weui-label" for="name">真实姓名</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="text" name="name" id="name" placeholder="请输入真实姓名">
                 </div>
             </div>
 
-            <div class="weui-cell">
+            <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="phoneLimit">
                 <div class="weui-cell__hd">
                     <label class="weui-label">手机号</label>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="weui-cell">
+            <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="studentIdLimit">
                 <div class="weui-cell__hd">
                     <label class="weui-label">学/工号</label>
                 </div>
@@ -54,15 +54,11 @@
                 </div>
             </div>
 
-            <div class="weui-cell">
+            <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="schoolNameTypeLimit" >
                 <div class="weui-cell__hd"><label for="name" class="weui-label">学校</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" name="schoolName" id="schoolName" placeholder="请选择学校" type="text" value="">
                 </div>
-            </div>
-
-            <div class="weui-cell">
-                <div id="msg" style="color:red;"></div>
             </div>
 
         </div>
@@ -84,6 +80,7 @@
     };
     $(document).ready(function () {
         Get("/User/ManageAddress/schoolNameList",success);
+        check();
     });
 </script>
 <script>
@@ -94,16 +91,20 @@
        var schoolName = $("#schoolName").val();
 
        if(name == ""){
-           $("#name").css({"borderColor": "red"});
+           $("#nameLimit").css({"borderColor": "red"});
+           return false;
        }
        if(phoneNumber == ""){
-           $("#phoneNumber").css({"borderColor": "red"});
+           $("#phoneLimit").css({"borderColor": "red"});
+           return false;
        }
        if(studentId == ""){
-           $("#studentId").css({"borderColor": "red"});
+           $("#studentIdLimit").css({"borderColor": "red"});
+           return false;
        }
        if(schoolName == ""){
-           $("#schoolName").css({"borderColor": "red"});
+           $("#schoolNameTypeLimit").css({"borderColor": "red"});
+           return false;
        }
     });
 </script>

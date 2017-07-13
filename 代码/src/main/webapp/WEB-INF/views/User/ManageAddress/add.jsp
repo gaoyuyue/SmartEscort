@@ -28,20 +28,20 @@
     </div>
 
     <div class="weui-cells">
-        <div class="weui-cell">
+        <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputreceiver">
             <div class="weui-cell__bd">
-                <input class="weui-input" id="name" type="text" placeholder="收货人姓名">
+                <input class="weui-input" id="name" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" type="text" placeholder="收货人姓名">
             </div>
         </div>
-        <div class="weui-cell">
+        <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputphon">
             <div class="weui-cell__bd">
-                <input class="weui-input" id="phone" type="number" placeholder="手机号码">
+                <input class="weui-input" id="phone" maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " type="number" placeholder="手机号码">
             </div>
         </div>
     </div>
 
     <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
+        <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputschoolarea">
             <div class="weui-cell__hd"><label for="name" class="weui-label">区域</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" id="area" placeholder="请选择区域" type="text" value="">
@@ -50,7 +50,7 @@
     </div>
 
     <div class="weui-cells weui-cells_form">
-        <div class="weui-cell">
+        <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputdetai">
             <div class="weui-cell__bd">
                 <textarea class="weui-textarea" id="detailAddress" placeholder="详细地址" rows="4"></textarea>
             </div>
@@ -76,6 +76,7 @@
         };
         $(document).ready(function () {
             Get("/User/ManageAddress/areaNameList",getSuccess);
+            check();
         });
 
         var postSuccess = function () {
@@ -91,7 +92,37 @@
                     areaName:$("#area").val()
                 }
             };
-            Post("/User/ManageAddress/add",data,postSuccess);
+            function examreceiver(data) {
+                if(data.receiverName =="") {
+                    $("#inputreceiver").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            function examphonenumber(data) {
+                if(data.phoneNumber =="") {
+                    $("#inputphon").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            function examdetai(data) {
+                if(data.detail =="") {
+                    $("#inputdetai").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            function examschoolarea(data) {
+                if(data.area.areaName =="") {
+                    $("#inputschoolarea").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
+            }
+            if(examreceiver(data)&examschoolarea(data)&examdetai(data)&examphonenumber(data)) {
+                Post("/User/ManageAddress/add",data,postSuccess);
+            }
         });
 
     </script>

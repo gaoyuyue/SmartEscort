@@ -191,3 +191,12 @@ var getLocalTime = function(nS) {
         return "";
     }
 };
+
+var check = function check() {
+    $(".check").click(function () {
+        var id = this.id;
+        $("#"+id).click(function () {
+            $("#"+id).css("borderColor","white");
+        });
+    });
+};

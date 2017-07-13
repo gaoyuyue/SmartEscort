@@ -29,12 +29,12 @@
 </div>
 
 <div class="weui-cells">
-    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputreceiver" onclick="checkreceiver()">
+    <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputreceiver">
         <div class="weui-cell__bd">
             <input class="weui-input" id="name" type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" placeholder="收货人姓名">
         </div>
     </div>
-    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputphon" onclick="checkphon()">
+    <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputphon">
         <div class="weui-cell__bd">
             <input class="weui-input" id="phone" type="text" maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " placeholder="手机号码">
         </div>
@@ -42,7 +42,7 @@
 </div>
 
 <div class="weui-cells weui-cells_form">
-    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputschoolarea" onclick="checkschoolarea()">
+    <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputschoolarea">
         <div class="weui-cell__hd"><label for="area" class="weui-label">学校/区域</label></div>
         <div class="weui-cell__bd">
             <input class="weui-input" id="area" type="text">
@@ -51,7 +51,7 @@
 </div>
 
 <div class="weui-cells weui-cells_form">
-    <div class="weui-cell" style="clear:both;border: 1.5px solid white" id="inputdetai" onclick="checkdetai()">
+    <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="inputdetai">
         <div class="weui-cell__bd">
             <textarea class="weui-textarea" id="detail" placeholder="详细地址" rows="4"></textarea>
         </div>
@@ -86,23 +86,12 @@
     };
     $(document).ready(function () {
         Get("/User/ManageAddress/edit",getAddress);
+        check();
     });
 
     var success = function () {
         window.location.href = "/User/ManageAddress/";
     };
-    function checkreceiver() {
-        $("#inputreceiver").css("borderColor","white");
-    }
-    function checkphon() {
-        $("#inputphon").css("borderColor","white");
-    }
-    function checkschoolarea() {
-        $("#inputschoolarea").css("borderColor","white");
-    }
-    function checkdetai() {
-        $("#inputdetai").css("borderColor","white");
-    }
     $("#saveButton").click(function () {
         const data = {
             id:addressId,
