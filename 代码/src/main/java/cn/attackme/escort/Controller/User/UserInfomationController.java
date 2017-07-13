@@ -1,6 +1,8 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class UserInfomationController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private SchoolService schoolService;
+
 
     /**
      * 获取当前用户信息
@@ -54,9 +59,10 @@ public class UserInfomationController {
      * @return
      */
     @ResponseBody
-    @PutMapping("/name/{name}/phoneNumber/{phoneNumber}")
+    @PutMapping("/name/{name}/phoneNumber/{phoneNumber}/school/{school}")
     public ResponseEntity<Void> updateUser(@PathVariable String name,
-                                           @PathVariable String phoneNumber){
+                                           @PathVariable String phoneNumber,
+                                           @PathVariable String school){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
 
@@ -65,7 +71,12 @@ public class UserInfomationController {
         }else{
             currentUser.setName(name);
             currentUser.setPhoneNumber(phoneNumber);
-            userInfoService.save(currentUser);
+            School school1 = schoolService.getByName(school);
+            if(currentUser.getSchool().getSchoolName() != school1.getSchoolName()){
+                currentUser.setSchool(school1);
+                currentUser.setAuthed(false);
+            }
+            userInfoService.saveOrUpdate(currentUser);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
