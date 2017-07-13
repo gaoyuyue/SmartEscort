@@ -27,6 +27,7 @@
 </style>
 <div id="frame">
     <div id="navbarSuspension">
+
         <div id="top">
             <span id="list">
                 <a href="/User/PersonalCenter/"><img src="/assets/img/goback.png" align="top"></a>
@@ -37,6 +38,7 @@
 
         <div class="page navbar js_show">
             <div class="page__bd">
+
                 <div class="back_position">
                     <div style="position: relative;text-align: center">
                         <img class="img_position" src="/assets/img/circle.jpg">
@@ -50,15 +52,15 @@
 
                     <div class="weui-cells">
                         <div class="weui-cells__title"><strong style="font-size: 15px;color: black">信用分变更记录</strong></div>
-                        <div id="creditDivisionRecord">
-
+                        <div class="weui-tab__panel" style="height: 300px">
+                            <div class="creditDivisionRecord">
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="text_position" id="integration"></div>
 
 
@@ -165,13 +167,13 @@
 
 <script>
     var success = function success(data) {
-      $("#creditDivisionRecord").empty();
+      $(".creditDivisionRecord").empty();
       var information = function information(array) {
           $("#integration").text("");
           $("#integration").text(array.integration);
           data.forEach(function (e) {
               if(array.userName == e.user.userName && e.score > 0){
-                  $("#creditDivisionRecord").prepend(`
+                  $(".creditDivisionRecord").prepend(`
                           <div class="weui-cell weui-cell_access">
                                 <div class="weui-cell__bd">`+e.description+`</div>
                                 <div style="font-size: 10px">
@@ -182,7 +184,7 @@
                           </div>
         `)
               } else if(array.userName == e.user.userName && e.score <= 0){
-                  $("#creditDivisionRecord").prepend(`
+                  $(".creditDivisionRecord").prepend(`
                           <div class="weui-cell weui-cell_access">
                                 <div class="weui-cell__bd">`+e.description+`</div>
                                 <div style="font-size: 10px">
