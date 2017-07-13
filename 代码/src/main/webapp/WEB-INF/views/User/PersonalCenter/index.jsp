@@ -35,17 +35,20 @@
             <a href="/User/MyPublish/" class="weui-grid">
                 <div class="weui-grid__icon">
                     <img src="/assets/img/daishouhuo.png" alt="">
+                    <span class="weui-badge" style="position: absolute;top: 0;right: 2em;" id="publishList"></span>
                 </div>
                 <p class="weui-grid__label">我的发布</p>
             </a>
             <a href="/User/MyDart/" class="weui-grid">
                 <div class="weui-grid__icon">
+                    <span class="weui-badge" style="position: absolute;top: 0;right: 2em;" id="myDartList"></span>
                     <img src="/assets/img/daijiebiao.png" alt="">
                 </div>
                 <p class="weui-grid__label">我的接单</p>
             </a>
             <a href="/User/WaitingEvaluation/" class="weui-grid">
                 <div class="weui-grid__icon">
+                    <span class="weui-badge" style="position: absolute;top: 0;right: 2em;" id="waitingEvaluationList"></span>
                     <img src="/assets/img/daipingjia.png" alt="">
                 </div>
                 <p class="weui-grid__label">待评价</p>
@@ -137,8 +140,19 @@
 
       $("#integration").text(data.integration);
     };
+    var packageList = function packageList(data) {
+        $("#publishList").empty();
+        $("#myDartList").empty();
+        $("#waitingEvaluationList").empty();
+
+        $("#publishList").text(data.myPublishCount);
+        $("#myDartList").text(data.myDartCount);
+        $("#waitingEvaluationList").text(data.waitingEvaluationCount);
+    };
+
     $(document).ready(function () {
         Get("/User/MyIntegration/information",success);
+        Get("/User/PersonalCenter/packageList",packageList);
     });
 </script>
 <script type="text/javascript">
