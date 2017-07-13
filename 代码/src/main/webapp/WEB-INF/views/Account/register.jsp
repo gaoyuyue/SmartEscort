@@ -29,10 +29,10 @@
         </div>
         <form action="/Account/Register" method="post" name="form1">
         <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
+            <div class="weui-cell" >
                 <div class="weui-cell__hd"><label class="weui-label" for="name">真实姓名</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入真实姓名" name="name" id="name">
+                    <input class="weui-input" type="text" name="name" id="name" placeholder="请输入真实姓名">
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     <label class="weui-label">手机号</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber">
+                    <input class="weui-input" type="tel" maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" placeholder="请输入手机号" name="phoneNumber" id="phoneNumber">
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                     <label class="weui-label">学/工号</label>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" placeholder="学/工号" name="studentId" id="studentId">
+                    <input class="weui-input" type="tel" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " placeholder="学/工号" name="studentId" id="studentId">
                 </div>
             </div>
 
@@ -76,7 +76,6 @@
 <script src="/assets/js/fastclick.js"></script>
 
 <script type="text/javascript">
-
     var success = function (data) {
         $("#schoolName").select({
             title: "选择区域",
@@ -85,6 +84,27 @@
     };
     $(document).ready(function () {
         Get("/User/ManageAddress/schoolNameList",success);
+    });
+</script>
+<script>
+    $("#submit").click(function () {
+       var name = $("#name").val();
+       var phoneNumber = $("#phoneNumber").val();
+       var studentId = $("#studentId").val();
+       var schoolName = $("#schoolName").val();
+
+       if(name == ""){
+           $("#name").css({"borderColor": "red"});
+       }
+       if(phoneNumber == ""){
+           $("#phoneNumber").css({"borderColor": "red"});
+       }
+       if(studentId == ""){
+           $("#studentId").css({"borderColor": "red"});
+       }
+       if(schoolName == ""){
+           $("#schoolName").css({"borderColor": "red"});
+       }
     });
 </script>
 
