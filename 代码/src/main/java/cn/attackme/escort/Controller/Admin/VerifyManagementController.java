@@ -16,6 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.List;
+
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 
 /**
  * Created by Administrator on 2017/5/23.
@@ -46,7 +51,17 @@ public class VerifyManagementController {
                                              @PathVariable int pageNumber,
                                              @PathVariable int pageSize){
         School school=schoolService.getById(schoolId);
-        return userInfoService.getListPageByUrlAndAuth(Role.user,school,false,pageNumber,pageSize);
+        PageResults<User> pageResults = userInfoService.getListPageByUrlAndAuth(Role.user, school, false, pageNumber, pageSize);
+        List<User> userList = pageResults.getResults();
+        userList.stream().forEach(user -> {
+            try {
+                user.setNickName(URLDecoder.decode(user.getNickName(), "utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                LogToDB(e);
+            }
+        });
+        pageResults.setResults(userList);
+        return pageResults;
     }
 
     //认证
