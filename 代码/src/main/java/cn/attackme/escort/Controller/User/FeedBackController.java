@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 import static org.apache.shiro.SecurityUtils.getSubject;
 
 
@@ -42,6 +44,7 @@ public class FeedBackController {
         Feedback feedback = new Feedback();
         feedback.setUser(user);
         feedback.setContent(content);
+        feedback.setSubmitTime(new Date());
         feedBackService.save(feedback);
         return new ResponseEntity<>(HttpStatus.OK);
 
