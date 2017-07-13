@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>UMI快递代取</title>
+    <title>优米快递代取</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -21,6 +21,10 @@
         .QQ_S{}
     </style>
 <body style="background-color: #eeeeee">
+
+<div id="top" style="background-color:#08ddff">
+    <h3 style="color: white">优米快递代取</h3>
+</div>
 
 <form method="post" action="/UMITeam/">
     <div class="weui-cells">
@@ -81,7 +85,7 @@
     </div>
 </form>
 
-<div style="width:60px;height: 75px;position:fixed;right:0;top:0;display:block;border:0px solid;border-radius:5px; background-color: #018d75">
+<div style="width:60px;height: 75px;position:fixed;right:0;top:50px;display:block;border:0px solid;border-radius:5px; background-color: #018d75">
     <ul style="text-align: center">
         <li><div style="height: 20px;margin-top: 2px"><span style="font-weight:bold;font-size: small;color:#c2c2c2">联系客服</span></div></li>
         <li><div style="height: 10px"></div></li>
