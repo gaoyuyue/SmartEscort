@@ -41,9 +41,9 @@ public class StudentVerifyController {
 
     @RequestMapping("/upLoad")
     public String upLoad(@RequestParam("dataUrl") String dataUrl) throws MessagingException {
+        String userName = getSubject().getPrincipal().toString();
+        User user = userInfoService.getById(userName);
         try {
-            String userName = getSubject().getPrincipal().toString();
-            User user = userInfoService.getById(userName);
             String userHome = System.getProperty("user.home");
             String fileSeparator = System.getProperty("file.separator");
             user.setStuCardUrl(decodeBase64ToImage(dataUrl, userHome+fileSeparator+"Images"+fileSeparator));
@@ -52,7 +52,7 @@ public class StudentVerifyController {
             LogUtils.LogToDB(e);
             return "/User/StudentVerify/failure";
         }
-        mailService.sendMail("1519035296@qq.com","gaoyuyue@outlook.com","有新用户认证!","请前往管理:http://escort.attackme.cn");
+        mailService.sendMail(user.getStudentId(),"有新用户认证!","请前往管理:"+user.getStuCardUrl());
         return "/User/StudentVerify/success";
     }
 }

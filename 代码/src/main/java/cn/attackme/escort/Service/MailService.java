@@ -22,10 +22,10 @@ public class MailService {
     @Autowired
     private JavaMailSenderImpl mailSender;
 
-    public void sendMail(String from,String to,String title,String content) throws MessagingException {
+    public void sendMail(String to,String title,String content) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
-        mimeMessageHelper.setFrom(from);
+        mimeMessageHelper.setFrom(mailSender.getUsername());
         mimeMessageHelper.setTo(to);
         mimeMessageHelper.setSubject(title);
         mimeMessageHelper.setText(content);
