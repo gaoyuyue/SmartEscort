@@ -250,8 +250,6 @@
                 var  email=$("#email").val();
                 AjaxPutRequest("/AdminAccount/changeInfo/userName/"+userName+"/name/"+name+"/nickName/"+nickName+"/phoneNumber/"+phoneNumber+"/email/"+email);
                 $("#CancelButton").click();
-//                load();
-//                location.reload()
             })
         });
         AjaxGetRequest("/UserManagement/UserInfo", fillUser);

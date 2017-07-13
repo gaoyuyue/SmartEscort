@@ -99,16 +99,6 @@
     </div>
 
     <div class="weui-cells">
-        <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/ContactCustomer/'">
-            <div class="weui-cell__bd">
-                <span class="fa-stack fa-lg">
-                    <i class="fa fa-square fa-stack-2x" style="color: #ADAAE4"></i>
-                    <i class="fa fa-mobile fa-stack-1x fa-inverse"></i>
-                </span>
-                <span style="vertical-align: middle" class="font_color">&nbsp;联系客服</span>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </div>
         <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/UserInfomation/'">
             <div class="weui-cell__bd">
                  <span class="fa-stack fa-lg">
@@ -116,6 +106,16 @@
                     <i class="fa fa-cog fa-stack-1x fa-inverse"></i>
                 </span>
                 <span style="vertical-align: middle" class="font_color">&nbsp;设置</span>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </div>
+        <div class="weui-cell weui-cell_access" onclick="window.location.href='/User/ContactCustomer/'">
+            <div class="weui-cell__bd">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-square fa-stack-2x" style="color: #ADAAE4"></i>
+                    <i class="fa fa-mobile fa-stack-1x fa-inverse"></i>
+                </span>
+                <span style="vertical-align: middle" class="font_color">&nbsp;联系客服</span>
             </div>
             <div class="weui-cell__ft"></div>
         </div>
