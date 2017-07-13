@@ -12,7 +12,7 @@
 <!--页面-->
 <div class="page badge js_show">
     <div class="navn1" >
-        <img class="img-circle navicon" id="headImageUrl" src="/assets/img/a5.jpg" style="width: 50px;height: 50px;display: block">
+        <img class="img-circle navicon" id="headImageUrl" style="width: 50px;height: 50px;display: block">
     </div>
     <div class="navn2" >
         <strong><p id="userName" class="navuser"></p></strong>
