@@ -68,6 +68,11 @@ public class UMIPackageController {
                          @RequestParam String areaName,
                          @RequestParam String courierCompany,
                          Model model){
+        if (name.trim().equals("")||phoneNumber.trim().equals("")
+                ||detailAddress.trim().equals("")||message.trim().equals("")
+                ||schoolName.trim().equals("")||areaName.trim().equals("")
+                ||courierCompany.trim().equals(""))
+            return "UMITeam/failure";
         try {
             CourierCompany company = courierCompanyService.getByName(courierCompany);
             School school = schoolService.getByName(schoolName);

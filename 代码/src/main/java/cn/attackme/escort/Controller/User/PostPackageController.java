@@ -161,6 +161,9 @@ public class PostPackageController {
     @ResponseBody
     public ResponseEntity<Void> addAddress(@RequestBody Address address,
                                            HttpSession httpSession){
+        if (address.getArea().getAreaName().trim().equals("")||address.getDetail().trim().equals("")
+                ||address.getPhoneNumber().trim().equals("")||address.getReceiverName().trim().equals(""))
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
         List<Address> addressList = user.getAddressList();
@@ -182,6 +185,11 @@ public class PostPackageController {
     @PostMapping("/")
     @ResponseBody
     public ResponseEntity<Void> create(@RequestBody Package p){
+        if (p.getMessage().trim().equals("")||p.getPrice().trim().equals("")||
+                p.getStandard().getDescription().trim().equals("")||p.getAddressDetail().trim().equals("")||
+                p.getReceiverName().trim().equals("")||p.getCourierCompany().getCompanyName().trim().equals("")||
+                p.getReceiverPhoneNumber().trim().equals("")||p.getArea().getId()==null)
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
         user.setIntegration(user.getIntegration()+1);
