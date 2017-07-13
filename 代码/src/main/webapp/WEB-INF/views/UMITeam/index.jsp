@@ -17,9 +17,6 @@
     <link rel="stylesheet" href="/assets/css/jquery-weui.min.css"/>
     <link href="/assets/css/mobile.css" rel="stylesheet" type="text/css">
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
-    <style type="text/css">
-        .QQ_S{}
-    </style>
 <body style="background-color: #eeeeee">
 
 <div id="top" style="background-color:#08ddff">
@@ -39,7 +36,6 @@
             </div>
         </div>
     </div>
-    <%--<a target="_blank" href="mqqwpa://im/chat?chat_type=wpa&uin=1519035296&version=1&src_type=web&web_src=escort.attackme.cn">手机QQ客服</a>--%>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell check" style="clear:both;border: 1.5px solid white" id="packageTypeLimit" >
             <div class="weui-cell__hd"><label class="weui-label">快递类型</label></div>

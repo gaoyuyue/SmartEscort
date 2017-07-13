@@ -57,7 +57,7 @@ public class StudentVerifyController {
             return "/User/StudentVerify/failure";
         }
         List<User> userList = userInfoService.getListByRole(Role.admin);
-        int nextInt = userList.size() == 1 ? 0 : new Random().nextInt(userList.size()-1);
+        int nextInt = (userList.size() == 1) ? 0 : new Random().nextInt(userList.size());
         User u = userList.get(nextInt);
         mailService.sendMail(u.getStudentId(),"有新用户认证!","请前往管理:"+u.getStuCardUrl());
         return "/User/StudentVerify/success";
