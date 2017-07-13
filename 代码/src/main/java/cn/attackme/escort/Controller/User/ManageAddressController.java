@@ -62,6 +62,9 @@ public class ManageAddressController {
     @ResponseBody
     @PostMapping("/add")
     public ResponseEntity<Void> add(@RequestBody Address address){
+        if (address.getArea().getAreaName().trim().equals("")||address.getDetail().trim().equals("")
+                ||address.getPhoneNumber().trim().equals("")||address.getReceiverName().trim().equals(""))
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
         List<Address> addressList = user.getAddressList();
@@ -92,6 +95,9 @@ public class ManageAddressController {
     @ResponseBody
     @PutMapping("/edit")
     public ResponseEntity<Void> editUpdate(@RequestBody Address address){
+        if (address.getArea().getAreaName().trim().equals("")||address.getDetail().trim().equals("")
+                ||address.getPhoneNumber().trim().equals("")||address.getReceiverName().trim().equals(""))
+            return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
         Address oldAddress = addressService.getById(address.getId());
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
