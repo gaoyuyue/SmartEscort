@@ -10,9 +10,10 @@
 <style>
     table td{
         border:1px solid #bfbfbf
+
     }
     td{
-        height: 30px;
+        height: 40px;
     }
     .bold{
         font-weight: bold;
@@ -24,6 +25,10 @@
     .green{
         color: green;
     }
+    .orange{
+        color: orange;
+    }
+
 </style>
 <div id="frame">
     <div id="navbarSuspension">
@@ -90,7 +95,40 @@
 
                     <section style="text-align: left;padding: 0px 0px">
                         <h1 style="color: black;font-weight: bolder;text-align: left;margin-bottom: 0em">信用分变化规则：</h1>
-                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center;">
+                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center;margin: 0px 20px 0px 20px;">
+                            <thead>星星级别</thead>
+                            <tbody>
+                            <tr>
+                                <td class="bold">星星个数</td>
+                                <td class="bold">代表分数</td>
+                            </tr>
+                            <tr>
+                                <td>0颗星</td>
+                                <td class="orange">0</td>
+                            </tr>
+                            <tr>
+                                <td>1颗星</td>
+                                <td class="orange">20</td>
+                            </tr>
+                            <tr>
+                                <td>2颗星</td>
+                                <td class="orange">40</td>
+                            </tr>
+                            <tr>
+                                <td>3颗星</td>
+                                <td class="orange">60</td>
+                            </tr>
+                            <tr>
+                                <td>4颗星</td>
+                                <td class="orange">80</td>
+                            </tr>
+                            <tr>
+                                <td>5颗星</td>
+                                <td class="orange">100</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center;margin: 0px 20px 0px 20px;">
                             <thead>双方互评</thead>
                             <tbody>
                             <tr>
@@ -119,7 +157,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center">
+                        <table width="90%" cellpadding="0" cellspacing="0" style="text-align: center;margin: 0px 20px 0px 20px;">
                             <thead>完成订单</thead>
                             <tbody>
                             <tr>
