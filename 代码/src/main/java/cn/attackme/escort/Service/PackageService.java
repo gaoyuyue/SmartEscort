@@ -142,13 +142,13 @@ public class PackageService extends BaseService<Package> {
     }
     //根据用户搜索
     public PageResults<Package> getListBySearch(@NotNull School school,
-                                                          @NotNull User user,
+                                                          @NotNull String packageId,
                                                           @NotNull int pageNumber,
                                                           @NotNull int pageSize){
         Query query = new Query(entityManager);
         query.from(Package.class)
                 .whereEqual("school",school)
-                .whereOr(Arrays.asList("agency","delegation"),user)
+                .whereEqual("id",packageId)
                 .setOrder("publishTime","desc");
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }

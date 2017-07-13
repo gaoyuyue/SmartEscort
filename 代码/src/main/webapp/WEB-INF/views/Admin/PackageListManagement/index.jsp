@@ -369,16 +369,6 @@
             })
         });
 
-    //查找
-    $("#searchPackage").click(function () {
-        var content = $("#content").val();
-        if(content.length>0){
-            if($("#theWay").val()=="wechat"){
-                alert(content)
-            }else{
 
-            }
-        }
-    })
 
 </script>

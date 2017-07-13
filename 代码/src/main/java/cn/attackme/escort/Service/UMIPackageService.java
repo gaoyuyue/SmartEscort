@@ -65,11 +65,11 @@ public class UMIPackageService extends BaseService<UMIPackage>{
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }
 
-    public PageResults<UMIPackage> getListBySearch(@NotNull School school, @NotNull String name,@NotNull int pageNumber,@NotNull int pageSize) {
+    public PageResults<UMIPackage> getListBySearch(@NotNull School school, @NotNull String packageId,@NotNull int pageNumber,@NotNull int pageSize) {
         Query query = new Query(entityManager);
         query.from(UMIPackage.class)
-                .whereEqual("name",name)
                 .whereEqual("school",school)
+                .whereEqual("orderNumber",packageId)
                 .setOrder("publishTime","desc");;
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }

@@ -71,6 +71,9 @@
                 <li class="li">
                     <a href="#" url="/UMITeam/admin" class="redirect"><i class="fa fa-tasks"></i> <span class="nav-label">团队接单</span> </a>
                 </li>
+                <li class="li">
+                    <a href="#" url="/SearchPackage/" class="redirect"><i class="fa fa-search-plus"></i> <span class="nav-label">订单查询</span> </a>
+                </li>
             </ul>
         </div>
     </nav>
