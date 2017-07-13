@@ -125,7 +125,6 @@ dependencies {
             "org.apache.httpcomponents:httpclient:4.5.3",
 
             //java mail
-//            "javax.mail:javax.mail-api:1.6.0-rc1"
             "com.sun.mail:javax.mail:1.6.0-rc1"
     )
     testCompile(

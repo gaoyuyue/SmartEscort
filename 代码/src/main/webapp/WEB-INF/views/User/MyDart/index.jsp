@@ -200,7 +200,7 @@
         $(".receivedDart").click(function () {
             "use strict";
             const publishDartId = $(this).attr("publishDartId");
-            $.confirm("确认收到货物吗？", "提示", function() {
+            $.confirm("确认送达货物吗？", "提示", function() {
                 $.ajax({
                     url:"/User/MyDart/cancel/publishDartId/"+publishDartId,
                     type:"PUT",

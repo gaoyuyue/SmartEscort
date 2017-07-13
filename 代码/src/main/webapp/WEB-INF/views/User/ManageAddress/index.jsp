@@ -40,7 +40,7 @@
     </div>
 
     <div class="weui-tabbar">
-        <a href="/User/ManageAddress/add" class="weui-btn weui-btn_warn footer_weui-btn">新增收获地址</a>
+        <a href="/User/ManageAddress/add" class="weui-btn weui-btn_warn footer_weui-btn">新增收货地址</a>
     </div>
 </div>
 

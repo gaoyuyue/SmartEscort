@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>编辑收获地址</title>
+    <title>编辑收货地址</title>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -24,7 +24,7 @@
         <span id="list">
             <a href="javascript:window.location.href='/User/ManageAddress/';"><img src="/assets/img/goback.png" align="top"></a>
         </span>
-    <a id="title">编辑收获地址</a>
+    <a id="title">编辑收货地址</a>
     <a id="logo" href="/"><img src="/assets/img/home.png" align="top"></a>
 </div>
 
