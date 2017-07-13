@@ -38,7 +38,7 @@ public class AdminAccountController {
             user.setNickName(nickName);
             user.setPhoneNumber(phoneNumber);
             user.setStudentId(email);
-            userInfoService.save(user);
+            userInfoService.saveOrUpdate(user);
             return new ResponseEntity<Void>(org.springframework.http.HttpStatus.OK);
         }
 

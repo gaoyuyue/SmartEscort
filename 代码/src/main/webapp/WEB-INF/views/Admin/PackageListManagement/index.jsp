@@ -13,9 +13,9 @@
                 <div class="ibox-title">
                     <h5>任务列表管理</h5>
                     <div class="input-group col-sm-3" style="float: right">
-                    <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
+                    <input type="text" placeholder="请输入关键词" class="input-sm form-control" id="content"> <span
                         class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                        <button type="button" class="btn btn-sm btn-primary" id="searchPackage"> 搜索</button> </span>
                 </div>
                 </div>
                 <div class="ibox-content">
@@ -369,5 +369,16 @@
             })
         });
 
+    //查找
+    $("#searchPackage").click(function () {
+        var content = $("#content").val();
+        if(content.length>0){
+            if($("#theWay").val()=="wechat"){
+                alert(content)
+            }else{
+
+            }
+        }
+    })
 
 </script>

@@ -22,7 +22,7 @@
             <br>
             <div style="margin: 20px">
                 <a style="color: orange" class="weui-btn weui-btn_plain-default" href="mqqwpa://im/chat?chat_type=wpa&uin=1519035296&version=1&src_type=web&web_src=escort.attackme.cn">QQ:1519035296</a>
-                <a class="weui-btn weui-btn_plain-default" href="mqqwpa://im/chat?chat_type=wpa&uin=1519035296&version=1&src_type=web&web_src=escort.attackme.cn">QQ:1519035296</a>
+                <a style="color: orange" class="weui-btn weui-btn_plain-default" href="mqqwpa://im/chat?chat_type=wpa&uin=1519035296&version=1&src_type=web&web_src=escort.attackme.cn">QQ:1519035296</a>
             </div>
             <div style="margin: 20px">
                 <a style="color: orange" class="weui-btn weui-btn_plain-default" href="tel:15678879836">TEL:15678879836</a>
@@ -30,13 +30,12 @@
             </div>
             <br>
             <br>
-
         </div>
-
-</div>
+    </div>
 <script>
     $(document).ready(function () {
         $("#personalCenter").addClass("weui-bar__item_on");
     });
+
 </script>
 <%@include file="/user_footer.jsp"%>

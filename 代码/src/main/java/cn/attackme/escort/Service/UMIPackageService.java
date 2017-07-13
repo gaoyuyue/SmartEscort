@@ -1,6 +1,7 @@
 package cn.attackme.escort.Service;
 
 import cn.attackme.escort.Model.*;
+import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Repository.Query;
 import cn.attackme.escort.Utils.PageResults;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,15 @@ public class UMIPackageService extends BaseService<UMIPackage>{
         query.from(UMIPackage.class)
                 .whereEqual("school",school)
                 .whereEqual("packageStatus",packageStatus);
+        return this.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
+
+    public PageResults<UMIPackage> getListBySearch(@NotNull School school, @NotNull String name,@NotNull int pageNumber,@NotNull int pageSize) {
+        Query query = new Query(entityManager);
+        query.from(UMIPackage.class)
+                .whereEqual("name",name)
+                .whereEqual("school",school)
+                .setOrder("publishTime","desc");;
         return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }
 }

@@ -7,6 +7,8 @@ import cn.attackme.escort.Utils.PageResults;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -137,5 +139,17 @@ public class PackageService extends BaseService<Package> {
                 whereValueIn("packageStatus", packageStatusList).
                 createTypedQuery().
                 getResultList();
+    }
+    //根据用户搜索
+    public PageResults<Package> getListBySearch(@NotNull School school,
+                                                          @NotNull User user,
+                                                          @NotNull int pageNumber,
+                                                          @NotNull int pageSize){
+        Query query = new Query(entityManager);
+        query.from(Package.class)
+                .whereEqual("school",school)
+                .whereOr(Arrays.asList("agency","delegation"),user)
+                .setOrder("publishTime","desc");
+        return this.getListByPageAndQuery(pageNumber,pageSize,query);
     }
 }

@@ -1,12 +1,8 @@
 package cn.attackme.escort.Controller.Admin;
 
+import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Model.Package;
-import cn.attackme.escort.Model.PackageStatus;
-import cn.attackme.escort.Model.School;
-import cn.attackme.escort.Model.UMIPackage;
-import cn.attackme.escort.Service.PackageService;
-import cn.attackme.escort.Service.SchoolService;
-import cn.attackme.escort.Service.UMIPackageService;
+import cn.attackme.escort.Service.*;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,10 @@ public class PackageListManagementController {
     private PackageService packageService;
     @Autowired
     private SchoolService schoolService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserInfoService userInfoService;
     @Autowired
     private UMIPackageService umiPackageService;
     @RequiresRoles("admin")
@@ -54,6 +54,27 @@ public class PackageListManagementController {
                                                   @PathVariable int pageSize){
         School school=schoolService.getById(schoolId);
         return umiPackageService.getPackageByStatusAndSchool(school,packageStatus,pageNumber,pageSize);
+    }
+    //查找订单
+    @RequiresRoles("admin")
+    @ResponseBody
+    @GetMapping("/SearchPackage/content/{content}/schoolId/{schoolId}/pageNumber/{pageNumber}/pageSize/{pageSize}")
+    public PageResults<Package> SearchPackage(@PathVariable String userName,
+                                              @PathVariable int schoolId,@PathVariable int pageNumber,
+                                              @PathVariable int pageSize){
+        School school = schoolService.getById(schoolId);
+        User user = userInfoService.getById(userName);//getByName
+        return packageService.getListBySearch(school,user,pageNumber,pageSize);
+    }
+    //查找UMI订单
+    @RequiresRoles("admin")
+    @ResponseBody
+    @GetMapping("/SearchUMIPackage/name/{name}/schoolId/{schoolId}/pageNumber/{pageNumber}/pageSize/{pageSize}")
+    public PageResults<UMIPackage> SearchUMIPackage(@PathVariable String name,
+                                              @PathVariable int schoolId,@PathVariable int pageNumber,
+                                              @PathVariable int pageSize){
+        School school = schoolService.getById(schoolId);
+        return umiPackageService.getListBySearch(school,name,pageNumber,pageSize);
     }
 
 }
