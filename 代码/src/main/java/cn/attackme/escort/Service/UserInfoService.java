@@ -89,61 +89,15 @@ public class UserInfoService extends BaseService<User>{
         return count.intValue() > 0;
     }
 
-    /**
-     * 根据openid判断用户是否已存在，不管是否被删除
-     * @param openId
-     * @return
-     */
-    public Boolean isExistByOpenId(String openId) {
-        Query query = new Query(entityManager);
-        final Long count = (Long) query.from(User.class)
-                .whereEqual("openid", openId)
-                .selectCount()
-                .createTypedQuery()
-                .getSingleResult();
-        return count.intValue() > 0;
-    }
-
-    public User search(String pattern) {
-        Query query = new Query(entityManager);
-        return (User) query.from(User.class)
-                .whereOrLike(asList("name", "userName"), pattern)
-                .whereEqual("isDeleted", false)
-                .createTypedQuery()
-                .setFirstResult(0)
-                .setMaxResults(1)
-                .getSingleResult();
-    }
-
     @Override
     public boolean contains(@NotNull User model) {
         return !model.isDeleted() && super.contains(model);
-    }
-
-    public void forbidden(@NotNull User model) {
-        model.setDeleted(true);
-        super.save(model);
     }
 
     @Override
     public void deleteAll(@NotNull List<User> modelList) {
         modelList.forEach(this::delete);
     }
-
-    public void forbiddenById(@NotNull Serializable id) {
-        User User = super.getById(id);
-        delete(User);
-    }
-
-    /*@Override
-    public User getById(@NotNull Serializable id) {
-        User User = super.getById(id);
-        if (User != null && User.isDeleted()) {
-            return null;
-        } else {
-            return User;
-        }
-    }*/
 
     @Override
     public List<User> getAll() {
@@ -210,6 +164,13 @@ public class UserInfoService extends BaseService<User>{
                 .whereEqual("role",role)
                 .whereIsNotNull("stuCardUrl");
         return super.getListByPageAndQuery(pageNumber,pageSize,query);
+    }
 
+    public List<User> getListByRole(@NotNull Role role){
+        Query query=new Query(entityManager);
+        return query.from(User.class)
+                .whereEqual("role", role)
+                .createTypedQuery()
+                .getResultList();
     }
 }
