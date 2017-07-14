@@ -16,11 +16,7 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class=" m-b-xs col-lg-7">
-                            <div class="input-group col-sm-5 form-inline" style="position: relative;left: 5px;float:left ">
-                                <input type="text" placeholder="请输入订单编号" class="input-sm form-control" id="content"> <span
-                                    class="input-group-btn">
-                        <button type="button" class="btn btn-sm btn-primary" id="searchPackage"> 搜索</button> </span>
-                            </div>
+
                             <div class=" m-b-xs col-lg-4 form-inline">
                                 <select class="input-sm " title="请选择来源" id="theWay">
                                 <option value="wechat">微信</option>
@@ -30,6 +26,11 @@
                                 <select id="school" class="input-sm input-s-sm inline" title="请选择学校">
                                 </select>
                             </div>
+                            <div class="input-group col-sm-5 form-inline" style="position: relative;left: 5px;float:left ">
+                            <input type="text" placeholder="请输入订单编号" class="input-sm form-control" id="content"> <span
+                                class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-primary" id="searchPackage"> 搜索</button> </span>
+                        </div>
                         </div>
                     </div>
                     <div class="table-responsive">
