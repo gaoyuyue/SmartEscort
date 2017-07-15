@@ -113,7 +113,7 @@
         <div class="weui-popup__modal">
             <div class="top_other">
                 <span class="list_other"><a class="close-popup refresh_page">取消</a></span>
-                <span><a class="logo_other show-warning update">保存</a></span>
+                <span><a class="logo_other show-warning update_school">保存</a></span>
             </div>
             <div class="weui-cell" style="border-bottom: 1px solid #cbcbcb">
                 <div class="weui-cell__bd">
@@ -199,7 +199,7 @@
         Get("/User/UserInfomation/current",success);
     };
     /**
-     * 修改
+     * 修改手机和姓名
      */
     $(".update").click(function () {
         var updateName_other = $("#updateName_other").val();
@@ -214,6 +214,35 @@
                     .on('click', '.show-warning', function() {
                         $.toptip('内容不能为空', 'warning');
                     })
+        } else {
+                $.ajax({
+                    type: "Put",
+                    url: "/User/UserInfomation/name/" + updateName_other + "/phoneNumber/" +updatePhoneNumber_other + "/school/" + updateSchool_other,
+                    success: function () {
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    }
+                });
+                cancelClick();
+        }
+    });
+    /**
+     * 修改学校
+     */
+    $(".update_school").click(function () {
+        var updateName_other = $("#updateName_other").val();
+        var updatePhoneNumber_other = $("#updatePhoneNumber_other").val();
+        var updateSchool_other = $("#updateSchool_other").val();
+        if(
+            isNullOrEmpty(updateName_other) ||
+            isNullOrEmpty(updatePhoneNumber_other) ||
+            isNullOrEmpty(updateSchool_other)
+        ){
+            $(document)
+                .on('click', '.show-warning', function() {
+                    $.toptip('内容不能为空', 'warning');
+                })
         } else {
             $.confirm("修改学校后，需要重新认证！", "提示", function() {
                 $.ajax({
