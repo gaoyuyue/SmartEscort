@@ -52,11 +52,21 @@
                 <img id="preview" src="" width="300px">
                 <h4 class="modal-Name"></h4>
                 <h4  class="modal-Id"> </h4>
+                <form class="">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadiosOk" value="option1" checked>通过
+                    </label>
+                    <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadiosNo" value="option2">不通过
+                </label>
+                </form>
+            </div>
+            <div class="text-center">
             </div>
             <small class="font-bold">
                 <div class="modal-footer">
-                    <button class="btn btn-success Author" name="">通过</button>
-                    <button class="btn btn-warning NoAuthor" name="">不通过</button>
+                    <input type="text" class="form-control" id="reason" placeholder="请输入原因" style="display: none;width: 80%;margin-top: -1px;">
+                    <button class="btn btn-success Author" name="">提交</button>
                 </div>
             </small>
         </div>
@@ -99,6 +109,8 @@
         function checkMe() {
             var pre = document.getElementById("preview");
 
+
+
             //查看图片
             $(".stuCard").click(function () {
                 pre.src="";
@@ -112,6 +124,13 @@
                 function loadImg(data) {
                     pre.src = data;
                 }
+                $('input:radio[id="optionsRadios2"]:checked')
+                $("#optionsRadiosNo").click(function () {
+                   $("#reason").css("display","inline");
+                });
+                $("#optionsRadiosOk").click(function () {
+                    $("#reason").css("display","none");
+                });
             });
         }
 
@@ -125,19 +144,37 @@
             }
         );
 
-        //通过认证
         $(".Author").click(function () {
-            var userName = this["name"];
-            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true");
-            loadThis();
-            $(".sr-only").click();
+            var status=$('input:radio:checked').val();
+            switch (status){
+                case "option1":{
+                    //通过认证
+                    var userName = this["name"];
+                    AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true"+"/reason/"+"");
+                    loadThis();
+                    $(".sr-only").click();
+                    break;
+                }
+                case "option2":{
+                    //不通过
+                    var reason=$("#reason").val();
+                    var userName = this["name"];
+                    if(reason.length<1){
+                        alert("请输入不通过审核原因！");
+                    }else {
+                        AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "false"+"/reason/"+reason);
+                        loadThis();
+                        $(".sr-only").click();
+                        $("#reason").val("");
+                    }
+                    break;
+                }
+                default:{
+                    alert("请重试！");
+                    $(".sr-only").click();
+                    $("#reason").val("");
+                }
+            }
         });
 
-        //不通过
-        $(".NoAuthor").click(function () {
-            var userName = this["name"];
-            AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "false");
-            loadThis();
-            $(".sr-only").click();
-        });
 </script>
