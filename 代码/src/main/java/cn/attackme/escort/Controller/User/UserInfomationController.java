@@ -82,19 +82,5 @@ public class UserInfomationController {
         }
     }
 
-    /**
-     * 修改密码
-     * @param userName
-     * @param password
-     * @return
-     */
-    @ResponseBody
-    @PutMapping("/userName/{userName}/password/{password}")
-    public ResponseEntity<User> userResponseEntity(@PathVariable String userName,
-                                                   @PathVariable String password){
-        User user = userInfoService.getById(userName);
-        user.setPassWord(getSHA_256(password));
-        userInfoService.save(user);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+
 }

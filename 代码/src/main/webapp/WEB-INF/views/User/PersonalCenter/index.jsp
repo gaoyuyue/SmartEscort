@@ -144,10 +144,28 @@
         $("#publishList").empty();
         $("#myDartList").empty();
         $("#waitingEvaluationList").empty();
+        if(data.myPublishCount==0){
+            $("#publishList").removeClass("weui-badge");
+            $("#publishList").text("");
+        }else{
+            $("#publishList").text(data.myPublishCount);
+        }
+        if(data.myDartCount==0){
+            $("#myDartList").removeClass("weui-badge");
+            $("#myDartList").text("");
+        }else{
+            $("#myDartList").text(data.myDartCount);
+        }
+        if(data.waitingEvaluationCount==0) {
+            $("#waitingEvaluationList").removeClass("weui-badge");
+            $("#waitingEvaluationList").text("");
+        }else {
+            $("#waitingEvaluationList").text(data.waitingEvaluationCount);
+        }
 
-        $("#publishList").text(data.myPublishCount);
-        $("#myDartList").text(data.myDartCount);
-        $("#waitingEvaluationList").text(data.waitingEvaluationCount);
+
+
+
     };
 
     $(document).ready(function () {
