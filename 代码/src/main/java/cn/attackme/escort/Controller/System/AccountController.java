@@ -108,7 +108,6 @@ public class AccountController {
 
         if (null != openid) {
             JSONObject userInfo = getUserInfoByOpenId(openid);
-            System.out.println(userInfo);
             User user = new User();
             School school = schoolService.getByName(schoolName);
             user.setIntegration(50);
@@ -123,6 +122,7 @@ public class AccountController {
             user.setUserName(openid);
             user.setStudentId(studentId);
             user.setOpenid(openid);
+            user.setAuthStatus(AuthStatus.未认证);
             userInfoService.save(user);
             CreditRecord creditRecord = new CreditRecord(null, user, 50, CreditRecordDescription.完善信息);
             creditRecordService.save(creditRecord);
