@@ -1,6 +1,7 @@
 package cn.attackme.escort.Controller.Admin;
 
 
+import cn.attackme.Wechat.Message.RowMessage;
 import cn.attackme.Wechat.Util.MessageUtil;
 import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Service.CreditRecordService;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 
@@ -66,9 +69,10 @@ public class VerifyManagementController {
 
     //认证
     @RequiresRoles("admin")
-    @PutMapping("/Author/userName/{userName}/isPass/{isPass}")
+    @PutMapping("/Author/userName/{userName}/isPass/{isPass}/reason/{reason}")
     public ResponseEntity<Void> Author(@PathVariable String userName,
-                                       @PathVariable boolean isPass){
+                                       @PathVariable boolean isPass,
+                                       @PathVariable String reason){
         User user = userInfoService.getById(userName);
         if(user!=null){
             if (isPass) {
@@ -82,8 +86,13 @@ public class VerifyManagementController {
             }else {
                 user.setStuCardUrl(null);
                 user.setAuthStatus(AuthStatus.未认证);
-                userInfoService.save(user);
-                MessageUtil.postTemplate(user.getOpenid(),"WGfq640oRdKmj8soG_ELosHGTE6GGwu4Hp29BTyU5ls","/User/UserInfomation/",null);
+                userInfoService.saveOrUpdate(user);
+                RowMessage name = new RowMessage(user.getName()+"\n","red");
+                RowMessage reasonMessage = new RowMessage(reason,"red");
+                Map<String,RowMessage> AuthorMessageMap = new HashMap<>();
+                AuthorMessageMap.put("name",name);
+                AuthorMessageMap.put("reason",reasonMessage);
+                MessageUtil.postTemplate(user.getOpenid(),"T-OcS-GauGMFnEEz3O9uXX_G8AZwbCJoCbFC16e8_iw","/User/MyDart/",AuthorMessageMap);
                 return new ResponseEntity<Void>(HttpStatus.OK);
             }
         }else {
