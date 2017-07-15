@@ -148,7 +148,7 @@ public class AccountController {
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassWord());
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-            if (!user.isAuthed()){
+            if (!user.getAuthStatus().equals(AuthStatus.已认证)){
                 return "redirect:/User/StudentVerify/";
             }
             String state = (String) httpSession.getAttribute("state");

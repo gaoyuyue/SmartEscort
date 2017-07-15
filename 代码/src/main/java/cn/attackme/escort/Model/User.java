@@ -66,7 +66,8 @@ public class User implements Serializable{
     //是否认证
     @Getter
     @Setter
-    private boolean isAuthed;
+    @Enumerated(EnumType.STRING)
+    private AuthStatus authStatus;
 
     @Getter
     @Setter

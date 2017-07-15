@@ -43,7 +43,7 @@ public class VerifyManagementController {
         return "Admin/VerifyManagement/index";
     }
 
-    //分页获取未认证用户
+    //分页获取审核中用户
     @RequiresRoles("admin")
     @ResponseBody
     @GetMapping("/userPageResults/school/{schoolId}/pageNumber/{pageNumber}/pageSize/{pageSize}")
@@ -51,7 +51,7 @@ public class VerifyManagementController {
                                              @PathVariable int pageNumber,
                                              @PathVariable int pageSize){
         School school=schoolService.getById(schoolId);
-        PageResults<User> pageResults = userInfoService.getListPageByUrlAndAuth(Role.user, school, false, pageNumber, pageSize);
+        PageResults<User> pageResults = userInfoService.getListPageByAuthStatus(Role.user, school, AuthStatus.审核中, pageNumber, pageSize);
         List<User> userList = pageResults.getResults();
         userList.stream().forEach(user -> {
             try {
@@ -72,7 +72,7 @@ public class VerifyManagementController {
         User user = userInfoService.getById(userName);
         if(user!=null){
             if (isPass) {
-                user.setAuthed(true);
+                user.setAuthStatus(AuthStatus.已认证);
                 user.setIntegration(user.getIntegration()+50);
                 userInfoService.save(user);
                 CreditRecord creditRecord = new CreditRecord(null, user, 50, CreditRecordDescription.完成认证);
@@ -81,6 +81,7 @@ public class VerifyManagementController {
                 return new ResponseEntity<Void>(HttpStatus.OK);
             }else {
                 user.setStuCardUrl(null);
+                user.setAuthStatus(AuthStatus.未认证);
                 userInfoService.save(user);
                 MessageUtil.postTemplate(user.getOpenid(),"WGfq640oRdKmj8soG_ELosHGTE6GGwu4Hp29BTyU5ls","/User/UserInfomation/",null);
                 return new ResponseEntity<Void>(HttpStatus.OK);

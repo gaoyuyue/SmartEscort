@@ -1,5 +1,6 @@
 package cn.attackme.escort.Service;
 
+import cn.attackme.escort.Model.AuthStatus;
 import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
@@ -152,17 +153,16 @@ public class UserInfoService extends BaseService<User>{
         return super.getListByPageAndQuery(currentPageNumber,pageSize,query);
     }
 
-    public PageResults<User> getListPageByUrlAndAuth(@NotNull Role role,
+    public PageResults<User> getListPageByAuthStatus(@NotNull Role role,
                                                      @NotNull School school,
-                                                     @NotNull boolean isAuthed,
+                                                     @NotNull AuthStatus authStatus,
                                                      @NotNull Integer pageNumber,
                                                      @NotNull Integer pageSize){
         Query query=new Query(entityManager);
         query.from(User.class)
                 .whereEqual("school",school)
-                .whereEqual("isAuthed",isAuthed)
-                .whereEqual("role",role)
-                .whereIsNotNull("stuCardUrl");
+                .whereEqual("authStatus",authStatus)
+                .whereEqual("role",role);
         return super.getListByPageAndQuery(pageNumber,pageSize,query);
     }
 

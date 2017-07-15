@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.Admin;
 
+import cn.attackme.escort.Model.AuthStatus;
 import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
@@ -54,7 +55,7 @@ public class UserManagementController {
                                              @PathVariable int pageSize,
                                              @PathVariable int schoolId){
         School school = schoolService.getById(schoolId);
-        PageResults<User> pageResults = userInfoService.getListByPageAndSchool(Role.user, school, pageNumber, pageSize);
+        PageResults<User> pageResults = userInfoService.getListPageByAuthStatus(Role.user, school, AuthStatus.已认证, pageNumber, pageSize);
         List<User> results = pageResults.getResults();
         results.stream().forEach(u ->{
             try {

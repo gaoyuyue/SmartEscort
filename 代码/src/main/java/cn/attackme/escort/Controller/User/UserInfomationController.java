@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.AuthStatus;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.SchoolService;
@@ -74,7 +75,7 @@ public class UserInfomationController {
             School school1 = schoolService.getByName(school);
             if(currentUser.getSchool().getSchoolName() != school1.getSchoolName()){
                 currentUser.setSchool(school1);
-                currentUser.setAuthed(false);
+                currentUser.setAuthStatus(AuthStatus.未认证);
             }
             userInfoService.saveOrUpdate(currentUser);
             return new ResponseEntity<>(HttpStatus.OK);

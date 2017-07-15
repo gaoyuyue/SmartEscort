@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Model.AuthStatus;
 import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.MailService;
@@ -51,6 +52,7 @@ public class StudentVerifyController {
             String userHome = System.getProperty("user.home");
             String fileSeparator = System.getProperty("file.separator");
             user.setStuCardUrl(decodeBase64ToImage(dataUrl, userHome+fileSeparator+"Images"+fileSeparator));
+            user.setAuthStatus(AuthStatus.审核中);
             userInfoService.saveOrUpdate(user);
         } catch (Exception e) {
             LogUtils.LogToDB(e);
