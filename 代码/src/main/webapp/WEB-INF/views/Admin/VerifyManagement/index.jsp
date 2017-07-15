@@ -150,7 +150,7 @@
                 case "option1":{
                     //通过认证
                     var userName = this["name"];
-                    AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true"+"/reason/"+"");
+                    AjaxPutRequest("/VerifyManagement/Author/userName/" + userName + "/isPass/" + "true"+"/reason/"+null);
                     loadThis();
                     $(".sr-only").click();
                     break;
