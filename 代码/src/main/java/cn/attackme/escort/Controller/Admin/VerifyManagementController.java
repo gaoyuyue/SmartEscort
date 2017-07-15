@@ -87,12 +87,10 @@ public class VerifyManagementController {
                 user.setStuCardUrl(null);
                 user.setAuthStatus(AuthStatus.未认证);
                 userInfoService.saveOrUpdate(user);
-                RowMessage name = new RowMessage(user.getName()+"\n","red");
                 RowMessage reasonMessage = new RowMessage(reason,"red");
                 Map<String,RowMessage> AuthorMessageMap = new HashMap<>();
-                AuthorMessageMap.put("name",name);
                 AuthorMessageMap.put("reason",reasonMessage);
-                MessageUtil.postTemplate(user.getOpenid(),"T-OcS-GauGMFnEEz3O9uXX_G8AZwbCJoCbFC16e8_iw","/User/MyDart/",AuthorMessageMap);
+                MessageUtil.postTemplate(user.getOpenid(),"toTisKzlJIT8xCAI4Ph4Mv9Mwab_XBRWwQsPqC9dODc","/User/StudentVerify/",AuthorMessageMap);
                 return new ResponseEntity<Void>(HttpStatus.OK);
             }
         }else {
