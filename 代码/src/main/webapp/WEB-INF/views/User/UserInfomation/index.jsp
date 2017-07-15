@@ -201,11 +201,10 @@
     $(".update").click(function () {
         var updateName_other = $("#updateName_other").val();
         var updatePhoneNumber_other = $("#updatePhoneNumber_other").val();
-        var updateSchool_other = $("#updateSchool_other").val();
         if(
                 isNullOrEmpty(updateName_other) ||
-                isNullOrEmpty(updatePhoneNumber_other) ||
-                    isNullOrEmpty(updateSchool_other)
+                isNullOrEmpty(updatePhoneNumber_other)
+
         ){
             $(document)
                     .on('click', '.show-warning', function() {
@@ -214,9 +213,9 @@
         } else {
                 $.ajax({
                     type: "Put",
-                    url: "/User/UserInfomation/name/" + updateName_other + "/phoneNumber/" +updatePhoneNumber_other + "/school/" + updateSchool_other,
+                    url: "/User/UserInfomation/name/" + updateName_other + "/phoneNumber/" +updatePhoneNumber_other,
                     success: function () {
-
+                        window.location.href = "/User/UserInfomation/";
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                     }
@@ -228,12 +227,8 @@
      * 修改学校
      */
     $(".update_school").click(function () {
-        var updateName_other = $("#updateName_other").val();
-        var updatePhoneNumber_other = $("#updatePhoneNumber_other").val();
         var updateSchool_other = $("#updateSchool_other").val();
         if(
-            isNullOrEmpty(updateName_other) ||
-            isNullOrEmpty(updatePhoneNumber_other) ||
             isNullOrEmpty(updateSchool_other)
         ){
             $(document)
@@ -244,9 +239,9 @@
             $.confirm("修改学校后，需要重新认证！", "提示", function() {
                 $.ajax({
                     type: "Put",
-                    url: "/User/UserInfomation/name/" + updateName_other + "/phoneNumber/" +updatePhoneNumber_other + "/school/" + updateSchool_other,
+                    url: "/User/UserInfomation/school/" + updateSchool_other,
                     success: function () {
-
+                        window.location.href = "/User/UserInfomation/";
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                     }
@@ -267,7 +262,6 @@
         );
         $(".close-popup").trigger("click");
     };
-
     $(document).ready(function () {
         loadPage()
     });

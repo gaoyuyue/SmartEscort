@@ -60,18 +60,29 @@ public class UserInfomationController {
      * @return
      */
     @ResponseBody
-    @PutMapping("/name/{name}/phoneNumber/{phoneNumber}/school/{school}")
+    @PutMapping("/name/{name}/phoneNumber/{phoneNumber}")
     public ResponseEntity<Void> updateUser(@PathVariable String name,
-                                           @PathVariable String phoneNumber,
-                                           @PathVariable String school){
+                                           @PathVariable String phoneNumber){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
-
         if(currentUser==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else{
             currentUser.setName(name);
             currentUser.setPhoneNumber(phoneNumber);
+            userInfoService.saveOrUpdate(currentUser);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+    //修改学校
+    @ResponseBody
+    @PutMapping("/school/{school}")
+    public ResponseEntity<Void> updateUSchool(@PathVariable String school){
+        final String userName = SecurityUtils.getSubject().getPrincipal().toString();
+        User currentUser = userInfoService.getById(userName);
+        if(currentUser==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
             School school1 = schoolService.getByName(school);
             if(currentUser.getSchool().getSchoolName() != school1.getSchoolName()){
                 currentUser.setSchool(school1);
@@ -81,6 +92,7 @@ public class UserInfomationController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
 
 
 }
