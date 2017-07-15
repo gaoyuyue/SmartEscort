@@ -52,9 +52,8 @@ public class AllDartController {
     public List<Package> packageList(){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
-        List<Package> receivelist = user.getReceiveList();
         List<Package> publishList = user.getPublishList();
-        publishList.addAll(receivelist);
+        publishList.addAll(user.getReceiveList());
         List<Package> publishList1 = publishList.stream().collect(toList());
         return publishList1;
     }

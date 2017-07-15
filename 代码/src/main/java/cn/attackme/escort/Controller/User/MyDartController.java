@@ -3,7 +3,6 @@ package cn.attackme.escort.Controller.User;
 import cn.attackme.Wechat.Message.RowMessage;
 import cn.attackme.escort.Model.Package;
 import cn.attackme.escort.Model.PackageStatus;
-import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.PackageService;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -52,9 +51,7 @@ public class MyDartController {
     @GetMapping("/packageList")
     public ResponseEntity<List<Package>> packageList(){
         String userName = getSubject().getPrincipal().toString();
-        User agency = userInfoService.getById(userName);
-        List<Package> list = agency.getReceiveList();
-        List<Package> receiveList = list.stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
+        List<Package> receiveList = userInfoService.getById(userName).getReceiveList().stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
         return new ResponseEntity<>(receiveList, HttpStatus.OK);
     }
 

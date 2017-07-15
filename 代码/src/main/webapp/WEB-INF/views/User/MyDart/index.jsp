@@ -267,11 +267,7 @@
 
 
 
-<script src="/assets/js/fastclick.js"></script>
 <script>
-    $(function() {
-        FastClick.attach(document.body);
-    });
     <%--嵌套页面--%>
     $(document).on("open", ".weui-popup-modal", function() {
         console.log("open popup");
