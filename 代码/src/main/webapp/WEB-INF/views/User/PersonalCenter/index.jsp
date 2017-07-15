@@ -18,7 +18,6 @@
         <strong><p id="userName" class="navuser"></p></strong>
     </div>
     <div class="navn3" style="height: 35px">
-        <%--<p style="font-size: 13px;color: #888888;" class="navuser">信用分</p>--%>
             <div class="button_sp_area navuser">
                 <a href="/User/MyIntegration/" class="weui-btn_mini weui-btn_primary" style="border-radius: 100px;background-color: orange;border: 0;color: white">
                     <div>
@@ -162,10 +161,6 @@
         }else {
             $("#waitingEvaluationList").text(data.waitingEvaluationCount);
         }
-
-
-
-
     };
 
     $(document).ready(function () {
