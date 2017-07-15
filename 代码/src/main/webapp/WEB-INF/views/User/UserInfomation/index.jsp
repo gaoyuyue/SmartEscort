@@ -87,7 +87,7 @@
             </div>
             <div class="weui-cell" style="border-bottom: 1px solid #cbcbcb">
                 <div class="weui-cell__bd">
-                    <input class="weui-input updatetextfocus" id="updateName_other" type="text">
+                    <input class="weui-input" id="updateName_other" type="text">
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="weui-cell" style="border-bottom: 1px solid #cbcbcb">
                 <div class="weui-cell__bd">
-                    <input class="weui-input updatetextfocus" id="updatePhoneNumber_other" type="number">
+                    <input class="weui-input" id="updatePhoneNumber_other" type="number">
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
             </div>
             <div class="weui-cell" style="border-bottom: 1px solid #cbcbcb">
                 <div class="weui-cell__bd">
-                    <input class="weui-input updatetextfocus schoolNameList" id="updateSchool_other" type="text">
+                    <input class="weui-input schoolNameList" id="updateSchool_other" type="text">
                 </div>
             </div>
         </div>
@@ -134,9 +134,6 @@
         console.log("open popup");
     }).on("close", ".weui-popup-modal", function() {
         console.log("close popup");
-    });
-    $(".updatetextfocus").focus(function () {
-        $(this).val("");
     });
     $(".refresh_page").click(function () {
        window.location.href = "/User/UserInfomation/";
