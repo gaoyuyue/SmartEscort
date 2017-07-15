@@ -204,13 +204,20 @@
 </div>
 
 <script>
+    var information = function information(array) {
+        $("#integration").text("");
+        $("#integration").text(array.integration);
+    };
+    $(document).ready(function () {
+        Get("/User/MyIntegration/information",information);
+    });
+</script>
+<script>
     var success = function success(data) {
       $(".creditDivisionRecord").empty();
-      var information = function information(array) {
-          $("#integration").text("");
-          $("#integration").text(array.integration);
+
           data.forEach(function (e) {
-              if(array.userName == e.user.userName && e.score > 0){
+              if(e.score > 0){
                   $(".creditDivisionRecord").prepend(`
                           <div class="weui-cell weui-cell_access">
                                 <div class="weui-cell__bd">`+e.description+`</div>
@@ -221,7 +228,7 @@
                                 </div>
                           </div>
         `)
-              } else if(array.userName == e.user.userName && e.score <= 0){
+              } else if(e.score <= 0){
                   $(".creditDivisionRecord").prepend(`
                           <div class="weui-cell weui-cell_access">
                                 <div class="weui-cell__bd">`+e.description+`</div>
@@ -233,18 +240,15 @@
         `)
               }
           });
-      };
-        Get("/User/MyIntegration/information",information);
+
 
     };
     Get("/User/MyIntegration/creditList",success);
 </script>
 
-<script src="/assets/js/fastclick.js"></script>
+
 <script>
-    $(function() {
-        FastClick.attach(document.body);
-    });
+
     <%--嵌套页面--%>
     $(document).on("open", ".weui-popup-modal", function() {
         console.log("open popup");

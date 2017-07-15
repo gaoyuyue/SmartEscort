@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +53,8 @@ public class MyIntegrationController {
     @ResponseBody
     @GetMapping("/creditList")
     public ResponseEntity<List<CreditRecord>> creditList(){
-        List<CreditRecord> creditRecords= creditRecordService.getAll();
+        final String userName = SecurityUtils.getSubject().getPrincipal().toString();
+        List<CreditRecord> creditRecords= creditRecordService.getAll().stream().filter(p -> (p.getUser().getUserName().equals(userName))).collect(toList());
         return new ResponseEntity<>(creditRecords, HttpStatus.OK);
     }
 
