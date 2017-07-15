@@ -237,22 +237,16 @@
                 <tr>
                     <th>发布人</th>
                     <th>快递类型</th>
-                    <th>快递大小</th>
                     <th>发布时间</th>
                 <tr>
 `);
                 for (var i = 0; i < data["totalCount"]; i++) {
                     var result = resultList[i];
-                    var theName=result.agency==null?"":result.agency.name;
                     $("#packageList").append(
                         '<tr>' +
                         '<td >' + result.name +
                         '</td>' +
-                        '<td>' + theName+
-                        '</td>' +
                         '<td>' + result.courierCompany.companyName +
-                        '</td>'+
-                        '<td>' + "*" +
                         '</td>'+
                         '<td>' + getLocalTime(result.createDate) +
                         '</td>'+
@@ -266,23 +260,17 @@
                 <tr>
                     <th>发布人</th>
                     <th>快递类型</th>
-                    <th>快递大小</th>
                     <th>发布时间</th>
                     <th>领取时间</th>
                 <tr>
 `);
                 for (var i = 0; i < data["totalCount"]; i++) {
                     var result = resultList[i];
-                    var theName=result.agency==null?"":result.agency.name;
                     $("#packageList").append(
                         '<tr>' +
                         '<td >' + result.name +
                         '</td>' +
-                        '<td>' + theName+
-                        '</td>' +
                         '<td>' + result.courierCompany.companyName +
-                        '</td>'+
-                        '<td>' + "*" +
                         '</td>'+
                         '<td>' + getLocalTime(result.createDate) +
                         '</td>'+
@@ -298,23 +286,18 @@
                 <tr>
                     <th>发布人</th>
                     <th>快递类型</th>
-                    <th>快递大小</th>
                     <th>发布时间</th>
+                    <th>领取时间</th>
                     <th>领取时间</th>
                 <tr>
 `);
                 for (var i = 0; i < data["totalCount"]; i++) {
                     var result = resultList[i];
-                    var theName=result.agency==null?"":result.agency.name;
                     $("#packageList").append(
                         '<tr>' +
                         '<td >' + result.name +
                         '</td>' +
-                        '<td>' + theName+
-                        '</td>' +
                         '<td>' + result.courierCompany.companyName +
-                        '</td>'+
-                        '<td>' + "*" +
                         '</td>'+
                         '<td>' + getLocalTime(result.createDate) +
                         '</td>'+

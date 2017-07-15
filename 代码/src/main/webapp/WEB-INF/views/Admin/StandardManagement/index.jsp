@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>取件收费标准管理</h5>
+                    <h5>包裹标准管理</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -27,7 +27,7 @@
                             <thead>
                             <tr>
                                 <th>选择</th>
-                                <th>收费标准描述</th>
+                                <th>包裹大小描述</th>
                             </tr>
                             </thead>
                             <tbody id="StandardTable">
@@ -48,7 +48,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                         class="sr-only">Close</span></button>
-                <h4 class="modal-title">新增快递取件收费标准</h4>
+                <h4 class="modal-title">新增包裹标准</h4>
                 <small class="font-bold">
                 </small>
             </div>
@@ -56,7 +56,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
+                            <label class="col-sm-4 control-label" style="font-size: medium">包裹大小描述</label>
                             <div class="col-sm-6">
                                 <input type="text"  class="form-control" placeholder="请输入描述"  id="standardDescription">
                                 </input>
@@ -85,13 +85,13 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
                         class="sr-only">Close</span></button>
-                <h4 class="modal-title">修改快递取件收费标准</h4>
+                <h4 class="modal-title">修改包裹标准</h4>
             </div>
             <small class="font-bold">
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-sm-4 control-label" style="font-size: medium">收费标准描述</label>
+                            <label class="col-sm-4 control-label" style="font-size: medium">包裹大小描述</label>
                             <div class="col-sm-6">
                                 <input type="text"  class="form-control"   id="newStandardDescription">
                                 </input>

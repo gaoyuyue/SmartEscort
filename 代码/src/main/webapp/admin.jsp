@@ -63,7 +63,7 @@
                     <a href="#" url="/CourierCompanyManagement/" class="redirect"><i class="fa fa-truck"></i> <span class="nav-label">快递类型管理</span> </a>
                 </li>
                 <li class="li">
-                    <a href="#" url="/StandardManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">取件收费标准管理</span> </a>
+                    <a href="#" url="/StandardManagement/" class="redirect"><i class="fa fa-street-view"></i> <span class="nav-label">包裹标准管理</span> </a>
                 </li>
                 <li class="li">
                     <a href="#" url="/FeedBackManagement/" class="redirect"><i class="fa fa-thumbs-up"></i> <span class="nav-label">用户反馈</span> </a>
