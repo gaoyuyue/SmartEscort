@@ -104,7 +104,7 @@
 //           else return true;
 //       }
         function chprice(data) {
-            if(data.price ==""){
+            if(data.price ==""||!(/^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*))$/.test(data.price))){
                 $("#inputPrice").css({"borderColor":"red"});
                 return false;
             }

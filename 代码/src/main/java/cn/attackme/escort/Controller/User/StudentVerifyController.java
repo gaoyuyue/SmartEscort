@@ -6,7 +6,6 @@ import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.MailService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Utils.LogUtils;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
-
 import java.util.List;
 import java.util.Random;
 

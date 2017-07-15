@@ -107,7 +107,7 @@
             $("#nameLimit").css({"borderColor": "red"});
             return false;
         }
-        if(phone == ""){
+        if(phone == ""||!(/^1[34578]\d{9}$/.test(phone))){
             $("#phoneLimit").css({"borderColor": "red"});
             return false;
         }

@@ -102,7 +102,7 @@
                 }
             };
             function examphone(data) {
-                if(data.phoneNumber =="") {
+                if(data.phoneNumber ==""||!(/^1[34578]\d{9}$/.test(data.phoneNumber))) {
                     $("#inputphone").css({"borderColor": "red"});
                     return false;
                 }
