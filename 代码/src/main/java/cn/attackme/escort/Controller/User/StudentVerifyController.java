@@ -6,6 +6,8 @@ import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.MailService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Utils.LogUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,7 @@ public class StudentVerifyController {
     @Autowired
     private MailService mailService;
 
+    @RequiresRoles(value = "noAuth")
     @GetMapping("/")
     public String index(){return "User/StudentVerify/index" ;}
 
@@ -44,6 +47,7 @@ public class StudentVerifyController {
         return "User/StudentVerify/failure";
     }
 
+    @RequiresRoles(value = "noAuth")
     @RequestMapping("/upLoad")
     public String upLoad(@RequestParam("dataUrl") String dataUrl) throws MessagingException {
         try {

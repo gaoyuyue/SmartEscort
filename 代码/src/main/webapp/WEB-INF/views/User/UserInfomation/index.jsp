@@ -184,11 +184,15 @@
             $("#updateName_other").val(updateName);
             $("#updatePhoneNumber_other").val(updatePhoneNumber);
             $("#updateSchool_other").val(updateSchool);
-            if(data.authed == true){
+            if(data.authStatus === "已认证"){
                 $("#isVerify").text("已认证");
                 $("#isdisabled").removeAttr('href');
                 $("#unUpdate").removeAttr('data-target');
-            } else {
+            }else if(data.authStatus === "审核中"){
+                $("#isVerify").text("审核中");
+                $("#isdisabled").removeAttr('href');
+                $("#unUpdate").removeAttr('data-target');
+            } else{
                 $("#isVerify").text("未认证");
             }
         }

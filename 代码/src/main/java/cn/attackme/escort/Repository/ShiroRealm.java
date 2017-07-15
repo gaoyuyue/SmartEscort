@@ -43,6 +43,7 @@ public class ShiroRealm extends AuthorizingRealm {
         if (user != null) {
             role = user.getRole();
             if (user.getAuthStatus().equals(AuthStatus.已认证)) info.addRole("authed");
+            if (user.getAuthStatus().equals(AuthStatus.未认证)) info.addRole("noAuth");
         } else {
             throw new AuthorizationException();
         }
