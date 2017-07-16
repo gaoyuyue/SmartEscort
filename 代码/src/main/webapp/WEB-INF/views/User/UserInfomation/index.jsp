@@ -61,7 +61,7 @@
             </div>
 
             <div class="weui-cells">
-                <a class="weui-cell open-popup" data-target="#updateSchool">
+                <a class="weui-cell open-popup" data-target="#updateSchool" id="unUpdateSchool">
                     <div class="weui-cell__bd">
                         <p style="font-family: SimSun;color: black">学校</p>
                     </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="weui-cell" style="border-bottom: 1px solid #cbcbcb">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="updatePhoneNumber_other" type="number">
+                    <input class="weui-input" id="updatePhoneNumber_other" maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" type="number">
                 </div>
             </div>
         </div>
@@ -185,10 +185,12 @@
                 $("#isVerify").text("已认证");
                 $("#isdisabled").removeAttr('href');
                 $("#unUpdate").removeAttr('data-target');
+                $("#unUpdateSchool").removeAttr('data-target')
             }else if(data.authStatus === "审核中"){
                 $("#isVerify").text("审核中");
                 $("#isdisabled").removeAttr('href');
                 $("#unUpdate").removeAttr('data-target');
+                $("#unUpdateSchool").removeAttr('data-target')
             } else{
                 $("#isVerify").text("未认证");
             }
@@ -210,7 +212,13 @@
                     .on('click', '.show-warning', function() {
                         $.toptip('内容不能为空', 'warning');
                     })
-        } else {
+        } else if(!(/^1[34578]\d{9}$/.test(updatePhoneNumber_other))){
+            $(document)
+                .on('click', '.show-warning', function() {
+                    $.toptip('请输入正确的手机号码', 'warning');
+                })
+        }
+        else {
                 $.ajax({
                     type: "Put",
                     url: "/User/UserInfomation/name/" + updateName_other + "/phoneNumber/" +updatePhoneNumber_other,
@@ -236,7 +244,6 @@
                     $.toptip('内容不能为空', 'warning');
                 })
         } else {
-            $.confirm("修改学校后，需要重新认证！", "提示", function() {
                 $.ajax({
                     type: "Put",
                     url: "/User/UserInfomation/school/" + updateSchool_other,
@@ -247,10 +254,6 @@
                     }
                 });
                 cancelClick();
-            }, function() {
-
-            });
-
         }
     });
     //点击取消，并重新加载个人信息

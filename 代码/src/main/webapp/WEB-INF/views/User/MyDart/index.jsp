@@ -151,6 +151,12 @@
                         <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=5>
                         <div class="weui-cells">
                             <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
+                                    <div class="weui-cell__bd">
+                                        <p>订单编号</p>
+                                    </div>
+                                    <div class="weui-cell__ft" id="packageId" style = "font-size: 13px"></div>
+                            </div>
+                            <div class="weui-cell" style="border-bottom: 1px solid #d3d3d3">
                                 <div class="weui-cell__bd">
                                     <p>快递类型</p>
                                 </div>
@@ -246,7 +252,9 @@
                 $("#agencyPhoneNumber").text("");
                 $("#areaName").text("");
                 $("#areaDetail").text("");
+                $("#packageId").text("");
 
+                $("#packageId").text(data.id);
                 $("#delegationName").text(data.delegation.name);
                 $("#delegationPhoneNumber").text(data.delegation.phoneNumber);
                 $("#courierCompany").text(data.courierCompany.companyName);

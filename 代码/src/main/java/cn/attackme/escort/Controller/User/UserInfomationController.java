@@ -65,7 +65,7 @@ public class UserInfomationController {
                                            @PathVariable String phoneNumber){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
-        if(currentUser==null){
+        if(currentUser==null || name.equals("") || phoneNumber.equals("")){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else{
             currentUser.setName(name);
@@ -80,7 +80,7 @@ public class UserInfomationController {
     public ResponseEntity<Void> updateUSchool(@PathVariable String school){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
-        if(currentUser==null){
+        if(currentUser==null || school.equals("")){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else{
             School school1 = schoolService.getByName(school);
