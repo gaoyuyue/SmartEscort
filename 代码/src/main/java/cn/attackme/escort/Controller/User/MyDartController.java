@@ -51,7 +51,10 @@ public class MyDartController {
     @GetMapping("/packageList")
     public ResponseEntity<List<Package>> packageList(){
         String userName = getSubject().getPrincipal().toString();
-        List<Package> receiveList = userInfoService.getById(userName).getReceiveList().stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
+        List<Package> receiveList = userInfoService.getById(userName).getReceiveList()
+                                    .stream()
+                                    .filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达))
+                                    .collect(toList());
         return new ResponseEntity<>(receiveList, HttpStatus.OK);
     }
 

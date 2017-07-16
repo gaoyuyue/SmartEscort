@@ -53,7 +53,10 @@ public class MyIntegrationController {
     @GetMapping("/creditList")
     public ResponseEntity<List<CreditRecord>> creditList(){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
-        List<CreditRecord> creditRecords= creditRecordService.getAll().stream().filter(p -> (p.getUser().getUserName().equals(userName))).collect(toList());
+        List<CreditRecord> creditRecords= creditRecordService.getAll()
+                                            .stream()
+                                            .filter(p -> (p.getUser().getUserName().equals(userName)))
+                                            .collect(toList());
         return new ResponseEntity<>(creditRecords, HttpStatus.OK);
     }
 

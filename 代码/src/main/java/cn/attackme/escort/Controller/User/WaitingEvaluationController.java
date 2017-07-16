@@ -50,8 +50,14 @@ public class WaitingEvaluationController {
     public List<Package> packageList(){
         String userName = getSubject().getPrincipal().toString();
         User user = userInfoService.getById(userName);
-        List<Package> receivelist = user.getReceiveList().stream().filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isAgencyEvaluate())).collect(toList());
-        List<Package> publishList = user.getPublishList().stream().filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isDelegationEvaluated())).collect(toList());
+        List<Package> receivelist = user.getReceiveList()
+                                    .stream()
+                                    .filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isAgencyEvaluate()))
+                                    .collect(toList());
+        List<Package> publishList = user.getPublishList()
+                                    .stream()
+                                    .filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isDelegationEvaluated()))
+                                    .collect(toList());
         publishList.addAll(receivelist);
         return publishList;
     }

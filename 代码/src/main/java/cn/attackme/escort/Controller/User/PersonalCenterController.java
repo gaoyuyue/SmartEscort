@@ -53,14 +53,26 @@ public class PersonalCenterController {
         User user = userInfoService.getById(userName);
         Map<String,Object> map = new HashMap<>();
         //MyPublish
-        List<Package> MyPublishlist1 = user.getPublishList().stream().filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
+        List<Package> MyPublishlist1 = user.getPublishList()
+                                        .stream()
+                                        .filter(p -> (p.getPackageStatus() == PackageStatus.待领取 || p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达))
+                                        .collect(toList());
         map.put("myPublishCount",MyPublishlist1.size());
         //MyDart
-        List<Package> MyDartList1 = user.getReceiveList().stream().filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达)).collect(toList());
+        List<Package> MyDartList1 = user.getReceiveList()
+                                    .stream()
+                                    .filter(p -> (p.getPackageStatus() == PackageStatus.待签收 || p.getPackageStatus() == PackageStatus.待送达))
+                                    .collect(toList());
         map.put("myDartCount",MyDartList1.size());
         //WaitingEvaluation
-        List<Package> WaitingEvaluationReceivelist = user.getReceiveList().stream().filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isAgencyEvaluate())).collect(toList());
-        List<Package> WaitingEvaluationPublishList = user.getPublishList().stream().filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isDelegationEvaluated())).collect(toList());
+        List<Package> WaitingEvaluationReceivelist = user.getReceiveList()
+                                                    .stream()
+                                                    .filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isAgencyEvaluate()))
+                                                    .collect(toList());
+        List<Package> WaitingEvaluationPublishList = user.getPublishList()
+                                                    .stream()
+                                                    .filter(p->(p.getPackageStatus().equals(PackageStatus.已完成) && !p.isDelegationEvaluated()))
+                                                    .collect(toList());
         WaitingEvaluationPublishList.addAll(WaitingEvaluationReceivelist);
         map.put("waitingEvaluationCount",WaitingEvaluationPublishList.size());
         return new ResponseEntity<>(map,HttpStatus.OK);
