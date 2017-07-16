@@ -1,6 +1,12 @@
 package cn.attackme.escort.Model;
 
-import lombok.*;
+import cn.attackme.escort.Annotations.NotCode;
+import cn.attackme.escort.Annotations.Phone;
+import cn.attackme.escort.Annotations.Price;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -43,12 +49,16 @@ public class Package implements Serializable {
     private CourierCompany courierCompany;
 
     //取件短信
+    @NotBlank
+    @NotCode
     private String message;
 
     //价格
+    @Price
     private String price;
 
     //留言
+    @NotCode
     private String note;
 
     //是否被取消
@@ -84,10 +94,15 @@ public class Package implements Serializable {
     private Area area;
 
     //详细地址
+    @NotBlank
+    @NotCode
     private String addressDetail;
 
+    @Phone
     private String receiverPhoneNumber;
 
+    @NotBlank
+    @NotCode
     private String receiverName;
 
     //委托人是否评价

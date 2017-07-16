@@ -19,7 +19,7 @@ public class LogAspect {
      * @param joinPoint
      * @param ex
      */
-    @AfterThrowing(throwing = "ex", pointcut = "execution(* cn.attackme.*.*.*(..)))")
+    @AfterThrowing(throwing = "ex", pointcut = "execution(* cn.attackme..*.*.*(..)))")
     public void LogPoint(JoinPoint joinPoint, Throwable ex) {
         LogToDB(joinPoint, ex);
     }

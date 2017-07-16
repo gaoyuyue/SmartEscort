@@ -1,11 +1,13 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Annotations.Phone;
 import cn.attackme.escort.Model.AuthStatus;
 import cn.attackme.escort.Model.School;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import org.apache.shiro.SecurityUtils;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

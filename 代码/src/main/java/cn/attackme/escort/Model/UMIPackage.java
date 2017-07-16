@@ -1,8 +1,11 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
+import cn.attackme.escort.Annotations.Phone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,8 +23,13 @@ public class UMIPackage {
     @Id
     private String orderNumber;
 
+    @NotBlank
+    @NotCode
     private String name;
+    @Phone
     private String phoneNumber;
+    @NotBlank
+    @NotCode
     private String message;
     private PackageStatus packageStatus;
 
@@ -37,6 +45,8 @@ public class UMIPackage {
     @JoinColumn(name = "courierCompany")
     private CourierCompany courierCompany;
 
+    @NotBlank
+    @NotCode
     private String detailAddress;
     private Date createDate;
     private Date receiveDate;

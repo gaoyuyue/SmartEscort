@@ -1,9 +1,11 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +30,8 @@ public class Feedback implements Serializable{
     @GenericGenerator(name = "generator",strategy = "increment")
     private Integer id;
 
+    @NotBlank
+    @NotCode
     private String content;
 
     //提交时间

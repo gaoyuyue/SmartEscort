@@ -1,9 +1,11 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +33,8 @@ public class CourierCompany implements Serializable{
     private Integer id;
 
     //快递名称
+    @NotBlank
+    @NotCode
     private String companyName;
 
     public CourierCompany(String companyName) {

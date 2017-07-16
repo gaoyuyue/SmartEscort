@@ -1,5 +1,7 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
+import cn.attackme.escort.Annotations.Phone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,6 +34,8 @@ public class User implements Serializable{
     private String userName;
 
     //真实姓名
+    @NotBlank
+    @NotCode
     @Getter
     @Setter
     private String name;
@@ -54,6 +59,7 @@ public class User implements Serializable{
     private String passWord;
 
     //个人信息中的手机号
+    @Phone
     @Getter
     @Setter
     private String phoneNumber;
@@ -87,6 +93,8 @@ public class User implements Serializable{
     private School school;
 
     //学工号
+    @NotBlank
+    @NotCode
     @Getter
     @Setter
     private String studentId;

@@ -1,9 +1,12 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
+import cn.attackme.escort.Annotations.Phone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,14 +38,19 @@ public class Address implements Serializable{
     private Area area;
 
     //详细地址
+    @NotBlank
+    @NotCode
     @Setter
     @Getter
     private String detail;
 
+    @Phone
     @Setter
     @Getter
     private String phoneNumber;
 
+    @NotBlank
+    @NotCode
     @Setter
     @Getter
     private String receiverName;

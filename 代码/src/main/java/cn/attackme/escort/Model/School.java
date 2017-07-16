@@ -1,5 +1,6 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,6 +34,8 @@ public class School implements Serializable {
     @GenericGenerator(name = "generator",strategy = "increment")
     private Integer id;
 
+    @NotBlank
+    @NotCode
     @Getter
     @Setter
     private String schoolName;
