@@ -17,6 +17,15 @@
         font-family: SimSun-ExtB;
         font-size: 15px
     }
+    .weui-loadmore_line{
+        position: relative;
+        top: 70%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        font-size: 17px;
+    }
+
 </style>
 <div id="frame">
     <div id="navbarSuspension">
@@ -50,11 +59,10 @@
     </div>
 
     <div class="weui-tab__panel">
-        <div class="page__bd" style="height: 50%;margin-top: 100px" id="packageList">
-
-
-
-
+        <div class="page__bd" style="height: 50%;margin-top: 100px;" id="packageList">
+                <div class="weui-loadmore weui-loadmore_line" style="border-color: #c1c3c4">
+                    <span class="weui-loadmore__tips">暂无数据</span>
+                </div>
         </div>
     </div>
 </div>
@@ -70,7 +78,9 @@
 
 <script>
     var success = function (data) {
-        $("#packageList").empty();
+        if(!isNullOrEmpty(data)){
+            $("#packageList").empty();
+        }
         data.forEach(function (e) {
            $("#packageList").append(`
                 <div class="weui-cells">
