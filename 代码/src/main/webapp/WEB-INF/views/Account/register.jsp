@@ -90,22 +90,22 @@
        var studentId = $("#studentId").val();
        var schoolName = $("#schoolName").val();
 
-//       if(name == ""){
-//           $("#nameLimit").css({"borderColor": "red"});
-//           return false;
-//       }
-//       if(phoneNumber == ""||!(/^1[34578]\d{9}$/.test(phoneNumber))){
-//           $("#phoneLimit").css({"borderColor": "red"});
-//           return false;
-//       }
-//       if(studentId == ""){
-//           $("#studentIdLimit").css({"borderColor": "red"});
-//           return false;
-//       }
-//       if(schoolName == ""){
-//           $("#schoolNameTypeLimit").css({"borderColor": "red"});
-//           return false;
-//       }
+       if(name == ""){
+           $("#nameLimit").css({"borderColor": "red"});
+           return false;
+       }
+       if(phoneNumber == ""||!(/^1[34578]\d{9}$/.test(phoneNumber))){
+           $("#phoneLimit").css({"borderColor": "red"});
+           return false;
+       }
+       if(studentId == ""){
+           $("#studentIdLimit").css({"borderColor": "red"});
+           return false;
+       }
+       if(schoolName == ""){
+           $("#schoolNameTypeLimit").css({"borderColor": "red"});
+           return false;
+       }
     });
 </script>
 

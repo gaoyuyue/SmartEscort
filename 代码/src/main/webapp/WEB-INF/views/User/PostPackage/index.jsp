@@ -104,36 +104,32 @@
 //           else return true;
 //       }
         function chprice(data) {
-//            if(data.price ==""||!((/^[0-9]+(.[0-9]{1,2})?$/.test(data.price))||(/^\d+$/.test(data.price)))){
-//                $("#inputPrice").css({"borderColor":"red"});
-//                return false;
-//            }
-//            else return true;
-            return true;
+            if(data.price ==""||!((/^[0-9]+(.[0-9]{1,2})?$/.test(data.price))||(/^\d+$/.test(data.price)))){
+                $("#inputPrice").css({"borderColor":"red"});
+                return false;
+            }
+            else return true;
         }
         function chmessage(data) {
-//            if(data.message==""){
-//                $("#inputMessage").css({"borderColor":"red"});
-//                return false;
-//            }
-//            else return true;
-            return true;
+            if(data.message==""){
+                $("#inputMessage").css({"borderColor":"red"});
+                return false;
+            }
+            else return true;
         }
         function chtype(data) {
-//            if(data.courierCompany.companyName==""){
-//                $("#inputtype").css({"borderColor":"red"});
-//                return false;
-//            }
-//            else return true;
-            return true;
+            if(data.courierCompany.companyName==""){
+                $("#inputtype").css({"borderColor":"red"});
+                return false;
+            }
+            else return true;
         }
         function chsize(data) {
-//            if(data.standard.description==""){
-//                $("#inputsize").css({"borderColor":"red"});
-//                return false;
-//            }
-//            else return true;
-            return true;
+            if(data.standard.description==""){
+                $("#inputsize").css({"borderColor":"red"});
+                return false;
+            }
+            else return true;
         }
         if(chprice(data)&chmessage(data)&chtype(data)&chsize(data)){
             $.ajax({

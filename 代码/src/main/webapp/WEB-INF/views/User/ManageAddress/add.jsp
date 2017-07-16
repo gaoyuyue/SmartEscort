@@ -93,36 +93,32 @@
                 }
             };
             function examreceiver(data) {
-//                if(data.receiverName =="") {
-//                    $("#inputreceiver").css({"borderColor": "red"});
-//                    return false;
-//                }
-//                else return true;
-                return true;
+                if(data.receiverName =="") {
+                    $("#inputreceiver").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
             }
             function examphonenumber(data) {
-//                if(data.phoneNumber ==""||!(/^1[34578]\d{9}$/.test(data.phoneNumber))) {
-//                    $("#inputphon").css({"borderColor": "red"});
-//                    return false;
-//                }
-//                else return true;
-                return true;
+                if(data.phoneNumber ==""||!(/^1[34578]\d{9}$/.test(data.phoneNumber))) {
+                    $("#inputphon").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
             }
             function examdetai(data) {
-//                if(data.detail =="") {
-//                    $("#inputdetai").css({"borderColor": "red"});
-//                    return false;
-//                }
-//                else return true;
-                return true;
+                if(data.detail =="") {
+                    $("#inputdetai").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
             }
             function examschoolarea(data) {
-//                if(data.area.areaName =="") {
-//                    $("#inputschoolarea").css({"borderColor": "red"});
-//                    return false;
-//                }
-//                else return true;
-                return true;
+                if(data.area.areaName =="") {
+                    $("#inputschoolarea").css({"borderColor": "red"});
+                    return false;
+                }
+                else return true;
             }
             if(examreceiver(data)&examschoolarea(data)&examdetai(data)&examphonenumber(data)) {
                 Post("/User/ManageAddress/add",data,postSuccess);

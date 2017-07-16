@@ -103,34 +103,34 @@
         var detailAddress = $("#detailAddress").val();
 
 
-//        if(name == ""){
-//            $("#nameLimit").css({"borderColor": "red"});
-//            return false;
-//        }
-//        if(phone == ""||!(/^1[34578]\d{9}$/.test(phone))){
-//            $("#phoneLimit").css({"borderColor": "red"});
-//            return false;
-//        }
-//        if(schoolName == ""){
-//            $("#schoolNameLimit").css({"borderColor": "red"});
-//            return false;
-//        }
-//        if(packageType == ""){
-//            $("#packageTypeLimit").css({"borderColor": "red"});
-//            return false;
-//        }
-//        if(area == ""){
-//            $("#areaLimit").css({"borderColor": "red"});
-//            return false;
-//        }
-//        if(message == ""){
-//            $("#messageLimit").css({"borderColor": "red"});
-//            return false;
-//        }
-//        if(detailAddress == ""){
-//            $("#detailAddressLimit").css({"borderColor": "red"});
-//            return false;
-//        }
+        if(name == ""){
+            $("#nameLimit").css({"borderColor": "red"});
+            return false;
+        }
+        if(phone == ""||!(/^1[34578]\d{9}$/.test(phone))){
+            $("#phoneLimit").css({"borderColor": "red"});
+            return false;
+        }
+        if(schoolName == ""){
+            $("#schoolNameLimit").css({"borderColor": "red"});
+            return false;
+        }
+        if(packageType == ""){
+            $("#packageTypeLimit").css({"borderColor": "red"});
+            return false;
+        }
+        if(area == ""){
+            $("#areaLimit").css({"borderColor": "red"});
+            return false;
+        }
+        if(message == ""){
+            $("#messageLimit").css({"borderColor": "red"});
+            return false;
+        }
+        if(detailAddress == ""){
+            $("#detailAddressLimit").css({"borderColor": "red"});
+            return false;
+        }
     });
 
     $(function() {
