@@ -1,5 +1,6 @@
 package cn.attackme.escort.Controller.User;
 
+import cn.attackme.escort.Annotations.NotCode;
 import cn.attackme.escort.Annotations.Phone;
 import cn.attackme.escort.Model.AuthStatus;
 import cn.attackme.escort.Model.School;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -63,8 +65,8 @@ public class UserInfomationController {
      */
     @ResponseBody
     @PutMapping("/name/{name}/phoneNumber/{phoneNumber}")
-    public ResponseEntity<Void> updateUser(@PathVariable String name,
-                                           @PathVariable String phoneNumber){
+    public ResponseEntity<Void> updateUser(@PathVariable @NotCode @NotBlank String name,
+                                           @PathVariable @Phone String phoneNumber){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
         if(currentUser==null || name.equals("") || phoneNumber.equals("")){
@@ -79,7 +81,7 @@ public class UserInfomationController {
     //修改学校
     @ResponseBody
     @PutMapping("/school/{school}")
-    public ResponseEntity<Void> updateUSchool(@PathVariable String school){
+    public ResponseEntity<Void> updateUSchool(@PathVariable @NotCode @NotBlank String school){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
         if(currentUser==null || school.equals("")){
@@ -94,7 +96,4 @@ public class UserInfomationController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
-
-
-
 }
