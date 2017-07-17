@@ -132,20 +132,20 @@
     //分页加载页面
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
+            $("#CourierTable").empty();
             var resultList = data["results"];
-            for (var i = 0; i < resultList.length; i++) {
-                var result = resultList[i];
-                $("#CourierTable").append(
-                    "<tr><td>" +
-                    "<div class='icheckbox_square-green checked'>" +
-                    "<input type='checkbox' class='checkMe' id='" + result.id + "' value='option1'/>" +
-                    "</div>" +
-                    "</td>" +
-                    "<td>" + result.companyName +
-                    "</td>" +
-                    "</tr>"
-                );
-            }
+            resultList.forEach(function (e) {
+                $("#CourierTable").append(`
+                    <tr>
+                        <td>
+                            <div class='icheckbox_square-green checked'>
+                                <input type='checkbox' class='checkMe' id='`+e.id+`' value='option1'/>
+                            </div>
+                        </td>
+                        <td>`+ e.companyName +`</td>
+                    </tr>
+                `);
+            });
             CheckMe();
         };
         Paging("/CourierCompanyManagement/getCourierCompanyList", "CourierTable", uploadTable, pageNumber, 10);
@@ -164,7 +164,6 @@
                 confirmButtonText: "知道了"
             });
         } else {
-
             AjaxPostRequest("/CourierCompanyManagement/createCourier/companyName/" + content);
             loadThis();
             $("#createCancelButton").click();
@@ -225,8 +224,7 @@
             });
     });
 
-    $(document).ready(
-        function () {
+    $(document).ready(function () {
             loadPage(1);
         });
 </script>
