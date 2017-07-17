@@ -124,41 +124,28 @@
 
 
 <script type="text/javascript">
-
-    //绑定点击事件
-    var deleteMe = function deleteMe() {
-        $(".md-delete").click(function () {
-            var id = this["id"];
-            var idArr = id.split("/");
-            var areaId = idArr[0];
-            var schoolId = idArr[1];
-            AjaxDeleteRequest("/AddressManagement/deleteAreaBySchool/schoolId/" + schoolId + "/areaId/" + areaId);
-            loadThis();
-        });
-    };
-
     //分页加载页面
     var loadPage = function (pageNumber) {
         var uploadTable = function (data) {
-            var resultList = data["results"];
             $("#AddressTable").empty();
-            for (var i = 0; i < resultList.length; i++) {
-                var result = resultList[i];
-                $("#AddressTable").append(
-                    '<tr>' +
-                    '<td >' + result.school.schoolName +
-                    '</td>' +
-                    '<td>' + result.areaName +
-                    '</td>' +
-                    '<td><a class="md-delete" id="' + result.id + "/" + result.school.id +
-                    '">删除</a></td>' +
-                    '</tr>'
-                );
-            }
-            deleteMe();
+            var result = data["results"];
+            result.forEach(function (e) {
+                $("#AddressTable").append(`
+                    <tr>
+                    <td >`+e.school.schoolName+`</td>
+                    <td>`+e.areaName+`</td>
+                    <td><a class="md-delete" areaId='`+e.id+`' schoolId = '`+e.school.id+`'>删除</a></td>
+                    </tr>
+                    `);
+            });
+            $(".md-delete").click(function () {
+                const areaId = $(this).attr("areaId");
+                const schoolId = $(this).attr("schoolId");
+                AjaxDeleteRequest("/AddressManagement/deleteAreaBySchool/schoolId/" + schoolId + "/areaId/" + areaId);
+                loadThis();
+            });
         };
         Paging("/AddressManagement/getAddressList", "AddressTable", uploadTable, pageNumber, 10);
-
     };
 
     //新增学校
@@ -176,7 +163,7 @@
             $("#schoolCancelButton").click();
             loadThis();
         }
-        $("#schoolName").val("");
+//        $("#schoolName").val("");
     });
 
     //点击新增区域加载学校
@@ -201,14 +188,10 @@
             $("#areaCancelButton").click();
         }
         loadThis();
-        $("#areaName").val("");
+//        $("#areaName").val("");
     });
 
-    $(document).ready(
-        function () {
+    $(document).ready(function () {
             loadPage(1);
-        }
-    );
-
-
+        });
 </script>
