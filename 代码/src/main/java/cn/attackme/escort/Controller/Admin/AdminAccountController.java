@@ -28,6 +28,7 @@ public class AdminAccountController {
     @Autowired
     private UserInfoService userInfoService;
 
+//    修改个人信息
     @RequiresRoles("admin")
     @PutMapping("/changeInfo/name/{name}/nickName/{nickName}/phoneNumber/{phoneNumber}/email/{email}")
     public ResponseEntity<Void> changeInfo(@PathVariable String name,
@@ -49,6 +50,7 @@ public class AdminAccountController {
 
     }
 
+//    修改密码
     @RequiresRoles("admin")
     @PutMapping("/changePassWord/origin/{origin}/passWord/{passWord}")
     public ResponseEntity<Void> changePassWord(@PathVariable String origin,

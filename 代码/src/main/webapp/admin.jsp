@@ -310,6 +310,9 @@
         });
 //        修改密码
         $("#changePassWord").click(function () {
+            $("#passWord2").val(null);
+            $("#passWord1").val(null);
+            $("#origin").val(null);
            $("#Create").click(function () {
                var passWord1=$("#passWord1").val();
                var passWord2=$("#passWord2").val();
@@ -326,6 +329,7 @@
                                type: "success",
                                confirmButtonText: "知道了"
                            });
+                           $("#Cancel").click();
                        },
                        error: function (XMLHttpRequest, textStatus, errorThrown) {
                            swal({
