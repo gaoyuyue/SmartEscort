@@ -69,14 +69,12 @@ public class UserInfomationController {
                                            @PathVariable @Phone String phoneNumber){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
-        if(currentUser==null || name.equals("") || phoneNumber.equals("")){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else{
+        if(currentUser.getAuthStatus().equals(AuthStatus.未认证)){
             currentUser.setName(name);
-            currentUser.setPhoneNumber(phoneNumber);
-            userInfoService.saveOrUpdate(currentUser);
-            return new ResponseEntity<>(HttpStatus.OK);
         }
+        currentUser.setPhoneNumber(phoneNumber);
+        userInfoService.saveOrUpdate(currentUser);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     //修改学校
     @ResponseBody
@@ -84,16 +82,11 @@ public class UserInfomationController {
     public ResponseEntity<Void> updateUSchool(@PathVariable @NotCode @NotBlank String school){
         final String userName = SecurityUtils.getSubject().getPrincipal().toString();
         User currentUser = userInfoService.getById(userName);
-        if(currentUser==null || school.equals("")){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }else{
-            School school1 = schoolService.getByName(school);
-            if(currentUser.getSchool().getSchoolName() != school1.getSchoolName()){
-                currentUser.setSchool(school1);
-                currentUser.setAuthStatus(AuthStatus.未认证);
-            }
-            userInfoService.saveOrUpdate(currentUser);
-            return new ResponseEntity<>(HttpStatus.OK);
+        School school1 = schoolService.getByName(school);
+        if(currentUser.getAuthStatus().equals(AuthStatus.未认证)&&currentUser.getSchool().getSchoolName() != school1.getSchoolName()){
+            currentUser.setSchool(school1);
         }
+        userInfoService.saveOrUpdate(currentUser);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
