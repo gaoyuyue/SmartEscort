@@ -104,8 +104,6 @@
             var arr = id.split(":");
             var userName = arr[0];
             var stage = arr[1];
-            console.log(userName);
-            console.log(stage);
             swal(
                 {
                     title: "确定？",
@@ -136,14 +134,12 @@
         })
     };
 
-    $(document).ready(
-        function () {
-            loadSchool("school");
-            loadPage(1);
-            $("#school").change(function () {
-                loadPage(1)
-            })
-        }
-    );
+    $(document).ready(function () {
+        loadSchool("school");
+        loadPage(1);
+        $("#school").change(function () {
+            loadPage(1)
+        })
+    });
 
 </script>
