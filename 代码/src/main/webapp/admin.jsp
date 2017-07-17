@@ -39,6 +39,9 @@
                             <li><a href="#" data-toggle="modal"
                                    data-target="#myModal1" id="change">修改个人资料</a>
                             </li>
+                            <li><a href="#" data-toggle="modal"
+                                   data-target="#myModal2" id="changePassWord">修改密码</a>
+                            </li>
                             <li><a href="/Account/LogOut">安全退出</a>
                             </li>
                         </ul>
@@ -124,6 +127,55 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal" id="CancelButton">取消</button>
                         <button type="button" class="btn btn-primary" id="CreateButton">确认</button>
+                    </div>
+                </small>
+            </div>
+            <small class="font-bold">
+            </small>
+        </div>
+        <small class="font-bold">
+        </small>
+    </div>
+<%--修改个人密码--%>
+    <div class="modal inmodal fade in" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"
+         style="display: none ; padding-right: 17px;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+                <small class="font-bold">
+                    <div class="modal-body" align="center">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" style="font-size: medium">原密码：</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" placeholder="请输入原密码"
+                                           id="origin">
+                                </div>
+                            </div><br/>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" style="font-size: medium">密码：</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" placeholder="请输入您的新密码"
+                                           id="passWord1">
+                                </div>
+                            </div><br/>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" style="font-size: medium">确认密码：</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" placeholder="请再次输入新密码"
+                                           id="passWord2">
+                                </div>
+                            </div><br/>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal" id="Cancel">取消</button>
+                        <button type="button" class="btn btn-primary" id="Create">确认</button>
                     </div>
                 </small>
             </div>
@@ -245,15 +297,54 @@
             $(".active").removeClass("active");
             $(this).addClass("active");
         });
+//        修改个人资料
         $("#change").click(function () {
             $("#CreateButton").click(function () {
                 var name=$("#name").val();
                 var  nickName=$("#nickName").val();
                 var  phoneNumber=$("#phoneNumber").val();
                 var  email=$("#email").val();
-                AjaxPutRequest("/AdminAccount/changeInfo/userName/"+userName+"/name/"+name+"/nickName/"+nickName+"/phoneNumber/"+phoneNumber+"/email/"+email);
+                AjaxPutRequest("/AdminAccount/changeInfo/name/"+name+"/nickName/"+nickName+"/phoneNumber/"+phoneNumber+"/email/"+email);
                 $("#CancelButton").click();
             })
+        });
+//        修改密码
+        $("#changePassWord").click(function () {
+           $("#Create").click(function () {
+               var passWord1=$("#passWord1").val();
+               var passWord2=$("#passWord2").val();
+               if(passWord1==passWord2){
+                   var origin=$("#origin").val();
+                   var passWord=passWord1;
+                   $.ajax({
+                       url: "/AdminAccount/changePassWord/origin/"+origin+"/passWord/"+passWord,
+                       type: "PUT",
+                       success: function () {
+                           swal({
+                               title: "成功",
+                               text: "修改成功",
+                               type: "success",
+                               confirmButtonText: "知道了"
+                           });
+                       },
+                       error: function (XMLHttpRequest, textStatus, errorThrown) {
+                           swal({
+                               title: "出错了！",
+                               text: "密码错误",
+                               type: "error",
+                               confirmButtonText: "知道了"
+                           });
+                       }
+                   });
+               }else {
+                   swal({
+                       title: "错误",
+                       text: "两次输入的密码不一致",
+                       type: "error",
+                       confirmButtonText: "知道了"
+                   });
+               }
+           })
         });
         AjaxGetRequest("/UserManagement/UserInfo", fillUser);
     }
