@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -36,6 +37,7 @@ public class User implements Serializable{
     //真实姓名
     @NotBlank
     @NotCode
+    @Length(max = 10,min = 1)
     @Getter
     @Setter
     private String name;

@@ -5,6 +5,7 @@ import cn.attackme.escort.Annotations.Phone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class UMIPackage {
 
     @NotBlank
     @NotCode
+    @Length(max = 10,min = 1)
     private String name;
     @Phone
     private String phoneNumber;

@@ -6,6 +6,7 @@ import cn.attackme.escort.Annotations.Price;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -103,6 +104,7 @@ public class Package implements Serializable {
 
     @NotBlank
     @NotCode
+    @Length(max = 10,min = 1)
     private String receiverName;
 
     //委托人是否评价

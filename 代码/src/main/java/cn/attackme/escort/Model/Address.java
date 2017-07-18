@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -51,6 +52,7 @@ public class Address implements Serializable{
 
     @NotBlank
     @NotCode
+    @Length(max = 10,min = 1)
     @Setter
     @Getter
     private String receiverName;
