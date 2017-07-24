@@ -17,7 +17,7 @@ import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Random;
 
-import static cn.attackme.escort.Utils.ImageUtils.decodeBase64ToImage;
+import static cn.attackme.escort.Utils.Base64ImageUtil.decodeToImage;
 import static org.apache.shiro.SecurityUtils.getSubject;
 
 /**
@@ -53,7 +53,7 @@ public class StudentVerifyController {
             User user = userInfoService.getById(userName);
             String userHome = System.getProperty("user.home");
             String fileSeparator = System.getProperty("file.separator");
-            user.setStuCardUrl(decodeBase64ToImage(dataUrl, userHome+fileSeparator+"Images"+fileSeparator));
+            user.setStuCardUrl(decodeToImage(dataUrl, userHome+fileSeparator+"Images"+fileSeparator));
             user.setAuthStatus(AuthStatus.审核中);
             userInfoService.saveOrUpdate(user);
         } catch (Exception e) {

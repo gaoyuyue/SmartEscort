@@ -7,7 +7,6 @@ import cn.attackme.escort.Model.*;
 import cn.attackme.escort.Service.CreditRecordService;
 import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
-import cn.attackme.escort.Utils.ImageUtils;
 import cn.attackme.escort.Utils.PageResults;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static cn.attackme.escort.Utils.Base64ImageUtil.encodeToString;
 import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 
 /**
@@ -106,7 +106,7 @@ public class VerifyManagementController {
         User user = userInfoService.getById(userName);
         String userHome = System.getProperty("user.home");
         String fileSeparator = System.getProperty("file.separator");
-        return ImageUtils.encodeImageToBase64(userHome+fileSeparator+"Images"+fileSeparator,user.getStuCardUrl());
+        return encodeToString(userHome+fileSeparator+"Images"+fileSeparator,user.getStuCardUrl());
     }
 }
 
