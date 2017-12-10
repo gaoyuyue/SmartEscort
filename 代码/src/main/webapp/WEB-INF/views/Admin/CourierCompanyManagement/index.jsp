@@ -11,39 +11,17 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>自定义响应式表格</h5>
-                    <div class="ibox-tools">
-                        <%--<a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>--%>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="table_basic.html#">选项1</a>
-                            </li>
-                            <li><a href="table_basic.html#">选项2</a>
-                            </li>
-                        </ul>
-                        <%--<a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>--%>
-                    </div>
+                    <h5>快递类型管理</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal5" >新建</button>
-                        <button type="button" class="btn btn-warning" id="editButton" disabled="disabled">修改</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">新建
+                        </button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal2"
+                                id="editButton" disabled="disabled">修改
+                        </button>
                         <button type="button" class="btn btn-danger" id="deleteButton" disabled="disabled">删除</button>
-
-                        <div class="col-sm-3" style="float: right">
-                            <div class="input-group">
-                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
-                                    class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                            </div>
-                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -53,45 +31,72 @@
                                 <th>快递名称</th>
                             </tr>
                             </thead>
-                            <tbody id="">
-                            <tr>
-                                <td>
-                                    <div class="icheckbox_square-green checked"><input
-                                            type="checkbox" value="" name="" class=""/>
-                                        <%--<ins class="iCheck-helper"
-                                             style="top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>--%>
-                                    </div>
-                                </td>
-                                <td>米莫说｜MiMO Show</td>
-                            </tr>
+                            <tbody id="CourierTable">
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <ul class="pagination" id="pagination"></ul>
             </div>
         </div>
     </div>
 </div>
-
-<div class="modal inmodal fade in" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true" style="display: none ; padding-right: 17px;">
+<%--弹窗新增--%>
+<div class="modal inmodal fade in" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true"
+     style="display: none ; padding-right: 17px;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
                 <h4 class="modal-title">新建快递类型</h4>
-                <small class="font-bold">这里可以显示副标题。
-                </small></div><small class="font-bold">
-            <div class="modal-body" align="center">
-                <input type="text" placeholder="请输入快递类型名称" class="form-control" name="min" id="content"  style="width: 8cm;">
             </div>
+            <small class="font-bold">
+                <div class="modal-body" align="center">
+                    <input type="text" placeholder="请输入快递类型名称" class="form-control" name="min" id="content" style="
+                width: 8cm;">
+                </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal" id="createCancelButton">关闭</button>
-                <button type="button" class="btn btn-primary" id="createButton">保存</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="createCancelButton">关闭</button>
+                    <button type="button" class="btn btn-primary" id="createButton">保存</button>
+                </div>
+            </small>
+        </div>
+        <small class="font-bold">
+        </small>
+    </div>
+    <small class="font-bold">
+    </small>
+</div>
+<%--弹窗修改--%>
+<div class="modal inmodal fade in" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"
+     style="display: none ; padding-right: 17px;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">新建快递类型</h4>
             </div>
-        </small></div><small class="font-bold">
-    </small></div><small class="font-bold">
-</small></div>
+            <small class="font-bold">
+                <div class="modal-body" align="center">
+                    <input type="text" placeholder="请输入快递类型名称" class="form-control" name="min" id="updateDescription" style="
+                width: 8cm;">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="updateCancelButton">取消</button>
+                    <button type="button" class="btn btn-primary" id="updateSubmitButton">确认</button>
+                </div>
+            </small>
+        </div>
+        <small class="font-bold">
+        </small>
+    </div>
+    <small class="font-bold">
+    </small>
+</div>
 
 <script type="text/javascript">
     function updateButton() {
@@ -110,13 +115,14 @@
     }
 
     //让这两个button不可用
-    function setUnAvaliable() {
+    function setUnAvailable() {
         $('#editButton').attr('disabled', "true");
         $('#deleteButton').attr('disabled', "true");
     }
 
     //为checkMe绑定点击事件 重新加载列表后需要重新绑定点击事件
     function CheckMe() {
+        setUnAvailable();
         $(".checkMe").click(function () {
             updateButton();
             deleteButton();
@@ -124,34 +130,101 @@
     }
 
     //分页加载页面
-    var loadPage=function (pageNumber) {
-        var uploadTable=function (data) {
-            var resultList=data["results"];
-            for(var i=0;i<data["totalCount"];i++){
-                var result=resultList[i];
-                $("#CourierTable").append(
-                    "<tr><td>" +
-                    "<div class='icheckbox_square-green checked'>" +
-                    "<input type='checkbox' class='checkMe' value='" +result.id+ "'/>" +
-                    "</div>" +
-                    "</td>" +
-                    "<td>" + result.companyName+
-                    "</td>" +
-                    "</tr>"
-                )
-            }
+    var loadPage = function (pageNumber) {
+        var uploadTable = function (data) {
+            $("#CourierTable").empty();
+            var resultList = data["results"];
+            resultList.forEach(function (e) {
+                $("#CourierTable").append(`
+                    <tr>
+                        <td>
+                            <div class='icheckbox_square-green checked'>
+                                <input type='checkbox' class='checkMe' id='`+e.id+`' value='option1'/>
+                            </div>
+                        </td>
+                        <td>`+ e.companyName +`</td>
+                    </tr>
+                `);
+            });
             CheckMe();
         };
-        Paging("/CourierCompanyManagement/getCourierCompanyList","CourierTable",uploadTable,pageNumber,10);
+        Paging("/CourierCompanyManagement/getCourierCompanyList", "CourierTable", uploadTable, pageNumber, 10);
+
     };
-    $(document).ready(
-        function () {
-            loadPage(1);
-        });
 
     //新增
     $("#createButton").click(function () {
-        $("#content").val()
-    })
+        var content = $("#content").val();
+        if (isNullOrEmpty(content)) {
+            swal({
+                title: "错误",
+                text: "不可为空",
+                type: "error",
 
+                confirmButtonText: "知道了"
+            });
+        } else {
+            AjaxPostRequest("/CourierCompanyManagement/createCourier/companyName/" + content);
+            loadThis();
+            $("#createCancelButton").click();
+            $("#content").val("");
+        }
+    });
+
+    //修改时给input设置值
+    $("#editButton").click(function () {
+        var id = $("input[class='checkMe']:checked").attr("id");
+        var thisElement = $("#" + id).parent().parent().next();
+        $("#updateDescription").val(thisElement.text());
+    });
+
+    //修改
+    $("#updateSubmitButton").click(function () {
+        var updateDescriptionVal = $("#updateDescription").val();
+        var id = $("input[class='checkMe']:checked").attr("id");
+        if (isNullOrEmpty(updateDescriptionVal)) {
+            swal({
+                title: "错误",
+                text: "必填项不可为空",
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        } else {
+            AjaxPutRequest("/CourierCompanyManagement/updateCourierCompany/id/" + id + "/updateDescription/" + updateDescriptionVal);
+            $("#updateCancelButton").click();
+            loadThis();
+        }
+        setUnAvailable();
+    });
+
+    //删除
+    $('#deleteButton').click(function () {
+        swal({
+                title: "确定？",
+                text: "你确定删除吗？",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var checkBoxes = $("input[class='checkMe']:checked");
+                    for (var i = 0; i < checkBoxes.length; i++) {
+                        AjaxDeleteRequest("/CourierCompanyManagement/deleteCourierCompany/id/" + checkBoxes[i].id);
+                    }
+                    loadThis();
+                } else {
+                    swal("已取消", "未作任何操作", "info");
+                    setUnAvailable()
+                }
+            });
+    });
+
+    $(document).ready(function () {
+            loadPage(1);
+        });
 </script>

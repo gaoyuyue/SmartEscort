@@ -1,9 +1,11 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,9 +32,8 @@ public class Standard implements Serializable{
     @GenericGenerator(name = "generator",strategy = "increment")
     private Integer id;
 
-    //价格
-    private Integer price;
-
     //标准描述
+    @NotBlank
+    @NotCode
     private String description;
 }

@@ -20,7 +20,7 @@ public class Update {
      * 每隔118分钟获取一次
      * @throws Exception
      */
-    @Scheduled(cron="0 */118 * * * ? ")
+    @Scheduled(cron="0 */58 * * * ? ")
 //    @Scheduled(cron="0 0 0 */1 * ? ")
 //    @Scheduled(cron = "0 */2 * * * ? ")
     public void getToken() throws Exception {

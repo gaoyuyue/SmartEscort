@@ -2,7 +2,7 @@ package cn.attackme.Wechat.Message;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by arthurme on 2017/3/10.
@@ -12,5 +12,5 @@ public class TemplateMessage {
     private String touser;
     private String template_id;
     private String url;
-    private List<RowMessage> data;
+    private Map<String,RowMessage> data;
 }

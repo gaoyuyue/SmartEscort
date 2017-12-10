@@ -1,11 +1,15 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,21 +21,37 @@ import java.util.List;
 @Entity
 @Table
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class School implements Serializable {
 
     private static final long serialVersionUID = 8028574764523803574L;
 
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(generator = "generator")
     @GenericGenerator(name = "generator",strategy = "increment")
     private Integer id;
 
+    @NotBlank
+    @NotCode
+    @Getter
+    @Setter
     private String schoolName;
 
+    @Setter
     @OneToMany(mappedBy = "school",cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.EXTRA)
     private List<Area> areaList;
+
+    public School(String schoolName, List<Area> areaList) {
+        this.schoolName = schoolName;
+        this.areaList = areaList;
+    }
+
+    @JsonIgnore
+    public List<Area> getAreaList(){
+        return areaList;
+    }
 }

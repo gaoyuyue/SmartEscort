@@ -1,5 +1,7 @@
 package cn.attackme.escort.Model;
 
+import cn.attackme.escort.Annotations.NotCode;
+import cn.attackme.escort.Annotations.Phone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,14 +28,29 @@ public class User implements Serializable{
 
     private static final long serialVersionUID = 895922977663522702L;
 
+    //用户名
     @Id
     @Getter
     @Setter
     private String userName;
 
+    //真实姓名
+    @NotBlank
+    @NotCode
+    @Length(max = 10,min = 1)
     @Getter
     @Setter
     private String name;
+
+    //性别
+    @Getter
+    @Setter
+    private boolean sex;
+
+    //微信昵称
+    @Getter
+    @Setter
+    private String nickName;
 
     //微信号
     @Getter
@@ -41,6 +60,8 @@ public class User implements Serializable{
     @Setter
     private String passWord;
 
+    //个人信息中的手机号
+    @Phone
     @Getter
     @Setter
     private String phoneNumber;
@@ -49,6 +70,12 @@ public class User implements Serializable{
     @Getter
     @Setter
     private boolean isDeleted;
+
+    //是否认证
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    private AuthStatus authStatus;
 
     @Getter
     @Setter
@@ -60,11 +87,43 @@ public class User implements Serializable{
     @Setter
     private Integer integration;
 
+    //所属学校
     @Getter
+    @Setter
+    @OneToOne
+    @JoinColumn(name = "school")
+    private School school;
+
+    //学工号
+    @NotBlank
+    @NotCode
+    @Getter
+    @Setter
+    private String studentId;
+
+    //头像url
+    @Getter
+    @Setter
+    private String headImageUrl;
+
+    //学生证照片url
+    @Setter
+    private String stuCardUrl;
+
     @Setter
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.EXTRA)
     private List<Address> addressList;
+
+    @Setter
+    @OneToMany(mappedBy = "delegation",cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Package> publishList;
+
+    @Setter
+    @OneToMany(mappedBy = "agency",cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    private List<Package> receiveList;
 
     public User(String userName, String passWord) {
         this.userName = userName;
@@ -74,5 +133,25 @@ public class User implements Serializable{
     @JsonIgnore    //生成json不包含此字段,必须打在Getter上面
     public String getPassWord() {
         return passWord;
+    }
+
+    @JsonIgnore
+    public List<Address> getAddressList(){
+        return addressList;
+    }
+
+    @JsonIgnore
+    public List<Package> getPublishList(){
+        return publishList;
+    }
+
+    @JsonIgnore
+    public List<Package> getReceiveList(){
+        return receiveList;
+    }
+
+    @JsonIgnore
+    public String getStuCardUrl(){
+        return stuCardUrl;
     }
 }
