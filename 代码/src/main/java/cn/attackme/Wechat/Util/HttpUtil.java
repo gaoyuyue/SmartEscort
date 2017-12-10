@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
+
 /**
  * Created by arthurme on 2017/3/4.
  */
@@ -97,14 +99,14 @@ public class HttpUtil {
                         inputStream.close();
                     }
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    LogToDB(ex);
                     throw new Exception("网络连接失败,请连接网络后再试");
                 }
             } else {
                 throw new Exception("参数不全，请稍后重试");
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LogToDB(ex);
             throw new Exception("发送未知异常");
         }
     }
@@ -160,10 +162,10 @@ public class HttpUtil {
                 lines = lines + line;
             }
             return lines; // 返回请求结果
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (MalformedURLException ex) {
+            LogToDB(ex);
+        } catch (IOException ex) {
+            LogToDB(ex);
         }
         return "fail";
     }
@@ -198,8 +200,8 @@ public class HttpUtil {
             jsonString = sb.toString();
             bis.close();
             reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            LogToDB(ex);
         }
 
         return jsonString;

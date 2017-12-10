@@ -1,16 +1,17 @@
 package cn.attackme.escort.Controller.System;
 
 
-import cn.attackme.escort.Model.Role;
-import cn.attackme.escort.Model.User;
+import cn.attackme.escort.Model.*;
+import cn.attackme.escort.Service.CreditRecordService;
+import cn.attackme.escort.Service.SchoolService;
 import cn.attackme.escort.Service.UserInfoService;
 import cn.attackme.escort.Service.UserService;
-import cn.attackme.escort.Utils.LogUtils;
 import cn.attackme.escort.Utils.ValidateCode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,11 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.UUID;
 
+import static cn.attackme.Wechat.Util.OAuth2Util.getUserInfoByOpenId;
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 import static cn.attackme.escort.Utils.SHAUtils.getSHA_256;
 
 @SuppressWarnings({"JavaDoc", "unused"})
@@ -37,6 +42,12 @@ public class AccountController {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private SchoolService schoolService;
+
+    @Autowired
+    private CreditRecordService creditRecordService;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -55,13 +66,17 @@ public class AccountController {
 
     /**
      * 转向注册界面
+     *
      * @return
      */
     @GetMapping("/Account/Register")
-        public String RegisterPage(){ return "/Account/register";}
+    public String RegisterPage() {
+        return "/Account/register";
+    }
 
     /**
      * 检查用户名是否重复
+     *
      * @param userName
      * @return
      */
@@ -77,29 +92,40 @@ public class AccountController {
 
     /**
      * 注册用户
-     * @param userName
-     * @param passWord
+     *
      * @param name
      * @param phoneNumber
      * @param httpSession
      * @return
      */
     @PostMapping("/Account/Register")
-    public String createUser(@RequestParam("userName") String userName,
-                                           @RequestParam("passWord") String passWord,
-                                           @RequestParam("name") String name,
-                                           @RequestParam("phoneNumber") String phoneNumber,
-                                           HttpSession httpSession) {
+    public String createUser(@RequestParam("name") String name,
+                             @RequestParam("phoneNumber") String phoneNumber,
+                             @RequestParam("studentId") String studentId,
+                             @RequestParam("schoolName") String schoolName,
+                             HttpSession httpSession) throws Exception {
         String openid = (String) httpSession.getAttribute("openid");
+
         if (null != openid) {
+            JSONObject userInfo = getUserInfoByOpenId(openid);
             User user = new User();
+            School school = schoolService.getByName(schoolName);
+            user.setIntegration(50);
+            user.setHeadImageUrl(userInfo.getString("headimgurl"));
+            user.setNickName(URLEncoder.encode(userInfo.getString("nickname"), "utf-8"));
+            user.setSex(userInfo.getInt("sex") == 1);
+            user.setSchool(school);
             user.setPhoneNumber(phoneNumber);
             user.setName(name);
-            user.setPassWord(getSHA_256(passWord));
+            user.setPassWord(getSHA_256(openid+ UUID.randomUUID().toString()));
             user.setRole(Role.user);
-            user.setUserName(userName);
+            user.setUserName(openid);
+            user.setStudentId(studentId);
             user.setOpenid(openid);
+            user.setAuthStatus(AuthStatus.未认证);
             userInfoService.save(user);
+            CreditRecord creditRecord = new CreditRecord(null, user, 50, CreditRecordDescription.完善信息);
+            creditRecordService.save(creditRecord);
             return "redirect:/Account/OAuth2";
         }
         return "redirect:/Account/Register";
@@ -107,24 +133,31 @@ public class AccountController {
 
     /**
      * 微信用户登录
+     *
      * @param httpSession
      * @return
      */
     @GetMapping("/Account/OAuth2")
-    public String oauth2(HttpSession httpSession){
-        try{
+    public String oauth2(HttpSession httpSession) {
+        try {
             String openid = (String) httpSession.getAttribute("openid");
             User user = userInfoService.getByOpenId(openid);
+            if (user.isDeleted()){
+                return "forward:/403.jsp";
+            }
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassWord());
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
+            if (!user.getAuthStatus().equals(AuthStatus.已认证)){
+                return "redirect:/User/StudentVerify/";
+            }
             String state = (String) httpSession.getAttribute("state");
             httpSession.removeAttribute("openid");
             httpSession.removeAttribute("state");
             return "redirect:" + state;
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
             return "redirect:/Account/Register";
-        } catch (Exception e){
+        } catch (Exception e) {
             return "forward:/403.jsp";
         }
     }
@@ -169,7 +202,7 @@ public class AccountController {
                 return "redirect:/Account/Login";
             }
         } catch (Exception e) {
-            LogUtils.LogToDB(e);
+            LogToDB(e);
             if (token != null) {
                 token.clear();
             }

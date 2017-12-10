@@ -18,11 +18,11 @@ public class SHAUtilsTest {
         String sha256 = getSHA_256("123456123456");
         System.out.println(
                 getSHA_256(
-                        getSHA_256("admin" + "admin")
+                        getSHA_256("user" + "user")
                 )
         );
         System.out.println(
-                getSHA_256("admin" + "admin")
+                getSHA_256("tom" + "tom")
         );
         assertEquals("958d51602bbfbd18b2a084ba848a827c29952bfef170c936419b0922994c0589", sha256);
     }

@@ -15,10 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static cn.attackme.Wechat.Util.HttpUtil.sendPostBuffer;
-import static org.apache.shiro.SecurityUtils.getSubject;
+import static cn.attackme.escort.Utils.LogUtils.LogToDB;
 
 /**
  * Created by arthurme on 2017/3/3.
@@ -257,26 +260,24 @@ public class MessageUtil {
         return msg;
     }
 
-    public static String postTemplate(){
-        TemplateMessage templete = new TemplateMessage();
-        templete.setTouser((String) getSubject().getPrincipal());
-        templete.setTemplate_id("0SqbEDkCEnshrxnMRlbb275rT8FfjN1pwFEm4e6320Q");
-        templete.setUrl("www.baidu.com");
-        RowMessage a = new RowMessage("","");
-        RowMessage b = new RowMessage("","");
-        List<RowMessage> list = new ArrayList<>();
-        list.add(a);
-        list.add(b);
-        templete.setData(list);
+    public static void postTemplate(String openid,String templateId,String url,Map<String,RowMessage> messageMap){
+        String foreUrl = WechatProperties.authorizeUrl+"?appid="+
+                WechatProperties.appid+
+                "&redirect_uri="+
+                WechatProperties.OAuth2Url+
+                "&response_type=code&scope=snsapi_base&state=";
+        String backUrl = "#wechat_redirect";
+
+        TemplateMessage templateMessage = new TemplateMessage();
+        templateMessage.setTouser(openid);
+        templateMessage.setTemplate_id(templateId);
+        templateMessage.setUrl(foreUrl+url+backUrl);
+        templateMessage.setData(messageMap);
         try {
-//            sendPostBuffer(WechatProperties.setIndustry+WechatProperties.access_token,industry);
-//            sendPostBuffer(WechatProperties.getTemplate+WechatProperties.access_token,getTemplete);
-            String result = sendPostBuffer(WechatProperties.sendTemplate+WechatProperties.access_token,new JSONObject(templete).toString());
-            System.out.println(result+"<><><><><><><><><><><><><><<><><><<>><><><><<><><><><<><><><><<><><><><><><><><><><><><><><><><><>");
-        } catch (IOException e) {
-            e.printStackTrace();
+            sendPostBuffer(WechatProperties.sendTemplate+WechatProperties.access_token,new JSONObject(templateMessage).toString());
+        } catch (IOException ex) {
+            LogToDB(ex);
         }
-        return "";
     }
 
 }

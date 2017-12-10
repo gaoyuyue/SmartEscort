@@ -1,6 +1,7 @@
 package cn.attackme.escort.Repository;
 
 
+import cn.attackme.escort.Model.AuthStatus;
 import cn.attackme.escort.Model.Role;
 import cn.attackme.escort.Model.User;
 import cn.attackme.escort.Service.UserService;
@@ -41,6 +42,8 @@ public class ShiroRealm extends AuthorizingRealm {
         User user = userService.getById(userName);
         if (user != null) {
             role = user.getRole();
+            if (user.getAuthStatus().equals(AuthStatus.已认证)) info.addRole("authed");
+            if (user.getAuthStatus().equals(AuthStatus.未认证)) info.addRole("noAuth");
         } else {
             throw new AuthorizationException();
         }

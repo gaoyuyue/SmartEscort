@@ -101,7 +101,7 @@ var checkNaN = function (value) {
  * @constructor
  */
 var Paging = function Paging(url, tableId, updateTable, pageNumber, pageSize) {
-    "use strict";
+    // "use strict";
     $(document).ajaxStart(function () {
         Pace.restart();
     });
@@ -117,13 +117,13 @@ var Paging = function Paging(url, tableId, updateTable, pageNumber, pageSize) {
             var currentPage = data["currentPage"];
             var pageCount = data["pageCount"];
             var nextPage = data["nextPage"];
+            nowPage=currentPage;
             //拼接上一页
             if (previousPage < 1 || previousPage >= currentPage) {//上一页不可达
                 pagination.append("<li class='disabled paging'><a pageNumber='1'>&laquo;</a></li>");
             } else {
                 pagination.append("<li class='paging'><a pageNumber=" + previousPage + ">&laquo;</a></li>");
             }
-
             //拼接页码
             for (var page = 1; page <= pageCount; page++) {
                 if (page == currentPage) {
@@ -150,12 +150,15 @@ var Paging = function Paging(url, tableId, updateTable, pageNumber, pageSize) {
             updateTable(data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
+            if (XMLHttpRequest.status!=200){
             swal({
                 title: "出错了！",
                 text: "错误信息" + XMLHttpRequest.status,
                 type: "error",
                 confirmButtonText: "知道了"
             });
+            }
+
         }
     });
 };
@@ -240,6 +243,71 @@ var AjaxPostRequest = function AjaxPostRequest(url) {
     });
 };
 
+/**
+ * Post方法
+ * @param url
+ * @param data
+ * @param success
+ * @constructor
+ */
+var Post = function (url,data) {
+    "use strict";
+
+    $.ajax({
+        url:url,
+        type:"POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function () {
+            swal({
+                title: "添加成功",
+                text: "添加成功",
+                type: "success",
+                confirmButtonText: "知道了"
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            swal({
+                title: "出错了！",
+                text: "错误信息" + XMLHttpRequest.status,
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        }
+    });
+};
+/**
+ * Put方法
+ * @param url
+ * @param data
+ * @constructor
+ */
+var Put = function (url,data) {
+    "use strict";
+
+    $.ajax({
+        url:url,
+        type:"PUT",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function () {
+            swal({
+                title: "修改成功",
+                text: "修改成功",
+                type: "success",
+                confirmButtonText: "知道了"
+            });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            swal({
+                title: "出错了！",
+                text: "错误信息" + XMLHttpRequest.status,
+                type: "error",
+                confirmButtonText: "知道了"
+            });
+        }
+    });
+};
 /**
  * 通过PUT修改
  * @param url
@@ -339,7 +407,6 @@ var bindRedirect = function bindRedirect() {
         Pace.restart();
     });
     $(".redirect").click(function () {
-        console.log(this);
         var attribute = this.getAttribute("url");
         AsynchronousLoading(attribute);
     });
@@ -389,4 +456,72 @@ var appendNotify = function appendNotify(toAppend, title, content, buttonText, U
         '</p>' +
         '</div>'
     );
+};
+
+/**
+ * 加载学校
+ */
+var loadSchool = function (id) {
+    var success = function (data) {
+        $("#"+id).empty();
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            $("#"+id).append(
+                '<option value="' + item.id +
+                '"> ' + item.schoolName +
+                '</option>'
+            )
+        }
+    };
+    AjaxGetRequest("/UserManagement/getSchoolList", success);
+};
+
+var loadArea = function (areaSelectId,schoolId) {
+    var success = function (data) {
+        $("#"+areaSelectId).empty();
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            $("#"+areaSelectId).append(
+                '<option value="' + item.id +
+                '"> ' + item.areaName +
+                '</option>'
+            )
+        }
+    };
+    AjaxGetRequest("/AddressManagement/areaList/schoolId/"+schoolId, success);
+};
+
+var loadPackageType = function (typeSelectId) {
+    var success = function (data) {
+         $("#"+typeSelectId).empty();
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            $("#"+typeSelectId).append(
+                '<option value="' + item.id +
+                '"> ' + item.companyName +
+                '</option>'
+            );
+        }
+    };
+    AjaxGetRequest("/CourierCompanyManagement/courierList", success);
+};
+
+function loadThis() {
+        loadPage(nowPage);
+    }
+
+
+var getLocalTime = function(nS) {
+    if(nS!=null){
+    var time = new Date(nS);
+    var y = time.getFullYear();
+    var m = time.getMonth() + 1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+    }else {
+        return "";
+    }
 };

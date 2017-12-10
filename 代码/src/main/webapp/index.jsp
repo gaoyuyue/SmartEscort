@@ -11,5 +11,6 @@
     <%@ include file="admin.jsp"%>
 </shiro:hasRole>
 <shiro:hasRole name="user">
-    <%@include file="user.jsp"%>
+    <%--<%@include file="user.jsp"%>--%>
+    <%@include file="./WEB-INF/views/User/PostPackage/index.jsp"%>
 </shiro:hasRole>

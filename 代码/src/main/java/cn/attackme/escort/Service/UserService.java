@@ -11,8 +11,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Arrays.asList;
-
 /**
  * Created by arthurme on 2017/1/29.
  */
@@ -55,17 +53,6 @@ public class UserService extends BaseService<User>{
     @Override
     public void saveOrUpdateAll(@NotNull List<User> userList) {
         super.saveOrUpdateAll(userList);
-    }
-
-    public User search(String pattern) {
-        Query query = new Query(entityManager);
-        return (User) query.from(User.class)
-                .whereOrLike(asList("name", "userName"), pattern)
-                .whereEqual("isDeleted", false)
-                .createTypedQuery()
-                .setFirstResult(0)
-                .setMaxResults(1)
-                .getSingleResult();
     }
 
     @Override

@@ -11,84 +11,46 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>自定义响应式表格</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="table_basic.html#">选项1</a>
-                            </li>
-                            <li><a href="table_basic.html#">选项2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
+                    <h5>任务列表管理</h5>
+                    <div class="input-group col-sm-3" style="float: right">
+                    <input type="text" placeholder="请输入关键词" class="input-sm form-control" id="content"> <span
+                        class="input-group-btn">
+                        <button type="button" class="btn btn-sm btn-primary" id="searchPackage"> 搜索</button> </span>
+                </div>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-5 m-b-xs">
-                            <select class="input-sm form-control input-s-sm inline">
-                                <option value="0">请选择</option>
-                                <option value="1">选项1</option>
-                                <option value="2">选项2</option>
-                                <option value="3">选项3</option>
+                        <div class=" m-b-xs col-lg-6">
+                            <select class="input-sm   " title="请选择来源" id="theWay">
+                                <option value="wechat">微信</option>
+
+                                <option value="qq">qq</option>
                             </select>
-                        </div>
-                        <div class="col-sm-4 m-b-xs">
-                            <div data-toggle="buttons" class="btn-group">
-                                <label class="btn btn-sm btn-white">
-                                    <input type="radio" id="option1" name="options">天</label>
-                                <label class="btn btn-sm btn-white active">
-                                    <input type="radio" id="option2" name="options">周</label>
-                                <label class="btn btn-sm btn-white">
-                                    <input type="radio" id="option3" name="options">月</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group">
-                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                            </div>
+                            &nbsp;
+                            <select class="input-sm   " title="请选择订单状态" id="packageStatus">
+                            <option value="待领取">待领取</option>
+                            <option value="已撤销">已撤销</option>
+                            <option value="待送达">待送达</option>
+                            <option value="待签收">待签收</option>
+                            <option value="已完成">已完成</option>
+                            </select>
+                            &nbsp;
+                            <select id="school" class="input-sm input-s-sm inline" title="请选择学校">
+                            </select>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped" >
-                            <thead>
+                            <thead id="tableTop">
                             <tr>
-                                <th></th>
-                                <th>发布人</th>
-                                <th>接受人</th>
-                                <th>快递类型</th>
-                                <th>快递大小</th>
-                                <th>发布时间</th>
-                                <th>执行时间</th>
-                                <th>完成时间</th>
-                                <th>操作</th>
+
                             </tr>
                             </thead>
-                            <tbody id="package">
-                            <tr>
-                                <td>
-                                    <div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" checked="" class="i-checks" name="input[]" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                </td>
-                                <td>米莫说｜MiMO Show</td>
-                                <td><span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="16" width="16"><path d="M 8 8 L 8 0 A 8 8 0 0 1 14.933563796318165 11.990700825968545 Z" fill="#1ab394"></path><path d="M 8 8 L 14.933563796318165 11.990700825968545 A 8 8 0 1 1 7.999999999999998 0 Z" fill="#d7d7d7"></path></svg>
-                                </td>
-                                <td>20%</td>
-                                <td>2014.11.11</td>
-                                <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a>
-                                </td>
-                            </tr>
+                            <tbody id="packageList">
                             </tbody>
                         </table>
                     </div>
-
+                    <ul class="pagination" id="pagination"></ul>
                 </div>
             </div>
         </div>
@@ -98,15 +60,298 @@
 <script>
     var loadPage=function (pageNumber) {
         var updateTable=function (data) {
-            console.log(data)
-        };
-        Paging("/PackageListManagement/getPackageList","package",updateTable,pageNumber,10)
+            $("#tableTop").empty();
+            var resultList = data["results"];
+            //根据订单种类加载
+            if($("#theWay").val()=="wechat"){
+                switch($("#packageStatus").val()){
+                    case "待领取": {
+                        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>快递类型</th>
+                    <th>快递大小</th>
+                    <th>发布时间</th>
+                <tr>
+`);
+            for (var i = 0; i < data["totalCount"]; i++) {
+                var result = resultList[i];
+                $("#packageList").append(
+                    '<tr>' +
+                    '<td >' + result.delegation.name +
+                    '</td>' +
+                    '<td>' + result.courierCompany.companyName +
+                    '</td>'+
+                    '<td>' + result.standard.description +
+                    '</td>'+
+                    '<td>' + getLocalTime(result.publishTime) +
+                    '</tr>'
+                )
+            }
+                        break;
+                    }
+                    case "已撤销": {
+                        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>快递类型</th>
+                    <th>快递大小</th>
+                    <th>发布时间</th>
+                    <th>结束时间</th>
+                    <th>订单结果</th>
+                <tr>
+`);
+                        for (var i = 0; i < data["totalCount"]; i++) {
+                            var result = resultList[i];
+                            $("#packageList").append(
+                                '<tr>' +
+                                '<td >' + result.delegation.name +
+                                '</td>' +
+                                '<td>' + result.courierCompany.companyName +
+                                '</td>'+
+                                '<td>' + result.standard.description +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.publishTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.endTime) +
+                                '</td>'+
+                                '<td>' + result.orderResult +
+                                '</tr>'
+                            )
+                        }
+                        break;
+                    }
+                    case "待送达": {
+                        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>接受人</th>
+                    <th>快递类型</th>
+                    <th>快递大小</th>
+                    <th>发布时间</th>
+                    <th>领取时间</th>
+                <tr>
+`);
+                        for (var i = 0; i < data["totalCount"]; i++) {
+                            var result = resultList[i];
+                            $("#packageList").append(
+                                '<tr>' +
+                                '<td >' + result.delegation.name +
+                                '</td>' +
+                                '<td>' + result.agency.name+
+                                '</td>' +
+                                '<td>' + result.courierCompany.companyName +
+                                '</td>'+
+                                '<td>' + result.standard.description +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.publishTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.receiveTime) +
+                                '</td>'+
+                                '</tr>'
+                            )
+                        }
+                        break;
+                    }
+                    case "待签收": {
+                        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>接受人</th>
+                    <th>快递类型</th>
+                    <th>快递大小</th>
+                    <th>发布时间</th>
+                    <th>领取时间</th>
+                    <th>送达时间</th>
+                <tr>
+`);
+                        for (var i = 0; i < data["totalCount"]; i++) {
+                            var result = resultList[i];
+                            $("#packageList").append(
+                                '<tr>' +
+                                '<td >' + result.delegation.name +
+                                '</td>' +
+                                '<td>' + result.agency.name+
+                                '</td>' +
+                                '<td>' + result.courierCompany.companyName +
+                                '</td>'+
+                                '<td>' + result.standard.description +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.publishTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.receiveTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.deliveryTime) +
+                                '</td>'+
+                                '</tr>'
+                            )
+                        }
+                        break;
+                    }
+                    case "已完成": {
+                        $("#tableTop").append(`
+                <tr>
+                   <th>发布人</th>
+                                <th>接受人</th>
+                                <th>快递类型</th>
+                                <th>快递大小</th>
+                                <th>发布时间</th>
+                                <th>领取时间</th>
+                                <th>送达时间</th>
+                                <th>结束时间</th>
+                                <th>订单结果</th>
+                <tr>
+`);
+                        for (var i = 0; i < data["totalCount"]; i++) {
+                            var result = resultList[i];
+                            $("#packageList").append(
+                                '<tr>' +
+                                '<td >' + result.delegation.name +
+                                '</td>' +
+                                '<td>' + result.agency.name +
+                                '</td>' +
+                                '<td>' + result.courierCompany.companyName +
+                                '</td>'+
+                                '<td>' + result.standard.description +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.publishTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.receiveTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.deliveryTime) +
+                                '</td>'+
+                                '<td>' + getLocalTime(result.endTime) +
+                                '</td>'+
+                                '<td>' + result.orderResult +
+                                '</td>'+
+                                '</tr>'
+                            )
+                        }
+                        break;
+                    }
+                }
+            }else {
+                switch ($("#packageStatus").val()){
+                    case "待领取":{
+                        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>快递类型</th>
+                    <th>发布时间</th>
+                <tr>
+`);
+                for (var i = 0; i < data["totalCount"]; i++) {
+                    var result = resultList[i];
+                    $("#packageList").append(
+                        '<tr>' +
+                        '<td >' + result.name +
+                        '</td>' +
+                        '<td>' + result.courierCompany.companyName +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.createDate) +
+                        '</td>'+
+                        '</tr>'
+                    )
+                }
+                        break;
+                    }
+                    case "待送达":{
+                        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>快递类型</th>
+                    <th>发布时间</th>
+                    <th>领取时间</th>
+                <tr>
+`);
+                for (var i = 0; i < data["totalCount"]; i++) {
+                    var result = resultList[i];
+                    $("#packageList").append(
+                        '<tr>' +
+                        '<td >' + result.name +
+                        '</td>' +
+                        '<td>' + result.courierCompany.companyName +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.createDate) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.receiveDate) +
+                        '</td>'+
+                        '</tr>'
+                    )
+                }
+                        break;
+                    }
+                    case "已完成":{
+                        $("#tableTop").append(`
+                <tr>
+                    <th>发布人</th>
+                    <th>快递类型</th>
+                    <th>发布时间</th>
+                    <th>领取时间</th>
+                    <th>领取时间</th>
+                <tr>
+`);
+                for (var i = 0; i < data["totalCount"]; i++) {
+                    var result = resultList[i];
+                    $("#packageList").append(
+                        '<tr>' +
+                        '<td >' + result.name +
+                        '</td>' +
+                        '<td>' + result.courierCompany.companyName +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.createDate) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.receiveDate) +
+                        '</td>'+
+                        '<td>' + getLocalTime(result.endDate) +
+                        '</td>'+
+                        '</tr>'
+                    )
+                }
+                        break;
+                    }
+                }
 
+            }
+        };
+        if($("#theWay").val()=="wechat"){
+        Paging("/PackageListManagement/PackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
+            }else {
+            Paging("/PackageListManagement/UMLPackageList/packageStatus/" + $("#packageStatus").val()+"/schoolId/"+$("#school").val(),"packageList",updateTable,pageNumber,10);
+        }
     };
+
     $(document).ready(
         function () {
-            loadPage(1)
+            loadSchool("school");
+            loadPage(1);
+            $("#theWay").change(function () {
+                $("#packageStatus").html("");
+                if($("#theWay").val()=="wechat"){
+                $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="已撤销">已撤销</option>
+                    <option value="待送达">待送达</option>
+                    <option value="待签收">待签收</option>
+                    <option value="已完成">已完成</option>
+            `);
+                }else {
+                    $("#packageStatus").append(`
+                    <option value="待领取">待领取</option>
+                    <option value="待送达">待送达</option>
+                    <option value="已完成">已完成</option>
+            `)
+                }
+                loadPage(1);
+            });
+            $("#packageStatus").change(function () {
+                loadPage(1);
+            });
+            $("#school").change(function () {
+                loadPage(1);
+            })
         });
+
 
 
 </script>

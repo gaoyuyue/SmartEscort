@@ -1,6 +1,5 @@
 import ch.qos.logback.classic.PatternLayout
 import ch.qos.logback.classic.db.DBAppender
-import ch.qos.logback.core.ConsoleAppender
 import ch.qos.logback.core.db.DriverManagerConnectionSource
 
 import static ch.qos.logback.classic.Level.ERROR
@@ -15,7 +14,7 @@ appender("stdOut", ConsoleAppender) {
 appender("db-classic-mysql", DBAppender) {
     connectionSource(DriverManagerConnectionSource) {
         driverClass = "com.mysql.cj.jdbc.Driver"
-        url = "jdbc:mysql:///SpringMVCSeedProject?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false"
+        url = "jdbc:mysql:///SmartEscort?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false"
         user = "root"
         password = "root"
     }

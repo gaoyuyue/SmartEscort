@@ -36,4 +36,15 @@ public class OAuth2Util {
         }
         return null;
     }
+
+    public static JSONObject getUserInfoByOpenId(String openId) throws Exception {
+        String requestUrl = "https://api.weixin.qq.com/cgi-bin/user/info";
+        Map<String,String> params = new HashMap<>();
+        params.put("openid", openId);
+        params.put("lang","zh_CN");
+        params.put("access_token",WechatProperties.access_token);
+        String json = sendGet(requestUrl,params);
+        System.out.println(json);
+        return new JSONObject(json);
+    }
 }

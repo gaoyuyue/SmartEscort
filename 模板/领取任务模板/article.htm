@@ -1,0 +1,449 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>淘鞋网手机商城触屏版自适应手机wap购物网站模板下载 【http://www.lanrenmb.com/shenghuofuwu/gouwu/】</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="css/gmu.css" />
+<link rel="stylesheet" type="text/css" href="css/ecmmobile.css" />
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript" src="js/gmu.js"></script>
+<script type="text/javascript" src="js/ecmmobile.js"></script>
+
+
+    
+    <script type="text/javascript" src="js/rateit.js"></script>
+    <script type="text/javascript" src="js/imgview.js"></script>
+
+</head>
+<body>
+	
+<script>
+    var productId = "31651";
+    var skuMap = {"14:d67d8ab4f4c10bf22aa353e27879133c":{"stock":"50","sku":"260281"},"14:a5771bce93e200c36f7cd9dfd0e5deaa":{"stock":"50","sku":"260280"},"14:19ca14e7ea6328a42e0eb13d585e4c22":{"stock":"50","sku":"260278"},"30:a5771bce93e200c36f7cd9dfd0e5deaa":{"stock":"50","sku":"260286"},"30:1c383cd30b7c298ab50293adfecb7b18":{"stock":"50","sku":"260283"},"30:e369853df766fa44e1ed0ff613f563bd":{"stock":"50","sku":"260282"},"14:1c383cd30b7c298ab50293adfecb7b18":{"stock":"50","sku":"260277"},"14:a5bfc9e07964f8dddeb95fc584cd965d":{"stock":"50","sku":"260279"},"14:e369853df766fa44e1ed0ff613f563bd":{"stock":"50","sku":"260276"},"30:a5bfc9e07964f8dddeb95fc584cd965d":{"stock":"50","sku":"260285"},"30:19ca14e7ea6328a42e0eb13d585e4c22":{"stock":"50","sku":"260284"},"30:d67d8ab4f4c10bf22aa353e27879133c":{"stock":"50","sku":"260287"}};
+    var featrueCount = 2;
+    function getCurrentSelectSku(){
+        return getCurrentSelectSkuWithMax(featrueCount);
+    }
+    function getCurrentSelectSkuWithMax(maxIndex){
+        var result ="";
+        for(var i=0;i<maxIndex;i++){
+            var currFeatureId="";
+            $("dd[feature-index='"+i+"']").children("label").each(function(){
+                if($(this).hasClass("ui-state-active")){
+                    var id = $(this).attr("for");
+                    currFeatureId=$("#"+id).attr("feature-id");
+                }
+            });
+            if(currFeatureId==""){
+                break;
+            }else{
+               if(result==""){
+                   result = currFeatureId;
+               }else{
+                   result = result +":"+currFeatureId;
+               }
+            }
+        }
+        return result;
+    }
+    var selectSkuId = "";
+    function doSelectProduct(sku){
+        var obj = skuMap[sku];
+        if(obj!=null){
+            selectSkuId = obj['sku'];
+            var stock = obj['stock'];
+            $("#stockEm").text(stock);
+        }else{
+            selectSkuId = "";
+            $("#stockEm").text("-");
+        }
+        
+    }
+    function addCart(gocheck){
+        if(selectSkuId==""){
+            alert("请选择规格");
+            return;
+        }
+        var quantity = parseInt($("#quantity").text());
+        var stock = parseInt($("#stockEm").text());
+        if(stock==0){
+            alert("库存不足");
+            return;
+        }
+        if(quantity>stock){
+            alert("选择数据超过库存");
+            return;
+        }
+        var url = "product/addtocart_json?id="+selectSkuId+"&quantity="+quantity;
+        $.getJSON(url, function(data){
+            if("nosession"==data.result){
+                showLoginDialog();
+            }else{
+                if(gocheck){
+                    location.href = 'showcart';
+                }else{
+                    var dialog = gmu.Dialog({
+                        autoOpen: false,
+                        closeBtn: false,
+                        buttons: {
+                            '再逛逛': function(){
+                                this.close();
+                            },
+                            '去购物车': function(){
+                                this.close();
+                                location.href = 'showcart';
+                            }
+                        },
+                        title: '添加成功',
+                        content: '<p>商品已成功加入购物车</p>'
+                    });
+                    dialog.open();
+                }
+            }
+        });
+    }
+    function buyNow(){
+         addCart(true);
+    }
+    function showLoginDialog(){
+        var backUrl = encodeURIComponent('/product?id=31651');
+        app.showLoginDialog('login?successUrl='+backUrl);
+    }
+    
+    function onclickFeatureBtnEvent(index){
+    
+     $(".prd-props").removeClass('props-toggled');
+            
+            
+            
+            
+               // resetFeatureShow();
+            // $(this).siblings("label").each(function(){
+             
+             
+              // if($(this).hasClass("ui-state-active")){
+               //         $(this).show();
+                //    }else{
+                   //     $(this).removeClass("ui-state-active");
+                        //$(this).hide();
+                   // }
+             
+             //})
+             
+             
+             
+             
+             
+            
+            
+            var nextIndex = index + 1;
+            if(nextIndex<featrueCount){//不是最后一个,取消下一个的所有选择，及过滤
+                var parentSku = getCurrentSelectSkuWithMax(nextIndex);
+                $("dd[feature-index='"+nextIndex+"']").children("label").each(function(){
+                    var labelObj = $(this);
+                    var id = labelObj.attr("for");
+                    var inputObj = $("#"+id);
+                    var currFeatureId= inputObj.attr("feature-id");
+                    var sku = parentSku + ":" +currFeatureId;
+                    var hasThis = false;
+                    var tempStock = "0";
+                    for(var key in skuMap){
+                        if(key.indexOf(sku)==0){
+
+                            var obj = skuMap[key];
+                            if(obj != null){
+                                tempStock = obj['stock'];
+                            }
+
+                            hasThis = true;
+                        }
+                    }
+                    if(hasThis){
+                        if(tempStock == "0"){
+                            labelObj.removeClass("ui-state-active");
+                            labelObj.addClass("ui-state-disabled");
+                        } else {
+                            labelObj.removeClass("ui-state-disabled");
+                        }
+
+
+                        labelObj.show();
+                    }else{
+                        labelObj.removeClass("ui-state-active");
+                        labelObj.hide();
+                    }
+                });
+                
+                
+                resetSliderPics(parentSku);
+                
+                
+                
+            }
+            var sku = getCurrentSelectSku();
+            doSelectProduct(sku);
+    
+    }
+    
+    
+    function resetFeatureShow(){
+	
+	$(".fetureContainer").html("");
+                
+    				$(".fetureContainer").append('<dl>');
+                    $(".fetureContainer").append('<dt>颜色</dt>');
+                    $(".fetureContainer").append('<dd class="prop-list prop-img" feature-index="0">');
+                        			 　
+                        			 		$(".fetureContainer").append('<a href="javascript:void(0)javascript:void(0)" class="ui-btn ui-state-disabled" style="background-image: url(images/goodspic.jpg);"></a>');
+                            
+                        			 　
+                        			 		$(".fetureContainer").append('<a href="javascript:void(0)javascript:void(0)" class="ui-btn ui-state-disabled" style="background-image: url(images/goodspic.jpg);"></a>');
+                            
+                    $(".fetureContainer").append('</dd>');
+                $(".fetureContainer").append('</dl>');
+                
+    				$(".fetureContainer").append('<dl>');
+                    $(".fetureContainer").append('<dt>尺码</dt>');
+                    $(".fetureContainer").append('<dd class="prop-list " feature-index="1">');
+		                        	$(".fetureContainer").append('<input class="button" type="radio"　  feature-id="e369853df766fa44e1ed0ff613f563bd" name="feature-1" id="feature-1-0">');
+		                            	$(".fetureContainer").append('<label for="feature-1-0">34</label>');
+                            
+		                        	$(".fetureContainer").append('<input class="button" type="radio"　  feature-id="1c383cd30b7c298ab50293adfecb7b18" name="feature-1" id="feature-1-1">');
+		                            	$(".fetureContainer").append('<label for="feature-1-1">35</label>');
+                            
+		                        	$(".fetureContainer").append('<input class="button" type="radio"　  feature-id="19ca14e7ea6328a42e0eb13d585e4c22" name="feature-1" id="feature-1-2">');
+		                            	$(".fetureContainer").append('<label for="feature-1-2">36</label>');
+                            
+		                        	$(".fetureContainer").append('<input class="button" type="radio"　  feature-id="a5bfc9e07964f8dddeb95fc584cd965d" name="feature-1" id="feature-1-3">');
+		                            	$(".fetureContainer").append('<label for="feature-1-3">37</label>');
+                            
+		                        	$(".fetureContainer").append('<input class="button" type="radio"　  feature-id="a5771bce93e200c36f7cd9dfd0e5deaa" name="feature-1" id="feature-1-4">');
+		                            	$(".fetureContainer").append('<label for="feature-1-4">38</label>');
+                            
+		                        	$(".fetureContainer").append('<input class="button" type="radio"　  feature-id="d67d8ab4f4c10bf22aa353e27879133c" name="feature-1" id="feature-1-5">');
+		                            	$(".fetureContainer").append('<label for="feature-1-5">39</label>');
+                            
+                    $(".fetureContainer").append('</dd>');
+                $(".fetureContainer").append('</dl>');
+        
+    
+    }
+    
+    function resetSliderPics(parentSku){
+	       　$(".picslider").html("");
+	       
+	       try{
+       if(null != productSlider){
+		 productSlider.destroy();
+       
+       }}catch(e){
+         //alert(e);
+       }
+	        
+	    		var featureId = "14"; 
+	    
+	    		if(parentSku==featureId){ 
+			                 $(".picslider").append('<div><img lazyload="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496351255577.jpg_400x400.jpg" data-pic="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496351255577.jpg_400x400.jpg"></div>')
+		       }
+			        
+	        
+	        
+	    		var featureId = "30"; 
+	    
+	    		if(parentSku==featureId){ 
+			                 $(".picslider").append('<div><img lazyload="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496352033567.jpg_400x400.jpg" data-pic="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496352033567.jpg_400x400.jpg"></div>')
+		       }
+			        
+	        
+		
+			
+			var productSlider =  new gmu.Slider($(".picslider"),{
+			    autoPlay:true,
+			    arrow:false,
+			    imgZoom:true,
+			    viewNum:1
+			});	
+			       
+            
+    }
+
+
+    $(function(){
+    imgView(".picslider img");
+    
+    $(".prop-list label").on("click",function(){
+		var btn = $("#"+this.getAttribute("for"));
+		if(btn.button("state") == "active"){
+			setTimeout(function(){
+				btn.button("state","reset");
+				
+            var index= $(this).parent().attr("feature-index");
+            index = parseInt(index);
+				onclickFeatureBtnEvent(index);
+			},0);
+		}
+	});
+    
+    
+        $("input[feature-id]").click(function(){
+           
+            var index= $(this).parent().attr("feature-index");
+            index = parseInt(index);
+				onclickFeatureBtnEvent(index);
+            
+            
+            
+            
+        });
+
+        $(".number-minus").click(function(){
+            var quantity = $("#quantity").text();
+            quantity = parseInt(quantity);
+            if(quantity==1){
+                return;
+            }else{
+                quantity --;
+                $("#quantity").text(quantity);
+            }
+        });
+        $(".number-plus").click(function(){
+            var quantity = $("#quantity").text();
+            quantity = parseInt(quantity)+1;
+            $("#quantity").text(quantity);
+        });
+
+        $("#favHref").click(function(){
+            var obj = $(this);
+            if(obj.hasClass("selected")){
+                $.getJSON('product/cancelfav_json?productId='+productId, function(data){
+                    if("nosession"==data.result){
+                        showLoginDialog();
+                    }else{
+                        obj.text("加入收藏");
+                        obj.removeClass("selected");
+                    }
+                });
+            }else{
+                $.getJSON('product/addfav_json?productId='+productId, function(data){
+                    if("nosession"==data.result){
+                        showLoginDialog();
+                    }else{
+                        obj.text("取消收藏");
+                        obj.addClass("selected");
+                    }
+                });
+            }
+        });
+        var propsbox = $(".prd-props");
+        propsbox.height(propsbox.height()).addClass("props-toggled");
+        //$(".togglebtn")[app.tapevent](function(){
+        $(".togglebtn").on("click",function(){
+            propsbox.toggleClass("props-toggled");
+            scrollTo(0,propsbox.offset().top);
+        });
+    });
+</script>
+<div id="page">
+<div class="toolbar">
+    <a href="javascript:void(0)javascript:history.back()">返回</a>
+    <h2>商品详情</h2>
+</div>
+<div class="container">
+    <div class="picslider"　id="abc">
+                <div><img lazyload="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496351255577.jpg_400x400.jpg" data-pic="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496351255577.jpg_400x400.jpg"></div>
+                <div><img lazyload="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496352033567.jpg_400x400.jpg" data-pic="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496352033567.jpg_400x400.jpg"></div>
+    </div>
+    <h1 class="prdname">2015年夏季新款女鞋鱼嘴蝴蝶结高跟女凉鞋 tmx</h1>
+    <div class="borderbox prd-infos">
+        <ul>
+            <li>
+                <div class="tit">淘鞋价<span class="price">¥179.00</span></div>
+            </li>
+            <li>
+                <div class="tit">专柜价</div>
+                <div class="price-origin">￥499.00</div>
+            </li>
+            <li>
+                <div class="tit">库存</div>
+                <div class="con"><em id="stockEm">-</em>件</div>
+            </li>
+        </ul>
+    </div>
+    <div class="borderbox prd-props">
+        <div class="togglebtn"></div>
+        
+        <div　id="fetureContainer" class="fetureContainer">
+                <dl>
+                    <dt>颜色</dt>
+                    <dd class="prop-list prop-img" feature-index="0">
+		                        	<input class="button" type="radio"　  feature-id="14" name="feature-0" id="feature-0-0">
+		                            	<label for="feature-0-0" data-img="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496351255577.jpg_50x50.jpg"></label>
+                            
+		                        	<input class="button" type="radio"　  feature-id="30" name="feature-0" id="feature-0-1">
+		                            	<label for="feature-0-1" data-img="http://pics.taoxie.com/Thumbnail/Pics/Product/taomeixie/2015/05/11/6496352033567.jpg_50x50.jpg"></label>
+                            
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>尺码</dt>
+                    <dd class="prop-list " feature-index="1">
+		                        	<input class="button" type="radio"　  feature-id="e369853df766fa44e1ed0ff613f563bd" name="feature-1" id="feature-1-0">
+		                            	<label for="feature-1-0">34</label>
+                            
+		                        	<input class="button" type="radio"　  feature-id="1c383cd30b7c298ab50293adfecb7b18" name="feature-1" id="feature-1-1">
+		                            	<label for="feature-1-1">35</label>
+                            
+		                        	<input class="button" type="radio"　  feature-id="19ca14e7ea6328a42e0eb13d585e4c22" name="feature-1" id="feature-1-2">
+		                            	<label for="feature-1-2">36</label>
+                            
+		                        	<input class="button" type="radio"　  feature-id="a5bfc9e07964f8dddeb95fc584cd965d" name="feature-1" id="feature-1-3">
+		                            	<label for="feature-1-3">37</label>
+                            
+		                        	<input class="button" type="radio"　  feature-id="a5771bce93e200c36f7cd9dfd0e5deaa" name="feature-1" id="feature-1-4">
+		                            	<label for="feature-1-4">38</label>
+                            
+		                        	<input class="button" type="radio"　  feature-id="d67d8ab4f4c10bf22aa353e27879133c" name="feature-1" id="feature-1-5">
+		                            	<label for="feature-1-5">39</label>
+                            
+                    </dd>
+                </dl>
+        </div>
+        <dl>
+            <dt>数量</dt>
+            <dd>
+                <div class="number-widget">
+                    <div class="number-text" id="quantity">1</div>
+                    <div class="number-minus"></div>
+                    <div class="number-plus"></div>
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <div class="prd-btns">
+        <a href="javascript:void(0)javascript:addCart();" class="button btn-cart">加入购物车</a>
+            <a id="favHref" href="javascript:void(0)javascript:void(0);" class="button btn-fav">加入收藏</a>
+    </div>
+    <div class="linklist">
+        <ul>
+            <li><a href="javascript:void(0)product/attribute?productId=31651">产品参数</a></li>
+            <li><a href="javascript:void(0)product/description?productId=31651">图文详情</a></li>
+            <li><a href="javascript:void(0)review?productId=31651">用户评价(0)<span class="rateit ml" data-rateit-value="0" data-rateit-readonly="true" data-rateit-starwidth="20" data-rateit-starheight="20"></span></a></li>
+        </ul>
+    </div>
+    <div class="fbbwrap">
+        <div class="ftbtnbar">
+            <a href="javascript:void(0)javascript:buyNow();" class="btn-buy">立即购买</a>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript"> 
+     /*创建于2016-06-14*/ 
+     var cpro_id = "u2671677";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/cm.js" type="text/javascript"></script>
+</body>
+</html>
