@@ -1,2 +1,5 @@
-代码/build/
-代码/.idea/
+build/
+.idea/
+out/
+classes/
+.gradle/
